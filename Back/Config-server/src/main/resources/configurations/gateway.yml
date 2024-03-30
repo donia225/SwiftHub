@@ -24,5 +24,8 @@ spring:
           - id: workshop
             uri: http://localhost:8020
             predicates:
-              - Path=/api/workshops/**
+              - Path=/api/workshop/**
+
+
+
 
