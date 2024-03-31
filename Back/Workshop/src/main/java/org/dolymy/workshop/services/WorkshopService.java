@@ -17,9 +17,9 @@ import java.util.Optional;
 public class WorkshopService {
 
     private static final Logger LOG = LoggerFactory.getLogger(WorkshopService.class);
-    private  static  final String ERROR_NULL_ID = "ID is NULL";
+    private static final String ERROR_NULL_ID = "ID is NULL";
     private static final String ERROR_NON_PRESENT_ID = " cannot find object with id : %s";
-    private static final String ERROR_UPDATE= "Error occurred while updating";
+    private static final String ERROR_UPDATE = "Error occurred while updating";
 
     private final WorkshopRepository workshopRepository;
     private final FeedbackRepository feedbackRepository;
@@ -40,18 +40,17 @@ public class WorkshopService {
      * @return The workshop with the specified ID if found, or null if not found.
      */
     public Workshop findWorkshopById(String id) {
-        Workshop workshop =null;
-        if(id != null){
-            final Optional<Workshop> optionalWorkshop =this.workshopRepository.findById(id);
-            if(optionalWorkshop.isPresent()){
-                workshop=optionalWorkshop.get();
-            }else{
-                LOG.info(ERROR_NON_PRESENT_ID,id);
+        Workshop workshop = null;
+        if (id != null) {
+            final Optional<Workshop> optionalWorkshop = this.workshopRepository.findById(id);
+            if (optionalWorkshop.isPresent()) {
+                workshop = optionalWorkshop.get();
+            } else {
+                LOG.info(ERROR_NON_PRESENT_ID, id);
             }
-        }else {
+        } else {
             LOG.error(ERROR_NULL_ID);
         }
-
 
 
         return workshop;
@@ -60,7 +59,7 @@ public class WorkshopService {
     /**
      * Updates an existing workshop with the provided ID.
      *
-     * @param id             The ID of the workshop to update.
+     * @param id              The ID of the workshop to update.
      * @param updatedWorkshop The updated workshop object.
      * @return The updated workshop if found, or a workshop object with title and description "NOT_FOUND" if the workshop with the specified ID is not found.
      */
@@ -68,14 +67,14 @@ public class WorkshopService {
     public Workshop updateWorkshop(String id, Workshop updatedWorkshop) {
         Optional<Workshop> existingWorkshop = this.workshopRepository.findById(id);
 
-        if (existingWorkshop.isPresent()){
-            if (updatedWorkshop != null){
+        if (existingWorkshop.isPresent()) {
+            if (updatedWorkshop != null) {
                 updatedWorkshop.setWorkshop_id(existingWorkshop.get().getWorkshop_id());
                 return this.workshopRepository.save(updatedWorkshop);
-            }else {
+            } else {
                 LOG.error(ERROR_UPDATE);
             }
-        }else {
+        } else {
             LOG.error(ERROR_NON_PRESENT_ID);
         }
 
@@ -91,21 +90,18 @@ public class WorkshopService {
      * @param id The ID of the workshop to be deleted.
      */
     public void deleteWorkshop(String id) {
-        if (id!= null)
-        {
+        if (id != null) {
             Optional<Workshop> workshop = this.workshopRepository.findById(id);
-           if(workshop.isPresent()){
-               //delete workshop
-               this.workshopRepository.deleteById(id);
-               //delete feedbacks corresponding to this workshop
-               workshop.get().getFeedbacks().stream()
+            if (workshop.isPresent()) {
+                //delete workshop
+                this.workshopRepository.deleteById(id);
+                //delete feedbacks corresponding to this workshop
+                workshop.get().getFeedbacks().stream()
                         .forEach(feedbackRepository::delete);
 
 
-           }
-           else LOG.error(ERROR_NON_PRESENT_ID, id);
-        }
-        else LOG.error(ERROR_NULL_ID);
+            } else LOG.error(ERROR_NON_PRESENT_ID, id);
+        } else LOG.error(ERROR_NULL_ID);
 
     }
 
