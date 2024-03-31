@@ -1,6 +1,7 @@
 package org.dolymy.workshop.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -14,10 +15,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document
+@Builder
 public class Workshop implements Serializable {
 
     @Id
-    private Long workshop_id;
+    private String workshop_id;
     private String title;
     private String description;
     private Integer capacity;
