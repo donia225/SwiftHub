@@ -2,6 +2,7 @@ package org.dolymy.workshop.enums;
 
 public enum RatingType {
     Great,
-    moderate,
+    Good,
+    Neutral,
     Bad
 }

@@ -77,4 +77,5 @@ public class WorkshopService {
         else LOG.error(ERROR_NULL_ID);
 
     }
+
 }
