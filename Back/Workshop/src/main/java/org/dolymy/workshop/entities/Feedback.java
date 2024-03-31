@@ -1,5 +1,6 @@
 package org.dolymy.workshop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,5 +20,8 @@ public class Feedback implements Serializable {
     private Long feedback_id;
     private String description;
     private RatingType rating;
+
+    @JsonIgnore
+    private Workshop workshop;
 
 }
