@@ -18,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QuizController {
     private final QuizService quizService;
+
     @PostMapping("/add-quiz")
     public Quiz addQuiz(@RequestBody Quiz quiz) {
 
@@ -26,7 +27,7 @@ public class QuizController {
 
 
     @GetMapping("/getAllQuizzes")
-    public List<Quiz> getAllQuizzes(){
+    public List<Quiz> getAllQuizzes() {
 
         return quizService.getAllQuizzes();
     }
@@ -35,18 +36,17 @@ public class QuizController {
     public Quiz getQuizById(@PathVariable String id) {
         return this.quizService.findQuizById(id);
     }
+
     @PutMapping("/update-quiz/{id}")
     public ResponseEntity<?> updateQuiz(@PathVariable String id, @RequestBody Quiz updatedQuiz) {
         return quizService.updateQuiz(id, updatedQuiz);
     }
 
     @DeleteMapping("/{quizId}")
-    public ResponseEntity<?> deleteQuiz(@PathVariable String quizId) {
-        try {
-            quizService.deleteQuiz(quizId);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete quiz: " + e.getMessage());
-        }
+    public void deleteQuiz(@PathVariable String quizId) {
+
+        quizService.deleteQuiz(quizId);
+
+
     }
 }

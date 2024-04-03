@@ -3,6 +3,7 @@ package org.dolymy.quiz.services;
 import lombok.RequiredArgsConstructor;
 import org.dolymy.quiz.entities.Question;
 import org.dolymy.quiz.entities.Quiz;
+import org.dolymy.quiz.entities.Answer;
 import org.dolymy.quiz.repos.AnswerRepository;
 import org.dolymy.quiz.repos.QuestionRepository;
 import org.dolymy.quiz.repos.QuizRepository;
@@ -28,6 +29,8 @@ public class QuizService {
     private final QuizRepository quizrepo;
     private final QuestionRepository questionRepo;
     private final AnswerRepository answerRepository;
+
+    private final QuestionService questionService;
 
 
     public Quiz addQuiz(Quiz quiz) {
@@ -86,30 +89,16 @@ public class QuizService {
         }
     }
 
+    //this method is implemented to delete the quiz
     @Transactional
-    public void deleteQuiz(String id) {
-        if (id != null) {
-            Optional<Quiz> optionalQuiz = this.quizrepo.findById(id);
-            if (optionalQuiz.isPresent()) {
-                Quiz quiz = optionalQuiz.get();
+    public void deleteQuiz(String quizId) {
 
-                // Delete associated answers first
-                quiz.getQuestions().forEach(question -> {
-                    question.getAnswers().forEach(answerRepository::delete);
-                });
 
-                // Then delete associated questions
-                quiz.getQuestions().forEach(questionRepo::delete);
+            // Delete the quiz
+            quizrepo.deleteById(quizId);
 
-                // Finally, delete the quiz itself
-                this.quizrepo.deleteById(id);
-            } else {
-                LOG.error(ERROR_NON_PRESENT_ID, id);
-            }
-        } else {
-            LOG.error(ERROR_NULL_ID);
         }
-    }
+
 
 
 }

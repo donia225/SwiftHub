@@ -23,9 +23,11 @@ private String quiz_id;
     private String quizName;
     private double grade;
     private boolean correct;
-    //a quiz contains many questions and many answers
-    private List<Question> questions= new ArrayList<>();
-    private List<Answer> answers;
+
+    private List<Question> questions = new ArrayList<>();
+
+
+    private List<Answer> answers = new ArrayList<>();
 
 
 }

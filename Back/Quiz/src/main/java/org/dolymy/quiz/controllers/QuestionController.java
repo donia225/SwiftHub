@@ -30,6 +30,7 @@ public class QuestionController {
     public Question getQuestionById(@PathVariable String id) {
         return this.questionService.findQuestionById(id);
     }
+
     @PutMapping("/update-question/{id}")
     public ResponseEntity<?> updateQuestion(@PathVariable String id, @RequestBody Question updatedQuestion) {
         return questionService.updateQuestion(id, updatedQuestion);
@@ -42,6 +43,17 @@ public class QuestionController {
             return ResponseEntity.status(HttpStatus.CREATED).body(createdQuestion);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteQuestion(@PathVariable String id) {
+        try {
+            questionService.deleteQuestionAndAnswers(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to delete question: " + e.getMessage());
         }
     }
 
