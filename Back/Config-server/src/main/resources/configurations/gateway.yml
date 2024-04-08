@@ -21,4 +21,7 @@ spring:
             uri: http://localhost:8090
             predicates:
               - Path=/api/quizzes/**
-
+          - id: post
+            uri: http://localhost:8070
+            predicates:
+              - Path=/api/**
