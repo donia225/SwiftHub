@@ -21,4 +21,11 @@ spring:
             uri: http://localhost:8090
             predicates:
               - Path=/api/quizzes/**
+          - id: workshop
+            uri: http://localhost:8020
+            predicates:
+              - Path=/api/workshop/**
+
+
+
 

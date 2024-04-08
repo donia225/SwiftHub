@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/Back/Gateway/pom.xml" />
         <option value="$PROJECT_DIR$/Back/Discovery/pom.xml" />
         <option value="$PROJECT_DIR$/Back/Config-server/pom.xml" />
+        <option value="$PROJECT_DIR$/Back/Workshop/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />
