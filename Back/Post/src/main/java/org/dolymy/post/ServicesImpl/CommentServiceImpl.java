@@ -1,7 +1,6 @@
 package org.dolymy.post.ServicesImpl;
 import org.dolymy.post.daos.CommentDao;
 import org.dolymy.post.entities.Comment;
-import org.dolymy.post.sequences.SequenceGeneratorService;
 import org.dolymy.post.services.CommentService;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,6 @@ import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements CommentService {
-    public static final String SEQUENCE_NAME = "comment_sequence";
-
 
     @Resource
     private CommentDao commentDao;
@@ -35,12 +32,9 @@ public class CommentServiceImpl implements CommentService {
         this.commentDao.deleteById(id);
     }
     //Add
-    @Autowired
-    private SequenceGeneratorService service;
+
     @PostMapping("/comments")
     public Comment addComment(@RequestBody Comment comment){
-        //generate sequence
-        comment.setId(service.getSequenceNumber(SEQUENCE_NAME));
         return commentDao.save(comment);
     }
 

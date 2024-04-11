@@ -3,22 +3,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-
 import java.io.Serializable;
 import java.util.Date;
-
-
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Document(collection = "comments")
+@Entity
+@Table(name = "comments")
 public class Comment implements Serializable{
-    @Transient
     @Id
-    @Column(name = "idComment")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idComent")
     Integer id;
     @Temporal(TemporalType.DATE)
     Date commentDate;

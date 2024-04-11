@@ -1,11 +1,13 @@
 package org.dolymy.post.daos;
 import org.dolymy.post.entities.Comment;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
-public interface CommentDao extends MongoRepository<Comment,Integer> {
+@Repository
+public interface CommentDao extends JpaRepository<Comment,Integer> {
     List <Comment> findAll();
 
 }

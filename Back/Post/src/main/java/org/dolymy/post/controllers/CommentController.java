@@ -13,6 +13,7 @@ import java.util.Optional;
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/comments")
+@Controller
 public class CommentController {
     @Autowired
     private CommentService commentService;

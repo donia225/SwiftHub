@@ -17,6 +17,7 @@ import java.util.Optional;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/posts")
+@Controller
 public class PostController {
     @Autowired
     private PostService postService;

@@ -1,11 +1,13 @@
 package org.dolymy.post.daos;
 import org.dolymy.post.entities.Post;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
-
-public interface PostDao extends MongoRepository<Post,Integer> {
+@Repository
+public interface PostDao extends JpaRepository<Post,Integer> {
     List<Post> findAll();
     List<Post> findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String title, String description);
     List<Post> findByPostDate(Date postDate);
