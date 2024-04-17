@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/answers")
+@RequestMapping("/api/quizzes/answers")
 @RequiredArgsConstructor
 public class AnswerController {
     private final AnswerService answerService;

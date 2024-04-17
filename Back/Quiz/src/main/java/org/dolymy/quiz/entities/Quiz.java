@@ -27,7 +27,7 @@ private String quiz_id;
     private List<Question> questions = new ArrayList<>();
 
 
-    private List<Answer> answers = new ArrayList<>();
+
 
 
 }
