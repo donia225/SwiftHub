@@ -7,17 +7,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Discovery" />
         <module name="Config-server" />
         <module name="Quiz" />
-        <module name="Workshop" />
+        <module name="User" />
         <module name="Gateway" />
         <module name="Post" />
+        <module name="Discovery" />
+        <module name="Workshop" />
+        <module name="RequestProject" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Workshop" target="1.5" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -26,6 +25,8 @@
       <module name="Gateway" options="-parameters" />
       <module name="Post" options="-parameters" />
       <module name="Quiz" options="-parameters" />
+      <module name="RequestProject" options="-parameters" />
+      <module name="User" options="-parameters" />
       <module name="Workshop" options="-parameters" />
     </option>
   </component>
