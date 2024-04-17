@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  isColorChanged: boolean = false;
+
+  toggleColor() {
+    this.isColorChanged = !this.isColorChanged;
+  }
 
 }
