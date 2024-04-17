@@ -33,11 +33,14 @@ spring:
             uri: http://localhost:8020
             predicates:
               - Path=/api/workshop/**
-
           - id: request
             uri: http://localhost:8080
             predicates:
               - Path=/api/request/**
+          - id: appointments
+            uri: http://localhost:8060
+            predicates:
+              - Path=/api/appointments/**
 
 
 
