@@ -12,14 +12,19 @@
         <module name="Quiz" />
         <module name="Workshop" />
         <module name="Gateway" />
+        <module name="Post" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Workshop" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Config-server" options="-parameters" />
       <module name="Discovery" options="-parameters" />
       <module name="Gateway" options="-parameters" />
+      <module name="Post" options="-parameters" />
       <module name="Quiz" options="-parameters" />
       <module name="Workshop" options="-parameters" />
     </option>
