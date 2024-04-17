@@ -1,0 +1,18 @@
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 8050
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: jwt_security
+
+
+
