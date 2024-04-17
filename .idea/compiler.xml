@@ -10,6 +10,7 @@
         <module name="Discovery" />
         <module name="Config-server" />
         <module name="Quiz" />
+        <module name="Workshop" />
         <module name="Gateway" />
         <module name="Post" />
       </profile>
@@ -25,6 +26,7 @@
       <module name="Gateway" options="-parameters" />
       <module name="Post" options="-parameters" />
       <module name="Quiz" options="-parameters" />
+      <module name="Workshop" options="-parameters" />
     </option>
   </component>
 </project>

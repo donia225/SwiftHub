@@ -29,4 +29,16 @@ spring:
             uri: http://localhost:8070
             predicates:
               - Path=/api/comments/**
+          - id: workshop
+            uri: http://localhost:8020
+            predicates:
+              - Path=/api/workshop/**
+
+          - id: request
+            uri: http://localhost:8080
+            predicates:
+              - Path=/api/request/**
+
+
+
 
