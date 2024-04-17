@@ -26,6 +26,10 @@ spring:
             predicates:
               - Path=/api/workshop/**
 
+          - id: request
+            uri: http://localhost:8080
+            predicates:
+              - Path=/api/request/**
 
 
 
