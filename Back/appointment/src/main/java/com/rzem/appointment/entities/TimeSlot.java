@@ -1,5 +1,6 @@
 package com.rzem.appointment.entities;
 
+import jakarta.persistence.Id;
 import lombok.*;
 
 
@@ -13,8 +14,6 @@ import java.util.Date;
 
 public class TimeSlot {
 
-
-    private int id;
     private Date startTime;
     private Date endTime;
 

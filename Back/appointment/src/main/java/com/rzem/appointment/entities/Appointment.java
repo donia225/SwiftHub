@@ -21,22 +21,20 @@ import java.util.List;
 public class Appointment {
 
     @Id
-    private String id;//cye
-    private String description;//cye
-    private Date start;//cye
-    private Status status;
-    private Boolean reminder;
-    private AppointmentType appointmentType;
-    private int studentId;//c bon
-    private int professorAdminId;//c bon
-    private Location location;
-    //private int priority;
-    private List<Feedback> feedbackList;
-    private List<Notification> notificationList;
-    private Boolean absance;
-    private String meetingLink;
+    private String id;//ma tit3malch
+    private String description;//cye    1
+    private Date start;//cye         2
+    private Status status; //ma tit3malch
+    private Boolean reminder;  //3
+    private AppointmentType appointmentType;//4
+    private String studentId; //ma tit3malch
+    private String professorId;//5
+    private Location location; //ma tit3malch
+    private int priority; //6 tji
+    private List<Feedback> feedbackList;  //ma tit3malch
+    private List<Notification> notificationList; //ma tit3malch
+    private Boolean absance; //ma tit3malch
+    private String meetingLink; //ma tit3malch
 
-    public Status getStatus() {
-        return status;
-    }
+
 }
