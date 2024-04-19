@@ -36,5 +36,7 @@ public class Appointment {
     private Boolean absance;
     private String meetingLink;
 
-
+    public Status getStatus() {
+        return status;
+    }
 }
