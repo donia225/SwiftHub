@@ -1,0 +1,29 @@
+<div class="layout-topbar">
+    <style>
+        .layout-topbar-logo img {
+            width: 130px; /* Changer cette valeur selon vos besoins */
+            height: auto; /* Pour maintenir les proportions */
+        }
+    </style>
+    <a class="layout-topbar-logo" routerLink="" >
+        <img    src="assets/layout/images/swifthub.png"   alt="logo">
+        <span></span>
+    </a>
+
+    <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+        <i class="pi pi-bars"></i>
+    </button>
+
+    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+        <i class="pi pi-ellipsis-v"></i>
+    </button>
+
+    <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+      
+        <button class="p-link layout-topbar-button">
+            <i class="pi pi-user"></i>
+            <span>Profile</span>
+        </button>
+      
+    </div>
+</div>
