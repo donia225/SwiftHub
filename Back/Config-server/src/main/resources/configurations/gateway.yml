@@ -42,6 +42,11 @@ spring:
             predicates:
               - Path=/api/user/**
 
+          - id: appointments
+            uri: http://localhost:8060
+            predicates:
+              - Path=/api/appointments/**
+
 
 
 

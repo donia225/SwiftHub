@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Back.iml" filepath="$PROJECT_DIR$/.idea/Back.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Config-server/Config-server.iml" filepath="$PROJECT_DIR$/Config-server/Config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Discovery/Discovery.iml" filepath="$PROJECT_DIR$/Discovery/Discovery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Gateway/Gateway.iml" filepath="$PROJECT_DIR$/Gateway/Gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Post/Post.iml" filepath="$PROJECT_DIR$/Post/Post.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Quiz/Quiz.iml" filepath="$PROJECT_DIR$/Quiz/Quiz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RequestProject/RequestProject.iml" filepath="$PROJECT_DIR$/RequestProject/RequestProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Workshop/Workshop.iml" filepath="$PROJECT_DIR$/Workshop/Workshop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/appointment/appointment.iml" filepath="$PROJECT_DIR$/appointment/appointment.iml" />
+    </modules>
+  </component>
+</project>
