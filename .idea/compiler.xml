@@ -17,6 +17,9 @@
         <module name="RequestProject" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="appointment" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
