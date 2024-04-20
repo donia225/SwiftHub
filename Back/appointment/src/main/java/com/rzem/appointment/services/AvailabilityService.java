@@ -10,12 +10,12 @@ public interface AvailabilityService {
     List<Availability> getAll();
 
 
-    Availability findById(Long id);
+    Availability findById(String id);
 
 
     Availability update(Availability availability);
 
-    void delete (Long id);
+    void delete (String id);
 
     Availability save (Availability availability);
 

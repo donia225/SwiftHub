@@ -9,12 +9,12 @@ public interface NotificationService {
     List<Notification> getAll();
 
 
-    Notification findById(Long id);
+    Notification findById(String id);
 
 
     Notification update(Notification notification);
 
-    void delete (Long id);
+    void delete (String id);
 
     Notification save (Notification notification);
 

@@ -30,7 +30,7 @@ public class Appointment {
     private String studentId; //ma tit3malch
     private String professorId;//5
     private Location location; //ma tit3malch
-    private int priority; //6 tji
+    private String priority; //6 tji
     private List<Feedback> feedbackList;  //ma tit3malch
     private List<Notification> notificationList; //ma tit3malch
     private Boolean absance; //ma tit3malch

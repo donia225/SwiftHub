@@ -35,7 +35,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     }
 
     @Override
-    public Availability findById(Long id) {
+    public Availability findById(String id) {
         Availability availability = null;
         if (id != null) {
             final Optional<Availability> optionalAvailability = this.availabilityRepository.findById(id);
@@ -62,7 +62,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
         this.availabilityRepository.deleteById(id);
     }
 
