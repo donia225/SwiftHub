@@ -41,6 +41,9 @@ import { DashboardComponent } from './BackOffice/dashboard/dashboard.component';
 import { DashboardModule } from './BackOffice/dashboard/dashboard.module';
 import { AppLayoutModule } from './BackOffice/layout/app.layout.module';
 import { HomeModule } from './FrontOffice/home/home.module';
+import { ShowWorkshopComponent } from './components/workshop/show-workshop/show-workshop.component';
+import { EditWorkshopComponent } from './components/workshop/edit-workshop/edit-workshop.component';
+import { ShowFeedbackComponent } from './components/feedback/show-feedback/show-feedback.component';
 
 
 
@@ -52,6 +55,9 @@ import { HomeModule } from './FrontOffice/home/home.module';
 @NgModule({
   declarations: [
     AppComponent,
+    ShowWorkshopComponent,
+    EditWorkshopComponent,
+    ShowFeedbackComponent,
 
     
 
