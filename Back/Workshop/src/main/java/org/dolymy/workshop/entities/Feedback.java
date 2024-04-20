@@ -25,6 +25,7 @@ public class Feedback implements Serializable {
     private String description;
     private RatingType rating;
     private Date creationDate;
+    private String userId;
 
     @DocumentReference(collection = "workshop")
     @JsonBackReference
