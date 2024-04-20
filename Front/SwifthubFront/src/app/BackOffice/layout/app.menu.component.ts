@@ -20,23 +20,33 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
                 ]
             },
-          
+
         {
             label: 'quiz',
             items: [
                 { label: 'Ajouter quiz', icon: 'pi pi-fw pi-id-card', routerLink: ['/quiz/add-quiz'] },
                 { label: 'List quiz', icon: 'pi pi-fw pi-check-square', routerLink: ['/quiz/list-quiz'] },
-               
+
+
             ]
         },
-       
-           
-            
+          {
+            label: 'Users',
+            items: [
+              { label: 'ConsulterUsers', icon: 'pi pi-fw pi-id-card', routerLink: ['/users/list-users'] }
+
+
+            ]
+          },
+
+
+
+
             {
                 label: 'Pages',
                 icon: 'pi pi-fw pi-briefcase',
                 items: [
-                  
+
                     {
                         label: 'Auth',
                         icon: 'pi pi-fw pi-user',
@@ -49,14 +59,14 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label:'Register'
                             }
-                           
+
                         ]
                     },
-                    
+
                 ]
             },
-           
-            
+
+
         ];
     }
 }

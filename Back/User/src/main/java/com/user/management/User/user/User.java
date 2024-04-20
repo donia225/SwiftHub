@@ -20,7 +20,7 @@ import java.util.List;
 @Document(collection = "user")
 public class User implements UserDetails {
     @Id
-    private String Id ;
+    private String id ;
     private String username;
     private String password;
     private String email;
@@ -28,6 +28,7 @@ public class User implements UserDetails {
     private String department;
     private String managedService;
     private Role role;
+    private String ImageUrl;
 
 
     @Override
@@ -40,10 +41,6 @@ public class User implements UserDetails {
         return password;
     }
 
-    @Override
-    public String getUsername(){
-        return email;
-    }
 
     @Override
     public boolean isAccountNonExpired() {

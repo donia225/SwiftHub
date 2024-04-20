@@ -10,18 +10,21 @@ import { WorkshopComponent } from '../workshop/workshop.component';
 
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    NavbarComponent,
-    ContentComponent,
-    FooterComponent,
-    WorkshopComponent
-  ],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    
+    declarations: [
+        HomeComponent,
+        NavbarComponent,
+        ContentComponent,
+        FooterComponent,
+        WorkshopComponent
+    ],
+    exports: [
+        NavbarComponent
+    ],
+    imports: [
+        CommonModule,
+        HomeRoutingModule,
 
-  ]
+
+    ]
 })
 export class HomeModule { }

@@ -5,6 +5,7 @@ import { AppLayoutComponent } from '../layout/app.layout.component';
 import { ListQuizComponent } from '../quizzes/list-quiz/list-quiz.component';
 import { AddQuizComponent } from '../quizzes/add-quiz/add-quiz.component';
 import { DashboardComponent } from './dashboard.component';
+import {ConsultUsersComponent} from "../../components/users/consult-users/consult-users.component";
 
 const routes: Routes = [
 
@@ -13,12 +14,12 @@ const routes: Routes = [
   children:[
     {
       path: '', component: AppLayoutComponent,
-     
+
     },
   ]
  },
   { path: 'login', component: LoginComponent },
-  
+
   {
     path: 'quiz', component: AppLayoutComponent,
     children: [
@@ -28,6 +29,13 @@ const routes: Routes = [
     ]
   },
 
+  {
+    path: 'users', component: AppLayoutComponent,
+    children: [
+      { path: 'list-users', component: ConsultUsersComponent },
+
+    ]
+  }
 ];
 
 @NgModule({

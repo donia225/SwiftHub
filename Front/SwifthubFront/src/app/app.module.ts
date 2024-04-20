@@ -32,15 +32,15 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DialogModule } from 'primeng/dialog';
-import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
-import { DashboardComponent } from './BackOffice/dashboard/dashboard.component';
 import { DashboardModule } from './BackOffice/dashboard/dashboard.module';
 import { AppLayoutModule } from './BackOffice/layout/app.layout.module';
 import { HomeModule } from './FrontOffice/home/home.module';
+import { AddUserComponent } from './components/users/add-user/add-user.component';
+import { ConsultUsersComponent } from './components/users/consult-users/consult-users.component';
+import { ModifyUsersComponent } from './components/users/modify-users/modify-users.component';
 
 
 
@@ -52,8 +52,11 @@ import { HomeModule } from './FrontOffice/home/home.module';
 @NgModule({
   declarations: [
     AppComponent,
+    AddUserComponent,
+    ConsultUsersComponent,
+    ModifyUsersComponent,
 
-    
+
 
   ],
   imports: [
@@ -93,9 +96,15 @@ import { HomeModule } from './FrontOffice/home/home.module';
     ConfirmPopupModule,
     ToolbarModule,
     ToastModule,
-    HomeModule
+    HomeModule,
+
+
+
+
+
+
   ],
- 
+
     bootstrap: [AppComponent]
 })
 export class AppModule { }
