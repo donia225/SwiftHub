@@ -59,7 +59,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'workshops',
                                 icon: 'pi pi-fw pi-arrow-right',
-                                routerLink: ['/workshop/show']
+                                routerLink: ['/workshopBack/show']
                             },
                             {
                                 label:'feedbacks',

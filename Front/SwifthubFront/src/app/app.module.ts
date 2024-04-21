@@ -44,6 +44,7 @@ import { HomeModule } from './FrontOffice/home/home.module';
 import { ShowWorkshopComponent } from './components/workshop/show-workshop/show-workshop.component';
 import { EditWorkshopComponent } from './components/workshop/edit-workshop/edit-workshop.component';
 import { ShowFeedbackComponent } from './components/feedback/show-feedback/show-feedback.component';
+import { AddWorkshopComponent } from './components/workshop/add-workshop/add-workshop.component';
 
 
 
@@ -58,6 +59,7 @@ import { ShowFeedbackComponent } from './components/feedback/show-feedback/show-
     ShowWorkshopComponent,
     EditWorkshopComponent,
     ShowFeedbackComponent,
+    AddWorkshopComponent,
 
     
 

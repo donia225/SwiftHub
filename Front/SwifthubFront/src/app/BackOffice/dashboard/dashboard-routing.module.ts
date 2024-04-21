@@ -30,7 +30,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'workshop', component: AppLayoutComponent,
+    path: 'workshopBack', component: AppLayoutComponent,
     children: [
       { path: 'show', component: ShowWorkshopComponent },
       // { path: 'add-quiz', component: EditWorkshopComponent },

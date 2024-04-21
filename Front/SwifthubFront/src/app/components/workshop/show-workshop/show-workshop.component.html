@@ -1,26 +1,43 @@
-<div class="block-content">
-    <div class="lg:px-8 md:px-6 px-4 py-8 surface-ground ng-star-inserted">
-        <div class="surface-ground">
-            <div class="grid">
-                <div class="col-12 md:col-6 xl:col-3 p-3">
-                    <div class="surface-card shadow-2 border-round p-4">
-                        <div class="flex flex-column align-items-center mb-3"><img
-                                src="assets/images/blocks/avatars/circle/avatar-f-1.png" class="mb-3"
-                                style="width: 70px; height: 70px;"><span class="font-medium text-900 text-xl mb-2">Jane
-                                Fox</span><span class="text-600 font-medium mb-2">Project Manager</span><span
-                                class="text-600 surface-200 p-2 border-round">Subscriber</span></div>
-                        <div class="pt-3 border-top-1 surface-border flex"><button pbutton="" pripple="" type="button"
-                                icon="pi pi-user-plus"
-                                class="p-element p-ripple flex-auto mr-2 p-button-outlined p-button-plain p-button p-component p-button-icon-only"
-                                style="border-radius: 30px;"><span class="p-button-icon pi pi-user-plus"
-                                    aria-hidden="true"></span><span class="p-ink"></span></button><button pbutton=""
-                                pripple="" type="button" icon="pi pi-send"
-                                class="p-element p-ripple flex-auto ml-2 p-button-outlined p-button-plain p-button p-component p-button-icon-only"
-                                style="border-radius: 30px;"><span class="p-button-icon pi pi-send"
-                                    aria-hidden="true"></span><span class="p-ink"></span></button></div>
+<div class="card card-w-title">
+    <p-breadcrumb [model]="breadcrumbItems" [home]="{icon: 'pi pi-home'}"></p-breadcrumb>
+</div>
+<!-- add workshop -->
+<div style="text-align: right;margin-right: 100px; margin-top: 30px;">
+    <button pbutton="" pripple="" type="button" icon="pi pi-plus"
+        class="p-element p-ripple p-button-rounded p-button-outlined p-button p-component p-button-icon-only"
+        routerLink="/workshopBack/add"
+        ><span
+            class="p-button-icon pi pi-plus" aria-hidden="true"></span><span class="p-ink" aria-hidden="true"
+            role="presentation"></span>
+    </button>
+</div>
+
+<div class="lg:px-8 md:px-6 px-4 py-4 surface-ground ng-star-inserted">
+    <div class="surface-ground">
+        <div class="grid">
+            <div class="col-12 md:col-6 xl:col-4 p-3" *ngFor="let workshop of workshops">
+                <div class="surface-card shadow-2 border-round p-4">
+                    <div class="flex border-bottom-1 surface-border pb-4">
+                        <div class="flex flex-column align-items-start"><span
+                                class="text-xl text-900 font-medium mb-1">{{workshop.title}}</span><span
+                                class="text-600 font-medium mb-2">{{workshop.start_date}}</span><span
+                                class="bg-blue-50 text-blue-400 border-round inline-flex py-1 px-2 text-sm">workshop
+                                tutor</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-content-between pt-4">
+                        <button pbutton="" pripple="" label="Join" icon="pi pi-search"
+                            class="p-element p-ripple p-button-outlined p-button-secondary w-6 mr-2 p-button p-component"><span
+                                class="p-button-icon p-button-icon-left pi pi-search" aria-hidden="true"></span><span
+                                class="p-button-label" routerLink="/workshopBack/edit">Edit</span><span
+                                class="p-ink"></span></button>
+                        <button pbutton="" pripple="" label="Follow" icon="pi pi-user-plus"
+                            class="p-element p-ripple p-button-outlined p-button-secondary w-6 ml-2 p-button p-component"><span
+                                class="p-button-icon p-button-icon-left pi pi-trash" aria-hidden="true"></span><span
+                                class="p-button-label">Delete</span><span class="p-ink"></span></button>
                     </div>
                 </div>
             </div>
         </div>
-    </div><!----><!---->
+    </div>
 </div>
