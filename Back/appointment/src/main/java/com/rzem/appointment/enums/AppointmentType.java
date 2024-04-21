@@ -1,5 +1,5 @@
 package com.rzem.appointment.enums;
 
 public enum AppointmentType {
-    MEETING
+    MEETING,FACE_TO_FACE,
 }
