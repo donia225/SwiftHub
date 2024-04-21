@@ -24,4 +24,19 @@ export class WorkshopService {
   public deleteWorkshop(workshopId:string) {
     return this.http.delete(`${this.baseUrl}/delete/`+workshopId);
   }
+
+  /**
+   * getWorkshopById
+   */
+  public getWorkshopById(workshopId:string) {
+    return this.http.get(`${this.baseUrl}/`+workshopId);
+  }
+
+  /**
+   * updateWorkshop
+   */
+  public updateWorkshop(workshopId:string,updatedWorkshop:Workshop) {
+    return this.http.put(`${this.baseUrl}/update/${workshopId}`,updatedWorkshop);
+  }
+  
 }
