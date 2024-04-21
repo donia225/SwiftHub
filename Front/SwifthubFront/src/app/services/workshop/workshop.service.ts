@@ -18,4 +18,10 @@ export class WorkshopService {
   public getAllWorkshops() {
     return this.http.get<Workshop[]>(`${this.baseUrl}`);
   }
+  /**
+   * deleteWorkshop
+   */
+  public deleteWorkshop(workshopId:string) {
+    return this.http.delete(`${this.baseUrl}/delete/`+workshopId);
+  }
 }

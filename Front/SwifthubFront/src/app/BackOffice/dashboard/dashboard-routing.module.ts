@@ -7,6 +7,7 @@ import { AddQuizComponent } from '../quizzes/add-quiz/add-quiz.component';
 import { DashboardComponent } from './dashboard.component';
 import { ShowWorkshopComponent } from 'src/app/components/workshop/show-workshop/show-workshop.component';
 import { EditWorkshopComponent } from 'src/app/components/workshop/edit-workshop/edit-workshop.component';
+import { AddWorkshopComponent } from 'src/app/components/workshop/add-workshop/add-workshop.component';
 
 const routes: Routes = [
 
@@ -33,7 +34,8 @@ const routes: Routes = [
     path: 'workshopBack', component: AppLayoutComponent,
     children: [
       { path: 'show', component: ShowWorkshopComponent },
-      // { path: 'add-quiz', component: EditWorkshopComponent },
+      { path: 'edit', component: EditWorkshopComponent },
+      { path: 'add', component: AddWorkshopComponent },
 
     ]
   },

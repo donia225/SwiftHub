@@ -96,8 +96,10 @@ public class WorkshopService {
                 //delete workshop
                 this.workshopRepository.deleteById(id);
                 //delete feedbacks corresponding to this workshop
-                workshop.get().getFeedbacks().stream()
-                        .forEach(feedbackRepository::delete);
+                if(workshop.get().getFeedbacks()!=null){
+                    workshop.get().getFeedbacks().stream()
+                            .forEach(feedbackRepository::delete);
+                }
 
 
             } else LOG.error(ERROR_NON_PRESENT_ID, id);

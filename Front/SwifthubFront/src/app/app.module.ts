@@ -45,6 +45,8 @@ import { ShowWorkshopComponent } from './components/workshop/show-workshop/show-
 import { EditWorkshopComponent } from './components/workshop/edit-workshop/edit-workshop.component';
 import { ShowFeedbackComponent } from './components/feedback/show-feedback/show-feedback.component';
 import { AddWorkshopComponent } from './components/workshop/add-workshop/add-workshop.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 
@@ -101,9 +103,11 @@ import { AddWorkshopComponent } from './components/workshop/add-workshop/add-wor
     ConfirmPopupModule,
     ToolbarModule,
     ToastModule,
+    ConfirmPopupModule,
+    ConfirmDialogModule,
     HomeModule
   ],
- 
+    providers:[MessageService,ConfirmationService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
