@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -24,7 +25,7 @@ public class Feedback implements Serializable {
     private String feedback_id;
     private String description;
     private RatingType rating;
-    private Date creationDate;
+    private LocalDateTime creationDate;
     private String userId;
 
     @DocumentReference(collection = "workshop")
