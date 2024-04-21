@@ -19,7 +19,7 @@ export class ShowWorkshopComponent implements OnInit {
 
   constructor(public serviceWorkshop: WorkshopService, public router: Router, private confirmationService: ConfirmationService, private messageService: MessageService) { }
 
-  //  get all workshops
+  //  get workshops
   getWorkshops() {
     this.serviceWorkshop.getAllWorkshops().subscribe(
       res => {
