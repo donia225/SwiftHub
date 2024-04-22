@@ -41,6 +41,9 @@ import { DashboardComponent } from './BackOffice/dashboard/dashboard.component';
 import { DashboardModule } from './BackOffice/dashboard/dashboard.module';
 import { AppLayoutModule } from './BackOffice/layout/app.layout.module';
 import { HomeModule } from './FrontOffice/home/home.module';
+import { QuizfrontComponent } from './FrontOffice/quizfront/quizfront.component';
+import { QuestionComponent } from './FrontOffice/question/question.component';
+import { UpdateQuizComponent } from './BackOffice/quizzes/update-quiz/update-quiz.component';
 
 
 
@@ -52,6 +55,9 @@ import { HomeModule } from './FrontOffice/home/home.module';
 @NgModule({
   declarations: [
     AppComponent,
+    QuizfrontComponent,
+    QuestionComponent,
+    UpdateQuizComponent,
 
     
 
@@ -94,6 +100,7 @@ import { HomeModule } from './FrontOffice/home/home.module';
     ToolbarModule,
     ToastModule,
     HomeModule
+    
   ],
  
     bootstrap: [AppComponent]

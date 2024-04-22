@@ -63,31 +63,57 @@ public class QuizService {
 
     }
 
+    //update the quiz + questions and its answers
     @Transactional
     public ResponseEntity<?> updateQuiz(String id, Quiz updatedQuiz) {
-        // Check if the quiz with the given ID exists
+        // Vérifiez si le quiz avec l'ID donné existe
         Optional<Quiz> optionalQuiz = quizrepo.findById(id);
         if (optionalQuiz.isPresent()) {
             Quiz existingQuiz = optionalQuiz.get();
 
-            // Update the fields of the existing quiz with the new data
+            // Mettre à jour les champs du quiz existant avec les nouvelles données
             existingQuiz.setQuizName(updatedQuiz.getQuizName());
-            existingQuiz.setGrade(updatedQuiz.getGrade());
-            existingQuiz.setCorrect(updatedQuiz.isCorrect());
+            existingQuiz.setQuizTime(updatedQuiz.getQuizTime());
+            //existingQuiz.setCorrect(updatedQuiz.isCorrect());
 
-            // Save the updated quiz
+            // Enregistrer le quiz mis à jour
             Quiz savedQuiz = quizrepo.save(existingQuiz);
 
-            // Return the updated quiz with a 200 OK status
+            // Récupérer toutes les questions associées à ce quiz
+            List<Question> updatedQuestions = updatedQuiz.getQuestions();
+            List<Question> existingQuestions = existingQuiz.getQuestions();
+
+            // Parcourir toutes les questions pour les mettre à jour
+            for (int i = 0; i < existingQuestions.size(); i++) {
+                Question existingQuestion = existingQuestions.get(i);
+                Question updatedQuestion = updatedQuestions.get(i);
+
+                // Mettre à jour le texte de la question
+                existingQuestion.setQuestiontxt(updatedQuestion.getQuestiontxt());
+
+                // Mettre à jour les réponses de la question
+                List<Answer> updatedAnswers = updatedQuestion.getAnswers();
+                List<Answer> existingAnswers = existingQuestion.getAnswers();
+
+                // Effacer les réponses existantes et ajouter les nouvelles
+                existingAnswers.clear();
+                existingAnswers.addAll(updatedAnswers);
+
+                // Enregistrer les réponses mises à jour
+                updatedAnswers.forEach(answer -> answerRepository.save(answer));
+
+                // Enregistrer la question mise à jour avec ses réponses
+                questionRepo.save(existingQuestion);
+            }
+
+            // Retourner le quiz mis à jour avec un statut 200 OK
             return ResponseEntity.ok(savedQuiz);
-
         } else {
-            // Return a not found response if the quiz is not found
-
+            // Retourner une réponse non trouvée si le quiz n'est pas trouvé
             return ResponseEntity.notFound().build();
-
         }
     }
+
 
     //this method is implemented to delete the quiz
     @Transactional

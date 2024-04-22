@@ -5,6 +5,7 @@ import { AppLayoutComponent } from '../layout/app.layout.component';
 import { ListQuizComponent } from '../quizzes/list-quiz/list-quiz.component';
 import { AddQuizComponent } from '../quizzes/add-quiz/add-quiz.component';
 import { DashboardComponent } from './dashboard.component';
+import { UpdateQuizComponent } from '../quizzes/update-quiz/update-quiz.component';
 
 const routes: Routes = [
 
@@ -24,6 +25,7 @@ const routes: Routes = [
     children: [
       { path: 'list-quiz', component: ListQuizComponent },
       { path: 'add-quiz', component: AddQuizComponent },
+      { path: 'update-quiz/:quiz_id', component: UpdateQuizComponent }
 
     ]
   },

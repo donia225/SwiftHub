@@ -62,6 +62,7 @@ public class QuestionService {
 
     }
 
+
     //add the question + the answers and assign them to quiz
     public Question affectQuestionToQuiz(String quizId, Question question) {
         Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
@@ -123,22 +124,25 @@ public class QuestionService {
         if (optionalQuestion.isPresent()) {
             Question question = optionalQuestion.get();
             List<Answer> answers = question.getAnswers();
-            // Delete associated answers
+
+            // Supprimer toutes les réponses associées à cette question
             answerRepository.deleteAll(answers);
 
-            // Remove the question from the associated quiz
+            // Supprimer la référence de la question dans le quiz
             Quiz quiz = question.getQuiz();
             if (quiz != null) {
                 quiz.getQuestions().remove(question);
                 quizRepository.save(quiz);
             }
 
-            // Delete the question itself
+            // Supprimer la question elle-même
             questionRepository.deleteById(questionId);
         } else {
             LOG.error(String.format(ERROR_NON_PRESENT_ID, questionId));
         }
     }
+
+
 
 
 }

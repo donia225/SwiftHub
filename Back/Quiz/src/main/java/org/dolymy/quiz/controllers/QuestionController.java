@@ -49,12 +49,15 @@ public class QuestionController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteQuestion(@PathVariable String id) {
         try {
+            // Appeler la méthode deleteQuestionAndAnswers du service QuestionService
             questionService.deleteQuestionAndAnswers(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
+            // En cas d'erreur, renvoyer une réponse avec un code d'erreur interne du serveur
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to delete question: " + e.getMessage());
+                    .body("Échec de la suppression de la question : " + e.getMessage());
         }
     }
+
 
 }
