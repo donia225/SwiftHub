@@ -38,5 +38,13 @@ export class WorkshopService {
   public updateWorkshop(workshopId:string,updatedWorkshop:Workshop) {
     return this.http.put(`${this.baseUrl}/update/${workshopId}`,updatedWorkshop);
   }
+
+  /**
+   * addWorkshop
+   */
+  public addWorkshop(workshop:Workshop) {
+    return this.http.post(`${this.baseUrl}`,workshop);
+    
+  }
   
 }

@@ -1,1 +1,82 @@
-<p>add-workshop works!</p>
+<!-- Header -->
+<div class="card card-w-title">
+    <p-breadcrumb [model]="breadcrumbItems" [home]="{icon: 'pi pi-home'}"></p-breadcrumb>
+</div>
+<!-- add workshop -->
+<div class="card card-w-title">
+    <form [formGroup]="addWorkshopForm">
+        <div class="grid gap-5">
+            <div class="flex flex-column gap-2">
+                <label for="titleWorkshop">Title</label>
+                <input id="titleWorkshop" pInputText type="text" aria-describedby="username-help"
+                    formControlName="title" />
+                <div *ngIf="title!.touched && title!.errors?.['required']" class="alert alert-danger m-2">Title is
+                    required.</div>
+            </div>
+            <div class="flex flex-column gap-2">
+                <label for="Capacity">Capacity</label>
+                <input id="Capacity" pInputText name="Capacity" type="number" aria-describedby="username-help"
+                    formControlName="capacity" />
+                <div class="p-error" *ngIf="capacity!.touched && capacity!.errors?.['required']"
+                    class="alert alert-danger m-2">capacity can't be 0</div>
+                <div class="p-error" *ngIf="capacity!.touched && capacity!.errors?.['pattern']"
+                    class="alert alert-danger m-2">capacity can't be 0</div>
+            </div>
+        </div>
+        <br>
+        <div class="flex flex-column gap-2">
+            <label for="description">Description</label>
+            <input id="description" pInputText name="description" type="text" aria-describedby="username-help"
+                formControlName="description" />
+            <div class="p-error" class="alert alert-danger m-2"
+                *ngIf="description!.touched&& description!.errors?.['required']">Description is required</div>
+        </div>
+        <div class="flex gap-3" style="margin-top: 40px;">
+            <p-selectButton [options]="stateOptions" name="presenceType" [(ngModel)]="presenceType" optionLabel="label"
+                optionValue="value" [ngModelOptions]="{standalone: true}"></p-selectButton>
+        </div>
+        <br>
+        <!-- Show location input if workshop is in-person -->
+        <div class="flex flex-column gap-2" *ngIf="presenceType == 'inPerson'">
+            <label for="location">Location:</label>
+            <input type="text" pInputText id="location" name="location" formControlName="location">
+        </div>
+
+        <!-- Show link input if workshop is online -->
+        <div class="flex flex-column gap-2" *ngIf="presenceType == 'online'">
+            <label for="link">Link:</label>
+            <input type="text" pInputText id="link" name="link" formControlName="link">
+        </div>
+        <br>
+        <div class="flex flex-column gap-2">
+            <label for="dateRange">Date Range:</label>
+            <div class="grid gap-4" style="margin-top: 5px;">
+                <label for="start_date" style="margin-top: 10px;">FROM: </label>
+                <p-calendar formControlName="start_date" name="start_date" [showIcon]="true"
+                    class="calendar-width"></p-calendar>
+                <div class="p-error block" class="alert alert-danger m-2"
+                    *ngIf="start_date!.touched&& start_date!.errors?.['required']">**start date
+                    required</div>
+
+                <label for="end_date" style="margin-top: 10px;">TO:</label>
+                <p-calendar formControlName="end_date" name="end_date" [showIcon]="true" class="calendar-width"
+                    (ngModelChange)="endDateValidator()">
+                </p-calendar>
+                <div class="p-error block" class="alert alert-danger m-2"
+                    *ngIf="end_date!.touched&& end_date!.errors?.['required']">**End date
+                    required</div>
+                <div class="p-error block" class="alert alert-danger m-2" *ngIf="end_date!.touched&&!dateValidity">**End
+                    date
+                    should be
+                    greater than start date</div>
+            </div>
+
+        </div>
+        <br>
+
+        <p-button (click)="addWorkshop()" label="Confirm" icon="pi pi-check" iconPos="right"
+    [disabled]="!dateValidity || addWorkshopForm.invalid" class="add-button"></p-button>
+
+    </form>
+    <p-toast></p-toast>
+</div>

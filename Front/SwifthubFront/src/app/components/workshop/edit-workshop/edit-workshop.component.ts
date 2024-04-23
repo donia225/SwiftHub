@@ -13,9 +13,6 @@ import { DatePipe } from '@angular/common';
 })
 export class EditWorkshopComponent implements OnInit {
 
-
-
-
   breadcrumbItems: MenuItem[] = [];
   workshopId: any;
   workshop!: any;

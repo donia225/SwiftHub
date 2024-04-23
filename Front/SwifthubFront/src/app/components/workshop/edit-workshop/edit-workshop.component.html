@@ -10,7 +10,7 @@
                 <label for="title">Title</label>
                 <input id="title" pInputText name="title" type="text" aria-describedby="username-help"
                     [(ngModel)]="workshop.title"  />
-                    <small class="p-error " *ngIf="!workshop.title">** Title is required</small>
+                    <div class="p-error block " *ngIf="!workshop.title">** Title is required</div>
             </div>
             <div class="flex flex-column gap-2">
                 <label for="Capacity">Capacity</label>
