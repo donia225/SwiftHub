@@ -52,6 +52,23 @@ export class AppMenuComponent implements OnInit {
                            
                         ]
                     },
+                    {
+                        label: 'Workshop',
+                        icon: 'pi pi-fw pi-briefcase',
+                        items: [
+                            {
+                                label: 'workshops',
+                                icon: 'pi pi-fw pi-arrow-right',
+                                routerLink: ['/workshopBack/show']
+                            },
+                            {
+                                label:'feedbacks',
+                                icon: 'pi pi-fw pi-arrow-right',
+                                routerLink: ['/feedback/show']
+                            }
+                           
+                        ]
+                    },
                     
                 ]
             },

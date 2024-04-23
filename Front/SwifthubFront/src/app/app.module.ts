@@ -41,6 +41,16 @@ import { DashboardComponent } from './BackOffice/dashboard/dashboard.component';
 import { DashboardModule } from './BackOffice/dashboard/dashboard.module';
 import { AppLayoutModule } from './BackOffice/layout/app.layout.module';
 import { HomeModule } from './FrontOffice/home/home.module';
+import { ShowWorkshopComponent } from './components/workshop/show-workshop/show-workshop.component';
+import { EditWorkshopComponent } from './components/workshop/edit-workshop/edit-workshop.component';
+import { ShowFeedbackComponent } from './components/feedback/show-feedback/show-feedback.component';
+import { AddWorkshopComponent } from './components/workshop/add-workshop/add-workshop.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { CardModule } from 'primeng/card';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { DatePipe } from '@angular/common';
+
 
 
 
@@ -52,6 +62,10 @@ import { HomeModule } from './FrontOffice/home/home.module';
 @NgModule({
   declarations: [
     AppComponent,
+    ShowWorkshopComponent,
+    EditWorkshopComponent,
+    ShowFeedbackComponent,
+    AddWorkshopComponent,
 
     
 
@@ -93,9 +107,13 @@ import { HomeModule } from './FrontOffice/home/home.module';
     ConfirmPopupModule,
     ToolbarModule,
     ToastModule,
+    ConfirmPopupModule,
+    ConfirmDialogModule,
+    CardModule,
+    SelectButtonModule,
     HomeModule
   ],
- 
+    providers:[MessageService,ConfirmationService,DatePipe],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
