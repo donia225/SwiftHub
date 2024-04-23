@@ -62,8 +62,6 @@ export class AddWorkshopComponent implements OnInit {
   };
   //format date
   formatDate(date: Date): Date {
-    // Assuming dateString is in the format: Tue Apr 23 2024 00:00:00 GMT+0200 (Central European Summer Time)
-    // const date = new Date(dateString);
     const formattedDate = this.datePipe.transform(date, 'yyyy-MM-dd');
     return formattedDate ? new Date(formattedDate) : new Date();
   }
