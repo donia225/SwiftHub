@@ -60,7 +60,7 @@
 
 
         <br>
-        <p-button type="submit" label="Submit" icon="pi pi-check" iconPos="right" [disabled]="endDateInvalid" ></p-button>
+        <p-button type="submit" label="Submit" icon="pi pi-check" iconPos="right" [disabled]="endDateInvalid || !workshop.title || !workshop.description || workshop.capacity==0" ></p-button>
     </form>
     <p-toast></p-toast>
 </div>
