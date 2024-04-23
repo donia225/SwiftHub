@@ -47,6 +47,10 @@ import { ShowFeedbackComponent } from './components/feedback/show-feedback/show-
 import { AddWorkshopComponent } from './components/workshop/add-workshop/add-workshop.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { CardModule } from 'primeng/card';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { DatePipe } from '@angular/common';
+
 
 
 
@@ -105,9 +109,11 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     ToastModule,
     ConfirmPopupModule,
     ConfirmDialogModule,
+    CardModule,
+    SelectButtonModule,
     HomeModule
   ],
-    providers:[MessageService,ConfirmationService],
+    providers:[MessageService,ConfirmationService,DatePipe],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

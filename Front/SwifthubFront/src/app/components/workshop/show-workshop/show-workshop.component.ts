@@ -11,7 +11,6 @@ import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 })
 export class ShowWorkshopComponent implements OnInit {
 
-
   displyDialogDelete: boolean = false;
   breadcrumbItems: MenuItem[] = [];
   workshops!: Workshop[];
@@ -71,7 +70,6 @@ export class ShowWorkshopComponent implements OnInit {
       }
     });
   }
-
 
   ngOnInit(): void {
     this.breadcrumbItems = [

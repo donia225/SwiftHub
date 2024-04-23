@@ -33,8 +33,9 @@ const routes: Routes = [
   {
     path: 'workshopBack', component: AppLayoutComponent,
     children: [
+      { path: 'edit/:id', component: EditWorkshopComponent },
       { path: 'show', component: ShowWorkshopComponent },
-      { path: 'edit', component: EditWorkshopComponent },
+    
       { path: 'add', component: AddWorkshopComponent },
 
     ]

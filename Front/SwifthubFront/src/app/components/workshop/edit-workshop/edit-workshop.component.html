@@ -1,1 +1,66 @@
-<p>edit-workshop works!</p>
+<!-- Header -->
+<div class="card card-w-title">
+    <p-breadcrumb [model]="breadcrumbItems" [home]="{icon: 'pi pi-home'}"></p-breadcrumb>
+</div>
+<!-- edit workshop -->
+<div class="card card-w-title">
+    <form (ngSubmit)="updateWorkshop()">
+        <div class="grid gap-5">
+            <div class="flex flex-column gap-2">
+                <label for="title">Title</label>
+                <input id="title" pInputText name="title" type="text" aria-describedby="username-help"
+                    [(ngModel)]="workshop.title"  />
+                    <small class="p-error " *ngIf="!workshop.title">** Title is required</small>
+            </div>
+            <div class="flex flex-column gap-2">
+                <label for="Capacity">Capacity</label>
+                <input id="Capacity" pInputText name="Capacity" type="number" aria-describedby="username-help"
+                    [(ngModel)]="workshop.capacity" />
+                    <small class="p-error" *ngIf="workshop.capacity==0 ||workshop.capacity==null ">capacity can't be 0</small>
+                </div>
+        </div>
+        <br>
+        <div class="flex flex-column gap-2">
+            <label for="description">Description</label>
+            <input id="description" pInputText name="description" type="text" aria-describedby="username-help"
+                [(ngModel)]="workshop.description" />
+                <small class="p-error" *ngIf="!workshop.description">description is required</small>        </div>
+        <div class="flex gap-3" style="margin-top: 40px;">
+            <p-selectButton [options]="stateOptions" name="presenceType" [(ngModel)]="presenceType" optionLabel="label"
+                optionValue="value"></p-selectButton>
+        </div>
+        <br>
+        <!-- Show location input if workshop is in-person -->
+        <div class="flex flex-column gap-2" *ngIf="presenceType === 'inPerson'">
+            <label for="location">Location:</label>
+            <input type="text" pInputText id="location" name="location" [(ngModel)]="workshop.location">
+        </div>
+
+        <!-- Show link input if workshop is online -->
+        <div class="flex flex-column gap-2" *ngIf="presenceType === 'online'">
+            <label for="link">Link:</label>
+            <input type="text" pInputText id="link" name="link" [(ngModel)]="workshop.link">
+        </div>
+        <br>
+        <div class="flex flex-column gap-2">
+            <label for="dateRange">Date Range:</label>
+            <div class="grid gap-4" style="margin-top: 5px;">
+                <label for="start_date" style="margin-top: 10px;">FROM: {{workshop.start_date | date:
+                    'yyyy-MM-dd'}}</label>
+                <p-calendar [(ngModel)]="workshop.start_date" name="start_date" [showIcon]="true"
+                    class="calendar-width"></p-calendar>
+                <label for="end_date" style="margin-top: 10px;">TO: {{workshop.end_date | date: 'yyyy-MM-dd'}}</label>
+                <p-calendar [(ngModel)]="workshop.end_date" name="end_date" [showIcon]="true"
+                    class="calendar-width" (ngModelChange)="checkDateValidity()" ></p-calendar>
+            </div>
+            <small class="p-error block" *ngIf="endDateInvalid">**End date should be greater than start date</small>
+        </div>
+
+
+
+
+        <br>
+        <p-button type="submit" label="Submit" icon="pi pi-check" iconPos="right" [disabled]="endDateInvalid" ></p-button>
+    </form>
+    <p-toast></p-toast>
+</div>

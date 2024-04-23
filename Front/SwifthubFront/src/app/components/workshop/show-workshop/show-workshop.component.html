@@ -23,28 +23,35 @@
                                 tutor</span>
                         </div>
                     </div>
+                    <!-- edit workshop -->
                     <div class="flex justify-content-between pt-4">
-                        <button pbutton="" pripple="" label="Join" icon="pi pi-search"
-                            class="p-element p-ripple p-button-outlined p-button-secondary w-6 mr-2 p-button p-button-info  p-component"><span
-                                class="p-button-icon p-button-icon-left pi pi-search" aria-hidden="true"></span><span
-                                class="p-button-label" routerLink="/workshopBack/edit">Edit</span><span
-                                class="p-ink"></span></button>
-
-                                <p-toast></p-toast>
-                        <p-confirmDialog  *ngIf="selectedWorkshopId=== workshop.workshop_id" #cd>
+                        <button routerLink="/workshopBack/edit/{{workshop.workshop_id}}" 
+                            pbutton="" pripple="" label="Join" icon="pi pi-search"
+                            class="p-element p-ripple p-button-outlined p-button-secondary w-6 mr-2 p-button p-button-info  p-component">
+                            <span  class="p-button-icon p-button-icon-left pi pi-search" aria-hidden="true"></span>
+                            <span class="p-button-label">Edit</span>
+                            <span class="p-ink"></span>
+                        </button>
+                    <!-- Delete workshop -->
+                        <p-toast></p-toast>
+                        <p-confirmDialog *ngIf="selectedWorkshopId=== workshop.workshop_id" #cd>
                             <ng-template pTemplate="message" let-message>
-                                <div  class="flex flex-column align-items-center p-5 surface-overlay border-round">
+                                <div class="flex flex-column align-items-center p-5 surface-overlay border-round">
                                     <span class="font-bold text-2xl block mb-2 mt-4">{{message.header}}</span>
                                     <p class="mb-0">{{ message.message }}</p>
                                     <div class="flex align-items-center gap-7 mt-4">
-                                        <button pButton label="Save" (click)="cd.accept()" class="p-button-outlined w-8rem "></button>
+                                        <button pButton label="Save" (click)="cd.accept()"
+                                            class="p-button-outlined w-8rem "></button>
                                         <button pButton label="Cancel" (click)="cd.reject()"
                                             class="p-button-outlined w-8rem "></button>
                                     </div>
                                 </div>
                             </ng-template>
                         </p-confirmDialog>
-                        <p-button (click)="deleteWorkshop(workshop.workshop_id)" icon="pi pi-check" label="Delete"></p-button>
+                        <button (click)="deleteWorkshop(workshop.workshop_id)" pbutton="" pripple="" type="button" label="Danger"
+                            class="p-element p-ripple p-button-outlined p-button-danger p-button p-component"><span
+                                class="p-button-label">Delete</span><span class="p-ink" aria-hidden="true"
+                                role="presentation"></span></button>
                     </div>
                 </div>
             </div>
