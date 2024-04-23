@@ -4,10 +4,10 @@ import { LoginComponent } from '../login/login.component';
 import { AppLayoutComponent } from '../layout/app.layout.component';
 import { ListQuizComponent } from '../quizzes/list-quiz/list-quiz.component';
 import { AddQuizComponent } from '../quizzes/add-quiz/add-quiz.component';
-import { DashboardComponent } from './dashboard.component';
 import { ShowWorkshopComponent } from 'src/app/components/workshop/show-workshop/show-workshop.component';
 import { EditWorkshopComponent } from 'src/app/components/workshop/edit-workshop/edit-workshop.component';
 import { AddWorkshopComponent } from 'src/app/components/workshop/add-workshop/add-workshop.component';
+import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
 
