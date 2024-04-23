@@ -9,12 +9,12 @@ public interface LocationService {
     List<Location> getAllLocations();
 
 
-    Location findLocationById(Long id);
+    Location findLocationById(String id);
 
 
     Location updateLocation(Location location);
 
-    void deleteLocation(Long id);
+    void deleteLocation(String id);
 
     Location saveLocation(Location location);
 

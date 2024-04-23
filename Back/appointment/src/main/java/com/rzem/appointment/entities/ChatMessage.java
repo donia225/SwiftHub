@@ -1,5 +1,5 @@
 package com.rzem.appointment.entities;
-
+/*
 import jakarta.persistence.Id;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,8 +18,11 @@ public class ChatMessage {
     private int id;
     private String content;
     private Date timestamp;
-    private int senderId;
-    private int receiverId;
+    private String senderId;
+    private String receiverId;
     private Appointment appointment ;
 
 }
+
+
+ */
