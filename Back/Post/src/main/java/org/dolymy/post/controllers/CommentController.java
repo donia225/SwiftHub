@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("api/comments")
+@RequestMapping("api/post/comments")
 @Controller
 public class CommentController {
     @Autowired

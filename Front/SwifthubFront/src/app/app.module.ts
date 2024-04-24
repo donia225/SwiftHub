@@ -41,8 +41,11 @@ import { DashboardComponent } from './BackOffice/dashboard/dashboard.component';
 import { DashboardModule } from './BackOffice/dashboard/dashboard.module';
 import { AppLayoutModule } from './BackOffice/layout/app.layout.module';
 import { HomeModule } from './FrontOffice/home/home.module';
-
-
+import { PostComponent } from './FrontOffice/post/post.component';
+import { PostDetailsComponent } from './FrontOffice/post-details/post-details.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -52,11 +55,17 @@ import { HomeModule } from './FrontOffice/home/home.module';
 @NgModule({
   declarations: [
     AppComponent,
+     PostComponent,
+     PostDetailsComponent,
+    
 
     
 
   ],
   imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     BrowserModule,
     DashboardModule,
     AppRoutingModule,

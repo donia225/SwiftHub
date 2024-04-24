@@ -16,8 +16,8 @@ import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/posts")
-@Controller
+@RequestMapping("/api/post/posts")
+@CrossOrigin("*")
 public class PostController {
     @Autowired
     private PostService postService;

@@ -7,6 +7,9 @@ import { ContentComponent } from './content/content.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home.component';
 import { WorkshopComponent } from '../workshop/workshop.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { PostComponent } from '../post/post.component';
+import { PostDetailsComponent } from '../post-details/post-details.component';
 
 
 @NgModule({
@@ -15,11 +18,18 @@ import { WorkshopComponent } from '../workshop/workshop.component';
     NavbarComponent,
     ContentComponent,
     FooterComponent,
-    WorkshopComponent
+    SidebarComponent,
+    WorkshopComponent,
+    //PostComponent,
+    //PostDetailsComponent
+   
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
+    
+
+   
     
 
   ]

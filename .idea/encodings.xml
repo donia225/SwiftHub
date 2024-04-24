@@ -5,9 +5,13 @@
     <file url="file://$PROJECT_DIR$/Back/Discovery/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Back/Gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Back/Post/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Back/Post/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Back/Quiz/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Back/RequestProject/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Back/RequestProject/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Back/User/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Back/User/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Back/Workshop/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Back/Workshop/src/main/resources" charset="UTF-8" />
   </component>
 </project>
