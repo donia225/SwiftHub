@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
+import { User } from 'src/app/models/user/user';
 import { Workshop } from 'src/app/models/workshop/workshop';
 import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 
@@ -14,6 +15,7 @@ export class ShowWorkshopComponent implements OnInit {
   displyDialogDelete: boolean = false;
   breadcrumbItems: MenuItem[] = [];
   workshops!: Workshop[];
+  users!:User[];
   selectedWorkshopId: string | null = null;
 
   constructor(public serviceWorkshop: WorkshopService, public router: Router, private confirmationService: ConfirmationService, private messageService: MessageService) { }
@@ -24,10 +26,25 @@ export class ShowWorkshopComponent implements OnInit {
       res => {
         this.workshops = res;
 
+
       },
       err => {
         console.log(err);
 
+      }
+    );
+  }
+
+  //getUsersList
+  getUsers(){
+    this.serviceWorkshop.getAllUsers().subscribe(
+      (res)=>{
+        this.users=res;
+
+      },
+      err=>{
+        console.log(err);
+        
       }
     );
   }
@@ -77,7 +94,10 @@ export class ShowWorkshopComponent implements OnInit {
       { label: 'workshops' }
     ];
 
+    this.getUsers();
     this.getWorkshops();
+    
+    
 
 
   }
