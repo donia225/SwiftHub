@@ -15,10 +15,21 @@ export class ShowWorkshopComponent implements OnInit {
   displyDialogDelete: boolean = false;
   breadcrumbItems: MenuItem[] = [];
   workshops!: Workshop[];
-  users!:User[];
+  users!: User[];
   selectedWorkshopId: string | null = null;
 
   constructor(public serviceWorkshop: WorkshopService, public router: Router, private confirmationService: ConfirmationService, private messageService: MessageService) { }
+
+  //show html for students: frontOffice
+  isStudentRoute() {
+    return this.router.url === '/home/workshop'
+  }
+  // show html for admins+professors: BackOffice
+  isAdminRoute() {
+    return this.router.url === '/workshopBack/show';
+
+  }
+
 
   //  get workshops
   getWorkshops() {
@@ -36,15 +47,15 @@ export class ShowWorkshopComponent implements OnInit {
   }
 
   //getUsersList
-  getUsers(){
+  getUsers() {
     this.serviceWorkshop.getAllUsers().subscribe(
-      (res)=>{
-        this.users=res;
+      (res) => {
+        this.users = res;
 
       },
-      err=>{
+      err => {
         console.log(err);
-        
+
       }
     );
   }
@@ -53,6 +64,8 @@ export class ShowWorkshopComponent implements OnInit {
   cancelDelete() {
     this.selectedWorkshopId = null;
   }
+
+
 
   deleteWorkshop(workshopId: string) {
     this.selectedWorkshopId = workshopId;
@@ -97,7 +110,8 @@ export class ShowWorkshopComponent implements OnInit {
     this.getUsers();
     this.getWorkshops();
     
-    
+
+
 
 
   }

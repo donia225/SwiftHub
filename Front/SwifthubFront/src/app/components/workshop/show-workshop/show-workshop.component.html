@@ -1,3 +1,5 @@
+<!-- BACKOFFICE FOR ADMINS/PROFESSORS -->
+<div *ngIf="isAdminRoute()">
 <div class="card card-w-title">
     <p-breadcrumb [model]="breadcrumbItems" [home]="{icon: 'pi pi-home'}"></p-breadcrumb>
 </div>
@@ -60,3 +62,6 @@
         </div>
     </div>
 </div>
+</div>
+<!-- FRONTOFFICE FOR STUDENTS -->
+<div *ngIf="isStudentRoute()">hello</div>
