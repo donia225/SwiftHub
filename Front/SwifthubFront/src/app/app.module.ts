@@ -49,6 +49,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DatePipe } from '@angular/common';
+import { UserWorkshopComponent } from './components/workshop/user-workshop/user-workshop.component';
 
 
 
@@ -65,6 +66,7 @@ import { DatePipe } from '@angular/common';
     EditWorkshopComponent,
     ShowFeedbackComponent,
     AddWorkshopComponent,
+    UserWorkshopComponent,
 
     
 

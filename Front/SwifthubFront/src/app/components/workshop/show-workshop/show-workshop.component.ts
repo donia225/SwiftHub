@@ -123,8 +123,15 @@ export class ShowWorkshopComponent implements OnInit {
   joinWorkshop(workshopId:string){
     var userId:string=this.LoggedInUser.id
     this.serviceWorkshop.joiningWorkshop(workshopId,userId).subscribe(
-      res=>{
-        this.messageService.add({severity:'success', summary:'Success', detail:'You Have Joined this workshop'});
+      (res)=>{
+        console.log(res);
+        
+        if (res==true) {
+          this.messageService.add({severity:'success', summary:'Success', detail:'You Have Joined this workshop'});
+        }else if(res== false){
+          this.messageService.add({severity:'info', summary:'Already Joined', detail:'You have already Joined this workshop'});
+
+        }
       },
       err=>{
         this.messageService.add({severity:'error', summary:'Failed', detail:'ERROR, couldnt join workshop'});

@@ -85,6 +85,55 @@ public class WorkshopService {
                 .build();
     }
 
+    public boolean JoinWorkshop(String workshopId, String userId) {
+        Workshop workshop=new Workshop();
+        Integer workshopCapacity=null;
+        List<String>usersInWorkshop=new ArrayList<String>();
+        boolean check=false;
+        if(workshopId!=null && userId!=null){
+            Optional<Workshop> optionalWorkshop=this.workshopRepository.findById(workshopId);
+            if (optionalWorkshop.isPresent())
+            {
+                workshop=optionalWorkshop.get();
+                workshopCapacity=workshop.getCapacity();
+                if (workshopCapacity>0){
+                   
+                    if(workshop.getJoinedUsersId().stream().anyMatch(userId::equals)) {
+                        check= false;
+                    }else {
+                        //add the newly joined user
+                        if(workshop.getJoinedUsersId()==null ) {
+                            usersInWorkshop.add(userId);
+                            workshop.setJoinedUsersId(usersInWorkshop);
+                            // reducing workshop capacity
+                            workshop.setCapacity(workshop.getCapacity()-1);
+                            check=true;
+
+                        }else {
+
+                            workshop.getJoinedUsersId().add(userId);
+                            // reducing workshop capacity
+                            workshop.setCapacity(workshop.getCapacity()-1);
+                            check=true;
+
+                        }
+                        //update workshop
+                        this.updateWorkshop(workshopId,workshop);
+                    }
+
+
+
+
+                }else {
+                    LOG.error("CAPACITY IS 0");
+                }
+            }else {
+                LOG.error("WORKSHOPID IS NULL AND/OR USERID IS NULL");
+            }
+        }
+        return check;
+    }
+
     /**
      * Deletes a workshop and its corresponding feedbacks.
      *
@@ -106,38 +155,6 @@ public class WorkshopService {
             } else LOG.error(ERROR_NON_PRESENT_ID, id);
         } else LOG.error(ERROR_NULL_ID);
 
-    }
-
-    public void JoinWorkshop(String workshopId, String userId) {
-        Workshop workshop=new Workshop();
-        Integer workshopCapacity=null;
-        List<String>usersInWorkshop=new ArrayList<String>();
-        if(workshopId!=null && userId!=null){
-            Optional<Workshop> optionalWorkshop=this.workshopRepository.findById(workshopId);
-            if (optionalWorkshop.isPresent())
-            {
-                workshop=optionalWorkshop.get();
-                workshopCapacity=workshop.getCapacity();
-                if (workshopCapacity>0){
-                    // reducing workshop capacity
-                    workshop.setCapacity(workshop.getCapacity()-1);
-                    //add the newly joined user
-                    if(workshop.getJoinedUsersId()!=null ) {
-                        workshop.getJoinedUsersId().add(userId);
-                    }else if(!workshop.getJoinedUsersId().contains(userId)) {
-                        usersInWorkshop.add(userId);
-                        workshop.setJoinedUsersId(usersInWorkshop);
-                    }
-                    //update wotkshop
-                    this.updateWorkshop(workshopId,workshop);
-
-                }else {
-                    LOG.error("CAPACITY IS 0");
-                }
-            }else {
-                LOG.error("WORKSHOPID IS NULL AND/OR USERID IS NULL");
-            }
-            }
     }
 
     public List<String> findJoinedUsers(String id) {
