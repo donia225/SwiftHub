@@ -64,4 +64,31 @@
 </div>
 </div>
 <!-- FRONTOFFICE FOR STUDENTS -->
-<div *ngIf="isStudentRoute()">hello</div>
+<div *ngIf="isStudentRoute()">
+    <div  style="margin-left: 250px;margin-right: 250px;"
+     class="card text-center" *ngFor="let workshop of workshops">
+        <h5 class="card-header">
+          {{workshop.title}}
+        </h5>
+        <div class="card-body " >
+          <!-- <h5 class="card-title">{{workshop.description}}</h5> -->
+          <p class="card-text">{{workshop.description}}</p>
+          <div *ngFor="let user of users" >
+            <div *ngIf="user.id === workshop.userId" >
+                <span class="badge badge-pill badge-light">{{user.username}}</span>
+            </div>
+          </div>
+          <br>
+
+          <button href="#" class="btn"  style=" color: #fff;
+          background: linear-gradient(45deg, #caa28c, #caa28c);">
+        Join Workshop</button>
+        </div>
+        <div class="card-footer text-body-secondary font-italic">
+         {{workshop.start_date}} -- {{workshop.end_date}}
+        </div>
+      </div>
+      <br>
+      <br>
+      
+</div>
