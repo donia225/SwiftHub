@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
@@ -18,7 +19,7 @@ export class ShowWorkshopComponent implements OnInit {
   users!: User[];
   selectedWorkshopId: string | null = null;
 
-  constructor(public serviceWorkshop: WorkshopService, public router: Router, private confirmationService: ConfirmationService, private messageService: MessageService) { }
+  constructor(public serviceWorkshop: WorkshopService, public router: Router, private confirmationService: ConfirmationService, private messageService: MessageService,private datePipe: DatePipe) { }
 
   //show html for students: frontOffice
   isStudentRoute() {
@@ -98,11 +99,12 @@ export class ShowWorkshopComponent implements OnInit {
     });
   }
 
-  //Show workshops after start date
-  // checkStartDate(Date start):boolean{
-  //   const currentDate = new Date();
-  //   return start >= currentDate;
-  // }
+  //only Show workshops that haven't started yet
+  checkStartDate(start:Date):boolean{
+    const workshopstart=new Date(start)
+    const currentDate = new Date();
+    return workshopstart >= currentDate;
+  }
 
   ngOnInit(): void {
     this.breadcrumbItems = [

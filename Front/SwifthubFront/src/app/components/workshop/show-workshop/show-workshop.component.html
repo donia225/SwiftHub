@@ -65,8 +65,11 @@
 </div>
 <!-- FRONTOFFICE FOR STUDENTS -->
 <div *ngIf="isStudentRoute()">
+    <div *ngFor="let workshop of workshops">
+    <div *ngIf="checkStartDate(workshop.start_date)">
     <div  style="margin-left: 250px;margin-right: 250px;"
-     class="card text-center" *ngFor="let workshop of workshops">
+     class="card text-center" >
+    
         <h5 class="card-header">
           {{workshop.title}}
         </h5>
@@ -79,7 +82,7 @@
             </div>
           </div>
           <br>
-
+    
           <button href="#" class="btn"  style=" color: #fff;
           background: linear-gradient(45deg, #caa28c, #caa28c);">
         Join Workshop</button>
@@ -90,5 +93,6 @@
       </div>
       <br>
       <br>
-      
+    </div>
+    </div>   
 </div>
