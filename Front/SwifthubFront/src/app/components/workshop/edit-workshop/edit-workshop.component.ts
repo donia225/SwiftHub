@@ -62,7 +62,8 @@ export class EditWorkshopComponent implements OnInit {
       start_date: this.formatDate(this.workshop.start_date),
       end_date: this.formatDate(this.workshop.end_date),
       userId: this.workshop.userId,
-      feedbacks: this.workshop.feedbacks
+      feedbacks: this.workshop.feedbacks,
+      joinedUsers:this.workshop.joinedUsers,
 
     }
 

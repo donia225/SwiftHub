@@ -109,30 +109,46 @@ public class WorkshopService {
     }
 
     public void JoinWorkshop(String workshopId, String userId) {
-        Workshop workshop=null;
+        Workshop workshop=new Workshop();
         Integer workshopCapacity=null;
         List<String>usersInWorkshop=new ArrayList<String>();
         if(workshopId!=null && userId!=null){
-           workshop=this.findWorkshopById(workshopId);
-           workshopCapacity=workshop.getCapacity();
-           if (workshopCapacity!=0){
-              // reducing workshop capacity
-              workshop.setCapacity(workshop.getCapacity()-1);
-              //add the newly joined user
-               if(workshop.getJoinedUsersId()!=null) {
-                   workshop.getJoinedUsersId().add(userId);
-               }else {
-                   usersInWorkshop.add(userId);
-                   workshop.setJoinedUsersId(usersInWorkshop);
-               }
-               //update wotkshop
-               this.updateWorkshop(workshopId,workshop);
+            Optional<Workshop> optionalWorkshop=this.workshopRepository.findById(workshopId);
+            if (optionalWorkshop.isPresent())
+            {
+                workshop=optionalWorkshop.get();
+                workshopCapacity=workshop.getCapacity();
+                if (workshopCapacity>0){
+                    // reducing workshop capacity
+                    workshop.setCapacity(workshop.getCapacity()-1);
+                    //add the newly joined user
+                    if(workshop.getJoinedUsersId()!=null ) {
+                        workshop.getJoinedUsersId().add(userId);
+                    }else if(!workshop.getJoinedUsersId().contains(userId)) {
+                        usersInWorkshop.add(userId);
+                        workshop.setJoinedUsersId(usersInWorkshop);
+                    }
+                    //update wotkshop
+                    this.updateWorkshop(workshopId,workshop);
 
-           }else {
-               LOG.error("CAPACITY IS 0");
-           }
+                }else {
+                    LOG.error("CAPACITY IS 0");
+                }
+            }else {
+                LOG.error("WORKSHOPID IS NULL AND/OR USERID IS NULL");
+            }
+            }
+    }
+
+    public List<String> findJoinedUsers(String id) {
+
+        Optional<Workshop> optionalWorkshop = this.workshopRepository.findById(id);
+        if (optionalWorkshop.isPresent()) {
+            Workshop workshop = optionalWorkshop.get();
+            return workshop.getJoinedUsersId();
         }else {
-            LOG.error("WORKSHOPID IS NULL AND/OR USERID IS NULL");
+            LOG.error("not found");
         }
+        return null;
     }
 }

@@ -26,7 +26,8 @@ export class AddWorkshopComponent implements OnInit {
     link: "",
     // static untill front token is set
     userId: "66218df95459d6419b2fec46",
-    feedbacks: []
+    feedbacks: [],
+    joinedUsers:[],
   };
   addWorkshopForm!: FormGroup;
   presenceType: string = 'InPerson';

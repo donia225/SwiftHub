@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class WorkshopService {
 
+
   protected baseUrl = `${environment.API_URL}/api/workshop/workshops`;
   protected userUrl = `${environment.API_URL}/api/user`;
 
@@ -62,5 +63,18 @@ export class WorkshopService {
   public getAllUsers() {
     return this.http.get<User[]>(`${this.userUrl}/all`); 
   }
+
+  /**
+   * JoinWorkshop
+   */
+  joiningWorkshop(workshopId: string, userId: string) {
+    return this.http.post(`${this.baseUrl}/join?workshopId=${workshopId}&userId=${userId}`,{}); 
+  }
   
+  /**
+   * joinedUsers
+wok   */
+  public joinedUsers(workshopId: string) {
+    return this.http.get(`${this.baseUrl}/joinedUsers/${workshopId}`);
+  }
 }

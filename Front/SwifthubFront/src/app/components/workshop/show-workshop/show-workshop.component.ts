@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
+import { Role } from 'src/app/enums/role';
 import { User } from 'src/app/models/user/user';
 import { Workshop } from 'src/app/models/workshop/workshop';
 import { WorkshopService } from 'src/app/services/workshop/workshop.service';
@@ -13,11 +14,26 @@ import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 })
 export class ShowWorkshopComponent implements OnInit {
 
+
   displyDialogDelete: boolean = false;
   breadcrumbItems: MenuItem[] = [];
   workshops!: Workshop[];
   users!: User[];
+  joinedUsers!:string[];
   selectedWorkshopId: string | null = null;
+
+  //static logged in user
+  LoggedInUser:User={
+    id: '662bb68d6c4b2853ebe30870',
+    username: 'ons',
+    password: '$2a$10$xa.eJw6xfl7pAPopFQHTcezeCSsufmssLZ67Jck8md47Fw9l5l5/u',
+    email: 'ons.hanafi2@gmail.com',
+    className: 'Class A',
+    department: 'Computer Science',
+    managedService: 'IT Support',
+    role: Role.STUDENT,
+    ImageUrl: 'com.user.management.User.user.User'
+  }
 
   constructor(public serviceWorkshop: WorkshopService, public router: Router, private confirmationService: ConfirmationService, private messageService: MessageService,private datePipe: DatePipe) { }
 
@@ -58,13 +74,11 @@ export class ShowWorkshopComponent implements OnInit {
       }
     );
   }
-
+////// BackOffice funtions
   // delete workshop
   cancelDelete() {
     this.selectedWorkshopId = null;
   }
-
-
 
   deleteWorkshop(workshopId: string) {
     this.selectedWorkshopId = workshopId;
@@ -98,13 +112,30 @@ export class ShowWorkshopComponent implements OnInit {
       }
     });
   }
-
+////// FrontOffice funtions
   //only Show workshops that haven't started yet
   checkStartDate(start:Date):boolean{
     const workshopstart=new Date(start)
     const currentDate = new Date();
     return workshopstart >= currentDate;
   }
+
+  joinWorkshop(workshopId:string){
+    var userId:string=this.LoggedInUser.id
+    this.serviceWorkshop.joiningWorkshop(workshopId,userId).subscribe(
+      res=>{
+        this.messageService.add({severity:'success', summary:'Success', detail:'You Have Joined this workshop'});
+      },
+      err=>{
+        this.messageService.add({severity:'error', summary:'Failed', detail:'ERROR, couldnt join workshop'});
+
+      }
+    );
+  }
+
+
+  
+ 
 
   ngOnInit(): void {
     this.breadcrumbItems = [
@@ -114,6 +145,7 @@ export class ShowWorkshopComponent implements OnInit {
 
     this.getUsers();
     this.getWorkshops();
+    
     
 
 
