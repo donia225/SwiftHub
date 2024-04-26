@@ -66,8 +66,8 @@ public class WorkshopController {
     /**
      * Join Workshop
      */
-    @GetMapping("/join/{workshop-id}")
-    public void JoiningWorkshop(@PathVariable("workshop-id") String workshopId, String userId){
+    @PostMapping("/join/")
+    public void JoiningWorkshop(@RequestParam String workshopId,@RequestParam String userId){
         this.workshopService.JoinWorkshop(workshopId,userId);
     }
 

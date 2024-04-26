@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -110,18 +111,23 @@ public class WorkshopService {
     public void JoinWorkshop(String workshopId, String userId) {
         Workshop workshop=null;
         Integer workshopCapacity=null;
-        List<String>usersInWorkshop=null;
+        List<String>usersInWorkshop=new ArrayList<String>();
         if(workshopId!=null && userId!=null){
            workshop=this.findWorkshopById(workshopId);
            workshopCapacity=workshop.getCapacity();
            if (workshopCapacity!=0){
               // reducing workshop capacity
-              workshopCapacity= workshopCapacity--;
-              workshop.setCapacity(workshopCapacity);
-              usersInWorkshop=workshop.getJoinedUsersId();
-              usersInWorkshop.add(userId);
+              workshop.setCapacity(workshop.getCapacity()-1);
               //add the newly joined user
-              workshop.setJoinedUsersId(usersInWorkshop);
+               if(workshop.getJoinedUsersId()!=null) {
+                   workshop.getJoinedUsersId().add(userId);
+               }else {
+                   usersInWorkshop.add(userId);
+                   workshop.setJoinedUsersId(usersInWorkshop);
+               }
+               //update wotkshop
+               this.updateWorkshop(workshopId,workshop);
+
            }else {
                LOG.error("CAPACITY IS 0");
            }
