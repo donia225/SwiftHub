@@ -107,4 +107,26 @@ public class WorkshopService {
 
     }
 
+    public void JoinWorkshop(String workshopId, String userId) {
+        Workshop workshop=null;
+        Integer workshopCapacity=null;
+        List<String>usersInWorkshop=null;
+        if(workshopId!=null && userId!=null){
+           workshop=this.findWorkshopById(workshopId);
+           workshopCapacity=workshop.getCapacity();
+           if (workshopCapacity!=0){
+              // reducing workshop capacity
+              workshopCapacity= workshopCapacity--;
+              workshop.setCapacity(workshopCapacity);
+              usersInWorkshop=workshop.getJoinedUsersId();
+              usersInWorkshop.add(userId);
+              //add the newly joined user
+              workshop.setJoinedUsersId(usersInWorkshop);
+           }else {
+               LOG.error("CAPACITY IS 0");
+           }
+        }else {
+            LOG.error("WORKSHOPID IS NULL AND/OR USERID IS NULL");
+        }
+    }
 }

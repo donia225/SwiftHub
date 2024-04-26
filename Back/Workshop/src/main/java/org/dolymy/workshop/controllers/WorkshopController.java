@@ -63,6 +63,14 @@ public class WorkshopController {
         this.workshopService.deleteWorkshop(id);
     }
 
+    /**
+     * Join Workshop
+     */
+    @GetMapping("/join/{workshop-id}")
+    public void JoiningWorkshop(@PathVariable("workshop-id") String workshopId, String userId){
+        this.workshopService.JoinWorkshop(workshopId,userId);
+    }
+
 
 
 

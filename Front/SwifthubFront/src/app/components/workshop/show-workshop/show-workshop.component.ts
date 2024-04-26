@@ -51,11 +51,9 @@ export class ShowWorkshopComponent implements OnInit {
     this.serviceWorkshop.getAllUsers().subscribe(
       (res) => {
         this.users = res;
-
       },
       err => {
         console.log(err);
-
       }
     );
   }
@@ -89,7 +87,6 @@ export class ShowWorkshopComponent implements OnInit {
             },
             err => {
               console.log("error deleting workshop:" + err);
-
             }
           );
         }
@@ -100,6 +97,12 @@ export class ShowWorkshopComponent implements OnInit {
       }
     });
   }
+
+  //Show workshops after start date
+  // checkStartDate(Date start):boolean{
+  //   const currentDate = new Date();
+  //   return start >= currentDate;
+  // }
 
   ngOnInit(): void {
     this.breadcrumbItems = [
