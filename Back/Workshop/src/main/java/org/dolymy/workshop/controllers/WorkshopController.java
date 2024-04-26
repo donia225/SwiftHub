@@ -66,7 +66,7 @@ public class WorkshopController {
     /**
      * Join Workshop
      */
-    @PostMapping("/join/")
+    @PostMapping("/join")
     public void JoiningWorkshop(@RequestParam String workshopId,@RequestParam String userId){
         this.workshopService.JoinWorkshop(workshopId,userId);
     }
