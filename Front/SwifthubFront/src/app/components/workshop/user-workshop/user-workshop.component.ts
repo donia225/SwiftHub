@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Role } from 'src/app/enums/role';
 import { User } from 'src/app/models/user/user';
 import { Workshop } from 'src/app/models/workshop/workshop';
@@ -30,6 +30,15 @@ export class UserWorkshopComponent implements OnInit {
 }
 
   constructor(private workshopService: WorkshopService){}
+  // Set the initial position of the feedback container
+  feedbackContainerTop: number = 50;
+
+  // Listen for scroll events and update the position of the feedback container
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const offset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    this.feedbackContainerTop = 50 + offset; // Adjust the initial offset as needed
+  }
 
   //getUsersList
   getUsers() {
