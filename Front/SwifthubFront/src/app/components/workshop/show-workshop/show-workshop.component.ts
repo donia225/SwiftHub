@@ -117,7 +117,7 @@ export class ShowWorkshopComponent implements OnInit {
   checkStartDate(start:Date):boolean{
     const workshopstart=new Date(start)
     var currentDate = new Date();
-    currentDate.setDate(currentDate.getDate()-2);
+    currentDate.setDate(currentDate.getDate()-3);
     return workshopstart >= currentDate;
   }
 
