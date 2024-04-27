@@ -72,9 +72,9 @@ export class WorkshopService {
   }
   
   /**
-   * joinedUsers
-wok   */
-  public joinedUsers(workshopId: string) {
-    return this.http.get(`${this.baseUrl}/joinedUsers/${workshopId}`);
+   * the worshops that the user have joined
+   */
+  public getWorkshopsByUser(userId:string) {
+    return this.http.get<Workshop[]>(`${this.baseUrl}/byUser/${userId}`);
   }
 }

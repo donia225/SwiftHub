@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -97,7 +98,7 @@ public class WorkshopService {
                 workshop=optionalWorkshop.get();
                 workshopCapacity=workshop.getCapacity();
                 if (workshopCapacity>0){
-                   
+
                     if(workshop.getJoinedUsersId().stream().anyMatch(userId::equals)) {
                         check= false;
                     }else {
@@ -157,15 +158,16 @@ public class WorkshopService {
 
     }
 
-    public List<String> findJoinedUsers(String id) {
+    /**
+     *
+     * @param id
+     * @return a list of workshop where the id belongs to the user that joined that workshop
+     */
 
-        Optional<Workshop> optionalWorkshop = this.workshopRepository.findById(id);
-        if (optionalWorkshop.isPresent()) {
-            Workshop workshop = optionalWorkshop.get();
-            return workshop.getJoinedUsersId();
-        }else {
-            LOG.error("not found");
-        }
-        return null;
+    public List<Workshop> findUsersWorkshops(String id) {
+         List<Workshop> workshops=this.findWorkshops();
+         //get the workshops that have the user
+       return workshops.stream().filter(workshop ->
+             workshop.getJoinedUsersId().stream().anyMatch(joinedUser -> joinedUser.equals(id))).collect(Collectors.toList());
     }
 }

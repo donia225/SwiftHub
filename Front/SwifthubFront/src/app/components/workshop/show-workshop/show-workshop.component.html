@@ -66,6 +66,12 @@
     </div>
 </div>
 <!-- FRONTOFFICE FOR STUDENTS -->
+<div style="margin-right: 250px;
+margin-bottom: 20px;" class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button class="btn btn-secondary me-md-2" type="button" routerLink="/home/my-workshops">My workshops</button>
+   
+  </div>
+
 <div *ngIf="isStudentRoute()">
     <div *ngFor="let workshop of workshops">
         <div *ngIf="checkStartDate(workshop.start_date)">
@@ -84,7 +90,7 @@
                     </div>
                     <br>
                     <button (click)="joinWorkshop(workshop.workshop_id)" class="btn" style=" color: #fff;
-          background: linear-gradient(45deg, #caa28c, #caa28c);">
+          background: linear-gradient(45deg, #caa28c, #caa28c);" >
                         Join Workshop</button>
                     </div>
                 <div class="card-footer text-body-secondary font-italic">

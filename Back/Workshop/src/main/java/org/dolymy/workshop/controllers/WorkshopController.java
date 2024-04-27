@@ -71,9 +71,9 @@ public class WorkshopController {
        return this.workshopService.JoinWorkshop(workshopId,userId);
     }
 
-    @GetMapping("/joinedUsers/{id}")
-    public List<String> getJoinedUsers(@PathVariable String id){
-        return this.workshopService.findJoinedUsers(id);
+    @GetMapping("/byUser/{id}")
+    public List<Workshop> getUserWorkshops(@PathVariable String id){
+        return this.workshopService.findUsersWorkshops(id);
     }
 
 

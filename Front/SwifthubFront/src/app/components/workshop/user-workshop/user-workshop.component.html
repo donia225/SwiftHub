@@ -1,1 +1,25 @@
-<p>user-workshop works!</p>
+<div class="grid">
+<div>
+<div *ngFor="let workshop of workshops" class="card" style="width: 757.6px;margin-left: 100px;">
+    <div class="card-body">
+        <h5 class="card-title">{{workshop.title}}</h5>
+        <div class="grid inline-flex  ">
+        <div *ngFor="let user of users">
+            <div *ngIf="user.id === workshop.userId">
+                <h6 class="card-subtitle mb-2 text-body-secondary" style="margin-left: 20px;margin-top: 20px;" >Instructor: {{user.username}}</h6>
+            </div>
+        </div>
+        <button (click)="hideShow(workshop.workshop_id)" style="margin-left: 600px;" class="btn btn-dark">feedbacks</button>
+    </div>
+        <p class="card-text"> {{workshop.description}}</p>
+        <a href="#" class="card-link">join workshop</a>
+        
+        
+
+    </div>
+</div>
+</div>
+<div><div *ngIf="showFeedback" >
+    <app-show-feedback [workshopId]="selectedWorkshopId"  ></app-show-feedback>
+</div></div>
+</div>
