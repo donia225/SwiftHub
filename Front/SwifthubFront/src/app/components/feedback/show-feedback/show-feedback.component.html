@@ -8,9 +8,15 @@
     <div class="card-body" style="overflow-y: auto;">
       <!-- Feedback items -->
       <div class="list-group">
+        
         <!-- Feedback item -->
         <div class="list-group-item shadow-sm rounded mb-3" *ngFor="let feedback of feedbacks">
           <!-- Star rating -->
+           <!-- Creation date -->
+           <div class="text-right" style="color: #6c757d; font-size: 12px;">
+            {{ feedback.creationDate | date: 'medium' }}
+          </div>
+         
           <div *ngIf="feedback.rating.toString() == 'Great'">
             <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
             <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
@@ -30,6 +36,7 @@
             <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
           </div>      
           <br>
+         
           <!-- Username and feedback content on the right -->
           <div class="d-flex justify-content-between align-items-center">
             <div>
