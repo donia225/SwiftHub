@@ -97,34 +97,23 @@ public class WorkshopService {
             {
                 workshop=optionalWorkshop.get();
                 workshopCapacity=workshop.getCapacity();
-                if (workshopCapacity>0){
-
-                    if(workshop.getJoinedUsersId().stream().anyMatch(userId::equals)) {
-                        check= false;
-                    }else {
-                        //add the newly joined user
-                        if(workshop.getJoinedUsersId()==null ) {
-                            usersInWorkshop.add(userId);
-                            workshop.setJoinedUsersId(usersInWorkshop);
-                            // reducing workshop capacity
-                            workshop.setCapacity(workshop.getCapacity()-1);
-                            check=true;
-
-                        }else {
-
-                            workshop.getJoinedUsersId().add(userId);
-                            // reducing workshop capacity
-                            workshop.setCapacity(workshop.getCapacity()-1);
-                            check=true;
-
-                        }
-                        //update workshop
-                        this.updateWorkshop(workshopId,workshop);
+                if (workshopCapacity>0) {
+                    if (workshop.getJoinedUsersId() == null) {
+                        usersInWorkshop.add(userId);
+                        workshop.setJoinedUsersId(usersInWorkshop);
+                        // reducing workshop capacity
+                        workshop.setCapacity(workshop.getCapacity() - 1);
+                        check = true;
+                    } else if (workshop.getJoinedUsersId().stream().anyMatch(userId::equals)) {
+                        check = false;
+                    } else {
+                        workshop.getJoinedUsersId().add(userId);
+                        // reducing workshop capacity
+                        workshop.setCapacity(workshop.getCapacity() - 1);
+                        check = true;
                     }
-
-
-
-
+                    //update workshop
+                    this.updateWorkshop(workshopId,workshop);
                 }else {
                     LOG.error("CAPACITY IS 0");
                 }
@@ -168,6 +157,6 @@ public class WorkshopService {
          List<Workshop> workshops=this.findWorkshops();
          //get the workshops that have the user
        return workshops.stream().filter(workshop ->
-             workshop.getJoinedUsersId().stream().anyMatch(joinedUser -> joinedUser.equals(id))).collect(Collectors.toList());
+             workshop.getJoinedUsersId()!=null&&workshop.getJoinedUsersId().stream().anyMatch(joinedUser -> joinedUser.equals(id))).collect(Collectors.toList());
     }
 }

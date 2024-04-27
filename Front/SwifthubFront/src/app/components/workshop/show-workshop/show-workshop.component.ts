@@ -116,16 +116,15 @@ export class ShowWorkshopComponent implements OnInit {
   //only Show workshops that haven't started yet
   checkStartDate(start:Date):boolean{
     const workshopstart=new Date(start)
-    const currentDate = new Date();
+    var currentDate = new Date();
+    currentDate.setDate(currentDate.getDate()-2);
     return workshopstart >= currentDate;
   }
 
   joinWorkshop(workshopId:string){
     var userId:string=this.LoggedInUser.id
     this.serviceWorkshop.joiningWorkshop(workshopId,userId).subscribe(
-      (res)=>{
-        console.log(res);
-        
+      (res)=>{        
         if (res==true) {
           this.messageService.add({severity:'success', summary:'Success', detail:'You Have Joined this workshop'});
         }else if(res== false){

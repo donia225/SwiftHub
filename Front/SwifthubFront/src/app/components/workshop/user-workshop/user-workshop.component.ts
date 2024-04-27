@@ -10,6 +10,7 @@ import { WorkshopService } from 'src/app/services/workshop/workshop.service';
   styleUrls: ['./user-workshop.component.scss']
 })
 export class UserWorkshopComponent implements OnInit {
+
   workshops!:Workshop[];
   users!:User[];
   showFeedback:boolean=false;
@@ -65,13 +66,19 @@ export class UserWorkshopComponent implements OnInit {
     );
     
   }
-
   //show feedbacks
   
   hideShow(workshopId: string){
     this.selectedWorkshopId = workshopId;
     this.showFeedback=!this.showFeedback;
     
+  }
+
+  //check start date is >= current date 
+  isValid(start: Date): boolean {
+    const workshopstart=new Date(start)
+    const currentDate = new Date();
+    return workshopstart >= currentDate;
   }
 
   ngOnInit(): void {
