@@ -20,7 +20,6 @@ import { MessagesModule } from 'primeng/messages';
 import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 
 import { FieldsetModule } from 'primeng/fieldset';
@@ -42,6 +41,14 @@ import { DashboardModule } from './BackOffice/dashboard/dashboard.module';
 import { AppLayoutModule } from './BackOffice/layout/app.layout.module';
 import { HomeModule } from './FrontOffice/home/home.module';
 
+import { AddRequestComponent } from './requests/add-request/add-request.component';
+import { ListRequestComponent } from './requests/list-request/list-request.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { RequestService } from './requests/services/request.service';
+import { UpdateRequestComponent } from './requests/update-request/update-request.component';
+
+
+
 
 
 
@@ -52,6 +59,11 @@ import { HomeModule } from './FrontOffice/home/home.module';
 @NgModule({
   declarations: [
     AppComponent,
+   
+    AddRequestComponent,
+    ListRequestComponent,
+    UpdateRequestComponent,
+   
 
     
 
@@ -93,7 +105,8 @@ import { HomeModule } from './FrontOffice/home/home.module';
     ConfirmPopupModule,
     ToolbarModule,
     ToastModule,
-    HomeModule
+    HomeModule,
+    DropdownModule,
   ],
  
     bootstrap: [AppComponent]

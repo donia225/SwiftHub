@@ -1,6 +1,8 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
+import { fontWeight } from 'html2canvas/dist/types/css/property-descriptors/font-weight';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-menu',
@@ -29,25 +31,38 @@ export class AppMenuComponent implements OnInit {
                
             ]
         },
+  /*       {
+            label: 'request',
+            items: [
+                { label: 'Add request', icon: 'pi pi-plus', routerLink: ['/request/add-request'] },
+                { label: 'List requests', icon: 'pi pi-list', routerLink: ['/request/list-request'] },
+               
+            ]
+                 
+       
+            
+        }, */
        
            
             
             {
-                label: 'Pages',
-                icon: 'pi pi-fw pi-briefcase',
+                label: '',
+                icon: '',
                 items: [
                   
                     {
-                        label: 'Auth',
-                        icon: 'pi pi-fw pi-user',
+                        label: 'Request',
+                        icon: 'pi pi-book',
                         items: [
                             {
-                                label: 'Login',
-                                icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/login']
+                                label: 'List requests',
+                                icon: 'pi pi-list',
+                                routerLink: ['/request/list-request']
                             },
                             {
-                                label:'Register'
+                                label:'Add request',
+                                icon: 'pi pi-plus',
+                                routerLink: ['/request/add-request']
                             }
                            
                         ]

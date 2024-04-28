@@ -3,9 +3,11 @@ package org.esprit.requestproject.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
@@ -13,14 +15,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 
+@Getter
+@Setter
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Document(collection = "requests" )
 public class Request implements Serializable {
+
+    @Transient
+    public static final String SEQUENCE_NAME = "requests_sequence";
     @Id
-    private String idRequest;
+    private long idRequest;
     private String title;
     private String description ;
     private Status status; //c'est pas l'étudiant qui gére ça
@@ -38,7 +45,8 @@ public class Request implements Serializable {
     @JsonBackReference
     private Category category;
 
-    public String getIdRequest() {
+
+    public long getIdRequest() {
         return idRequest;
     }
 
@@ -88,5 +96,20 @@ public class Request implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "idRequest='" + idRequest + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", creationDate=" + creationDate +
+                ", attachment='" + attachment + '\'' +
+                ", visibility=" + visibility +
+                ", category=" + category +
+
+                '}';
     }
 }

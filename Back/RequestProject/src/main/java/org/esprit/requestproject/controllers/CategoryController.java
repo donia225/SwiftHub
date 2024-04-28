@@ -26,7 +26,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getCategoryById(@PathVariable("id") String id) {
+    public ResponseEntity<Category> getCategoryById(@PathVariable("id") Long id) {
         Category category = categoryService.getCategoryById(id);
         if (category != null) {
             return new ResponseEntity<>(category, HttpStatus.OK);
@@ -48,18 +48,10 @@ public class CategoryController {
 
 
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Category> updateCategory(@PathVariable String id, @RequestBody Category category) {
-        Category updatedCategory = categoryService.updateCategory(id, category);
-        if (updatedCategory != null) {
-            return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable("id") String id) {
+    public ResponseEntity<Void> deleteCategory(@PathVariable("id") Long id) {
         try {
             categoryService.deleteCategory(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

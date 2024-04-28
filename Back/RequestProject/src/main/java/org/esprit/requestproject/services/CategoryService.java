@@ -10,18 +10,24 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
+
 public class CategoryService  {
+    private final SequenceGeneratorService sequenceGenerator;
+
+    public CategoryService(SequenceGeneratorService sequenceGenerator) {
+        this.sequenceGenerator = sequenceGenerator;
+    }
 
     @Autowired
     private CategoryRepo categoryRepo;
+
 
     public List<Category> getAllCategories() {
         return categoryRepo.findAll();
     }
 
 
-   public Category getCategoryById(String id) {
+   public Category getCategoryById(Long id) {
 
        Category category = null;
        if (id != null) {
@@ -39,32 +45,16 @@ public class CategoryService  {
    }
 
     public String createCategory(Category category) {
+        category.setIdCategory(sequenceGenerator.generateSequence(Category.SEQUENCE_NAME));
         categoryRepo.save(category);
         return "Catégorie ajoutée avec succès";
     }
 
 
 
-    public Category updateCategory(String id, Category category) {
-        Optional<Category> existingCategoryOptional = this.categoryRepo.findById(id);
 
-        if (existingCategoryOptional.isPresent()) {
-            Category existingCategory = existingCategoryOptional.get();
 
-            if (category != null) {
-                existingCategory.setCategoryName(category.getCategoryName());
-                return this.categoryRepo.save(existingCategory);
-            } else {
-                System.err.println("Erreur : La catégorie envoyée est nulle");
-            }
-        } else {
-            System.err.println("Erreur : Aucune catégorie trouvée pour l'ID " + id);
-        }
-
-        return null;
-    }
-
-    public void deleteCategory(String id) {
+    public void deleteCategory(Long id) {
         categoryRepo.deleteById(id);
     }
 
