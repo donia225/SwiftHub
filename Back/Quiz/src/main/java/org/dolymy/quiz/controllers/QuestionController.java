@@ -14,11 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
-    @PostMapping("/add-question")
-    public Question addQuestion(@RequestBody Question q) {
 
-        return this.questionService.addQuestion(q);
-    }
 
     @GetMapping("/getAllQuestions")
     public List<Question> getAllQuestions(){
@@ -27,17 +23,13 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}")
-    public Question getQuestionById(@PathVariable String id) {
+    public Question getQuestionById(@PathVariable Long id) {
         return this.questionService.findQuestionById(id);
     }
 
-    @PutMapping("/update-question/{id}")
-    public ResponseEntity<?> updateQuestion(@PathVariable String id, @RequestBody Question updatedQuestion) {
-        return questionService.updateQuestion(id, updatedQuestion);
-    }
 
     @PostMapping("/{quizId}")
-    public ResponseEntity<Question> affectQuestionToQuiz(@PathVariable("quizId") String quizId, @RequestBody Question question) {
+    public ResponseEntity<Question> affectQuestionToQuiz(@PathVariable("quizId") Long quizId, @RequestBody Question question) {
         Question createdQuestion = questionService.affectQuestionToQuiz(quizId, question);
         if (createdQuestion != null) {
             return ResponseEntity.status(HttpStatus.CREATED).body(createdQuestion);
@@ -47,7 +39,7 @@ public class QuestionController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteQuestion(@PathVariable String id) {
+    public ResponseEntity<?> deleteQuestion(@PathVariable Long id) {
         try {
             questionService.deleteQuestionAndAnswers(id);
             return ResponseEntity.ok().build();
