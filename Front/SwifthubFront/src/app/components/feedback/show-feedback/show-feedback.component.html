@@ -1,29 +1,63 @@
 <!--Feedbacks -->
 <div class="col-md-6">
-  
+
   <!-- Feedbacks card -->
   <div class="card" style="max-height: 670px; width: 557.6px;">
-   
+
     <div class="flex-column">
       <div class="card-header sticky-top" style="box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
         {{workshop.title}} Feedbacks
       </div>
-      <button class="btn btn-outline-light btn-sm sticky-top" style="color: #c8935e; display: inline-block;width: 515.6px;" (click)="openAddFeedbackModal()">Add Feedback</button>
+      <button class="btn btn-outline-light btn-sm sticky-top"
+        style="color: #c8935e; display: inline-block;width: 515.6px;" (click)="openAddFeedbackModal()">Add
+        Feedback</button>
       <!-- Add Feedback Component -->
-<app-add-feedback [incomingWorkshopId]="workshopId" *ngIf="addFeedbackCheck" ></app-add-feedback>
+      <div *ngIf="addFeedbackCheck">
+        <form [formGroup]="addFeedbackForm">
+
+          <div class="card mb-3 sticky-top" style="background-color: transparent; border: none;">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <textarea class="form-control comment-textarea" rows="3" formControlName="description"
+                    name="feedbackDescription" placeholder="Write your feedback here..."></textarea>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-auto">
+                  <select class="form-control" formControlName="rating" name="feedbackRating">
+                    <option value="Great">Great</option>
+                    <option value="Good">Good</option>
+                    <option value="Neutral">Neutral</option>
+                    <option value="Bad">Bad</option>
+                  </select>
+                </div>
+                <div class="col-auto">
+                  <button (click)="submitFeedback()" type="submit" class="btn btn-outline-light"
+                    style="color: #c8935e;">
+                    Post Feedback
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <p-toast></p-toast>
+      </div>
     </div>
+      <!-- Add Feedback Component ENDS HERE -->
     <div class="card-body" style="overflow-y: auto;">
       <!-- Feedback items -->
       <div class="list-group">
-        
+
         <!-- Feedback item -->
         <div class="list-group-item shadow-sm rounded mb-3" *ngFor="let feedback of feedbacks">
           <!-- Star rating -->
-           <!-- Creation date -->
-           <div class="text-right" style="color: #6c757d; font-size: 12px;">
+          <!-- Creation date -->
+          <div class="text-right" style="color: #6c757d; font-size: 12px;">
             {{ feedback.creationDate | date: 'medium' }}
           </div>
-         
+
           <div *ngIf="feedback.rating.toString() == 'Great'">
             <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
             <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
@@ -34,25 +68,25 @@
             <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
             <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
             <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
-          </div>  
+          </div>
           <div *ngIf="feedback.rating.toString() == 'Neutral'">
             <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
             <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
-          </div>  
+          </div>
           <div *ngIf="feedback.rating.toString() == 'Bad'">
             <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
-          </div>      
+          </div>
           <br>
-         
+
           <!-- Username and feedback content on the right -->
           <div class="d-flex justify-content-between align-items-center">
             <div>
               <div *ngFor="let user of users">
-              <div *ngIf="user.id == feedback.userId">
-                <h5 class="mb-1 " style="color: #c8935e">{{user.username}}</h5>
+                <div *ngIf="user.id == feedback.userId">
+                  <h5 class="mb-1 " style="color: #c8935e">{{user.username}}</h5>
+                </div>
               </div>
-              </div>
-              
+
               <p class="mb-1">{{feedback.description}}</p>
             </div>
           </div>
@@ -62,5 +96,3 @@
     </div>
   </div>
 </div>
-
-   

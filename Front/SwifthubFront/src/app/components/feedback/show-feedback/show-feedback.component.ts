@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { RatingType } from 'src/app/enums/rating-type';
 import { Role } from 'src/app/enums/role';
 import { Feedback } from 'src/app/models/feedback/feedback';
@@ -20,9 +22,9 @@ export class ShowFeedbackComponent implements OnInit {
   feedbacks!:Feedback[];
   users!:User[];
   addFeedbackCheck: boolean=false;
+  addFeedbackForm!: FormGroup;
 
-
-  //static logged in user
+    //static logged in user
  LoggedInUser:User={
   id: '662bb68d6c4b2853ebe30870',
   username: 'ons',
@@ -34,7 +36,22 @@ export class ShowFeedbackComponent implements OnInit {
   role: Role.STUDENT,
   ImageUrl: 'com.user.management.User.user.User'
  }
-  constructor(private feedbackService:FeedbackService,private workshopService:WorkshopService){}
+feedback:Feedback={
+    feedback_id: '',
+    description: "",
+    rating: RatingType.Great,
+    creationDate: new Date(),
+    userId: this.LoggedInUser.id,
+    workshop:this.workshop,
+  };
+
+
+
+
+  constructor(
+    private feedbackService:FeedbackService,
+    private workshopService:WorkshopService,
+    private messageService:MessageService){}
 
 
 ///////////////// DESGIN
@@ -87,8 +104,53 @@ export class ShowFeedbackComponent implements OnInit {
   ngOnInit(): void {
   this.getUsers();
   this.showfeedback(this.workshopId);
+  this.initializeForm();
   
     
   }
+
+  //////add feedback
+  initializeForm(){
+    //  add feedback form
+    this.addFeedbackForm=new FormGroup({
+      description : new FormControl(this.feedback.description,Validators.required),
+      rating: new FormControl(this.feedback.rating,Validators.required),
+      creationDate: new FormControl(this.feedback.creationDate),
+      userId: new FormControl(this.feedback.userId),
+      workshop: new FormControl(this.feedback.workshop),
+    });
+    }
+  
+     //getters
+   get description(){return this.addFeedbackForm.get('description')};
+   get rating(){return this.addFeedbackForm.get('rating')};
+  
+   //submit feedback
+  submitFeedback() {
+    if (this.addFeedbackForm.valid) {
+      const formData={
+        ...this.addFeedbackForm.value,
+        workshop: this.workshop
+      }
+    this.feedbackService.addFeedback(formData).subscribe(
+      res=>{
+        this.messageService.add({severity:'success', summary:'Success', detail:'Feedback added successfully'});
+        this.addFeedbackCheck=false;
+        this.showfeedback(this.workshopId);
+        
+      },
+      err=>{
+        console.log(err);
+        this.messageService.add({severity:'error', summary:'Error', detail:'Failed to add feedback'});
+  
+        
+      }
+          );
+  
+  
+      }
+  
+
+}
 
 }

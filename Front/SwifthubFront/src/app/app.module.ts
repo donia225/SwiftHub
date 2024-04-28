@@ -50,7 +50,6 @@ import { CardModule } from 'primeng/card';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DatePipe } from '@angular/common';
 import { UserWorkshopComponent } from './components/workshop/user-workshop/user-workshop.component';
-import { AddFeedbackComponent } from './components/feedback/add-feedback/add-feedback.component';
 
 
 
@@ -68,7 +67,6 @@ import { AddFeedbackComponent } from './components/feedback/add-feedback/add-fee
     ShowFeedbackComponent,
     AddWorkshopComponent,
     UserWorkshopComponent,
-    AddFeedbackComponent,
 
     
 
