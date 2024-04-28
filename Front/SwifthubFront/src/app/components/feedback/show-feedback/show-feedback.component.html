@@ -1,9 +1,16 @@
-<!-- Right side: Feedbacks -->
+<!--Feedbacks -->
 <div class="col-md-6">
+  
   <!-- Feedbacks card -->
   <div class="card" style="max-height: 670px; width: 557.6px;">
-    <div class="card-header sticky-top" style="box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-     {{workshop.title}} Feedbacks
+   
+    <div class="flex-column">
+      <div class="card-header sticky-top" style="box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        {{workshop.title}} Feedbacks
+      </div>
+      <button class="btn btn-outline-light btn-sm sticky-top" style="color: #c8935e; display: inline-block;width: 515.6px;" (click)="openAddFeedbackModal()">Add Feedback</button>
+      <!-- Add Feedback Component -->
+<app-add-feedback [incomingWorkshopId]="workshopId" *ngIf="addFeedbackCheck" ></app-add-feedback>
     </div>
     <div class="card-body" style="overflow-y: auto;">
       <!-- Feedback items -->
@@ -50,8 +57,10 @@
             </div>
           </div>
         </div>
-        <!-- Add more feedback items as needed -->
+        <!--  -->
       </div>
     </div>
   </div>
 </div>
+
+   

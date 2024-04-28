@@ -16,6 +16,13 @@ export class FeedbackService {
    public getAllFeedbacks() {
     return this.http.get<Feedback[]>(`${this.baseUrl}`);
   }
+  
+  /**
+   * addFeedback
+   */
+  public addFeedback(feedback:Feedback) {
+    return this.http.post(`${this.baseUrl}`,feedback);
+  }
 
 
 

@@ -13,10 +13,14 @@ import { WorkshopService } from 'src/app/services/workshop/workshop.service';
   styleUrls: ['./show-feedback.component.scss']
 })
 export class ShowFeedbackComponent implements OnInit {
+
   @Input() workshopId: string="";
+  
   workshop!:Workshop ;
   feedbacks!:Feedback[];
   users!:User[];
+  addFeedbackCheck: boolean=false;
+
 
   //static logged in user
  LoggedInUser:User={
@@ -73,6 +77,12 @@ export class ShowFeedbackComponent implements OnInit {
       }
     );
   }
+  ///showing add feedback component
+  openAddFeedbackModal() {
+   return this.addFeedbackCheck=!this.addFeedbackCheck;
+  }
+
+  
   
   ngOnInit(): void {
   this.getUsers();

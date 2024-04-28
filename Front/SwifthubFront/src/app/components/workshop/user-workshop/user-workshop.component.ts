@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Role } from 'src/app/enums/role';
 import { User } from 'src/app/models/user/user';
 import { Workshop } from 'src/app/models/workshop/workshop';
@@ -30,7 +31,7 @@ export class UserWorkshopComponent implements OnInit {
   ImageUrl: 'com.user.management.User.user.User'
 }
 
-  constructor(private workshopService: WorkshopService){}
+  constructor(private workshopService: WorkshopService,private route: ActivatedRoute){}
   // Set the initial position of the feedback container
   feedbackContainerTop: number = 50;
 
