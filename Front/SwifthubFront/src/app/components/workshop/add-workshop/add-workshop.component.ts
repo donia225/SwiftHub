@@ -24,8 +24,10 @@ export class AddWorkshopComponent implements OnInit {
     end_date: new Date(),
     location: "",
     link: "",
-    userId: "55eef234",
-    feedbacks: []
+    // static untill front token is set
+    userId: "66218df95459d6419b2fec46",
+    feedbacks: [],
+    joinedUsers:[],
   };
   addWorkshopForm!: FormGroup;
   presenceType: string = 'InPerson';

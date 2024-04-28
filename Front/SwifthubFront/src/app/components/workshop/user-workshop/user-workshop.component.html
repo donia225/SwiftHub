@@ -1,0 +1,35 @@
+<div class="grid">
+  <div>
+    <div *ngFor="let workshop of workshops" class="card" style="width: 757.6px;margin-left: 100px;">
+      <!--  date -->
+      <div class="text-right" style="color: #6c757d; font-size: 12px;">
+        <div>FROM:  {{ workshop.start_date| date: 'MMM dd, yyyy' }}</div>
+        <div>TO: {{workshop.end_date |date: 'MMM dd, yyyy'}}</div>
+       </div>
+      <div class="card-body">
+        <h5 class="card-title">{{workshop.title}}</h5>
+        
+        <div class="grid inline-flex  ">
+          <div *ngFor="let user of users">
+            <div *ngIf="user.id === workshop.userId">
+              <h6 class="card-subtitle mb-2 text-body-secondary" style="margin-left: 20px;margin-top: 20px;">Instructor: {{user.username}}</h6>
+            </div>
+          </div>
+          <div>
+        
+          <button (click)="hideShow(workshop.workshop_id)" style="margin-left: 600px;" class="btn btn-dark"  [disabled]="isValid(workshop.start_date)">Feedbacks</button>
+            
+        </div>
+        <p class="card-text">{{workshop.description}}</p>
+        
+      </div>
+      <a href="#" class="card-link">Join Workshop</a>
+
+    </div>
+  </div>
+  <div>
+    <div class="feedback-container" *ngIf="showFeedback" >
+      <app-show-feedback  [workshopId]="selectedWorkshopId"></app-show-feedback>
+    </div>
+  </div>
+</div>

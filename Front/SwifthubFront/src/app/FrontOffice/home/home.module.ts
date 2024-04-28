@@ -6,7 +6,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ContentComponent } from './content/content.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home.component';
-import { WorkshopComponent } from '../workshop/workshop.component';
 
 
 @NgModule({
@@ -15,7 +14,6 @@ import { WorkshopComponent } from '../workshop/workshop.component';
     NavbarComponent,
     ContentComponent,
     FooterComponent,
-    WorkshopComponent
   ],
   imports: [
     CommonModule,

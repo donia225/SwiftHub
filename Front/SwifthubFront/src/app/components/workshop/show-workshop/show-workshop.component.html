@@ -1,60 +1,106 @@
-<div class="card card-w-title">
-    <p-breadcrumb [model]="breadcrumbItems" [home]="{icon: 'pi pi-home'}"></p-breadcrumb>
-</div>
-<!-- add workshop -->
-<div style="text-align: right;margin-right: 100px; margin-top: 30px;">
-    <button pbutton="" pripple="" type="button" icon="pi pi-plus"
-        class="p-element p-ripple p-button-rounded p-button-outlined p-button p-component p-button-icon-only"
-        routerLink="/workshopBack/add"><span class="p-button-icon pi pi-plus" aria-hidden="true"></span><span
-            class="p-ink" aria-hidden="true" role="presentation"></span>
-    </button>
-</div>
+<!-- BACKOFFICE FOR ADMINS/PROFESSORS -->
+<div *ngIf="isAdminRoute()">
+    <div class="card card-w-title">
+        <p-breadcrumb [model]="breadcrumbItems" [home]="{icon: 'pi pi-home'}"></p-breadcrumb>
+    </div>
+    <!-- add workshop -->
+    <div style="text-align: right;margin-right: 100px; margin-top: 30px;">
+        <button pbutton="" pripple="" type="button" icon="pi pi-plus"
+            class="p-element p-ripple p-button-rounded p-button-outlined p-button p-component p-button-icon-only"
+            routerLink="/workshopBack/add"><span class="p-button-icon pi pi-plus" aria-hidden="true"></span><span
+                class="p-ink" aria-hidden="true" role="presentation"></span>
+        </button>
+    </div>
 
-<div class="lg:px-8 md:px-6 px-4 py-4 surface-ground ng-star-inserted">
-    <div class="surface-ground">
-        <div class="grid">
-            <div class="col-12 md:col-6 xl:col-4 p-3" *ngFor="let workshop of workshops">
-                <div class="surface-card shadow-2 border-round p-4">
-                    <div class="flex border-bottom-1 surface-border pb-4">
-                        <div class="flex flex-column align-items-start"><span
-                                class="text-xl text-900 font-medium mb-1">{{workshop.title}}</span><span
-                                class="text-600 font-medium mb-2">{{workshop.start_date}}</span><span
-                                class="bg-blue-50 text-blue-400 border-round inline-flex py-1 px-2 text-sm">workshop
-                                tutor</span>
-                        </div>
-                    </div>
-                    <!-- edit workshop -->
-                    <div class="flex justify-content-between pt-4">
-                        <button routerLink="/workshopBack/edit/{{workshop.workshop_id}}" 
-                            pbutton="" pripple="" label="Join" icon="pi pi-search"
-                            class="p-element p-ripple p-button-outlined p-button-secondary w-6 mr-2 p-button p-button-info  p-component">
-                            <span  class="p-button-icon p-button-icon-left pi pi-search" aria-hidden="true"></span>
-                            <span class="p-button-label">Edit</span>
-                            <span class="p-ink"></span>
-                        </button>
-                    <!-- Delete workshop -->
-                        <p-toast></p-toast>
-                        <p-confirmDialog *ngIf="selectedWorkshopId=== workshop.workshop_id" #cd>
-                            <ng-template pTemplate="message" let-message>
-                                <div class="flex flex-column align-items-center p-5 surface-overlay border-round">
-                                    <span class="font-bold text-2xl block mb-2 mt-4">{{message.header}}</span>
-                                    <p class="mb-0">{{ message.message }}</p>
-                                    <div class="flex align-items-center gap-7 mt-4">
-                                        <button pButton label="Save" (click)="cd.accept()"
-                                            class="p-button-outlined w-8rem "></button>
-                                        <button pButton label="Cancel" (click)="cd.reject()"
-                                            class="p-button-outlined w-8rem "></button>
-                                    </div>
+    <div class="lg:px-8 md:px-6 px-4 py-4 surface-ground ng-star-inserted">
+        <div class="surface-ground">
+            <div class="grid">
+                <div class="col-12 md:col-6 xl:col-4 p-3" *ngFor="let workshop of workshops">
+                    <div class="surface-card shadow-2 border-round p-4">
+                        <div class="flex border-bottom-1 surface-border pb-4">
+                            <div class="flex flex-column align-items-start"><span
+                                    class="text-xl text-900 font-medium mb-1">{{workshop.title}}</span><span
+                                    class="text-600 font-medium mb-2">{{workshop.start_date}}</span>
+                                <div *ngFor="let user of users">
+                                    <span *ngIf="user.id === workshop.userId"
+                                        class="bg-blue-50 text-blue-400 border-round inline-flex py-1 px-2 text-sm">
+                                        {{user.username}}</span>
                                 </div>
-                            </ng-template>
-                        </p-confirmDialog>
-                        <button (click)="deleteWorkshop(workshop.workshop_id)" pbutton="" pripple="" type="button" label="Danger"
-                            class="p-element p-ripple p-button-outlined p-button-danger p-button p-component"><span
-                                class="p-button-label">Delete</span><span class="p-ink" aria-hidden="true"
-                                role="presentation"></span></button>
+                            </div>
+                        </div>
+                        <!-- edit workshop -->
+                        <div class="flex justify-content-between pt-4">
+                            <button routerLink="/workshopBack/edit/{{workshop.workshop_id}}" pbutton="" pripple=""
+                                label="Join" icon="pi pi-search"
+                                class="p-element p-ripple p-button-outlined p-button-secondary w-6 mr-2 p-button p-button-info  p-component">
+                                <span class="p-button-icon p-button-icon-left pi pi-search" aria-hidden="true"></span>
+                                <span class="p-button-label">Edit</span>
+                                <span class="p-ink"></span>
+                            </button>
+                            <!-- Delete workshop -->
+                            <p-toast></p-toast>
+                            <p-confirmDialog *ngIf="selectedWorkshopId=== workshop.workshop_id" #cd>
+                                <ng-template pTemplate="message" let-message>
+                                    <div class="flex flex-column align-items-center p-5 surface-overlay border-round">
+                                        <span class="font-bold text-2xl block mb-2 mt-4">{{message.header}}</span>
+                                        <p class="mb-0">{{ message.message }}</p>
+                                        <div class="flex align-items-center gap-7 mt-4">
+                                            <button pButton label="Save" (click)="cd.accept()"
+                                                class="p-button-outlined w-8rem "></button>
+                                            <button pButton label="Cancel" (click)="cd.reject()"
+                                                class="p-button-outlined w-8rem "></button>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-confirmDialog>
+                            <button (click)="deleteWorkshop(workshop.workshop_id)" pbutton="" pripple="" type="button"
+                                label="Danger"
+                                class="p-element p-ripple p-button-outlined p-button-danger p-button p-component"><span
+                                    class="p-button-label">Delete</span><span class="p-ink" aria-hidden="true"
+                                    role="presentation"></span></button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<!-- FRONTOFFICE FOR STUDENTS -->
+<div *ngIf="isStudentRoute()">
+<div style="margin-right: 250px;
+margin-bottom: 20px;" class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button class="btn btn-secondary me-md-2" type="button" routerLink="/home/my-workshops">My workshops</button>
+   
+  </div>
+
+
+    <div *ngFor="let workshop of workshops">
+        <div *ngIf="checkStartDate(workshop.start_date)">
+            <div style="margin-left: 250px;margin-right: 250px;" class="card text-center">
+
+                <h5 class="card-header">
+                    {{workshop.title}}
+                </h5>
+                <div class="card-body ">
+                    <!-- <h5 class="card-title">{{workshop.description}}</h5> -->
+                    <p class="card-text">{{workshop.description}}</p>
+                    <div *ngFor="let user of users">
+                        <div *ngIf="user.id === workshop.userId">
+                            <span class="badge badge-pill badge-light">{{user.username}}</span>
+                        </div>
+                    </div>
+                    <br>
+                    <button (click)="joinWorkshop(workshop.workshop_id)" class="btn" style=" color: #fff;
+          background: linear-gradient(45deg, #caa28c, #caa28c);" >
+                        Join Workshop</button>
+                    </div>
+                <div class="card-footer text-body-secondary font-italic">
+                    {{workshop.start_date}} -- {{workshop.end_date}}
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+    </div>
+    <p-toast></p-toast>
 </div>

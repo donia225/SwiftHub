@@ -37,7 +37,6 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
-import { DashboardComponent } from './BackOffice/dashboard/dashboard.component';
 import { DashboardModule } from './BackOffice/dashboard/dashboard.module';
 import { AppLayoutModule } from './BackOffice/layout/app.layout.module';
 import { HomeModule } from './FrontOffice/home/home.module';
@@ -50,6 +49,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DatePipe } from '@angular/common';
+import { UserWorkshopComponent } from './components/workshop/user-workshop/user-workshop.component';
 
 
 
@@ -66,6 +66,7 @@ import { DatePipe } from '@angular/common';
     EditWorkshopComponent,
     ShowFeedbackComponent,
     AddWorkshopComponent,
+    UserWorkshopComponent,
 
     
 
