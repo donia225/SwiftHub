@@ -32,6 +32,7 @@ public class Workshop implements Serializable {
     private String link;
     private String userId;
     private List<String> joinedUsersId;
+    private String meeting_id;
     
     @JsonManagedReference
     private List<Feedback> feedbacks;
