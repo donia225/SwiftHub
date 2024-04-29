@@ -1,5 +1,6 @@
 package org.dolymy.post.services;
 
+
 import org.dolymy.post.entities.Comment;
 
 import java.util.List;
@@ -11,8 +12,9 @@ public interface CommentService {
     //detele
     void deleteById(Integer id);
     //Add
-    Comment addComment(Comment comment);
+    Comment addComment(Comment comment, int idPost);
 
     //Update
     Comment updateComment(Comment comment);
+    List<Comment> findCommentsByPostId(Integer postId);
 }

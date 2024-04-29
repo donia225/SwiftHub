@@ -1,6 +1,5 @@
 package org.dolymy.post.ServicesImpl;
 
-import jakarta.annotation.Resource;
 import org.dolymy.post.daos.PostDao;
 import org.dolymy.post.entities.Comment;
 import org.dolymy.post.entities.Post;
@@ -15,8 +14,12 @@ import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {
-@Resource
-private PostDao postDao;
+
+
+    @Autowired
+    private PostDao postDao;
+
+
     @Override
     public List<Post> findAllPosts() {
         return postDao.findAll();
@@ -39,6 +42,7 @@ private PostDao postDao;
 
     @Override
     public Post addPost(Post post) {
+
         return postDao.save(post);
     }
 
@@ -52,9 +56,12 @@ private PostDao postDao;
         return postDao.findByPostDate(postDate);
     }
 
+   /*
     @Override
     public List<Comment> findCommentsByPostId(Integer postId) {
         Optional<Post> post = postDao.findById(postId);
         return post.map(Post::getComments).orElse(Collections.emptyList());
     }
+
+    */
 }

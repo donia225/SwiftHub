@@ -12,8 +12,9 @@ import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("api/post/comments")
-@Controller
+@RequestMapping("/api/post/comments")
+@CrossOrigin(origins = "*")
+
 public class CommentController {
     @Autowired
     private CommentService commentService;
@@ -38,8 +39,8 @@ public class CommentController {
     //add
     @PostMapping("")
     @ResponseBody
-    public Comment addingComment(@RequestBody Comment comment) {
-        return commentService.addComment(comment);
+    public Comment addingComment(@RequestBody Comment comment,@RequestParam int idPost) {
+        return commentService.addComment(comment,idPost);
     }
 
     //Update
