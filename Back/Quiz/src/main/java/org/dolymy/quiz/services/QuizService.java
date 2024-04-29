@@ -47,6 +47,7 @@ public class QuizService {
     public List<Quiz> getAllQuizzes() {
         return this.quizrepo.findAll();
     }
+
     public Quiz findQuizById(Long id) {
         Quiz quiz = null;
         if (id != null) {
@@ -177,6 +178,9 @@ public class QuizService {
         System.out.println("Aucune réponse mise à jour correspondante trouvée pour l'identifiant de réponse existant : " + existingAnswerId);
         return null;
     }
+
+
+
 
 
 

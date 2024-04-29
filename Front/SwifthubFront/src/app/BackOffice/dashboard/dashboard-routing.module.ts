@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
@@ -8,6 +9,12 @@ import { DashboardComponent } from './dashboard.component';
 import { ShowWorkshopComponent } from 'src/app/components/workshop/show-workshop/show-workshop.component';
 import { EditWorkshopComponent } from 'src/app/components/workshop/edit-workshop/edit-workshop.component';
 import { AddWorkshopComponent } from 'src/app/components/workshop/add-workshop/add-workshop.component';
+import { UpdateQuizComponent } from '../quizzes/update-quiz/update-quiz.component';
+
+import { AddQuestionComponent } from '../quizzes/question/add-question/add-question.component';
+import { ListQuestionComponent } from '../quizzes/list-question/list-question.component';
+
+
 
 const routes: Routes = [
 
@@ -27,9 +34,24 @@ const routes: Routes = [
     children: [
       { path: 'list-quiz', component: ListQuizComponent },
       { path: 'add-quiz', component: AddQuizComponent },
+      { path: 'update-quiz/:quiz_id', component: UpdateQuizComponent },
+   
+      {path:'add-question/:quiz_id', component: AddQuestionComponent},
+    
 
     ]
   },
+  {
+    path: 'question', component: AppLayoutComponent,
+    children: [
+      { path: 'list-question', component: ListQuestionComponent },
+  
+    
+
+    ]
+  },
+  
+  
   {
     path: 'workshopBack', component: AppLayoutComponent,
     children: [

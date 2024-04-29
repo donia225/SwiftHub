@@ -3,69 +3,47 @@
 </div>
 
 <div class="card">
-    <h5>List quizzes</h5>
+    <h5>Liste des quizzes</h5>
 
     <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
             <div class="my-2">
-                <button pButton pRipple label="Add quiz" icon="pi pi-plus" class="p-button-success mr-2"
+                <button pButton pRipple label="Ajouter un quiz" icon="pi pi-plus" class="p-button-success mr-2"
                     routerLink="/quiz/add-quiz"></button>
             </div>
         </ng-template>
-
-      
-
-
     </p-toolbar>
 
-
     <div class="flex table-header">
-    </div> <p-table  rowGroupMode="subheader" groupRowsBy="representative.name"
-        sortMode="single" (onSort)="onSort()">
+    </div>
+    <p-table [value]="quizzes" rowGroupMode="subheader" groupRowsBy="quizName" sortMode="single" (onSort)="onSort()">
         <ng-template pTemplate="header">
             <tr>
-                <th>quizName</th>
-                <th>grade</th>
-                <th>correct</th>
+                <th>Nom du quiz</th>
+                <th>Date du quiz</th>
                 <th>Actions</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body"  let-rowIndex="rowIndex">
-            <tr>
-                <td style="min-width: 150px;">
-                    Management Stress
-                </td>
-
-                <td style="min-width: 150px;">
-                   12
-                </td>
-
-                <td style="min-width: 150px;">
-                   <!--  <div class="flex align-items-center">
-                        <p-radioButton name="correct" value="correct" ></p-radioButton>
-                        <label for="ingredient1" class="ml-2">Correct</label>
-                    </div> -->
-                </td>
-
                
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-quiz let-rowIndex="rowIndex">
+            <tr>
+                <td style="min-width: 150px;">{{ quiz.quizName }}</td>
+                <td style="min-width: 150px;">{{ quiz.quizTime }}</td>
                 <td style="min-width: 150px;">
-
-
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
-                       >
-                        <i class="fa fa-edit"></i>
-                    </button>
+                    [routerLink]="['/quiz/update-quiz', quiz.quiz_id]">
+                    <i class="fa fa-edit"></i>
+                </button>
 
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                       >
-                        <i class="fa fa-trash"></i>
-                    </button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+               >
+          <i class="fa fa-trash"></i>
+        </button>
+        <button pButton pRipple label="Ajouter une question" icon="pi pi-plus" class="p-button-danger mr-2" style="width: 150px; margin-left: 10px;"  [routerLink]="['/quiz/add-question', quiz.quiz_id]"></button>
 
-                
 
                 </td>
             </tr>
         </ng-template>
-
     </p-table>
 </div>

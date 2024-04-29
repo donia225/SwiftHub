@@ -1,0 +1,22 @@
+<div class="col-12">
+    <div class="card">
+        <h5>Modification du quiz</h5>
+        <form (submit)="onSubmit()">
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 md:col-6">
+                    <label for="quizName">Nom du quiz</label>
+                    <input pInputText id="quizName" type="text"  name="quizName" />
+                    <div class="text-danger"></div>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="quizTime">Date et heure du quiz</label>
+                   <!--<p-calendar id="quizTime" [showTime]="true" [showSeconds]="true" ></p-calendar> --> 
+                    <div class="text-danger"></div>
+                </div>
+            </div>
+            <div class="field col-12 md:col-2">
+                <button pButton pRipple type="submit" label="Modifier" class="p-button-raised p-button-success"></button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -49,7 +49,14 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
+import { RatingModule } from 'primeng/rating';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { SliderModule } from 'primeng/slider';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { TreeTableModule } from 'primeng/treetable';
+
+
 
 
 
@@ -111,7 +118,19 @@ import { DatePipe } from '@angular/common';
     ConfirmDialogModule,
     CardModule,
     SelectButtonModule,
-    HomeModule
+    HomeModule,
+    ReactiveFormsModule,
+    RouterModule,
+    FormsModule,
+    CommonModule,
+		RatingModule,
+		SliderModule,
+		MultiSelectModule,
+		ProgressBarModule,
+    TreeTableModule,
+  BreadcrumbModule
+	
+	
   ],
     providers:[MessageService,ConfirmationService,DatePipe],
     bootstrap: [AppComponent]
