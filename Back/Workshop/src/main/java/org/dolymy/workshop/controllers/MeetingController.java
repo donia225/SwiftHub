@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/workshop/meeting")
+@RequestMapping("/api/workshop/meetings")
 @RequiredArgsConstructor
 public class MeetingController {
     private final MeetingService meetingService;
