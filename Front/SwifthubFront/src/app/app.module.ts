@@ -55,6 +55,14 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { SliderModule } from 'primeng/slider';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TreeTableModule } from 'primeng/treetable';
+import { AddQuestionComponent } from './BackOffice/quizzes/question/add-question/add-question.component';
+import { QuizfrontComponent } from './FrontOffice/quizfront/quizfront.component';
+import { QuestionComponent } from './FrontOffice/question/question.component';
+import { UpdateQuizComponent } from './BackOffice/quizzes/update-quiz/update-quiz.component';
+import { ListQuestionComponent } from './BackOffice/quizzes/list-question/list-question.component';
+
+
+
 
 
 
@@ -73,6 +81,12 @@ import { TreeTableModule } from 'primeng/treetable';
     EditWorkshopComponent,
     ShowFeedbackComponent,
     AddWorkshopComponent,
+    QuizfrontComponent,
+    QuestionComponent,
+    UpdateQuizComponent,
+    ListQuestionComponent,
+    AddQuestionComponent
+    
 
     
 
@@ -128,7 +142,8 @@ import { TreeTableModule } from 'primeng/treetable';
 		MultiSelectModule,
 		ProgressBarModule,
     TreeTableModule,
-  BreadcrumbModule
+    BreadcrumbModule,
+    PanelModule
 	
 	
   ],
