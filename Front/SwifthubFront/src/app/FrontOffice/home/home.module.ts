@@ -7,6 +7,7 @@ import { ContentComponent } from './content/content.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home.component';
 import { WorkshopComponent } from '../workshop/workshop.component';
+import { CardQuizzesComponent } from '../card-quizzes/card-quizzes.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { WorkshopComponent } from '../workshop/workshop.component';
     ContentComponent,
     FooterComponent,
     WorkshopComponent
+
   ],
   imports: [
     CommonModule,

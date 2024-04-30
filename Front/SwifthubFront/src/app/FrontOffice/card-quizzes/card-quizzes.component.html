@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+      <div class="col" *ngFor="let quiz of quizzes">
+        <div class="card" style="width: 18rem;">
+          <!-- Image de la carte -->
+          <img class="card-img-top" src="/assets/img/softlogo.png" alt="soft skills">
+          <div class="card-body">
+            <!-- Titre de la carte -->
+            <h5 class="card-title">{{ quiz.quizName }}</h5>
+            <!-- Boucle for sur les questions -->
+           <!-- <div *ngFor="let question of quiz.questions">
+            
+              <p class="card-text">{{ question.questiontxt }}</p>
+             
+              <ul>
+                <li *ngFor="let answer of question.answers">
+              
+                  <p>{{ answer.answerTxt }}</p>
+                </li>
+              </ul>
+            </div> -->
+            <!-- Lien vers un autre endroit -->
+            <button routerLink="/home/quizfront" class="btn btn-primary">Faire le quiz</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

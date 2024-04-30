@@ -8,8 +8,8 @@ import { QuizModel } from '../Model/quiz-model';
   styleUrls: ['./update-quiz.component.scss']
 })
 export class UpdateQuizComponent implements OnInit {
-  quizId: number = 0;
-  updatedQuiz: QuizModel = { quiz_id: 0, quizName: '', quizTime: new Date() };
+  quiz_id!: number 
+  updatedQuiz: QuizModel = { quiz_id: 0, quizName: '', quizTime: new Date(),   questions: [] };
 
   constructor(
     private route: ActivatedRoute,
@@ -18,19 +18,15 @@ export class UpdateQuizComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      const idString = params.get('quiz_id');
-      if (idString !== null) { 
-        const id = +idString; 
-        if (!isNaN(id)) { 
-          this.quizId = id;
-          this.getQuizDetails(this.quizId);
-        } else {
-          console.error('Identifiant du quiz invalide');
-        }
-      } else {
-        console.error('Identifiant du quiz manquant');
-      }
-    });
+      const id = params.get('quiz_id');
+      if (id !== null) { 
+     this.quiz_id=+id;
+     this.getQuizDetails(this.quiz_id);
+        
+  }
+});
+this.quiz_id=this.route.snapshot.params['quiz_id']
+this.updatedQuiz= { quiz_id: 0, quizName: '', quizTime: new Date() ,   questions: []};
   }
   
   
@@ -48,7 +44,7 @@ export class UpdateQuizComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.quizService.updateQuiz(this.quizId, this.updatedQuiz).subscribe(
+    this.quizService.updateQuiz(this.quiz_id, this.updatedQuiz).subscribe(
       (response) => {
         console.log('Quiz mis à jour avec succès !', response);
         this.router.navigate(['/quiz/list-quiz']);

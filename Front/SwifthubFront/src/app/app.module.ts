@@ -60,6 +60,8 @@ import { QuizfrontComponent } from './FrontOffice/quizfront/quizfront.component'
 import { QuestionComponent } from './FrontOffice/question/question.component';
 import { UpdateQuizComponent } from './BackOffice/quizzes/update-quiz/update-quiz.component';
 import { ListQuestionComponent } from './BackOffice/quizzes/list-question/list-question.component';
+import { AddQuizComponent } from './BackOffice/quizzes/add-quiz/add-quiz.component';
+import { CardQuizzesComponent } from './FrontOffice/card-quizzes/card-quizzes.component';
 
 
 
@@ -85,7 +87,9 @@ import { ListQuestionComponent } from './BackOffice/quizzes/list-question/list-q
     QuestionComponent,
     UpdateQuizComponent,
     ListQuestionComponent,
-    AddQuestionComponent
+    AddQuestionComponent,
+    CardQuizzesComponent,
+  
     
 
     
