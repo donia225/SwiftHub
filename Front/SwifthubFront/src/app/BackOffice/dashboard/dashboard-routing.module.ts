@@ -8,6 +8,7 @@ import { ShowWorkshopComponent } from 'src/app/components/workshop/show-workshop
 import { EditWorkshopComponent } from 'src/app/components/workshop/edit-workshop/edit-workshop.component';
 import { AddWorkshopComponent } from 'src/app/components/workshop/add-workshop/add-workshop.component';
 import { DashboardComponent } from './dashboard.component';
+import { AdminShowFeedbackComponent } from 'src/app/components/feedback/admin-show-feedback/admin-show-feedback.component';
 
 const routes: Routes = [
 
@@ -35,8 +36,8 @@ const routes: Routes = [
     children: [
       { path: 'edit/:id', component: EditWorkshopComponent },
       { path: 'show', component: ShowWorkshopComponent },
-    
       { path: 'add', component: AddWorkshopComponent },
+      { path: 'feedback', component: AdminShowFeedbackComponent },
 
     ]
   },

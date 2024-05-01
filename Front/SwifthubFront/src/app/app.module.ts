@@ -51,6 +51,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { DatePipe } from '@angular/common';
 import { UserWorkshopComponent } from './components/workshop/user-workshop/user-workshop.component';
 import { MeetingComponent } from './components/meeting/meeting.component';
+import { AdminShowFeedbackComponent } from './components/feedback/admin-show-feedback/admin-show-feedback.component';
 
 
 
@@ -69,6 +70,7 @@ import { MeetingComponent } from './components/meeting/meeting.component';
     AddWorkshopComponent,
     UserWorkshopComponent,
     MeetingComponent,
+    AdminShowFeedbackComponent,
 
     
 

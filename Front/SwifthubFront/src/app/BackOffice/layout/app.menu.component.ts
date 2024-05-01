@@ -64,7 +64,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label:'feedbacks',
                                 icon: 'pi pi-fw pi-arrow-right',
-                                routerLink: ['/feedback/show']
+                                routerLink: ['/workshopBack/feedback']
                             }
                            
                         ]
