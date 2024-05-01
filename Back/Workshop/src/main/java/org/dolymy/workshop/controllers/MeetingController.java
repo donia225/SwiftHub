@@ -4,9 +4,7 @@ package org.dolymy.workshop.controllers;
 import lombok.RequiredArgsConstructor;
 import org.dolymy.workshop.entities.Meeting;
 import org.dolymy.workshop.services.MeetingService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/workshop/meetings")
@@ -18,5 +16,10 @@ public class MeetingController {
     @PostMapping
     public Meeting createMeeting(){
         return this.meetingService.addMeeting();
+    }
+
+    @GetMapping("{id}")
+    public Meeting getMeetingById(@PathVariable String id){
+        return this.meetingService.findMeetingById(id);
     }
 }
