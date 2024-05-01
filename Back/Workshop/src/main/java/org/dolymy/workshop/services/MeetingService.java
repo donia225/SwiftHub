@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -31,5 +32,44 @@ public class MeetingService {
         Random random = new Random();
         return random.nextLong(5000);
     }
+
+    public Meeting findMeetingById(String id) {
+        Meeting meeting = null;
+        if (id != null) {
+            final Optional<Meeting> optionalMeeting = this.meetingRepository.findById(id);
+            if (optionalMeeting.isPresent()) {
+                meeting = optionalMeeting.get();
+            } else {
+                LOG.info("NON_PRESENT_ID", id);
+            }
+        } else {
+            LOG.error("NULL ID PASSED");
+        }
+
+
+        return meeting;
+    }
+
+    public Meeting updateMeeting(String id, Meeting updatedMeeting) {
+        Optional<Meeting> existingMeeting = this.meetingRepository.findById(id);
+
+        if (existingMeeting.isPresent()) {
+            if (updatedMeeting != null) {
+                updatedMeeting.setMeeting_id(existingMeeting.get().getMeeting_id());
+                return this.meetingRepository.save(updatedMeeting);
+            } else {
+                LOG.error("ERROR_UPDATE");
+            }
+        } else {
+            LOG.error("ERROR_NON_PRESENT_ID");
+        }
+
+        return updatedMeeting;
+    }
+
+
+
+
+
 
 }

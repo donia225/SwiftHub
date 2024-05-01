@@ -12,4 +12,5 @@ export class Workshop {
     userId!:string;
     feedbacks!: Feedback[];
     joinedUsers!:string[];
+    meetingId!:string;
 }
