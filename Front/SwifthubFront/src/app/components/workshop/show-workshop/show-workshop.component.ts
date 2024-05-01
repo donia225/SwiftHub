@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Role } from 'src/app/enums/role';
+import { Meeting } from 'src/app/models/meeting/meeting';
 import { User } from 'src/app/models/user/user';
 import { Workshop } from 'src/app/models/workshop/workshop';
+import { MeetingService } from 'src/app/services/meeting/meeting.service';
 import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 
 @Component({
@@ -15,12 +17,16 @@ import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 export class ShowWorkshopComponent implements OnInit {
 
 
+
   displyDialogDelete: boolean = false;
   breadcrumbItems: MenuItem[] = [];
   workshops!: Workshop[];
   users!: User[];
   joinedUsers!:string[];
   selectedWorkshopId: string | null = null;
+  meeting!:Meeting;
+  selectedMeetingId: string | null = null;
+  
 
   //static logged in user
   LoggedInUser:User={
@@ -35,7 +41,7 @@ export class ShowWorkshopComponent implements OnInit {
     ImageUrl: 'com.user.management.User.user.User'
   }
 
-  constructor(public serviceWorkshop: WorkshopService, public router: Router, private confirmationService: ConfirmationService, private messageService: MessageService,private datePipe: DatePipe) { }
+  constructor(public serviceWorkshop: WorkshopService,private meetingService:MeetingService, public router: Router, private confirmationService: ConfirmationService, private messageService: MessageService,private datePipe: DatePipe) { }
 
   //show html for students: frontOffice
   isStudentRoute() {
@@ -112,6 +118,22 @@ export class ShowWorkshopComponent implements OnInit {
       }
     });
   }
+// when admin joins a meeting 
+  adminJoinMeeting(meetingId:string) {
+     this.selectedMeetingId=meetingId;
+     
+     this.meetingService.getMeetingById(this.selectedMeetingId).subscribe(
+      res=>{
+          this.meeting=res as Meeting;
+          this.router.navigateByUrl('/meeting?roomID='+this.meeting.accessKey);
+      },
+      err=>{
+        console.log(err);
+        
+      }
+    )
+    }
+
 ////// FrontOffice funtions
   //only Show workshops that haven't started yet
   checkStartDate(start:Date):boolean{

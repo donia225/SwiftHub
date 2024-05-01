@@ -64,6 +64,7 @@ export class EditWorkshopComponent implements OnInit {
       userId: this.workshop.userId,
       feedbacks: this.workshop.feedbacks,
       joinedUsers:this.workshop.joinedUsers,
+      meetingId:this.workshop.meetingId
 
     }
 

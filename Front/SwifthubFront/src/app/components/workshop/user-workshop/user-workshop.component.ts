@@ -1,8 +1,10 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Role } from 'src/app/enums/role';
+import { Meeting } from 'src/app/models/meeting/meeting';
 import { User } from 'src/app/models/user/user';
 import { Workshop } from 'src/app/models/workshop/workshop';
+import { MeetingService } from 'src/app/services/meeting/meeting.service';
 import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 
 @Component({
@@ -16,6 +18,7 @@ export class UserWorkshopComponent implements OnInit {
   users!:User[];
   showFeedback:boolean=false;
   selectedWorkshopId!: string;
+  meeting!:Meeting;
   
 
  //static logged in user
@@ -31,7 +34,15 @@ export class UserWorkshopComponent implements OnInit {
   ImageUrl: 'com.user.management.User.user.User'
 }
 
-  constructor(private workshopService: WorkshopService,private route: ActivatedRoute){}
+  constructor(private workshopService: WorkshopService,private meetingService:MeetingService,private route: ActivatedRoute,private router:Router){}
+
+  ngOnInit(): void {
+
+    this.getUsers();
+    this.WorkshopsByJoinedUser(this.LoggedInUser.id)
+ 
+   }
+
   // Set the initial position of the feedback container
   feedbackContainerTop: number = 50;
 
@@ -82,15 +93,26 @@ export class UserWorkshopComponent implements OnInit {
     return workshopstart >= currentDate;
   }
 
-  ngOnInit(): void {
-
-   this.getUsers();
-   this.WorkshopsByJoinedUser(this.LoggedInUser.id)
-
-   
-
-
-
+  //disabling join meeting button
+  meetingValidity(workshop:Workshop): boolean {
+    const currentDate = new Date(Date.now());
+    const startDate = new Date(workshop.start_date);
+    const endDate = new Date(workshop.end_date);
+    return currentDate>=startDate&&currentDate<=endDate;
   }
+        
+  studentJoinMeeting(meetingId:string) {
+    this.meetingService.getMeetingById(meetingId).subscribe(
+      res=>{
+        this.meeting=res as Meeting;
+        this.router.navigateByUrl('/meeting?roomID='+this.meeting.accessKey);
+    },
+    err=>{
+      console.log(err);
+      
+    }
+    );
+    }
+
 
 }

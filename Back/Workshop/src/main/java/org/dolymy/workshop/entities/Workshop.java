@@ -29,10 +29,10 @@ public class Workshop implements Serializable {
     private LocalDate start_date;
     private LocalDate end_date;
     private String location;
-    private String link;
+  //  private String link;
     private String userId;
     private List<String> joinedUsersId;
-    
+    private String meetingId;
     @JsonManagedReference
     private List<Feedback> feedbacks;
 

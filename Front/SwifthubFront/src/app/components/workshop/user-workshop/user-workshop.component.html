@@ -23,9 +23,11 @@
         <p class="card-text">{{workshop.description}}</p>
         
       </div>
-      <a href="#" class="card-link">Join Workshop</a>
+      <!-- <a href="#" class="card-link"></a> -->
+     
 
     </div>
+    <button (click)="studentJoinMeeting(workshop.meetingId)" type="button" class="btn btn-outline-info" [disabled]="workshop.meetingId==null||!meetingValidity(workshop)" >Join Meeting</button>
   </div>
   <div>
     <div class="feedback-container" *ngIf="showFeedback" >
