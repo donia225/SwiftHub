@@ -27,7 +27,7 @@ export class AddWorkshopComponent implements OnInit {
     location: "",
     link: "",
     // static untill user token is set
-    userId: "66218df95459d6419b2fec46",
+    userId: "662bb6b46c4b2853ebe30871",
     feedbacks: [],
     joinedUsers: [],
     meetingId: ''

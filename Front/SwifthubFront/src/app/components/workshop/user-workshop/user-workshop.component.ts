@@ -14,7 +14,6 @@ import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 })
 export class UserWorkshopComponent implements OnInit {
 
-
   workshops!:Workshop[];
   users!:User[];
   showFeedback:boolean=false;
@@ -94,6 +93,14 @@ export class UserWorkshopComponent implements OnInit {
     return workshopstart >= currentDate;
   }
 
+  //disabling join meeting button
+  meetingValidity(workshop:Workshop): boolean {
+    const currentDate = new Date(Date.now());
+    const startDate = new Date(workshop.start_date);
+    const endDate = new Date(workshop.end_date);
+    return currentDate>=startDate&&currentDate<=endDate;
+  }
+        
   studentJoinMeeting(meetingId:string) {
     this.meetingService.getMeetingById(meetingId).subscribe(
       res=>{
