@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.dolymy.workshop.entities.Feedback;
 import org.dolymy.workshop.entities.Notification;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
