@@ -114,7 +114,8 @@ public class QuizService {
                         Answer updatedAnswer = findMatchingUpdatedAnswer(existingAnswer.getAnswer_id(), updatedQuiz);
 
                         if (updatedAnswer != null) {
-                            existingAnswer.setAnswerTxt(updatedAnswer.getAnswerTxt()); // Update answer text (or other fields)
+                            existingAnswer.setAnswerTxt(updatedAnswer.getAnswerTxt());
+                            existingAnswer.setPoint(Integer.parseInt(updatedAnswer.getAnswerTxt()));// Update answer text (or other fields)
 
                             // Handle potential error during saving the updated answer
                             Optional<Answer> savedOptionalAnswer = Optional.of(answerRepository.save(existingAnswer));

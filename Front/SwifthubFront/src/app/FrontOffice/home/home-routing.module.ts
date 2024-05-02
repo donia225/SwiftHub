@@ -19,7 +19,8 @@ const routes: Routes = [
       { path: 'workshop', component:WorkshopComponent },
       {path: 'quiz-card', component:CardQuizzesComponent},
       {path: 'quizfront', component:QuizfrontComponent},
-      {path:'question',component:QuestionComponent}
+      { path: 'question/:quizId', component: QuestionComponent },
+
       
     ]
   },

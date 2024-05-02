@@ -3,6 +3,7 @@ import { interval } from 'rxjs';
 import { QuestionService } from './services/question.service';
 import { QuestionModel } from 'src/app/BackOffice/quizzes/Model/question-model';
 import { AnswerModel } from 'src/app/BackOffice/quizzes/Model/answer-model';
+import { QuizModel } from 'src/app/BackOffice/quizzes/Model/quiz-model';
 
 @Component({
   selector: 'app-question',
@@ -20,28 +21,20 @@ export class QuestionComponent implements OnInit {
   public interval$: any;
   public progress: string = "0";
   public isQuizCompleted : boolean = false;
+  public quizList!: QuizModel[];
 
   constructor(private questionService: QuestionService) { }
 
   ngOnInit(): void {
     this.name = localStorage.getItem("name")!;
-    this.enterFullScreen();
+
     this.getAllQuestions();
     this.startCounter();
 
 
   }
 
-  enterFullScreen() {
-    const elem = document.documentElement;
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.requestFullscreen) { /* Safari */
-      elem.requestFullscreen();
-    } else if (elem.requestFullscreen) { /* IE11 */
-      elem.requestFullscreen();
-    }
-  }
+ 
 
   @HostListener('document:keydown.escape', ['$event'])
   onEscKeyDown(event: KeyboardEvent) {
@@ -79,9 +72,12 @@ export class QuestionComponent implements OnInit {
 
 
 
-  nextQuestion() {
+nextQuestion() {
+  if (this.currentQuestion < this.questionList.length - 1) { // Check if there are more questions
     this.currentQuestion++;
   }
+}
+
 
   previousQuestion() {
     this.currentQuestion--;
@@ -89,16 +85,14 @@ export class QuestionComponent implements OnInit {
 
   startCounter() {
     this.interval$ = interval(1000).subscribe(val => {
-      this.counter--;
-      if (this.counter === 0) {
-        this.nextQuestion();
+      if (this.counter > 0) {
+        this.counter--;
+      } else {
+        this.stopCounter();
+        this.isQuizCompleted = true;
       }
     });
-    setTimeout(() => {
-      this.interval$.unsubscribe();
-    }, 600000);
   }
-
   stopCounter() {
     this.interval$.unsubscribe();
     this.counter = 0;

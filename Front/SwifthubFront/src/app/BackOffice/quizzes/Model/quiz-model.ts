@@ -1,7 +1,7 @@
 import { QuestionModel } from "./question-model";
 
 export interface QuizModel {
-    quiz_id: number;
+    quizId: number;
     quizName: string;
     quizTime: Date;
     questions: QuestionModel[];

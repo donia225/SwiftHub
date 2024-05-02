@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http'
 import { QuestionModel } from 'src/app/BackOffice/quizzes/Model/question-model';
 import { AnswerModel } from 'src/app/BackOffice/quizzes/Model/answer-model';
 import { Observable } from 'rxjs';
+import { QuizModel } from 'src/app/BackOffice/quizzes/Model/quiz-model';
 
 
 @Injectable({
@@ -23,5 +24,10 @@ export class QuestionService {
 
   getAllAnswers(): Observable<AnswerModel[]> {
     return this.http.get<AnswerModel[]>(`${this.baseUrl}/answers/getAllAnswers`); 
+  }
+
+
+  getAllQuizzes(): Observable<QuizModel[]> {
+    return this.http.get<QuizModel[]>(`${this.baseUrl}/getAllQuizzes`); 
   }
 }

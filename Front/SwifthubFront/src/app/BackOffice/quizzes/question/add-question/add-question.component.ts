@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 export class AddQuestionComponent implements OnInit {
   
   addQuestionForm!: FormGroup;
-  quizId: string = '';
+  quizId: number = 0;
   answersArray!: FormArray; 
   answerTxt: string = '';
   correctAnswer: boolean = false;
@@ -31,14 +31,13 @@ export class AddQuestionComponent implements OnInit {
     this.addQuestionForm = this.formBuilder.group({
       questiontxt: ['', Validators.required],
       answers: this.formBuilder.array([]),
-      available:[false]
+      available: [false]
     });
     
-    
     this.route.paramMap.subscribe(params => {
-      const id = params.get('quiz_id');
+      const id = params.get('quizId');
       if (id !== null) {
-        this.quizId = id;
+        this.quizId = +id; 
       }
     });
   }
@@ -46,15 +45,16 @@ export class AddQuestionComponent implements OnInit {
   onSubmit(): void {
     if (this.addQuestionForm.valid) {
       const question: QuestionModel = this.addQuestionForm.value;
-      this.questionService.affectQuestionToQuiz(this.quizId, question).subscribe(
+      const quizIdString: string = this.quizId.toString(); // Convert number to string
+      this.questionService.affectQuestionToQuiz(quizIdString, question).subscribe(
         (response) => {
-          console.log('Question ajoutée avec succès', response);
+          console.log('Question added successfully', response);
         
-          // Rediriger vers la liste des quiz ou une autre page appropriée
+          // Redirect to the list of quizzes or another appropriate page
           this.router.navigate(['/quiz/list-quiz']);
         },
         (error) => {
-          console.error('Erreur lors de l\'ajout de la question', error);
+          console.error('Error adding question', error);
         }
       );
     }

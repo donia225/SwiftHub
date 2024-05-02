@@ -34,9 +34,9 @@ const routes: Routes = [
     children: [
       { path: 'list-quiz', component: ListQuizComponent },
       { path: 'add-quiz', component: AddQuizComponent },
-      { path: 'update-quiz/:quiz_id', component: UpdateQuizComponent },
+      { path: 'update-quiz/:quizId', component: UpdateQuizComponent },
    
-      {path:'add-question/:quiz_id', component: AddQuestionComponent},
+      {path:'add-question/:quizId', component: AddQuestionComponent},
     
 
     ]

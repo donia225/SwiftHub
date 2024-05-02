@@ -23,6 +23,7 @@ public class Answer implements Serializable {
     private Long answer_id;
     private String answerTxt;
     private boolean correctAnswer;
+    private int point;
 
 
 }

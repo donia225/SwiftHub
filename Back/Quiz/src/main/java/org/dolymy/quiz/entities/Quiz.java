@@ -34,6 +34,7 @@ public class Quiz implements Serializable {
     private String quizName;
     private LocalDateTime quizTime;
 
+
     private List<Question> questions = new ArrayList<>();
 
 

@@ -13,9 +13,9 @@ export class QuizfrontComponent  implements OnInit{
 
   ngOnInit(): void {
   }
-  startQuiz(){
-    localStorage.setItem("name",this.nameKey.nativeElement.value);
-  }
+  //startQuiz(){
+    //localStorage.setItem("name",this.nameKey.nativeElement.value);
+  //}
 
 }
 

@@ -23,7 +23,7 @@
                 </div>
             </div>
             <button style="width: 20%;" pButton pRipple type="button" (click)="addAnswer()" label="Ajouter une réponse" class="p-button-info"></button>
-            <button   style="width: 20%;"   pButton pRipple type="submit" label="Ajouter la question" class="p-button-warning"></button>
+            <button   style="width: 20%;"   (click)="onSubmit()"     pButton pRipple type="submit" label="Ajouter la question" class="p-button-warning"></button>
             
         </form>
     </div>
