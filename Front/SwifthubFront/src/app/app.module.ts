@@ -18,7 +18,7 @@ import { RippleModule } from 'primeng/ripple';
 import { RouterModule } from '@angular/router';
 import { MessagesModule } from 'primeng/messages';
 import { TableModule } from 'primeng/table';
-import { CalendarModule } from 'primeng/calendar';
+//import { CalendarModule } from 'primeng/calendar';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -41,6 +41,8 @@ import { DashboardComponent } from './BackOffice/dashboard/dashboard.component';
 import { DashboardModule } from './BackOffice/dashboard/dashboard.module';
 import { AppLayoutModule } from './BackOffice/layout/app.layout.module';
 import { HomeModule } from './FrontOffice/home/home.module';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
 
@@ -93,7 +95,8 @@ import { HomeModule } from './FrontOffice/home/home.module';
     ConfirmPopupModule,
     ToolbarModule,
     ToastModule,
-    HomeModule
+    HomeModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
  
     bootstrap: [AppComponent]
