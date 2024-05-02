@@ -12,8 +12,9 @@ import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("api/comments")
-@Controller
+@RequestMapping("/api/post/comments")
+
+
 public class CommentController {
     @Autowired
     private CommentService commentService;
@@ -33,23 +34,23 @@ public class CommentController {
     @DeleteMapping("/{id}")
     @ResponseBody
     public void deletingCommentById(@PathVariable int id) {
-        commentService.deleteById(id);
+        commentService.deleteCommentById(id);
     }
     //add
     @PostMapping("")
     @ResponseBody
-    public Comment addingComment(@RequestBody Comment comment) {
-        return commentService.addComment(comment);
+    public Comment addingComment(@RequestBody Comment comment,@RequestParam int idPost) {
+        return commentService.addComment(comment,idPost);
     }
 
     //Update
     @PutMapping("/{id}")
     @ResponseBody
-    public Comment updatingComment(@PathVariable int id, @RequestBody Comment comment) {
+    public Comment updatingComment(@PathVariable int id, @RequestBody Comment comment, @RequestParam int idPost) {
         Optional<Comment> existingComment = commentService.findCommentById(id);
         if (!existingComment.isPresent()) {}
         comment.setId(id);
-        return commentService.updateComment(comment);
+        return commentService.updateComment(comment,idPost);
     }
 
 
