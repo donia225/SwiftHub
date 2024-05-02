@@ -41,6 +41,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
+import { ListCategoryComponent } from '../categories/list-category/list-category.component';
 
 
 
@@ -50,7 +51,7 @@ import { ToastModule } from 'primeng/toast';
     DashboardComponent,
     LoginComponent,
     ListQuizComponent,
-    AddQuizComponent,
+    AddQuizComponent
   ],
   imports: [
     CommonModule,

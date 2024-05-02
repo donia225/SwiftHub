@@ -25,9 +25,17 @@
               <li class="nav-item">
                 <a class="nav-link active" style="color: grey;"  aria-current="page" routerLink="/home">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color: grey;"  href="#">Requests</a>
-              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Requests
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" (click)="navigateToAddComplaint()">Add Complaint</a>
+                    <a class="dropdown-item" (click)="navigateToListComplaints()" >List Complaints</a>
+                </div>
+            </li>
+            
               <li class="nav-item">
                 <a class="nav-link" style="color: grey;"  href="#">Posts</a>
               </li>

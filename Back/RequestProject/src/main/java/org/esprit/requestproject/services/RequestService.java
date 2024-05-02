@@ -3,6 +3,7 @@ package org.esprit.requestproject.services;
 import org.esprit.requestproject.entities.Category;
 import org.esprit.requestproject.entities.Request;
 
+import org.esprit.requestproject.entities.Status;
 import org.esprit.requestproject.repositories.CategoryRepo;
 import org.esprit.requestproject.repositories.RequestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,16 +88,17 @@ public class RequestService {
                 // Mettre à jour les champs de la demande
                 existingRequest.setTitle(request.getTitle());
                 existingRequest.setDescription(request.getDescription());
-                existingRequest.setAttachment(request.getAttachment());
-                existingRequest.setVisibility(true);
+                //existingRequest.setAttachment(request.getAttachment());
+                //existingRequest.setStatus(request.getStatus());
+
 
                 // Vérifier si la catégorie associée à la demande existante est null
-                if (existingRequest.getCategory() == null) {
+               /* if (existingRequest.getCategory() == null) {
                     existingRequest.setCategory(new Category()); // Créer une nouvelle catégorie si elle est null
                 }
 
                 // Mettre à jour l'ID de la catégorie associée à la demande
-                existingRequest.getCategory().setIdCategory(request.getCategory().getIdCategory());
+                existingRequest.getCategory().setIdCategory(request.getCategory().getIdCategory());*/
 
                 request.setIdRequest(sequenceGenerator.generateSequence(Request.SEQUENCE_NAME));
                 return this.requestRepo.save(existingRequest);
@@ -115,4 +117,10 @@ public class RequestService {
         requestRepo.deleteById(id);
 
     }
+
+    public List<Request> advancedSearch(String title, Status status) {
+        // Utilisez le repository pour rechercher les demandes en fonction des critères fournis
+        return requestRepo.advancedSearch(title, status);
+    }
+
 }

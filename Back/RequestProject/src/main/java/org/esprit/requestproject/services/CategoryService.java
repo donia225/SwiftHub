@@ -44,10 +44,10 @@ public class CategoryService  {
 
    }
 
-    public String createCategory(Category category) {
+    public Category createCategory(Category category) {
         category.setIdCategory(sequenceGenerator.generateSequence(Category.SEQUENCE_NAME));
-        categoryRepo.save(category);
-        return "Catégorie ajoutée avec succès";
+        return  categoryRepo.save(category);
+
     }
 
 

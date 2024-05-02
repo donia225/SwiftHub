@@ -46,6 +46,14 @@ import { ListRequestComponent } from './requests/list-request/list-request.compo
 import { DropdownModule } from 'primeng/dropdown';
 import { RequestService } from './requests/services/request.service';
 import { UpdateRequestComponent } from './requests/update-request/update-request.component';
+import { ListCategoryComponent } from './BackOffice/categories/list-category/list-category.component';
+import { AddCategoryComponent } from './BackOffice/categories/add-category/add-category.component';
+import { RequestComponent } from './FrontOffice/frontrequest/request/request.component';
+import { FrontAddComponent } from './FrontOffice/frontrequest/front-add/front-add.component';
+import { CardModule } from 'primeng/card';
+import { UpdateReqComponent } from './FrontOffice/frontrequest/update-req/update-req.component';
+
+
 
 
 
@@ -63,6 +71,11 @@ import { UpdateRequestComponent } from './requests/update-request/update-request
     AddRequestComponent,
     ListRequestComponent,
     UpdateRequestComponent,
+    ListCategoryComponent,
+    AddCategoryComponent,
+    RequestComponent,
+    FrontAddComponent,
+    UpdateReqComponent
    
 
     
@@ -107,6 +120,7 @@ import { UpdateRequestComponent } from './requests/update-request/update-request
     ToastModule,
     HomeModule,
     DropdownModule,
+    CardModule
   ],
  
     bootstrap: [AppComponent]
