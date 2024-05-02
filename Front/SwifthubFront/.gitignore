@@ -43,3 +43,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+
+.angular
+node_modules
+SwifthubFront/.angular
+SwifthubFront/.node_modules

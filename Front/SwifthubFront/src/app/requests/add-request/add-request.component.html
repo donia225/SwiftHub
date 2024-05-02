@@ -1,0 +1,44 @@
+
+
+<div class="col-12">
+    <div class="card">
+        <h5 style="text-align: center;">Student Complaint Management System</h5>
+        <form [formGroup]="requestform" (ngSubmit)="addRequest()">
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="title">Title</label>
+                    <input pInputText id="title" type="text" formControlName="title" />
+                    <div *ngIf="requestform.get('title')?.invalid && requestform.get('title')?.touched" class="text-danger">
+                    Title is required </div>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="category">Category</label>
+                    <p-dropdown optionLabel="name"  ></p-dropdown>
+                   <!--  <div *ngIf="requestform.get('category')?.invalid && requestform.get('category')?.touched" class="text-danger">
+                        Category is required </div> -->
+                    
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="description"></label>
+                    <textarea rows="5" cols="60" placeholder="Description" pInputTextarea formControlName="description" required></textarea>
+                    <div *ngIf="requestform.get('description')?.invalid && requestform.get('description')?.touched" class="text-danger">
+                        Description is required </div>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="visibility">Visibility</label>
+                    <p-inputSwitch id="visibility" formControlName="visibility"></p-inputSwitch>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="attachment">Attachment</label>
+                    <input type="file" id="attachment" (change)="onFileChange($event)" formControlName="attachment" required/>
+                </div>
+                <div class="field col-12" style="text-align: right;">
+                    <button pButton pRipple type="submit" label="Save" class="p-button-rounded p-button-success p-button-sm custom-button" ></button>
+                    <button pButton pRipple type="button" label="Cancel" class="p-button-rounded p-button-danger p-button-sm custom-button"  ></button>
+                </div>
+                    
+                
+            </div>
+        </form>
+    </div>
+</div>

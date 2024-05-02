@@ -8,6 +8,8 @@ import { DashboardComponent } from './dashboard.component';
 import { ListRequestComponent } from 'src/app/requests/list-request/list-request.component';
 import { AddRequestComponent } from 'src/app/requests/add-request/add-request.component';
 import { UpdateRequestComponent } from 'src/app/requests/update-request/update-request.component';
+import { ListCategoryComponent } from '../categories/list-category/list-category.component';
+import { AddCategoryComponent } from '../categories/add-category/add-category.component';
 
 const routes: Routes = [
 
@@ -37,6 +39,16 @@ const routes: Routes = [
       { path: 'list-request', component: ListRequestComponent },
       { path: 'add-request', component: AddRequestComponent },
       {path:"update-request/:idRequest",component:UpdateRequestComponent},
+
+    ]
+  },
+
+  {
+    path: 'category', component: AppLayoutComponent,
+    children: [
+      { path: 'list-category', component: ListCategoryComponent },
+      { path: 'add-category', component: AddCategoryComponent },
+    
 
     ]
   },

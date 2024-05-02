@@ -37,13 +37,12 @@ public class CategoryController {
 
 
     @PostMapping("/add-category")
-    public ResponseEntity<String> createCategory(@RequestBody Category category) {
-        try {
-            this.categoryService.createCategory(category);
-            return new ResponseEntity<>("Categorie ajoutée avec succès", HttpStatus.CREATED);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+    public Category createCategory(@RequestBody Category category) {
+
+          return   this.categoryService.createCategory(category);
+
+
+
     }
 
 

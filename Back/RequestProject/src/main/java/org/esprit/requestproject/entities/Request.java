@@ -32,12 +32,13 @@ public class Request implements Serializable {
     private String description ;
     private Status status; //c'est pas l'étudiant qui gére ça
 
+
     @CreatedDate // Annotation pour générer automatiquement la date de création
     private Date creationDate;
 
 
     private String attachment;
-    private boolean visibility; //request public ychoufouha ness kol wala privé ychoufha ken ma3neya bel amr
+    private long idUser;
 
 
 
@@ -46,57 +47,7 @@ public class Request implements Serializable {
     private Category category;
 
 
-    public long getIdRequest() {
-        return idRequest;
-    }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public String getAttachment() {
-        return attachment;
-    }
-
-    public void setAttachment(String attachment) {
-        this.attachment = attachment;
-    }
-
-    public boolean isVisibility() {
-        return visibility;
-    }
-
-    public void setVisibility(boolean visibility) {
-        this.visibility = visibility;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 
     @Override
     public String toString() {
@@ -107,7 +58,6 @@ public class Request implements Serializable {
                 ", status=" + status +
                 ", creationDate=" + creationDate +
                 ", attachment='" + attachment + '\'' +
-                ", visibility=" + visibility +
                 ", category=" + category +
 
                 '}';
