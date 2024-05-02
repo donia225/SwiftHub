@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +38,7 @@ public class FeedbackService {
         //Only accepts feedback without empty description
         if (!feedback.getDescription().isEmpty()) {
             //saving feedback
+            feedback.setCreationDate(LocalDateTime.now());
             Feedback createdFeedback = this.feedbackRepository.save(feedback);
             String workshop_id = createdFeedback.getWorkshop().getWorkshop_id();
             if (workshop_id != null) {

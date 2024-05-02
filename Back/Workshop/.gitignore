@@ -31,3 +31,13 @@ build/
 
 ### VS Code ###
 .vscode/
+
+Back/Workshop/.idea
+Back/User/.idea
+Back/ResquestProject/.idea
+Back/Gateway/.idea
+Back/appointment/.idea
+Back/Post/.idea
+Back/Config-server/.idea
+Back/Discovery/.idea
+Back/Quiz/.idea

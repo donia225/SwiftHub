@@ -26,7 +26,30 @@ public class AppointmentController {
 
     @GetMapping
     public ResponseEntity<List<Appointment>> findAllAppointments(){
-        return ResponseEntity.ok(service.findAllAppointments());
+        return ResponseEntity.ok(service.getAllAppointments());
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Appointment getAppointmentById(@PathVariable String id) {
+        // Lambda Example
+        return id != null ? this.service.findAppointmentById(id) : null;
+    }
+
+
+    @PutMapping
+    @ResponseBody
+    public Appointment updateAppointment(@RequestBody Appointment appointment) {
+        return appointment != null ? this.service.updateAppointment(appointment) : null;
+    }
+
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAppointment(@PathVariable String id) {
+        if (id != null) {
+            this.service.deleteAppointment(id);
+        }
     }
 
 }

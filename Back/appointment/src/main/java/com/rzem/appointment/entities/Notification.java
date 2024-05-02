@@ -19,7 +19,7 @@ public class Notification {
     private int id;
     private String content;
     private Date sentTime;
-    private int recipientId;
+    private String recipientId;
     private NotificationType notificationType;
     private Appointment appointment;
 }

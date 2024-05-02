@@ -63,4 +63,12 @@ public class FeedbackController {
         this.feedbackService.deleteFeedback(id);
     }
 
+    /**
+     * get feedback by workshop id
+//     */
+//    @GetMapping("/workshop/{id}")
+//    public List<Feedback> getFeedBackByWorkshop(@PathVariable String id){
+//        return this.feedbackService.
+//    }
+
 }

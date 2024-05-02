@@ -16,7 +16,7 @@ public class Availability {
 
     @Id
     private String id;
-    private int userId;
+    private String userId;
     private List<TimeSlot> availableTimeSlots;
 
 }
