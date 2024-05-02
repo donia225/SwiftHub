@@ -13,7 +13,7 @@ import java.util.Optional;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/post/comments")
-@CrossOrigin(origins = "*")
+
 
 public class CommentController {
     @Autowired
@@ -34,7 +34,7 @@ public class CommentController {
     @DeleteMapping("/{id}")
     @ResponseBody
     public void deletingCommentById(@PathVariable int id) {
-        commentService.deleteById(id);
+        commentService.deleteCommentById(id);
     }
     //add
     @PostMapping("")
@@ -46,11 +46,11 @@ public class CommentController {
     //Update
     @PutMapping("/{id}")
     @ResponseBody
-    public Comment updatingComment(@PathVariable int id, @RequestBody Comment comment) {
+    public Comment updatingComment(@PathVariable int id, @RequestBody Comment comment, @RequestParam int idPost) {
         Optional<Comment> existingComment = commentService.findCommentById(id);
         if (!existingComment.isPresent()) {}
         comment.setId(id);
-        return commentService.updateComment(comment);
+        return commentService.updateComment(comment,idPost);
     }
 
 

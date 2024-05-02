@@ -1,5 +1,4 @@
 package org.dolymy.post.services;
-
 import org.dolymy.post.entities.Post;
 
 import java.util.Date;

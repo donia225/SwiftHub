@@ -1,9 +1,9 @@
 package org.dolymy.post.entities;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
 
 
 import java.io.Serializable;
@@ -17,6 +17,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "posts")
+
 public class Post implements Serializable {
 
     @Id
@@ -24,6 +25,7 @@ public class Post implements Serializable {
     @Column(name = "idPost")
     Integer id;
     String title ;
+
     String description ;
     @Temporal(TemporalType.DATE)
     Date postDate;

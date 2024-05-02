@@ -13,4 +13,3 @@ public interface PostDao extends JpaRepository<Post,Integer> {
     List<Post> findByPostDate(Date postDate);
 
 }
-
