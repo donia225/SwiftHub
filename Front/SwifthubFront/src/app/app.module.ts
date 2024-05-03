@@ -42,9 +42,6 @@ import { AppLayoutModule } from './BackOffice/layout/app.layout.module';
 import { HomeModule } from './FrontOffice/home/home.module';
 import { PostComponent } from './FrontOffice/post/post.component';
 import { PostDetailsComponent } from './FrontOffice/post-details/post-details.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { ShowWorkshopComponent } from './components/workshop/show-workshop/show-workshop.component';
 import { EditWorkshopComponent } from './components/workshop/edit-workshop/edit-workshop.component';
 import { ShowFeedbackComponent } from './components/feedback/show-feedback/show-feedback.component';
@@ -82,9 +79,6 @@ import { MeetingComponent } from './components/meeting/meeting.component';
 
   ],
   imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
     BrowserModule,
     DashboardModule,
     AppRoutingModule,
