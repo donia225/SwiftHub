@@ -1,19 +1,18 @@
-/*
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddWorkshopComponent } from './add-workshop.component';
+import { RegisterComponent } from './register.component';
 
-describe('AddWorkshopComponent', () => {
-  let component: AddWorkshopComponent;
-  let fixture: ComponentFixture<AddWorkshopComponent>;
+describe('RegisterComponent', () => {
+  let component: RegisterComponent;
+  let fixture: ComponentFixture<RegisterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddWorkshopComponent ]
+      declarations: [ RegisterComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddWorkshopComponent);
+    fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -22,4 +21,3 @@ describe('AddWorkshopComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-*/

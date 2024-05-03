@@ -26,7 +26,7 @@ export class ShowWorkshopComponent implements OnInit {
   selectedWorkshopId: string | null = null;
   meeting!:Meeting;
   selectedMeetingId: string | null = null;
-  
+
 
   //static logged in user
   LoggedInUser:User={
@@ -118,10 +118,10 @@ export class ShowWorkshopComponent implements OnInit {
       }
     });
   }
-// when admin joins a meeting 
+// when admin joins a meeting
   adminJoinMeeting(meetingId:string) {
      this.selectedMeetingId=meetingId;
-     
+
      this.meetingService.getMeetingById(this.selectedMeetingId).subscribe(
       res=>{
           this.meeting=res as Meeting;
@@ -129,7 +129,7 @@ export class ShowWorkshopComponent implements OnInit {
       },
       err=>{
         console.log(err);
-        
+
       }
     )
     }
@@ -146,7 +146,7 @@ export class ShowWorkshopComponent implements OnInit {
   joinWorkshop(workshopId:string){
     var userId:string=this.LoggedInUser.id
     this.serviceWorkshop.joiningWorkshop(workshopId,userId).subscribe(
-      (res)=>{        
+      (res)=>{
         if (res==true) {
           this.messageService.add({severity:'success', summary:'Success', detail:'You Have Joined this workshop'});
         }else if(res== false){
@@ -162,8 +162,8 @@ export class ShowWorkshopComponent implements OnInit {
   }
 
 
-  
- 
+
+
 
   ngOnInit(): void {
     this.breadcrumbItems = [
@@ -173,8 +173,8 @@ export class ShowWorkshopComponent implements OnInit {
 
     this.getUsers();
     this.getWorkshops();
-    
-    
+
+
 
 
 

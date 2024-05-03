@@ -32,45 +32,38 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DialogModule } from 'primeng/dialog';
-import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
 import { DashboardModule } from './BackOffice/dashboard/dashboard.module';
 import { AppLayoutModule } from './BackOffice/layout/app.layout.module';
 import { HomeModule } from './FrontOffice/home/home.module';
-import { ShowWorkshopComponent } from './components/workshop/show-workshop/show-workshop.component';
-import { EditWorkshopComponent } from './components/workshop/edit-workshop/edit-workshop.component';
 import { ShowFeedbackComponent } from './components/feedback/show-feedback/show-feedback.component';
-import { AddWorkshopComponent } from './components/workshop/add-workshop/add-workshop.component';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { CardModule } from 'primeng/card';
-import { SelectButtonModule } from 'primeng/selectbutton';
 import { DatePipe } from '@angular/common';
-import { UserWorkshopComponent } from './components/workshop/user-workshop/user-workshop.component';
 import { MeetingComponent } from './components/meeting/meeting.component';
-
-
-
-
-
-
-
-
+import {SelectButtonModule} from "primeng/selectbutton";
+import {RegisterComponent} from "./BackOffice/pages/register/register.component";
+import {EditWorkshopComponent} from "./components/workshop/edit-workshop/edit-workshop.component";
+import {AddWorkshopComponent} from "./components/workshop/add-workshop/add-workshop.component";
+import {UserWorkshopComponent} from "./components/workshop/user-workshop/user-workshop.component";
+import {ShowWorkshopComponent} from "./components/workshop/show-workshop/show-workshop.component";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @NgModule({
   declarations: [
     AppComponent,
-    ShowWorkshopComponent,
-    EditWorkshopComponent,
     ShowFeedbackComponent,
-    AddWorkshopComponent,
-    UserWorkshopComponent,
     MeetingComponent,
+    EditWorkshopComponent,
+    AddWorkshopComponent,
+    MeetingComponent,
+    UserWorkshopComponent,
+    ShowWorkshopComponent,
 
-    
+
+
+
 
   ],
   imports: [
@@ -110,11 +103,11 @@ import { MeetingComponent } from './components/meeting/meeting.component';
     ConfirmPopupModule,
     ToolbarModule,
     ToastModule,
-    ConfirmPopupModule,
-    ConfirmDialogModule,
-    CardModule,
+    HomeModule,
     SelectButtonModule,
-    HomeModule
+    RegisterComponent,
+    ConfirmDialogModule,
+
   ],
     providers:[MessageService,ConfirmationService,DatePipe],
     bootstrap: [AppComponent]

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { LoginComponent } from '../login/login.component';
 import { ListQuizComponent } from '../quizzes/list-quiz/list-quiz.component';
 import { AddQuizComponent } from '../quizzes/add-quiz/add-quiz.component';
 import { AppLayoutModule } from '../layout/app.layout.module';
@@ -41,6 +40,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
+import {LoginComponent} from "../pages/login/login.component";
 
 
 
@@ -48,9 +48,9 @@ import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [
     DashboardComponent,
-    LoginComponent,
     ListQuizComponent,
     AddQuizComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -89,6 +89,6 @@ import { ToastModule } from 'primeng/toast';
     ToolbarModule,
     ToastModule
   ],
-  providers: [DialogService,DynamicDialogRef], 
+  providers: [DialogService,DynamicDialogRef],
 })
 export class DashboardModule { }
