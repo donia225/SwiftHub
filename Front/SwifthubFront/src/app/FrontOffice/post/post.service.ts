@@ -20,6 +20,7 @@ export class PostService {
   }
 
   createPost(post: Post): Observable<Post> {
+    post.visibility = "yes";
     return this.http.post<Post>(this.apiUrl, post);
   }
 

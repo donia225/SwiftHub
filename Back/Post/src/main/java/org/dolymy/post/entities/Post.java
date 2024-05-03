@@ -30,7 +30,7 @@ public class Post implements Serializable {
     @Temporal(TemporalType.DATE)
     Date postDate;
     String attachment ;
-
+    String visibilty= "yes";
     @Column(name = "userPost")
     Integer idUser;
 

@@ -8,6 +8,8 @@ import { ShowWorkshopComponent } from 'src/app/components/workshop/show-workshop
 import { EditWorkshopComponent } from 'src/app/components/workshop/edit-workshop/edit-workshop.component';
 import { AddWorkshopComponent } from 'src/app/components/workshop/add-workshop/add-workshop.component';
 import { DashboardComponent } from './dashboard.component';
+import { PostAdminComponent } from '../post-admin/post-admin.component';
+
 
 const routes: Routes = [
 
@@ -21,6 +23,10 @@ const routes: Routes = [
   ]
  },
   { path: 'login', component: LoginComponent },
+  { path: 'postAdmin', component: PostAdminComponent },
+
+  
+  
   
   {
     path: 'quiz', component: AppLayoutComponent,

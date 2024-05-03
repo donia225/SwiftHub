@@ -73,7 +73,15 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
            
-            
+            {
+                label: 'posts',
+                items: [
+                    { label: 'posts', icon: 'pi pi-fw pi-id-card', routerLink: ['/postAdmin'] },
+                  
+                   
+                ]
+            },
+ 
         ];
     }
 }

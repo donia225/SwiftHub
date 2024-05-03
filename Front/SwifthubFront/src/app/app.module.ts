@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
@@ -22,7 +20,6 @@ import { CalendarModule } from 'primeng/calendar';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
-
 import { FieldsetModule } from 'primeng/fieldset';
 
 import { FileUploadModule } from 'primeng/fileupload';
@@ -56,6 +53,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { DatePipe } from '@angular/common';
 import { UserWorkshopComponent } from './components/workshop/user-workshop/user-workshop.component';
 import { MeetingComponent } from './components/meeting/meeting.component';
+import { PostAdminComponent } from './BackOffice/post-admin/post-admin.component';
 
 
 
@@ -70,7 +68,7 @@ import { MeetingComponent } from './components/meeting/meeting.component';
     AppComponent,
      PostComponent,
      PostDetailsComponent,
-    
+    PostAdminComponent,
     ShowWorkshopComponent,
     EditWorkshopComponent,
     ShowFeedbackComponent,

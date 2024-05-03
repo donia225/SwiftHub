@@ -6,6 +6,7 @@ export interface Post {
     postDate: Date;
     attachment: Blob | File;
     comments: Comment[]; 
+    visibility: string;
 
   }
   

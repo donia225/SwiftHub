@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { LoginComponent } from '../login/login.component';
 import { ListQuizComponent } from '../quizzes/list-quiz/list-quiz.component';
 import { AddQuizComponent } from '../quizzes/add-quiz/add-quiz.component';
 import { AppLayoutModule } from '../layout/app.layout.module';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
@@ -26,9 +24,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
-
 import { FieldsetModule } from 'primeng/fieldset';
-
 import { FileUploadModule } from 'primeng/fileupload';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PanelModule } from 'primeng/panel';
@@ -41,6 +37,9 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
+import { PostAdminComponent } from '../post-admin/post-admin.component';
+import { PostDetailsComponent } from 'src/app/FrontOffice/post-details/post-details.component';
+import { PostComponent } from 'src/app/FrontOffice/post/post.component';
 
 
 
@@ -51,6 +50,8 @@ import { ToastModule } from 'primeng/toast';
     LoginComponent,
     ListQuizComponent,
     AddQuizComponent,
+  
+    
   ],
   imports: [
     CommonModule,
