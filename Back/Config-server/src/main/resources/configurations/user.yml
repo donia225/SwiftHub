@@ -13,7 +13,7 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      database: jwt_security
+      database: userr
 
 
 
