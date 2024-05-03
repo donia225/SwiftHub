@@ -53,7 +53,7 @@
 
         <ng-container *ngIf="isQuizCompleted && points >= 5">
             <div class="row d-flex justify-content-between">
-                <img style="width: 30%;" class="img-fluid col-sm-12 mx-auto" src="/assets/img/happy.png" alt="">
+                <img style="width: 5%;" class="img-fluid col-sm-5 mx-auto" src="/assets/img/happy.png" alt="">
                 <div class="result text-center col-md-6 col-sm-12">
                     <h3>Congratulations!! <br>You have completed the quiz. <br>Below is your result:</h3>
                     <p>Total Question Attempted : {{questionList.length}} </p>
@@ -66,7 +66,7 @@
 
         <ng-container *ngIf="isQuizCompleted && points < 5">
             <div class="row d-flex justify-content-between">
-                <img style="width: 30%;" class="img-fluid col-sm-12 mx-auto" src="/assets/img/sad.png" alt="">
+                <img style="width: 5%;" class="img-fluid col-sm-5 mx-auto" src="/assets/img/sad.png" alt="">
                 <div class="result text-center col-md-6 col-sm-12">
                     <h3>Oops! Looks like you didn't score enough points. <br>Below is your result:</h3>
                     <p>Total Question Attempted : {{questionList.length}} </p>

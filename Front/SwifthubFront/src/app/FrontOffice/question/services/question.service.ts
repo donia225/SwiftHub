@@ -4,13 +4,14 @@ import { QuestionModel } from 'src/app/BackOffice/quizzes/Model/question-model';
 import { AnswerModel } from 'src/app/BackOffice/quizzes/Model/answer-model';
 import { Observable } from 'rxjs';
 import { QuizModel } from 'src/app/BackOffice/quizzes/Model/quiz-model';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
-  protected baseUrl = "http://localhost:8090/api/quizzes"
+  protected baseUrl = environment.API_URL;
 
   
 
@@ -19,11 +20,11 @@ export class QuestionService {
 
 
   getAllQuestions(): Observable<QuestionModel[]> {
-    return this.http.get<QuestionModel[]>(`${this.baseUrl}/questions/getAllQuestions`); 
+    return this.http.get<QuestionModel[]>(`${this.baseUrl}/api/quizzes/questions/getAllQuestions`); 
   }
 
   getAllAnswers(): Observable<AnswerModel[]> {
-    return this.http.get<AnswerModel[]>(`${this.baseUrl}/answers/getAllAnswers`); 
+    return this.http.get<AnswerModel[]>(`${this.baseUrl}/api/quizzes/answers/getAllAnswers`); 
   }
 
 

@@ -21,8 +21,8 @@ public class Result  implements Serializable {
     @DBRef
     private Quiz quiz;
 
-    @DBRef
-    private User student;
+//    @DBRef
+//    private User student;
 
 
     private Certificate certificate;
