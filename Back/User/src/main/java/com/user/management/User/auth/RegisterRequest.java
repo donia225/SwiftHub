@@ -1,5 +1,6 @@
 package com.user.management.User.auth;
 
+import com.user.management.User.user.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +17,7 @@ public class RegisterRequest {
     private String className;
     private String department;
     private String managedService;
+    private Role role;
+    private boolean mfaEnabled;
+
 }
