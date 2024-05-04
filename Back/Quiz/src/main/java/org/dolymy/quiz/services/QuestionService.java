@@ -30,12 +30,11 @@ public class QuestionService {
     private final QuestionRepository questionRepository;
     private final QuizRepository quizRepository;
     private final AnswerRepository answerRepository;
+    private final SequenceGeneratorService sequenceGenerator;
 
 
     // a simple method to add a question
-    public Question addQuestion(Question question) {
-        return this.questionRepository.save(question);
-    }
+
 
     // get all the questions
     public List<Question> getAllQuestions() {
@@ -43,7 +42,7 @@ public class QuestionService {
     }
 
     //find question by id
-    public Question findQuestionById(String id) {
+    public Question findQuestionById(Long id) {
         Question q = null;
         if (id != null) {
             final Optional<Question> questionOptional = this.questionRepository.findById(id);
@@ -63,12 +62,13 @@ public class QuestionService {
     }
 
     //add the question + the answers and assign them to quiz
-    public Question affectQuestionToQuiz(String quizId, Question question) {
-        Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
+    public Question affectQuestionToQuiz(Long id, Question question) {
+        Optional<Quiz> optionalQuiz = quizRepository.findById(id);
+
         if (optionalQuiz.isPresent()) {
             Quiz quiz = optionalQuiz.get();
             question.setQuiz(quiz); // here we set the quiz for the question
-
+            question.setId(sequenceGenerator.generateSequence(Question.SEQUENCE_NAME));
             // we update the list of questions in the quiz
             quiz.getQuestions().add(question);
 
@@ -78,48 +78,64 @@ public class QuestionService {
             // we save the updated quiz with the new question added
             quizRepository.save(quiz);
 
+
+
             // finally we save and return the question + answers + id of the quiz
             return questionRepository.save(question);
         }
         return null;
     }
 
-
-    //this method is dedicated to update a question and its answers
     @Transactional
-    public ResponseEntity<?> updateQuestion(String id, Question updatedQuestion) {
-        Optional<Question> optionalQuestion = questionRepository.findById(id);
-        if (optionalQuestion.isPresent()) {
-            Question existingQuestion = optionalQuestion.get();
+    public Quiz updateQuestionsAndAnswers(Long quizId, List<Question> updatedQuestions) {
+        Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
+        if (optionalQuiz.isPresent()) {
+            Quiz quiz = optionalQuiz.get();
+            for (Question updatedQuestion : updatedQuestions) {
+                Optional<Question> optionalExistingQuestion = questionRepository.findById(updatedQuestion.getId());
+                if (optionalExistingQuestion.isPresent()) {
+                    Question existingQuestion = optionalExistingQuestion.get();
+                    // Update question details
+                    existingQuestion.setQuestiontxt(updatedQuestion.getQuestiontxt());
+                    existingQuestion.setQuiz(quiz);
 
-            // Update the attribute questiontxt
-            existingQuestion.setQuestiontxt(updatedQuestion.getQuestiontxt());
-
-            // Update answers
-            List<Answer> updatedAnswers = updatedQuestion.getAnswers();
-            List<Answer> existingAnswers = existingQuestion.getAnswers();
-
-            // Clear existing answers and add updated ones
-            existingAnswers.clear();
-            existingAnswers.addAll(updatedAnswers);
-
-            // Save updated question along with its answers
-            Question savedQuestion = questionRepository.save(existingQuestion);
-
-            // Save updated answers
-            updatedAnswers.forEach(answer -> answerRepository.save(answer));
-
-            return ResponseEntity.ok(savedQuestion);
+                    // Update each answer in the question
+                    for (Answer updatedAnswer : updatedQuestion.getAnswers()) {
+                        // Check if the answer exists
+                        Optional<Answer> optionalExistingAnswer = answerRepository.findById(updatedAnswer.getAnswer_id());
+                        if (optionalExistingAnswer.isPresent()) {
+                            Answer existingAnswer = optionalExistingAnswer.get();
+                            // Update answer details
+                            existingAnswer.setAnswerTxt(updatedAnswer.getAnswerTxt());
+                            existingAnswer.setCorrectAnswer(updatedAnswer.isCorrectAnswer());
+                            existingAnswer.setPoint(updatedAnswer.getPoint());
+                            // Save the updated answer
+                            answerRepository.save(existingAnswer);
+                        } else {
+                            LOG.error("Answer with ID " + updatedAnswer.getAnswer_id() + " not found.");
+                        }
+                    }
+                    // Save the updated question
+                    questionRepository.save(existingQuestion);
+                } else {
+                    LOG.error("Question with ID " + updatedQuestion.getId() + " not found.");
+                }
+            }
+            // Save the updated quiz
+            return quizRepository.save(quiz);
         } else {
-            return ResponseEntity.notFound().build();
+            LOG.error(String.format(ERROR_NON_PRESENT_ID, quizId));
+            return null;
         }
     }
 
-    //this method is implemented to delete the question and its answers
+
+
+
 
     @Transactional
-    public void deleteQuestionAndAnswers(String questionId) {
-        Optional<Question> optionalQuestion = questionRepository.findById(questionId);
+    public void deleteQuestionAndAnswers(Long id) {
+        Optional<Question> optionalQuestion = questionRepository.findById(id);
         if (optionalQuestion.isPresent()) {
             Question question = optionalQuestion.get();
             List<Answer> answers = question.getAnswers();
@@ -134,9 +150,9 @@ public class QuestionService {
             }
 
             // Delete the question itself
-            questionRepository.deleteById(questionId);
+            questionRepository.deleteById(id);
         } else {
-            LOG.error(String.format(ERROR_NON_PRESENT_ID, questionId));
+            LOG.error(String.format(ERROR_NON_PRESENT_ID, id));
         }
     }
 

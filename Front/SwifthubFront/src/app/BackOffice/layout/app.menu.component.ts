@@ -26,9 +26,18 @@ export class AppMenuComponent implements OnInit {
             items: [
                 { label: 'Ajouter quiz', icon: 'pi pi-fw pi-id-card', routerLink: ['/quiz/add-quiz'] },
                 { label: 'List quiz', icon: 'pi pi-fw pi-check-square', routerLink: ['/quiz/list-quiz'] },
+                
                
             ]
         },
+        {label: 'question',
+        items: [
+           
+            { label: 'List questions', icon: 'pi pi-fw pi-check-square', routerLink: ['/question/list-question'] },
+            
+           
+        ]
+    },
        
            
             

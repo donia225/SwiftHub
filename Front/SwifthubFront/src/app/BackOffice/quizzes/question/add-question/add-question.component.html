@@ -1,0 +1,31 @@
+<div class="grid p-fluid">
+	<div class="col-12 md:col-10">
+		<div class="card">
+        <h5>Ajout question</h5>
+        <form (ngSubmit)="onSubmit()">
+            <div class="field">
+                <label for="questiontxt">Question</label>
+                <textarea rows="5" cols="60" placeholder="Question"    ></textarea>
+
+
+            </div>
+            <div *ngIf="addQuestionForm.get('answers') !== null">
+                <div *ngFor="let answer of addQuestionForm.get('answers')?.value; let i=index" class="answer-group">
+                    <div class="field">
+                        <label for="answerTxt{{i}}">Réponse {{i+1}}</label>
+                        <textarea rows="3" cols="60" placeholder="Réponse"   ></textarea>
+                        
+                    </div>
+                     <div class="field">
+                        <input type="checkbox">
+                        <label for="correctAnswer{{i}}">Réponse correcte</label>
+                    </div> 
+                </div>
+            </div>
+            <button style="width: 20%;" pButton pRipple type="button" (click)="addAnswer()" label="Ajouter une réponse" class="p-button-info"></button>
+            <button   style="width: 20%;"   (click)="onSubmit()"     pButton pRipple type="submit" label="Ajouter la question" class="p-button-warning"></button>
+            
+        </form>
+    </div>
+</div>
+</div>

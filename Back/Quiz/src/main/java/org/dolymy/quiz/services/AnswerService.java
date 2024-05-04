@@ -21,14 +21,12 @@ public class AnswerService {
 
     private final AnswerRepository answerRepository;
 
-    public Answer addAnswer(Answer answer) {
-        return this.answerRepository.save(answer);
-    }
+
 
     public List<Answer> getAllAnswers() {
         return this.answerRepository.findAll();
     }
-    public Answer findAnswerById(String id) {
+    public Answer findAnswerById(Long id) {
         Answer a = null;
         if (id != null) {
             final Optional<Answer> answerOptional = this.answerRepository.findById(id);
@@ -47,31 +45,7 @@ public class AnswerService {
 
     }
 
-    @Transactional
-    public ResponseEntity<?> updateAnswer(String id, Answer updatedAnswer) {
 
-        Optional<Answer> optionalAnswer = answerRepository.findById(id);
-        if (optionalAnswer.isPresent()) {
-            Answer existingAnswer= optionalAnswer.get();
-
-
-            existingAnswer.setAnswerTxt(updatedAnswer.getAnswerTxt());
-            existingAnswer.setCorrectAnswer(updatedAnswer.isCorrectAnswer());
-
-
-
-            Answer savedAnswer = answerRepository.save(existingAnswer);
-
-
-            return ResponseEntity.ok(savedAnswer);
-
-        } else {
-
-
-            return ResponseEntity.notFound().build();
-
-        }
-    }
 
 
 }

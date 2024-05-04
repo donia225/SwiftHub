@@ -13,11 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AnswerController {
     private final AnswerService answerService;
-    @PostMapping("/add-answer")
-    public Answer addAnswer(@RequestBody Answer answer) {
 
-        return this.answerService.addAnswer(answer);
-    }
 
     @GetMapping("/getAllAnswers")
     public List<Answer> getAllAnswers(){
@@ -26,11 +22,8 @@ public class AnswerController {
     }
 
     @GetMapping("/{id}")
-    public Answer getAnswerById(@PathVariable String id) {
+    public Answer getAnswerById(@PathVariable Long id) {
         return this.answerService.findAnswerById(id);
     }
-    @PutMapping("/update-answer/{id}")
-    public ResponseEntity<?> updateAnswer(@PathVariable String id, @RequestBody Answer updatedAnswer) {
-        return answerService.updateAnswer(id, updatedAnswer);
-    }
+
 }

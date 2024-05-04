@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3" *ngFor="let quiz of quizzes">
+      <div class="card" style="width: 17rem;">
+        <!-- Image de la carte -->
+        <img class="card-img-top" src="/assets/img/softlogo.png" alt="soft skills">
+        <div class="card-body">
+          <!-- Titre de la carte -->
+          <h5 class="card-title">{{ quiz.quizName }}</h5>
+          <!-- Lien vers un autre endroit -->
+        
+          <a (click)="logQuizId(quiz.quizId)" [routerLink]="['/home/question', quiz.quizId]" class="btn btn-primary">Start Quiz</a>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+ <!-- <p-dialog header="Quiz" [(visible)]="displayDialog" [style]="{ 'width': '50%' }">
+    <div>
+      This area is only for students who attended our workshops. We want to see how much they've learned from our fun sessions by testing their knowledge with quizzes.
+    </div>
+    <div class="form-group">
+      <label for="name">Entrez votre nom:</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="name">
+    </div>
+    <button type="button" class="btn btn-primary" (click)="startQuiz()">Start Quiz</button>
+
+
+
+
+
+    <button type="button" class="btn btn-secondary" (click)="hideDialog()">Close</button>
+  </p-dialog> -->
+
+  
