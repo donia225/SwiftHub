@@ -4,6 +4,8 @@ import { QuestionService } from './services/question.service';
 import { QuestionModel } from 'src/app/BackOffice/quizzes/Model/question-model';
 import { AnswerModel } from 'src/app/BackOffice/quizzes/Model/answer-model';
 import { QuizModel } from 'src/app/BackOffice/quizzes/Model/quiz-model';
+import { ActivatedRoute } from '@angular/router';
+import { QuizserviceService } from 'src/app/BackOffice/quizzes/service/quizservice.service';
 
 @Component({
   selector: 'app-question',
@@ -21,14 +23,16 @@ export class QuestionComponent implements OnInit {
   public interval$: any;
   public progress: string = "0";
   public isQuizCompleted : boolean = false;
-  public quizList!: QuizModel[];
+  public quiz: QuizModel | undefined;
+  public selectedAnswers: AnswerModel[] = []; 
 
-  constructor(private questionService: QuestionService) { }
+
+  constructor(private questionService: QuestionService, private activatedRoute: ActivatedRoute, private quizService: QuizserviceService) { }
 
   ngOnInit(): void {
     this.name = localStorage.getItem("name")!;
 
-    this.getAllQuestions();
+    this.getQuizDetails();
     this.startCounter();
 
 
@@ -42,21 +46,28 @@ export class QuestionComponent implements OnInit {
   }
   
 
-  getAllQuestions() {
-    this.questionService.getAllQuestions().subscribe(res => {
-      this.questionList = res.map(question => ({...question, answered: false}));
-    });
+  getQuizDetails() {
+    const quizId = this.activatedRoute.snapshot.paramMap.get('quizId');
+    if (quizId !== null) {
+      this.quizService.getQuizById(+quizId).subscribe((quiz: QuizModel) => {
+        this.quiz = quiz;
+        this.questionList = quiz.questions;
+      });
+    }
   }
   selectAnswer(selectedAnswer: AnswerModel) {
     const currentQuestion: QuestionModel = this.questionList[this.currentQuestion];
     if (!currentQuestion.answered) {
       currentQuestion.answered = true;
-      if (selectedAnswer.correctAnswer) {
+      if (!this.selectedAnswers[this.currentQuestion]) {
+        this.selectedAnswers[this.currentQuestion] = selectedAnswer;
+        if (selectedAnswer.correctAnswer) {
           this.points += 5;
           this.correctAnswer++;
-      } else {
+        } else {
           this.points -= 5;
           this.inCorrectAnswer++;
+        }
       }
       setTimeout(() => {
         this.currentQuestion++;
