@@ -1,11 +1,11 @@
 package org.dolymy.post.ServicesImpl;
 
-import jakarta.annotation.Resource;
 import org.dolymy.post.daos.PostDao;
 import org.dolymy.post.entities.Comment;
 import org.dolymy.post.entities.Post;
 import org.dolymy.post.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -15,8 +15,14 @@ import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {
-@Resource
-private PostDao postDao;
+
+
+    @Autowired
+    private PostDao postDao;
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+
     @Override
     public List<Post> findAllPosts() {
         return postDao.findAll();
@@ -39,6 +45,8 @@ private PostDao postDao;
 
     @Override
     public Post addPost(Post post) {
+        String message ="User "+ post.getIdUser() + " added a post. ";
+        kafkaTemplate.send("notifications", message);
         return postDao.save(post);
     }
 
@@ -52,9 +60,12 @@ private PostDao postDao;
         return postDao.findByPostDate(postDate);
     }
 
+   /*
     @Override
     public List<Comment> findCommentsByPostId(Integer postId) {
         Optional<Post> post = postDao.findById(postId);
         return post.map(Post::getComments).orElse(Collections.emptyList());
     }
+
+    */
 }

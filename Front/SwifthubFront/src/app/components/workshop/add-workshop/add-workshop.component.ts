@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
+import { Meeting } from 'src/app/models/meeting/meeting';
 import { Workshop } from 'src/app/models/workshop/workshop';
+import { MeetingService } from 'src/app/services/meeting/meeting.service';
 import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 
 @Component({
@@ -13,8 +15,8 @@ import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 })
 export class AddWorkshopComponent implements OnInit {
 
-
   breadcrumbItems!: MenuItem[];
+  generatedMeeting!:Meeting;
   workshop: Workshop = {
     workshop_id: "",
     title: "",
@@ -24,8 +26,11 @@ export class AddWorkshopComponent implements OnInit {
     end_date: new Date(),
     location: "",
     link: "",
-    userId: "55eef234",
-    feedbacks: []
+    // static untill user token is set
+    userId: "662bb6b46c4b2853ebe30871",
+    feedbacks: [],
+    joinedUsers: [],
+    meetingId: ''
   };
   addWorkshopForm!: FormGroup;
   presenceType: string = 'InPerson';
@@ -34,7 +39,7 @@ export class AddWorkshopComponent implements OnInit {
 
 
 
-  constructor(private sw:WorkshopService,private datePipe: DatePipe,private messageService:MessageService,private router:Router) { }
+  constructor(private sw:WorkshopService,private meetingServie:MeetingService,private datePipe: DatePipe,private messageService:MessageService,private router:Router) { }
 
   //options for workshop
   stateOptions: any[] = [
@@ -71,7 +76,8 @@ export class AddWorkshopComponent implements OnInit {
        const formData={
          ...this.addWorkshopForm.value,
          start_date: this.formatDate(this.addWorkshopForm.value.start_date),
-         end_date: this.formatDate(this.addWorkshopForm.value.end_date)
+         end_date: this.formatDate(this.addWorkshopForm.value.end_date),
+         meetingId:this.generatedMeeting.meeting_id,
        };
        this.sw.addWorkshop(formData).subscribe(
          res=>{
@@ -113,7 +119,7 @@ ngOnInit(): void {
     start_date: new FormControl(this.workshop.start_date, Validators.required),
     end_date: new FormControl(this.workshop.end_date, [Validators.required]),
     location: new FormControl(this.workshop.location),
-    link: new FormControl(this.workshop.link),
+    // link: new FormControl(this.workshop.link),
     userId: new FormControl(this.workshop.userId),
   })
 
@@ -121,6 +127,19 @@ ngOnInit(): void {
 
 
 }
+
+// creating meeting 
+createMeeting() {
+  this.meetingServie.addMeeting().subscribe(
+    res=>{
+      this.generatedMeeting=res as Meeting;
+    },
+    err=>{
+      console.log(err);
+      
+    }
+  );
+  }
 
 
 

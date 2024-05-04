@@ -63,6 +63,19 @@ public class WorkshopController {
         this.workshopService.deleteWorkshop(id);
     }
 
+    /**
+     * Join Workshop
+     */
+    @PostMapping("/join")
+    public boolean JoiningWorkshop(@RequestParam String workshopId,@RequestParam String userId){
+       return this.workshopService.JoinWorkshop(workshopId,userId);
+    }
+
+    @GetMapping("/byUser/{id}")
+    public List<Workshop> getUserWorkshops(@PathVariable String id){
+        return this.workshopService.findUsersWorkshops(id);
+    }
+
 
 
 

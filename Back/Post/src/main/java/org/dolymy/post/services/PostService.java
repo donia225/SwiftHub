@@ -1,5 +1,4 @@
 package org.dolymy.post.services;
-import org.dolymy.post.entities.Comment;
 import org.dolymy.post.entities.Post;
 
 import java.util.Date;
@@ -22,6 +21,5 @@ public interface PostService {
     List<Post> findPostByKeyword(String keyword);
     List<Post> findPostByPostDate(Date postDate);
 
-    List<Comment> findCommentsByPostId(Integer postId);
 
 }

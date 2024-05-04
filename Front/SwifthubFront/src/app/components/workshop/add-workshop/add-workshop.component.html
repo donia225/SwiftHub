@@ -44,8 +44,12 @@
 
         <!-- Show link input if workshop is online -->
         <div class="flex flex-column gap-2" *ngIf="presenceType == 'online'">
-            <label for="link">Link:</label>
-            <input type="text" pInputText id="link" name="link" formControlName="link">
+            <label for="link">Meeting:</label>
+            <!-- <input type="text" pInputText id="link" name="link" formControlName="link"> -->
+            <p-button (onClick)="createMeeting()">Generate Meeting</p-button>
+            <div *ngIf="generatedMeeting!=null">
+                <p>Meeting Link: <a href="{{ generatedMeeting.link }}" target="_blank">{{ generatedMeeting.link }}</a></p>
+            </div>
         </div>
         <br>
         <div class="flex flex-column gap-2">

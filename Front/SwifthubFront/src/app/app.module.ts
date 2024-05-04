@@ -37,10 +37,10 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
-import { DashboardComponent } from './BackOffice/dashboard/dashboard.component';
 import { DashboardModule } from './BackOffice/dashboard/dashboard.module';
 import { AppLayoutModule } from './BackOffice/layout/app.layout.module';
-import { HomeModule } from './FrontOffice/home/home.module';
+import { PostComponent } from './FrontOffice/post/post.component';
+import { PostDetailsComponent } from './FrontOffice/post-details/post-details.component';
 import { ShowWorkshopComponent } from './components/workshop/show-workshop/show-workshop.component';
 import { EditWorkshopComponent } from './components/workshop/edit-workshop/edit-workshop.component';
 import { ShowFeedbackComponent } from './components/feedback/show-feedback/show-feedback.component';
@@ -67,6 +67,9 @@ import { CardQuizzesComponent } from './FrontOffice/card-quizzes/card-quizzes.co
 
 
 
+import { UserWorkshopComponent } from './components/workshop/user-workshop/user-workshop.component';
+import { MeetingComponent } from './components/meeting/meeting.component';
+import { HomeModule } from './FrontOffice/home/home.module';
 
 
 
@@ -79,6 +82,9 @@ import { CardQuizzesComponent } from './FrontOffice/card-quizzes/card-quizzes.co
 @NgModule({
   declarations: [
     AppComponent,
+     PostComponent,
+     PostDetailsComponent,
+    
     ShowWorkshopComponent,
     EditWorkshopComponent,
     ShowFeedbackComponent,
@@ -91,6 +97,8 @@ import { CardQuizzesComponent } from './FrontOffice/card-quizzes/card-quizzes.co
     CardQuizzesComponent,
   
     
+    UserWorkshopComponent,
+    MeetingComponent,
 
     
 

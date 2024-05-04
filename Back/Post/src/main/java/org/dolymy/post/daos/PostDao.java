@@ -1,11 +1,11 @@
 package org.dolymy.post.daos;
 import org.dolymy.post.entities.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+
 @Repository
 public interface PostDao extends JpaRepository<Post,Integer> {
     List<Post> findAll();

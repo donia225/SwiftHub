@@ -1,0 +1,18 @@
+.feedback-container {
+    // position: fixed;
+    top: 70px; 
+    right: 5px;
+    width: 560px; /* Adjust the width as needed */
+    position: fixed;
+   margin-right: 50px;
+   margin-bottom: 100px;
+    z-index: 1000; /* Ensure it's above other content */
+    overflow-y: auto;
+    max-height: calc(100vh - 10px); /* Adjust as needed */
+    background-color: #ffffff00; /* Background color for the feedback container */
+    border: 1px solid #ddd; /* Border style */
+    border-radius: 5px; /* Border radius */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Shadow effect */
+    transition: top 0.3s; 
+  }
+  

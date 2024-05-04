@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { User } from 'src/app/models/user/user';
 import { Workshop } from 'src/app/models/workshop/workshop';
 import { environment } from 'src/environments/environment';
 
@@ -8,7 +9,9 @@ import { environment } from 'src/environments/environment';
 })
 export class WorkshopService {
 
+
   protected baseUrl = `${environment.API_URL}/api/workshop/workshops`;
+  protected userUrl = `${environment.API_URL}/api/user`;
 
   constructor(private http:HttpClient) { }
 
@@ -46,5 +49,32 @@ export class WorkshopService {
     return this.http.post(`${this.baseUrl}`,workshop);
     
   }
+
+  /**
+   * findUser
+   */
+  public findUser(userId:string) {
+    return this.http.get<User>(`${this.userUrl}/find/${userId}`); 
+  }
+
+  /**
+   * getAllUsers
+   */
+  public getAllUsers() {
+    return this.http.get<User[]>(`${this.userUrl}/all`); 
+  }
+
+  /**
+   * JoinWorkshop
+   */
+  joiningWorkshop(workshopId: string, userId: string) {
+    return this.http.post(`${this.baseUrl}/join?workshopId=${workshopId}&userId=${userId}`,{}); 
+  }
   
+  /**
+   * the worshops that the user have joined
+   */
+  public getWorkshopsByUser(userId:string) {
+    return this.http.get<Workshop[]>(`${this.baseUrl}/byUser/${userId}`);
+  }
 }
