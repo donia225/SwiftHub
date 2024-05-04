@@ -1,60 +1,52 @@
-<h2>Liste des questions</h2>
-<table  style="margin-top: 10px;"   class="table">
+<div class="card card-w-title">
+  <p-breadcrumb [model]="breadcrumbItems" [home]="{icon: 'pi pi-home'}"></p-breadcrumb>
+</div>
+
+<div class="card">
+  <h5>Liste des questions et réponses</h5>
+
+  <p-toolbar styleClass="mb-4">
+      <ng-template pTemplate="left">
+          <div class="my-2">
+            <button pButton pRipple label="Liste des quizzes" icon="pi pi-plus" class="p-button-info mr-2"
+            routerLink="/quiz/list-quiz"></button>
+          </div>
+      </ng-template>
+  </p-toolbar>
+
+  <div class="flex table-header">
+  </div>
+
+  <table>
     <thead>
       <tr>
-       
-        <th scope="col">question</th>
-      
+        <th>Question</th>
+        <th>Réponses</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-      
-        <td>question 1</td>
-      
-      </tr>
-      <tr>
-   
-        <td>question 2</td>
-       
-      </tr>
-      <tr>
-     
-        <td>question 3</td>
-    
-      </tr>
+      <ng-container *ngFor="let question of questions">
+        <tr>
+          <td>{{ question.question }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let answer of question.answers">
+                <i></i> <span [innerHTML]=" answer.answerTxt"></span>
+              </li>
+            </ul>
+          </td>
+          <td style="min-width: 150px;">
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2">
+              <i class="fa fa-edit"></i>
+            </button>
+
+            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>
-
-
-<h2>Liste des réponses</h2>
-  <table  style="margin-top: 30px;"   class="table">
-    <thead>
-      <tr>
-       
-        <th scope="col">réponse</th>
-        <th scope="col">correcte?</th>
-     
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-      
-        <td>réponse 1</td>
-        <td>true</td>
-   
-      </tr>
-      <tr>
-   
-        <td>réponse 2</td>
-        <td>false</td>
-  
-      </tr>
-      <tr>
-     
-        <td>réponse 3</td>
-        <td>false</td>
-    
-      </tr>
-    </tbody>
-  </table>
+</div>

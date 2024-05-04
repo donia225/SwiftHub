@@ -27,7 +27,7 @@ export class QuizserviceService {
     return this.http.get<QuizModel>(`${this.baseUrl}/api/quizzes/${quizId}`);
   }
   updateQuiz(quizId: number, updatedQuiz: QuizModel): Observable<any> {
-    return this.http.put(`${this.baseUrl}/api/quizzes/update-quiz/${quizId}`, updatedQuiz);
+    return this.http.put(`${this.baseUrl}/api/quizzes/${quizId}`, updatedQuiz);
   }
   deleteQuiz(quizId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/api/quizzes/${quizId}`);

@@ -14,7 +14,8 @@ export class UpdateQuizComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private quizService: QuizserviceService
+    private quizService: QuizserviceService,
+  
   ) { }
 
   ngOnInit(): void {
@@ -31,6 +32,7 @@ export class UpdateQuizComponent implements OnInit {
     this.quizService.getQuizById(quizId).subscribe(
       (quiz: QuizModel) => {
         this.updatedQuiz = quiz; // Populate the updatedQuiz object with fetched quiz details
+        this.updatedQuiz.quizTime = new Date(quiz.quizTime);
       },
       (error) => {
         console.error('Error fetching quiz details:', error);
