@@ -86,6 +86,50 @@ public class QuestionService {
         return null;
     }
 
+    @Transactional
+    public Quiz updateQuestionsAndAnswers(Long quizId, List<Question> updatedQuestions) {
+        Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
+        if (optionalQuiz.isPresent()) {
+            Quiz quiz = optionalQuiz.get();
+            for (Question updatedQuestion : updatedQuestions) {
+                Optional<Question> optionalExistingQuestion = questionRepository.findById(updatedQuestion.getId());
+                if (optionalExistingQuestion.isPresent()) {
+                    Question existingQuestion = optionalExistingQuestion.get();
+                    // Update question details
+                    existingQuestion.setQuestiontxt(updatedQuestion.getQuestiontxt());
+                    existingQuestion.setQuiz(quiz);
+
+                    // Update each answer in the question
+                    for (Answer updatedAnswer : updatedQuestion.getAnswers()) {
+                        // Check if the answer exists
+                        Optional<Answer> optionalExistingAnswer = answerRepository.findById(updatedAnswer.getAnswer_id());
+                        if (optionalExistingAnswer.isPresent()) {
+                            Answer existingAnswer = optionalExistingAnswer.get();
+                            // Update answer details
+                            existingAnswer.setAnswerTxt(updatedAnswer.getAnswerTxt());
+                            existingAnswer.setCorrectAnswer(updatedAnswer.isCorrectAnswer());
+                            existingAnswer.setPoint(updatedAnswer.getPoint());
+                            // Save the updated answer
+                            answerRepository.save(existingAnswer);
+                        } else {
+                            LOG.error("Answer with ID " + updatedAnswer.getAnswer_id() + " not found.");
+                        }
+                    }
+                    // Save the updated question
+                    questionRepository.save(existingQuestion);
+                } else {
+                    LOG.error("Question with ID " + updatedQuestion.getId() + " not found.");
+                }
+            }
+            // Save the updated quiz
+            return quizRepository.save(quiz);
+        } else {
+            LOG.error(String.format(ERROR_NON_PRESENT_ID, quizId));
+            return null;
+        }
+    }
+
+
 
 
 

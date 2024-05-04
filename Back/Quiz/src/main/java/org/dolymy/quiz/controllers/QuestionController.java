@@ -2,7 +2,9 @@ package org.dolymy.quiz.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.dolymy.quiz.entities.Question;
+import org.dolymy.quiz.entities.Quiz;
 import org.dolymy.quiz.services.QuestionService;
+import org.dolymy.quiz.services.QuizService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
+    private final QuizService quizService;
 
 
     @GetMapping("/getAllQuestions")
@@ -35,6 +38,15 @@ public class QuestionController {
             return ResponseEntity.status(HttpStatus.CREATED).body(createdQuestion);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+    @PutMapping("/{quizId}/update")
+    public ResponseEntity<Object> updateQuestionsAndAnswers(@PathVariable("quizId") Long quizId, @RequestBody List<Question> updatedQuestions) {
+        Quiz quiz = questionService.updateQuestionsAndAnswers(quizId, updatedQuestions);
+        if (quiz != null) {
+            return ResponseEntity.ok().body("Questions and answers updated successfully for quiz with ID " + quizId);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 
