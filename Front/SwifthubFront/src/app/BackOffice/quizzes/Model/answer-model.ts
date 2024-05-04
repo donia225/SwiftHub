@@ -3,4 +3,5 @@ export interface AnswerModel {
     answerTxt: string;
     point:number;
     correctAnswer: boolean;
+    answered: boolean;
 }

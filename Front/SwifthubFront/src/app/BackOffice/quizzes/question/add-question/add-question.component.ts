@@ -17,8 +17,6 @@ export class AddQuestionComponent implements OnInit {
   addQuestionForm!: FormGroup;
   quizId: number = 0;
   answersArray!: FormArray; 
-  answerTxt: string = '';
-  correctAnswer: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,7 +31,10 @@ export class AddQuestionComponent implements OnInit {
       answers: this.formBuilder.array([]),
       available: [false]
     });
-    
+  
+    // Initialize answersArray
+    this.answersArray = this.addQuestionForm.get('answers') as FormArray;
+  
     this.route.paramMap.subscribe(params => {
       const id = params.get('quizId');
       if (id !== null) {
@@ -49,7 +50,6 @@ export class AddQuestionComponent implements OnInit {
       this.questionService.affectQuestionToQuiz(quizIdString, question).subscribe(
         (response) => {
           console.log('Question added successfully', response);
-        
           // Redirect to the list of quizzes or another appropriate page
           this.router.navigate(['/quiz/list-quiz']);
         },
@@ -62,11 +62,10 @@ export class AddQuestionComponent implements OnInit {
 
   addAnswer() {
     const answerControl = this.formBuilder.group({
-      answerTxt: [''],
+      answerTxt: [''],  // Ensure answerTxt control is initialized with a default value
       correctAnswer: [false]
     });
     (this.addQuestionForm.get('answers') as FormArray).push(answerControl);
   }
   
- 
 }

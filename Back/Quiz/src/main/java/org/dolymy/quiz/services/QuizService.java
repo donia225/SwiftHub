@@ -1,14 +1,13 @@
 package org.dolymy.quiz.services;
 
 import lombok.RequiredArgsConstructor;
-import org.dolymy.quiz.entities.Question;
+
 import org.dolymy.quiz.entities.Quiz;
-import org.dolymy.quiz.entities.Answer;
-import org.dolymy.quiz.repos.AnswerRepository;
-import org.dolymy.quiz.repos.QuestionRepository;
+
+
 import org.dolymy.quiz.repos.QuizRepository;
-import org.springframework.dao.DataAccessException;
-import org.springframework.http.ResponseEntity;
+
+
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -28,10 +27,10 @@ public class QuizService {
 
 
     private final QuizRepository quizrepo;
-    private final QuestionRepository questionRepo;
-    private final AnswerRepository answerRepository;
+    //private final QuestionRepository questionRepo;
+    //private final AnswerRepository answerRepository;
 
-    private final QuestionService questionService;
+    //private final QuestionService questionService;
     private final SequenceGeneratorService sequenceGenerator;
 
 
