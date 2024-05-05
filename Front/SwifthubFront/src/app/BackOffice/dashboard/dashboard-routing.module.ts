@@ -16,6 +16,7 @@ import { ListQuestionComponent } from '../quizzes/list-question/list-question.co
 import { ListRequestComponent } from 'src/app/requests/list-request/list-request.component';
 import { ListCategoryComponent } from '../categories/list-category/list-category.component';
 import { AddCategoryComponent } from '../categories/add-category/add-category.component';
+import { AddAnswerComponent } from 'src/app/requests/add-answer/add-answer.component';
 
 
 
@@ -68,7 +69,8 @@ const routes: Routes = [
   {
     path: 'request', component: AppLayoutComponent,
     children: [
-      { path: 'list-request', component: ListRequestComponent }
+      { path: 'list-request', component: ListRequestComponent },
+      {path:'add-answer/:idRequest', component: AddAnswerComponent}
 
     ]
   },
@@ -77,6 +79,7 @@ const routes: Routes = [
     children: [
       { path: 'list-category', component: ListCategoryComponent },
       { path: 'add-category', component: AddCategoryComponent },
+
     
 
     ]

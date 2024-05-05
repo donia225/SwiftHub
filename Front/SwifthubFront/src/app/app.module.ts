@@ -77,6 +77,7 @@ import { RequestComponent } from './FrontOffice/frontrequest/request/request.com
 import { FrontAddComponent } from './FrontOffice/frontrequest/front-add/front-add.component';
 
 import { UpdateReqComponent } from './FrontOffice/frontrequest/update-req/update-req.component';
+import { AddAnswerComponent } from './requests/add-answer/add-answer.component';
 
 
 
@@ -109,7 +110,8 @@ import { UpdateReqComponent } from './FrontOffice/frontrequest/update-req/update
     ListCategoryComponent,
     RequestComponent,
     FrontAddComponent,
-    UpdateReqComponent
+    UpdateReqComponent,
+    AddAnswerComponent
 
     
 
