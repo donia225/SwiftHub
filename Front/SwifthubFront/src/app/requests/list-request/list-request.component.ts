@@ -4,6 +4,7 @@ import { RequestService } from '../services/request.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { AnswerService } from '../services/answer.service';
 
 @Component({
   selector: 'app-list-request',
@@ -13,8 +14,10 @@ import { Router } from '@angular/router';
 export class ListRequestComponent implements OnInit {
   Request: any[]=[];
   breadcrumbItems: MenuItem[] = [];
+  displayModal: boolean = false;
+  selectedRequest: any = null;
 
-  constructor(private requestService:RequestService, private route:Router ){
+  constructor(private requestService:RequestService,private answerService: AnswerService, private route:Router ){
 
   }
 
@@ -37,6 +40,17 @@ export class ListRequestComponent implements OnInit {
       }
     );
   }
+  openDetailsModal(idRequest: number): void {
+    this.requestService.getRequestById(idRequest).subscribe(
+      (response) => {
+        this.selectedRequest = response;
+        this.displayModal = true;
+      },
+      (error) => { console.error('Error loading request details:', error); }
+    );
+  }
+
+
   
   
 
