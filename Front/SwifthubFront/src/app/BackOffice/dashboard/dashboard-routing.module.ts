@@ -13,6 +13,9 @@ import { UpdateQuizComponent } from '../quizzes/update-quiz/update-quiz.componen
 
 import { AddQuestionComponent } from '../quizzes/question/add-question/add-question.component';
 import { ListQuestionComponent } from '../quizzes/list-question/list-question.component';
+import { ListRequestComponent } from 'src/app/requests/list-request/list-request.component';
+import { ListCategoryComponent } from '../categories/list-category/list-category.component';
+import { AddCategoryComponent } from '../categories/add-category/add-category.component';
 
 
 
@@ -59,6 +62,22 @@ const routes: Routes = [
       { path: 'show', component: ShowWorkshopComponent },
     
       { path: 'add', component: AddWorkshopComponent },
+
+    ]
+  },
+  {
+    path: 'request', component: AppLayoutComponent,
+    children: [
+      { path: 'list-request', component: ListRequestComponent }
+
+    ]
+  },
+  {
+    path: 'category', component: AppLayoutComponent,
+    children: [
+      { path: 'list-category', component: ListCategoryComponent },
+      { path: 'add-category', component: AddCategoryComponent },
+    
 
     ]
   },
