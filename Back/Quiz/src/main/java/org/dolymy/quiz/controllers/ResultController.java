@@ -1,7 +1,7 @@
 package org.dolymy.quiz.controllers;
 
 
-import org.dolymy.quiz.entities.Result;
+
 import org.dolymy.quiz.services.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

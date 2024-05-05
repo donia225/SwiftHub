@@ -6,6 +6,7 @@ import { AnswerModel } from 'src/app/BackOffice/quizzes/Model/answer-model';
 import { QuizModel } from 'src/app/BackOffice/quizzes/Model/quiz-model';
 import { ActivatedRoute } from '@angular/router';
 import { QuizserviceService } from 'src/app/BackOffice/quizzes/service/quizservice.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-question',
@@ -25,9 +26,11 @@ export class QuestionComponent implements OnInit {
   public isQuizCompleted : boolean = false;
   public quiz: QuizModel | undefined;
   public selectedAnswers: AnswerModel[] = []; 
+ public  maxPossiblePoints: number = 0;
 
 
-  constructor(private questionService: QuestionService, private activatedRoute: ActivatedRoute, private quizService: QuizserviceService) { }
+  constructor(private questionService: QuestionService, private activatedRoute: ActivatedRoute, private quizService: QuizserviceService, private http: HttpClient) { }
+  
 
   ngOnInit(): void {
     this.name = localStorage.getItem("name")!;
@@ -35,6 +38,7 @@ export class QuestionComponent implements OnInit {
     this.getQuizDetails();
     this.startCounter();
 
+    this.maxPossiblePoints = this.calculateMaxPossiblePoints();
 
   }
 
@@ -44,6 +48,9 @@ export class QuestionComponent implements OnInit {
   onEscKeyDown(event: KeyboardEvent) {
       event.preventDefault(); // Empêche le comportement par défaut de la touche "Échap"
   }
+  
+
+
   
 
   getQuizDetails() {
@@ -61,11 +68,10 @@ export class QuestionComponent implements OnInit {
       currentQuestion.answered = true;
       if (!this.selectedAnswers[this.currentQuestion]) {
         this.selectedAnswers[this.currentQuestion] = selectedAnswer;
+        this.points += selectedAnswer.point; // Add the points of the selected answer
         if (selectedAnswer.correctAnswer) {
-          this.points += 5;
           this.correctAnswer++;
         } else {
-          this.points -= 5;
           this.inCorrectAnswer++;
         }
       }
@@ -73,13 +79,26 @@ export class QuestionComponent implements OnInit {
         this.currentQuestion++;
         this.getProgressPercent();
         if (this.currentQuestion === this.questionList.length) {
-            this.isQuizCompleted = true;
-            this.stopCounter();
+          this.isQuizCompleted = true;
+          this.stopCounter();
         }
-    }, 1000);
+      }, 1000);
+    }
   }
-}
-
+  calculateMaxPossiblePoints(): number {
+    let maxPoints = 0;
+    if (this.quiz && this.quiz.questions) {
+      for (const question of this.quiz.questions) {
+        for (const answer of question.answers) {
+          if (answer.correctAnswer) {
+            maxPoints += answer.point;
+            break; // Break after adding the first correct answer's points
+          }
+        }
+      }
+    }
+    return maxPoints;
+  }
 
 
 
@@ -101,6 +120,7 @@ nextQuestion() {
       } else {
         this.stopCounter();
         this.isQuizCompleted = true;
+        
       }
     });
   }

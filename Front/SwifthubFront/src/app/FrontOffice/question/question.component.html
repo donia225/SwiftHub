@@ -23,9 +23,9 @@
           </div>
         </div>
         <div class="progress mb-3">
-            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress"
-              aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress"
+            aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
   
         <div class="question">
           <div class="card">
@@ -41,6 +41,7 @@
                   <input type="radio" name="answer" (click)="selectAnswer(answer)"
                     [disabled]="isQuizCompleted || answer.answered">
                   {{ answer.answerTxt }}
+                  <span *ngIf="answer.answered"> ({{ answer.point }} Points)</span>
                 </label>
               </div>
             </li>
@@ -55,36 +56,35 @@
         </div>
       </ng-container>
   
-      <ng-container *ngIf="isQuizCompleted && points >= 5">
+      <ng-container *ngIf="isQuizCompleted && points >= correctAnswer && points >= inCorrectAnswer">
         <div class="row d-flex justify-content-between">
-            <img style="width: 10%;" class="img-fluid col-sm-5 mx-auto" src="/assets/img/happy.png" alt="">
-            <div class="result text-center col-md-6 col-sm-12">
-                <h3>Congratulations!! <br>You have completed the quiz. <br>Below is your result:</h3>
-                <p>Total Question Attempted : {{questionList.length}} </p>
-                <p>Total Correct Answered : {{correctAnswer}} </p>
-                <p>Total Wrong Answered : {{inCorrectAnswer}} </p>
-                <p>Your Score : {{points}} Points </p>
-            </div>
+          <img style="width: 10%;" class="img-fluid col-sm-5 mx-auto" src="/assets/img/happy.png" alt="">
+          <div class="result text-center col-md-6 col-sm-12">
+            <h3>Congratulations!! <br>You have completed the quiz. <br>Below is your result:</h3>
+            <p>Total Question Attempted : {{questionList.length}} </p>
+            <p>Total Correct Answered : {{correctAnswer}} </p>
+            <p>Total Wrong Answered : {{inCorrectAnswer}} </p>
+            <p>Your Score : {{points}} Points </p>
+            <p>Maximum Possible Points: {{ maxPossiblePoints }}</p>
+            <p *ngIf="points === maxPossiblePoints">You achieved the maximum possible score!</p>
+          </div>
         </div>
-    </ng-container>
-
-    <ng-container *ngIf="isQuizCompleted && points < 5">
+      </ng-container>
+      
+      <ng-container *ngIf="isQuizCompleted && (points < correctAnswer || points < inCorrectAnswer)">
         <div class="row d-flex justify-content-between">
-            <img style="width: 10%;" class="img-fluid col-sm-5 mx-auto" src="/assets/img/sad.png" alt="">
-            <div class="result text-center col-md-6 col-sm-12">
-                <h3>Oops! Looks like you didn't score enough points. <br>Below is your result:</h3>
-                <p>Total Question Attempted : {{questionList.length}} </p>
-                <p>Total Correct Answered : {{correctAnswer}} </p>
-                <p>Total Wrong Answered : {{inCorrectAnswer}} </p>
-                <p>Your Score : {{points}} Points </p>
-            </div>
+          <img style="width: 10%;" class="img-fluid col-sm-5 mx-auto" src="/assets/img/sad.png" alt="">
+          <div class="result text-center col-md-6 col-sm-12">
+            <h3>Oops! Looks like you didn't score enough points. <br>Below is your result:</h3>
+            <p>Total Question Attempted : {{questionList.length}} </p>
+            <p>Total Correct Answered : {{correctAnswer}} </p>
+            <p>Total Wrong Answered : {{inCorrectAnswer}} </p>
+            <p>Your Score : {{points}} Points </p>
+            <p>Maximum Possible Points: {{ maxPossiblePoints }}</p>
+          </div>
         </div>
-    </ng-container>
-
-
-</div>
-</div>
-
-  
-  
+      </ng-container>
+      
+    </div>
+  </div>
   

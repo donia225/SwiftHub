@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface QuestionRepository extends MongoRepository<Question,Long> {
-    List<Question> findByQuizQuizId(Long quizId);
+
 }

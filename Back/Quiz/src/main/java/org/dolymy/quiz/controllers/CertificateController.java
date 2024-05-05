@@ -4,11 +4,11 @@ package org.dolymy.quiz.controllers;
 
 
 import org.dolymy.quiz.entities.Certificate;
-import org.dolymy.quiz.entities.User;
+
 import org.dolymy.quiz.services.CertificateService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

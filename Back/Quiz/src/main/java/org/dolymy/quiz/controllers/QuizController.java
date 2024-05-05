@@ -2,17 +2,15 @@ package org.dolymy.quiz.controllers;
 
 
 import lombok.RequiredArgsConstructor;
-import org.dolymy.quiz.entities.Question;
+
 import org.dolymy.quiz.entities.Quiz;
-import org.dolymy.quiz.entities.Answer;
-import org.dolymy.quiz.repos.QuizRepository;
+
 import org.dolymy.quiz.services.QuizService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ConcurrentModificationException;
+
 import java.util.List;
 
 
