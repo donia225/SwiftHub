@@ -16,11 +16,9 @@ spring:
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowedOrigins: "http://localhost:4200/"
-            allowedMethods: "POST, GET, OPTIONS,DELETE,PUT"
+            allowedOrigins: "*"
+            allowedMethods: "*"
             allowedHeaders: "*"
-            exposedHeaders: "Access-Control-Allow-Credentials"
-            allowCredentials: true
       routes:
         - id: quiz
           uri: http://localhost:8090

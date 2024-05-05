@@ -13,7 +13,7 @@ export class AdminShowFeedbackComponent implements OnInit {
   constructor(private notifService:NotificationFeedbackService){}
 
   ngOnInit(): void {
-
+  //  this.notification= this.notifService.connect();
       // opening cnx with server socket 
       let stompClient= this.notifService.connect();
       stompClient.connect({}, (frame:any)=>{
