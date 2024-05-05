@@ -2,7 +2,6 @@ package org.esprit.requestproject.services;
 
 import lombok.RequiredArgsConstructor;
 import org.esprit.requestproject.entities.Answer;
-import org.esprit.requestproject.entities.Category;
 import org.esprit.requestproject.entities.Request;
 import org.esprit.requestproject.repositories.AnswerRepo;
 import org.esprit.requestproject.repositories.RequestRepo;

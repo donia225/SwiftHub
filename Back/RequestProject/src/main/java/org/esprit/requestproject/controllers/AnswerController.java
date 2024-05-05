@@ -1,7 +1,6 @@
 package org.esprit.requestproject.controllers;
 
 import org.esprit.requestproject.entities.Answer;
-import org.esprit.requestproject.entities.Category;
 import org.esprit.requestproject.entities.Request;
 import org.esprit.requestproject.services.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row justify-content-center">
+<div class="col-10">
+    <div class="card">
+        <h5 class="text-center">Student Complaint Management System</h5>
+
+        <form [formGroup]="requestform" >
+        <div class="p-fluid p-formgrid grid">
+            <div class="field col-10 md:col-4">
+                <label htmlFor="title">Object</label>
+                <input pInputText id="title" type="text" formControlName="title" />
+                <div *ngIf="requestform.get('title')?.invalid && requestform.get('title')?.touched" class="text-danger">
+                    Title is required </div>
+                </div>
+                
+            
+          <!--       <div class="field col-12 md-6">
+                    <label htmlFor="category">Category</label>
+                    <p-dropdown [options]="categories" optionLabel="categoryName" formControlName="selectedCategory" name="category"></p-dropdown>
+                    <div *ngIf="requestform.get('selectedCategory')?.invalid && requestform.get('selectedCategory')?.touched" class="text-danger">
+                      Category is required
+                    </div>
+                  </div> -->
+                  
+                
+                  
+                  
+            <div class="field col-12 md:col-6">
+                <textarea rows="5" cols="30" placeholder="Description" pInputTextarea formControlName="description"></textarea>
+                <div *ngIf="requestform.get('description')?.invalid && requestform.get('description')?.touched" class="text-danger">
+                    Description is required </div>
+            
+            </div>
+       
+          <!--   <div class="field col-12 md:col-6">
+                <label htmlFor="attachment">Attachment</label>
+                <input type="file" id="attachment" (change)="onFileChange($event)" formControlName="attachment" required/>
+            </div> -->
+            <div class="field col-12" style="text-align: right;">
+                <button pButton pRipple type="submit" label="edit" class="p-button-rounded p-button-success p-button-sm custom-button" (click)="updateRequest()" > </button>
+                <button pButton pRipple type="button" label="cancel" class="p-button-rounded p-button-danger p-button-sm custom-button" (click)="cancel()"   ></button>
+            </div>
+      
+          
+        </div>
+    </form>
+    </div>
+</div>
