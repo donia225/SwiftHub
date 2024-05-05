@@ -3,6 +3,8 @@ package org.dolymy.quiz.repos;
 import org.dolymy.quiz.entities.Question;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface QuestionRepository extends MongoRepository<Question,Long> {
+import java.util.List;
 
+public interface QuestionRepository extends MongoRepository<Question,Long> {
+    List<Question> findByQuizQuizId(Long quizId);
 }
