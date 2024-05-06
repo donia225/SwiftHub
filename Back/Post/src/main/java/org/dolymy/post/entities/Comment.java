@@ -3,16 +3,22 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+
 import java.io.Serializable;
 import java.util.Date;
+
+
+
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "comments")
 public class Comment implements Serializable{
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idComent")
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name = "idComment")
     Integer id;
     @Temporal(TemporalType.DATE)
     Date commentDate;

@@ -1,5 +1,6 @@
 package com.user.management.User.config;
 
+import com.user.management.User.repo.TokenRepo;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import java.io.IOException;
 public class JWTAuthentificationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
+    private final TokenRepo tokenRepo;
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
@@ -29,16 +31,19 @@ public class JWTAuthentificationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
-        final String username;
-        if (authHeader == null || !authHeader.startsWith("Bearer ")){
-           filterChain.doFilter(request,response);
-           return;
+        final String userEmail;
+        if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
+            filterChain.doFilter(request, response);
+            return;
         }
-        jwt= authHeader.substring(7);
-        username= jwtService.extractUserName(jwt);
-        if(username !=null && SecurityContextHolder.getContext().getAuthentication()==null){
-            UserDetails userDetails =this.userDetailsService.loadUserByUsername(username);
-            if(jwtService.isTokenValid(jwt,userDetails)){
+        jwt = authHeader.substring(7);
+        userEmail = jwtService.extractUsername(jwt);
+        if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+            var isTokenValid = tokenRepo.findByToken(jwt)
+                    .map(t -> !t.isExpired() && !t.isRevoked())
+                    .orElse(false);
+            if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
@@ -48,10 +53,8 @@ public class JWTAuthentificationFilter extends OncePerRequestFilter {
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
                 SecurityContextHolder.getContext().setAuthentication(authToken);
-
             }
         }
-        filterChain.doFilter(request,response);
-
+        filterChain.doFilter(request, response);
     }
 }
