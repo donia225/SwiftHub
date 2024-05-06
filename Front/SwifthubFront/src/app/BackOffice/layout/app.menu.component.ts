@@ -38,29 +38,62 @@ export class AppMenuComponent implements OnInit {
            
         ]
     },
+
+    
+    {
+        label: 'Request',
+        icon: '',
+        items: [
+          
+            {
+                label: 'Request',
+                icon: 'pi pi-book',
+                items: [
+                    {
+                        label: 'List requests',
+                        icon: 'pi pi-list',
+                        routerLink: ['/request/list-request']
+                    }
+                   
+                ]
+            },
+            
+        ]
+    },
+
+    {
+        label: '',
+        icon: '',
+        items: [
+          
+            {
+                label: 'Category',
+                icon: 'pi pi-book',
+                items: [
+                    {
+                        label: 'List categories',
+                        icon: 'pi pi-list',
+                        routerLink: ['/category/list-category']
+                    },
+                    {
+                        label:'Add category',
+                        icon: 'pi pi-plus',
+                        routerLink: ['/category/add-category']
+                    }
+                   
+                ]
+            },
+            
+        ]
+    },
        
            
             
             {
-                label: 'Pages',
+                label: 'Workshop',
                 icon: 'pi pi-fw pi-briefcase',
                 items: [
                   
-                    {
-                        label: 'Auth',
-                        icon: 'pi pi-fw pi-user',
-                        items: [
-                            {
-                                label: 'Login',
-                                icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/login']
-                            },
-                            {
-                                label:'Register'
-                            }
-                           
-                        ]
-                    },
                     {
                         label: 'Workshop',
                         icon: 'pi pi-fw pi-briefcase',
@@ -73,11 +106,16 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label:'feedbacks',
                                 icon: 'pi pi-fw pi-arrow-right',
-                                routerLink: ['/feedback/show']
+                                routerLink: ['/workshopBack/feedback']
                             }
                            
                         ]
                     },
+
+
+
+
+
                     
                 ]
             },

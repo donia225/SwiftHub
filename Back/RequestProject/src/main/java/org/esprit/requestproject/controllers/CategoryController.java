@@ -26,7 +26,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getCategoryById(@PathVariable("id") String id) {
+    public ResponseEntity<Category> getCategoryById(@PathVariable("id") Long id) {
         Category category = categoryService.getCategoryById(id);
         if (category != null) {
             return new ResponseEntity<>(category, HttpStatus.OK);
@@ -37,29 +37,20 @@ public class CategoryController {
 
 
     @PostMapping("/add-category")
-    public ResponseEntity<String> createCategory(@RequestBody Category category) {
-        try {
-            this.categoryService.createCategory(category);
-            return new ResponseEntity<>("Categorie ajoutée avec succès", HttpStatus.CREATED);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+    public Category createCategory(@RequestBody Category category) {
+
+        return   this.categoryService.createCategory(category);
+
+
+
     }
 
 
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Category> updateCategory(@PathVariable String id, @RequestBody Category category) {
-        Category updatedCategory = categoryService.updateCategory(id, category);
-        if (updatedCategory != null) {
-            return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable("id") String id) {
+    public ResponseEntity<Void> deleteCategory(@PathVariable("id") Long id) {
         try {
             categoryService.deleteCategory(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

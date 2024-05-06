@@ -69,7 +69,16 @@ import { CardQuizzesComponent } from './FrontOffice/card-quizzes/card-quizzes.co
 
 import { UserWorkshopComponent } from './components/workshop/user-workshop/user-workshop.component';
 import { MeetingComponent } from './components/meeting/meeting.component';
+import { AdminShowFeedbackComponent } from './components/feedback/admin-show-feedback/admin-show-feedback.component';
 import { HomeModule } from './FrontOffice/home/home.module';
+import { ListRequestComponent } from './requests/list-request/list-request.component';
+import { AddCategoryComponent } from './BackOffice/categories/add-category/add-category.component';
+import { ListCategoryComponent } from './BackOffice/categories/list-category/list-category.component';
+import { RequestComponent } from './FrontOffice/frontrequest/request/request.component';
+import { FrontAddComponent } from './FrontOffice/frontrequest/front-add/front-add.component';
+
+import { UpdateReqComponent } from './FrontOffice/frontrequest/update-req/update-req.component';
+import { AddAnswerComponent } from './requests/add-answer/add-answer.component';
 
 
 
@@ -95,10 +104,16 @@ import { HomeModule } from './FrontOffice/home/home.module';
     ListQuestionComponent,
     AddQuestionComponent,
     CardQuizzesComponent,
-  
-    
     UserWorkshopComponent,
     MeetingComponent,
+    AdminShowFeedbackComponent,
+    ListRequestComponent,
+    AddCategoryComponent,
+    ListCategoryComponent,
+    RequestComponent,
+    FrontAddComponent,
+    UpdateReqComponent,
+    AddAnswerComponent
 
     
 

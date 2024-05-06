@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+      <div class="col-7" *ngFor="let request of Request">
+        <div class="card" style="width: 900px;"> <!-- Ajustez la largeur selon vos besoins -->
+          
+          <div class="card-body text-center">
+            <!-- Titre de la carte -->
+            <h5 class="card-title">{{ request.title }}</h5>
+            <p>{{ request.creationDate | date }}</p>
+            <p class="card-text" [ngClass]="{
+                'text-warning': request.status === 'AWAITING',
+                'text-orange': request.status === 'IN_PROGRESS',
+                'text-success': request.status === 'DONE'
+              }">{{ request.status }}</p>
+            
+    
+            <p>{{ request.category }}</p>
+                                  
+                                 
+           
+          </div> 
+          <div class="text-right mb-3"> <!-- Aligner les boutons à droite -->
+            <button pButton pRipple type="button" label="edit" class="p-button-rounded p-button-success custom-button" (click)="gotoupdatepage(request.idRequest)"></button>
+            <button pButton pRipple type="button" label="delete" class="p-button-rounded p-button-warning custom-button ml-2" (click)="deleteRequest(request.idRequest)"></button>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  
