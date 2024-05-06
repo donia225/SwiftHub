@@ -48,7 +48,7 @@
           </ul>
         </div>
         <div class="d-flex justify-content-between">
-          <button [disabled]="currentQuestion === 0" class="btn" (click)="previousQuestion()"><i
+          <button [disabled]="isPreviousDisabled()" class="btn" (click)="previousQuestion()"><i
               class="fa text-primary fa-chevron-left fa-3x" aria-hidden="true"></i></button>
   
           <button class="btn" (click)="nextQuestion()"><i class="fa text-primary fa-chevron-right fa-3x"
@@ -64,7 +64,7 @@
             <p>Total Question Attempted : {{questionList.length}} </p>
             <p>Total Correct Answered : {{correctAnswer}} </p>
             <p>Total Wrong Answered : {{inCorrectAnswer}} </p>
-            <p>Your Score : {{points}} Points </p>
+            <p>Your Score : {{ totalScore }} Points </p>
             <p>Maximum Possible Points: {{ maxPossiblePoints }}</p>
             <p *ngIf="points === maxPossiblePoints">You achieved the maximum possible score!</p>
             <button class="btn btn-primary mt-3" (click)="onDownloadCertificateClick()">Download Certificate</button>
@@ -80,7 +80,7 @@
             <p>Total Question Attempted : {{questionList.length}} </p>
             <p>Total Correct Answered : {{correctAnswer}} </p>
             <p>Total Wrong Answered : {{inCorrectAnswer}} </p>
-            <p>Your Score : {{points}} Points </p>
+            <p>Your Score : {{ totalScore }} Points </p>
             <p>Maximum Possible Points: {{ maxPossiblePoints }}</p>
           </div>
         </div>
