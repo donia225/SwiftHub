@@ -7,6 +7,8 @@ import { QuizModel } from 'src/app/BackOffice/quizzes/Model/quiz-model';
 import { ActivatedRoute } from '@angular/router';
 import { QuizserviceService } from 'src/app/BackOffice/quizzes/service/quizservice.service';
 import { HttpClient } from '@angular/common/http';
+import { CertificateService } from 'src/app/BackOffice/quizzes/service/certificate.service';
+
 
 @Component({
   selector: 'app-question',
@@ -27,9 +29,9 @@ export class QuestionComponent implements OnInit {
   public quiz: QuizModel | undefined;
   public selectedAnswers: AnswerModel[] = []; 
  public  maxPossiblePoints: number = 0;
+ 
 
-
-  constructor(private questionService: QuestionService, private activatedRoute: ActivatedRoute, private quizService: QuizserviceService, private http: HttpClient) { }
+  constructor(private questionService: QuestionService, private activatedRoute: ActivatedRoute, private quizService: QuizserviceService, private http: HttpClient, private certificateService: CertificateService) { }
   
 
   ngOnInit(): void {
@@ -133,4 +135,30 @@ nextQuestion() {
   getProgressPercent() {
     this.progress = ((this.currentQuestion / this.questionList.length) * 100).toString();
   }
+
+
+  generateCertificatePdf(): void {
+    this.certificateService.generateCertificatePdf().subscribe(
+      response => {
+        // Create a blob from the response text
+        const blob = new Blob([response], { type: 'application/pdf' });
+
+        // Create a download link
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+
+        // Set the filename for the download
+        link.download = 'certificate.pdf';
+
+        // Trigger the download
+        link.click();
+      },
+      error => {
+        console.error(error); // Handle error response
+        // You can display an error message or perform other actions here
+      }
+    );
+  }
+
+
 }

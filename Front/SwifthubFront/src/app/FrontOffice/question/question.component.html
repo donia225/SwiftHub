@@ -56,7 +56,7 @@
         </div>
       </ng-container>
   
-      <ng-container *ngIf="isQuizCompleted && points >= correctAnswer && points >= inCorrectAnswer">
+      <ng-container *ngIf="isQuizCompleted && points > correctAnswer ">
         <div class="row d-flex justify-content-between">
           <img style="width: 10%;" class="img-fluid col-sm-5 mx-auto" src="/assets/img/happy.png" alt="">
           <div class="result text-center col-md-6 col-sm-12">
@@ -67,11 +67,12 @@
             <p>Your Score : {{points}} Points </p>
             <p>Maximum Possible Points: {{ maxPossiblePoints }}</p>
             <p *ngIf="points === maxPossiblePoints">You achieved the maximum possible score!</p>
+            <button class="btn btn-primary mt-3" (click)="generateCertificatePdf()">Download Certificate</button>
           </div>
         </div>
       </ng-container>
       
-      <ng-container *ngIf="isQuizCompleted && (points < correctAnswer || points < inCorrectAnswer)">
+      <ng-container *ngIf="isQuizCompleted && points < inCorrectAnswer">
         <div class="row d-flex justify-content-between">
           <img style="width: 10%;" class="img-fluid col-sm-5 mx-auto" src="/assets/img/sad.png" alt="">
           <div class="result text-center col-md-6 col-sm-12">
