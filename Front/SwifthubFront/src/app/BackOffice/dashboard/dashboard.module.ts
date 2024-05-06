@@ -38,8 +38,6 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
 import { PostAdminComponent } from '../post-admin/post-admin.component';
-import { PostDetailsComponent } from 'src/app/FrontOffice/post-details/post-details.component';
-import { PostComponent } from 'src/app/FrontOffice/post/post.component';
 
 
 

@@ -1,8 +1,16 @@
 <section>
   <div class="container">
+    <div class="card flex justify-content-center">
+      <form [formGroup]="formGroup" (ngSubmit)="searchPosts()">
+          <label for="integer" class="font-bold block mb-2"> Search </label>
+          <input pInputText id="integer" pKeyFilter="int"  formControlName="value" />
+      </form>
+    </div>
+
     <div class="row">
       <div class="col-md-6">
-        <button class="btn btn-primary mb-3" (click)="toggleFormVisibility()">Add Post</button> <!-- Bouton "Add Post" -->
+        <button class="btn btn-primary mb-3" style="margin-left: 220px;" (click)="toggleFormVisibility()">Add Post</button> <!-- Bouton "Add Post" -->
+        
         <div *ngIf="showForm">
           <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
             <div>
@@ -21,29 +29,40 @@
               <label for="attachment">Attachment:</label>
               <input type="file" id="attachment" name="attachment" (change)="onFileSelected($event)">
             </div>
-            <button type="submit">Submit</button>
-            <button type="button" (click)="cancelAdd()">Cancel</button>
+            <button type="submit"class="btn btn-primary">Submit</button>
+            <button type="button" (click)="cancelAdd()"class="btn btn-primary">Cancel</button>
           </form>
         </div>
-        <h1>POSTS</h1>
-        <div *ngFor="let post of posts" class="post-item border border-danger p-3 mb-3 bg-caa28c text-white">
-          <div class="post-header d-flex justify-content-end">
-            <button class="btn btn-warning custom-btn custom-button-background" style="background-color: #504032;" (click)="showPostDetails(post.id)">Details</button>
-          </div>
-          <div class="post-content">
-            <h4>{{ post.idUser }} <span>({{ post.postDate | date: 'dd/MM/yyyy' }})</span></h4>
-            <h4>Title: {{ post.title }}</h4>
-            <p *ngIf="post.description">Description: {{ post.description.split(' ').slice(0, 10).join(' ') }}...</p>
-          </div>
-          <div class="post-footer">
-            <button class="btn btn-primary" style="background-color: rgb(222, 195, 146)" (click)="editPost(post) ">Edit</button>
-            <span style="margin-right: 400px;"></span>
-            <button class="btn btn-danger" style="background-color: #d0541b;" (click)="deletePost(post.id)">Delete</button>
+        
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10 offset-md-2">
+              <ng-container *ngFor="let post of posts">
+                <div *ngIf="post.visibility === 1" class="card mb-3">
+                  <div class="card-header d-flex justify-content-between">
+                    <span>{{ post.idUser }}</span>
+                  </div>
+                  <div class="card-body">
+                    <div>
+                      
+                      <span>{{ post.postDate | date: 'dd/MM/yyyy' }}</span>
+                      <button class="btn btn-details"  style="margin-left: 182px;" (click)="showPostDetails(post.id)">Details</button>
+                    </div>
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text" *ngIf="post.description">Description: {{ post.description.split(' ').slice(0, 10).join(' ') }}...</p>
+                    <button class="btn btn-edit" (click)="editPost(post)">Edit</button>
+                    <button  class="p-button p-button-danger"  style="margin-left: 220px;" (click)="deletePost(post.id)">
+                      <span class="pi pi-times"></span> 
+                    </button>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
           </div>
         </div>
         
-        
-        
+ 
         
       </div>
       <div class="col-md-6">
@@ -66,9 +85,10 @@
               <label for="editAttachment">Attachment:</label>
               <input type="file" id="editAttachment" name="editAttachment" (change)="onEditFileSelected($event)">
             </div>
-            <button type="submit">Update</button>
-            <button type="button" (click)="cancelEdit()">Cancel</button>
-          </form>
+            <button type="submit" class="btn btn-edit">Update</button>
+            <span style="margin-right: 50px;"></span>
+            <button type="button" (click)="cancelEdit()" class="btn btn-edit">Cancel</button>
+            </form>
         </div>
 
         <!-- Détails du post -->
@@ -77,3 +97,4 @@
     </div>
   </div>
 </section>
+

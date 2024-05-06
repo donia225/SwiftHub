@@ -51,8 +51,9 @@ import { DatePipe } from '@angular/common';
 import { UserWorkshopComponent } from './components/workshop/user-workshop/user-workshop.component';
 import { MeetingComponent } from './components/meeting/meeting.component';
 import { PostAdminComponent } from './BackOffice/post-admin/post-admin.component';
+import { EditorModule } from 'primeng/editor';
 
-
+import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 
 
 
@@ -77,6 +78,8 @@ import { PostAdminComponent } from './BackOffice/post-admin/post-admin.component
 
   ],
   imports: [
+    TriStateCheckboxModule,
+    EditorModule,
     BrowserModule,
     DashboardModule,
     AppRoutingModule,

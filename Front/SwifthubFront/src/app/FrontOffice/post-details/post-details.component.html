@@ -7,21 +7,28 @@
   <h3>Comments</h3>
   <ul>
     <li *ngFor="let comment of comments">
-      <p>({{ comment.idUser }}) - {{ comment.commentDate }}</p>
+      <div class="d-flex align-items-center">
+        <p class="mr-2">{{ comment.idUser }} - {{ comment.commentDate }}</p>
+        <button *ngIf="comment.id !== null" class="p-button p-button-danger" (click)="deleteComment(comment.id)">
+          <span class="pi pi-times"></span> 
+
+        </button>
+              </div>
+      
+      
       <!-- Appliquer les styles -->
       <p [style.color]="comment.textColor" [style.fontWeight]="comment.isBold ? 'bold' : 'normal'" 
         [style.fontStyle]="comment.isItalic ? 'italic' : 'normal'" [style.textDecoration]="comment.isUnderline ? 'underline' : 'none'"
         [style.background-color]="comment.isHighlighted ? 'yellow' : 'transparent'">
         {{ comment.content }}
       </p>
-      <button class="btn btn-primary" style="background-color: rgb(222, 195, 146)" (click)="editComment(comment)">Edit</button>
+      <button class="btn btn-edit"       (click)="editComment(comment)">Edit</button>
       <form *ngIf="editingComment && showEditForm" (ngSubmit)="updateComment(editingComment)">
         <textarea class="form-control" rows="3" name="editedComment" [(ngModel)]="editingComment.content"></textarea>
         <button type="submit" class="btn btn-primary">Save Changes</button>
-        <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+        <button type="button" class="btn btn-secondary" style="margin-left: 20px;" (click)="cancelEdit()">Cancel</button>
       </form>
       <span style="margin-right: 10px;"></span>
-      <button *ngIf="comment.id !== null" class="btn btn-danger" style="background-color: #d0541b;" (click)="deleteComment(comment.id)">Delete</button>
 
       <hr>
     </li>
@@ -34,41 +41,10 @@
 
   <!-- Add new comment -->
   <div class="comment-container">
-    <div class="comment-options">
-      <div>
-        <label for="bold">Gras :</label>
-        <input type="checkbox" id="bold" name="bold" [(ngModel)]="isBold">
-      </div>
-      <div>
-        <label for="italic">Italique :</label>
-        <input type="checkbox" id="italic" name="italic" [(ngModel)]="isItalic">
-      </div>
-      <div>
-        <label for="underline">Souligné :</label>
-        <input type="checkbox" id="underline" name="underline" [(ngModel)]="isUnderline">
-      </div>
-      <div>
-        <label for="highlight">Mise en relief :</label>
-        <input type="checkbox" id="highlight" name="highlight" [(ngModel)]="isHighlighted">
-      </div>
-      <div>
-        <label for="textColor">Couleur du texte :</label>
-        <input type="color" id="textColor" name="textColor" [(ngModel)]="textColor">
-      </div>
-    </div>
     <div class="comment-input">
-      <textarea class="form-control" rows="3" [(ngModel)]="newCommentText" 
-        [style.fontWeight]="isBold ? 'bold' : 'normal'" 
-        [style.fontStyle]="isItalic ? 'italic' : 'normal'" 
-        [style.textDecoration]="isUnderline ? 'underline' : 'none'" 
-        [style.color]="textColor"
-        [style.background-color]="isHighlighted ? 'yellow' : 'transparent'">
-      </textarea>
-      <button class="btn btn-primary" (click)="addComment()">Add Comment</button>
+      
+      <textarea class="form-control" rows="3" [(ngModel)]="newCommentText"></textarea>
+      <button class="btn btn-add" (click)="addComment()">Add Comment</button>
     </div>
   </div>
-
-  
-  
-  
 </div>

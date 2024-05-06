@@ -47,6 +47,7 @@ public class PostServiceImpl implements PostService {
     public Post addPost(Post post) {
         String message ="User "+ post.getIdUser() + " added a post. ";
         kafkaTemplate.send("notifications", message);
+        post.setVisibility(1);
         return postDao.save(post);
     }
 

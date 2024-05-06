@@ -6,7 +6,7 @@ import { ContentComponent } from './content/content.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
@@ -20,6 +20,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
    
   ],
   imports: [
+    ButtonModule,
     CommonModule,
     HomeRoutingModule,
     
