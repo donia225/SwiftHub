@@ -31,7 +31,7 @@ public class Appointment {
     private AppointmentType appointmentType;  //yes
     private String studentId;
     private String professorId;  //yes
-    private Location location;
+    private String location;
     private Priority priority;  //yes
     private Boolean absance;
     private String meetingLink;

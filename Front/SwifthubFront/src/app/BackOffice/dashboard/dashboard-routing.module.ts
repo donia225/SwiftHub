@@ -26,6 +26,12 @@ const routes: Routes = [
     children: [
       { path: 'list-quiz', component: ListQuizComponent },
       { path: 'add-quiz', component: AddQuizComponent },
+    ]
+  },
+
+  {
+    path: 'appointment', component: AppLayoutComponent,
+    children: [
       { path: 'admin', component: AppComponentAdmin },
       { path: 'teacher', component: AppComponentTeacher },
       { path: 'student', component: AppComponentStudent },

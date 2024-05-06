@@ -22,7 +22,7 @@ import { RippleModule } from 'primeng/ripple';
 import { RouterModule } from '@angular/router';
 import { MessagesModule } from 'primeng/messages';
 import { TableModule } from 'primeng/table';
-//import { CalendarModule } from 'primeng/calendar';
+import { CalendarModule } from 'primeng/calendar';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -42,7 +42,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
 
-import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { CalendarModule  as AngularCalendarModule, DateAdapter } from 'angular-calendar';
 
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -74,6 +74,7 @@ import {CalendarComponentTeacher} from '../Teacher/calendar/calendar.component';
 import {CalendarComponentStudent} from '../Student/calendar/calendar.component';
 import {MatCardModule} from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
+import {LocationComponent} from '../Administrator/location/location.component'
 
 
 
@@ -87,7 +88,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     AddQuizComponent,
     CalendarComponentAdmin,CalendarComponentTeacher,CalendarComponentStudent,
     AppointmentAddEditComponentAdmin,AppointmentAddEditComponentTeacher,AppointmentAddEditComponentStudent,
-    AppComponentAdmin,AppComponentTeacher,AppComponentStudent,
+    AppComponentAdmin,AppComponentTeacher,AppComponentStudent,LocationComponent
 
   ],
   imports: [
@@ -121,7 +122,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     ToggleButtonModule,
     AutoCompleteModule,
     DialogModule,
-    CalendarModule,
+    AngularCalendarModule,
     DynamicDialogModule,
     ConfirmPopupModule,
     ToolbarModule,
@@ -147,7 +148,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    AngularCalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
 
 
   ],
