@@ -5,6 +5,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ContentComponent } from './content/content.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home.component';
+// import { CardQuizzesComponent } from '../card-quizzes/card-quizzes.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ButtonModule } from 'primeng/button';
 

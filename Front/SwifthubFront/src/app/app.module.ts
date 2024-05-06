@@ -36,7 +36,6 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
 import { DashboardModule } from './BackOffice/dashboard/dashboard.module';
 import { AppLayoutModule } from './BackOffice/layout/app.layout.module';
-import { HomeModule } from './FrontOffice/home/home.module';
 import { PostComponent } from './FrontOffice/post/post.component';
 import { PostDetailsComponent } from './FrontOffice/post-details/post-details.component';
 import { ShowWorkshopComponent } from './components/workshop/show-workshop/show-workshop.component';
@@ -47,9 +46,36 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
+import { RatingModule } from 'primeng/rating';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { SliderModule } from 'primeng/slider';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { TreeTableModule } from 'primeng/treetable';
+import { AddQuestionComponent } from './BackOffice/quizzes/question/add-question/add-question.component';
+import { QuizfrontComponent } from './FrontOffice/quizfront/quizfront.component';
+import { QuestionComponent } from './FrontOffice/question/question.component';
+import { UpdateQuizComponent } from './BackOffice/quizzes/update-quiz/update-quiz.component';
+import { ListQuestionComponent } from './BackOffice/quizzes/list-question/list-question.component';
+import { AddQuizComponent } from './BackOffice/quizzes/add-quiz/add-quiz.component';
+import { CardQuizzesComponent } from './FrontOffice/card-quizzes/card-quizzes.component';
+
+
+
+
+
 import { UserWorkshopComponent } from './components/workshop/user-workshop/user-workshop.component';
 import { MeetingComponent } from './components/meeting/meeting.component';
+import { AdminShowFeedbackComponent } from './components/feedback/admin-show-feedback/admin-show-feedback.component';
+import { HomeModule } from './FrontOffice/home/home.module';
+import { ListRequestComponent } from './requests/list-request/list-request.component';
+import { AddCategoryComponent } from './BackOffice/categories/add-category/add-category.component';
+import { ListCategoryComponent } from './BackOffice/categories/list-category/list-category.component';
+import { RequestComponent } from './FrontOffice/frontrequest/request/request.component';
+import { FrontAddComponent } from './FrontOffice/frontrequest/front-add/front-add.component';
+
+import { UpdateReqComponent } from './FrontOffice/frontrequest/update-req/update-req.component';
+import { AddAnswerComponent } from './requests/add-answer/add-answer.component';
 import { PostAdminComponent } from './BackOffice/post-admin/post-admin.component';
 import { EditorModule } from 'primeng/editor';
 
@@ -71,8 +97,22 @@ import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
     EditWorkshopComponent,
     ShowFeedbackComponent,
     AddWorkshopComponent,
+    QuizfrontComponent,
+    QuestionComponent,
+    UpdateQuizComponent,
+    ListQuestionComponent,
+    AddQuestionComponent,
+    CardQuizzesComponent,
     UserWorkshopComponent,
     MeetingComponent,
+    AdminShowFeedbackComponent,
+    ListRequestComponent,
+    AddCategoryComponent,
+    ListCategoryComponent,
+    RequestComponent,
+    FrontAddComponent,
+    UpdateReqComponent,
+    AddAnswerComponent
 
     
 
@@ -120,7 +160,20 @@ import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
     ConfirmDialogModule,
     CardModule,
     SelectButtonModule,
-    HomeModule
+    HomeModule,
+    ReactiveFormsModule,
+    RouterModule,
+    FormsModule,
+    CommonModule,
+		RatingModule,
+		SliderModule,
+		MultiSelectModule,
+		ProgressBarModule,
+    TreeTableModule,
+    BreadcrumbModule,
+    PanelModule
+	
+	
   ],
     providers:[MessageService,ConfirmationService,DatePipe],
     bootstrap: [AppComponent]

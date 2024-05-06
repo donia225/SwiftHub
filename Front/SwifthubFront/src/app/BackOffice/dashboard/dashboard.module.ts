@@ -37,6 +37,9 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
+import { ListRequestComponent } from 'src/app/requests/list-request/list-request.component';
+import { ListCategoryComponent } from '../categories/list-category/list-category.component';
+import { AddCategoryComponent } from '../categories/add-category/add-category.component';
 import { PostAdminComponent } from '../post-admin/post-admin.component';
 
 
@@ -48,6 +51,7 @@ import { PostAdminComponent } from '../post-admin/post-admin.component';
     LoginComponent,
     ListQuizComponent,
     AddQuizComponent,
+    
   
     
   ],

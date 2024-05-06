@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,17 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
   isColorChanged: boolean = false;
-
+  constructor(private router: Router) {}
   toggleColor() {
     this.isColorChanged = !this.isColorChanged;
+  }
+
+
+  navigateToListComplaints() {
+    this.router.navigate(['home/content/frontrequest']);
+  }
+  navigateToAddComplaint() {
+    this.router.navigate(['home/content/frontadd']);
   }
 
 }

@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
@@ -9,6 +10,16 @@ import { EditWorkshopComponent } from 'src/app/components/workshop/edit-workshop
 import { AddWorkshopComponent } from 'src/app/components/workshop/add-workshop/add-workshop.component';
 import { DashboardComponent } from './dashboard.component';
 import { PostAdminComponent } from '../post-admin/post-admin.component';
+import { UpdateQuizComponent } from '../quizzes/update-quiz/update-quiz.component';
+import { AddQuestionComponent } from '../quizzes/question/add-question/add-question.component';
+import { ListQuestionComponent } from '../quizzes/list-question/list-question.component';
+import { AdminShowFeedbackComponent } from 'src/app/components/feedback/admin-show-feedback/admin-show-feedback.component';
+import { ListRequestComponent } from 'src/app/requests/list-request/list-request.component';
+import { AddAnswerComponent } from 'src/app/requests/add-answer/add-answer.component';
+import { ListCategoryComponent } from '../categories/list-category/list-category.component';
+import { AddCategoryComponent } from '../categories/add-category/add-category.component';
+
+
 
 
 const routes: Routes = [
@@ -20,10 +31,11 @@ const routes: Routes = [
       path: '', component: AppLayoutComponent,
      
     },
+    { path: 'postAdmin', component: PostAdminComponent },
   ]
  },
   { path: 'login', component: LoginComponent },
-  { path: 'postAdmin', component: PostAdminComponent },
+
 
   
   
@@ -33,16 +45,49 @@ const routes: Routes = [
     children: [
       { path: 'list-quiz', component: ListQuizComponent },
       { path: 'add-quiz', component: AddQuizComponent },
+      { path: 'update-quiz/:quizId', component: UpdateQuizComponent },
+   
+      {path:'add-question/:quizId', component: AddQuestionComponent},
+    
 
     ]
   },
+  {
+    path: 'question', component: AppLayoutComponent,
+    children: [
+      { path: 'list-question', component: ListQuestionComponent },
+  
+    
+
+    ]
+  },
+  
+  
   {
     path: 'workshopBack', component: AppLayoutComponent,
     children: [
       { path: 'edit/:id', component: EditWorkshopComponent },
       { path: 'show', component: ShowWorkshopComponent },
-    
       { path: 'add', component: AddWorkshopComponent },
+      { path: 'feedback', component: AdminShowFeedbackComponent },
+
+    ]
+  },
+  {
+    path: 'request', component: AppLayoutComponent,
+    children: [
+      { path: 'list-request', component: ListRequestComponent },
+      {path:'add-answer/:idRequest', component: AddAnswerComponent}
+
+    ]
+  },
+  {
+    path: 'category', component: AppLayoutComponent,
+    children: [
+      { path: 'list-category', component: ListCategoryComponent },
+      { path: 'add-category', component: AddCategoryComponent },
+
+    
 
     ]
   },

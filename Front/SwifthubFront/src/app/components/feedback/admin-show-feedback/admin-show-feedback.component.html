@@ -1,0 +1,71 @@
+<!-- NOTIF TOAST   -->
+<div *ngIf="notification" class="alert alert-info" role="alert">
+<p> {{notification}}</p>
+</div>
+<!-- Feedbacks & workshops -->
+<div class="grid">
+  <div class="col-3">
+    <div class="list-group" id="feedback-list" role="tablist">
+      <h4>Workshops</h4>
+      <a class="list-group-item list-group-item-action" *ngFor="let workshop of workshops"
+        (click)="showSelectedFeedback(workshop)" [class.active]="workshop === selectedWorkshop">
+        {{ workshop.title }}
+      </a>
+    </div>
+  </div>
+  <div class="col-7">
+    <div class="tab-content" id="feedback-details">
+      <div class="tab-pane fade show active " *ngIf="selectedWorkshop" id="feedback-details-content" role="tabpanel">
+        <br>
+        <h4>{{ selectedWorkshop.title }}</h4>
+        <br>
+
+        <div class="grid gap-4">
+          <ul class="list-group" style="width: 150px;">
+            <li class="list-group-item" *ngFor="let feedback of selectedWorkshop.feedbacks"
+              (click)="showFeedbackDetails(feedback)" [class.active]="feedback === selectedFeedback">
+              <div *ngFor="let user of users">
+                <div *ngIf="user.id==feedback.userId">
+                  {{user.username}}
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div *ngIf="selectedFeedback">
+            <div class="card" style=" height: 217.6px; width: 227.6px;">
+              <div class="text-right" style="color: #6c757d; font-size: 12px;">
+                {{ selectedFeedback.creationDate | date: 'medium' }}
+              </div>
+              <br>
+              <div class="text-left">
+                <div *ngIf="selectedFeedback.rating.toString() == 'Great'">
+                  <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
+                  <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
+                  <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
+                  <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
+                </div>
+                <div *ngIf="selectedFeedback.rating.toString() == 'Good'">
+                  <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
+                  <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
+                  <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
+                </div>
+                <div *ngIf="selectedFeedback.rating.toString() == 'Neutral'">
+                  <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
+                  <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
+                </div>
+                <div *ngIf="selectedFeedback.rating.toString() == 'Bad'">
+                  <img src="/assets/img/star-fill.svg" alt="Star" style="width: 20px;">
+                </div>
+              </div>
+              <h6 >{{ selectedFeedback.description }}</h6>
+              <p></p>
+
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

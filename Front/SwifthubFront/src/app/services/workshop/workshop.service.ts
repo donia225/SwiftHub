@@ -75,6 +75,13 @@ export class WorkshopService {
    * the worshops that the user have joined
    */
   public getWorkshopsByUser(userId:string) {
-    return this.http.get<Workshop[]>(`${this.baseUrl}/byUser/${userId}`);
+    return this.http.get<Workshop[]>(`${this.baseUrl}/joined-user/${userId}`);
+  }
+
+  /**
+   * getWorkshopsByCreator
+   */
+  public getWorkshopsByCreator(userId:string) {
+    return this.http.get<Workshop[]>(`${this.baseUrl}/user/${userId}`);
   }
 }
