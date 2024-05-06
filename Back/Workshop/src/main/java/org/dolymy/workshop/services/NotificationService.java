@@ -16,7 +16,7 @@ public class NotificationService {
     public void sendNotification(Feedback feedback) {
         System.out.println("NOTIFICATION IN PROGRESS..........");
         System.out.println("workshop :"+feedback.getWorkshop().getTitle());
-        Notification notification = new Notification("New feedback added for workshop: "+ feedback.getWorkshop().getTitle());
+        Notification notification = new Notification("New feedback added to workshop: "+ feedback.getWorkshop().getTitle());
 //        template.convertAndSend("/topic/admin/notification", notification);
         template.convertAndSend("/topic/notification", notification);
         System.out.println("Notifications successfully sent to Angular !");

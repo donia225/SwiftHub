@@ -15,7 +15,6 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/api/workshop/notif")
                 .setAllowedOrigins("http://localhost:4200");
-//                .withSockJS();
     }
 
     @Override
