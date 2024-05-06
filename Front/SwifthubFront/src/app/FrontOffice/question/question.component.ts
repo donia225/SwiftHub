@@ -20,7 +20,7 @@ export class QuestionComponent implements OnInit {
   public questionList!:  QuestionModel[];
   public currentQuestion: number = 0;
   public points: number = 0;
-  public counter = 60;
+  public counter = 120;
   public correctAnswer: number = 0;
   public inCorrectAnswer: number = 0;
   public interval$: any;
@@ -137,7 +137,7 @@ nextQuestion() {
   }
 
 
-  generateCertificatePdf(): void {
+ /*  generateCertificatePdf(): void {
     this.certificateService.generateCertificatePdf().subscribe(
       response => {
         // Create a blob from the response text
@@ -158,6 +158,9 @@ nextQuestion() {
         // You can display an error message or perform other actions here
       }
     );
+  } */
+  onDownloadCertificateClick(): void {
+    this.certificateService.downloadCertificate();
   }
 
 

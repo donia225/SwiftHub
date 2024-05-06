@@ -9,6 +9,9 @@ import org.dolymy.quiz.services.CertificateService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,15 +60,34 @@ public class CertificateController {
     }
 
 
-    @PostMapping("/generateCertificatePdf")
-    public String generateCertificatePdf() {
-        try {
-            certificateService.generateCertificatePdf();
-            return "Certificate PDF generated successfully.";
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return "Error generating certificate PDF.";
-        }
+//    @PostMapping("/generateCertificatePdf")
+//    public String generateCertificatePdf() {
+//        try {
+//            certificateService.generateCertificatePdf();
+//            return "Certificate PDF generated successfully.";
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//            return "Error generating certificate PDF.";
+//        }
+//    }
+@GetMapping("/download")
+public ResponseEntity<Resource> downloadCertificate() {
+    try {
+        byte[] certificateBytes = certificateService.generateCertificatePdf();
+
+        ByteArrayResource resource = new ByteArrayResource(certificateBytes);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentDisposition(ContentDisposition.attachment().filename("certificate.pdf").build());
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(resource);
+    } catch (IOException e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
+}
 
 }

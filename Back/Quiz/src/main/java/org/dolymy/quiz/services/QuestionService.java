@@ -67,6 +67,7 @@ public class QuestionService {
 
         if (optionalQuiz.isPresent()) {
             Quiz quiz = optionalQuiz.get();
+
             question.setQuiz(quiz); // here we set the quiz for the question
             question.setId(sequenceGenerator.generateSequence(Question.SEQUENCE_NAME));
             // we update the list of questions in the quiz
