@@ -118,9 +118,8 @@ public class RequestService {
 
     }
 
-    public List<Request> advancedSearch(String title, Status status) {
-        // Utilisez le repository pour rechercher les demandes en fonction des critères fournis
-        return requestRepo.advancedSearch(title, status);
+    public List<Request> searchRequests(String searchText) {
+        return requestRepo.findByText(searchText);
     }
 
 }

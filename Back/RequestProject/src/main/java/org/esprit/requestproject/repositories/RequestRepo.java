@@ -14,11 +14,8 @@ import java.util.List;
 
 public interface RequestRepo extends MongoRepository<Request, Long> {
 
-    @Query("{ $and: [ " +
-            "{ $or: [ { 'title': { $regex: ?0, $options: 'i' } }, { ?0: null } ] }, " +
-            "{ $or: [ { 'status': ?1 }, { ?1: null } ] } " +
-            "] }")
-    List<Request> advancedSearch(String title, Status status);
+    @Query("{ $text: { $search: ?0 } }")
+    List<Request> findByText(String text);
 
 }
 
