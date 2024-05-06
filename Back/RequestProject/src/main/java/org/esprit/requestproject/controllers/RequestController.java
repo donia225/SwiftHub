@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -39,11 +40,17 @@ public class RequestController {
     }
 
 
-    @PostMapping("/add-request")
-    public Request createRequest(@RequestBody Request request) {
-        return this.requestService.createRequest(request);
 
+
+
+
+    @PostMapping("/add-request")
+    public ResponseEntity<Request> addRequest(@RequestBody Request request) {
+        request.setCreationDate(new Date()); // Définir manuellement pour tester
+        Request savedRequest = requestService.createRequest(request);
+        return ResponseEntity.ok(savedRequest);
     }
+
 
 
     @PostMapping("/addcateg")
@@ -84,20 +91,14 @@ public class RequestController {
         }
     }
 
-    @GetMapping("/search") // Endpoint pour la recherche avancée
-    public ResponseEntity<List<Request>> advancedSearch(
-            @RequestParam(value = "title", required = false) String title,
-            @RequestParam(value = "status", required = false) Status status) {
-
-        // Appelez la méthode advancedSearch de votre service
-        List<Request> result = requestService.advancedSearch(title, status);
-
-        // Vérifiez si des résultats ont été trouvés
-        if (!result.isEmpty()) {
-            return new ResponseEntity<>(result, HttpStatus.OK); // Renvoyer les résultats avec le code de statut OK (200)
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Aucun résultat trouvé, renvoyer le code de statut NOT_FOUND (404)
+    // Endpoint pour rechercher des requests par texte
+    @GetMapping("/search")
+    public ResponseEntity<List<Request>> searchRequests(@RequestParam String searchText) {
+        List<Request> requests = requestService.searchRequests(searchText);
+        if (requests.isEmpty()) {
+            return ResponseEntity.noContent().build();
         }
+        return ResponseEntity.ok(requests);
     }
 
 
