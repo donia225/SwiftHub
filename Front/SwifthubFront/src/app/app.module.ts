@@ -49,6 +49,7 @@ import {AddWorkshopComponent} from "./components/workshop/add-workshop/add-works
 import {UserWorkshopComponent} from "./components/workshop/user-workshop/user-workshop.component";
 import {ShowWorkshopComponent} from "./components/workshop/show-workshop/show-workshop.component";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ConsultUsersComponent} from "./components/users/consult-users/consult-users.component";
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     MeetingComponent,
     UserWorkshopComponent,
     ShowWorkshopComponent,
+    ConsultUsersComponent
 
 
 
