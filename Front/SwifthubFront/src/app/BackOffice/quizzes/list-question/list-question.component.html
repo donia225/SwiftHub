@@ -22,6 +22,7 @@
       <tr>
         <th>Question</th>
         <th>Réponses</th>
+        <th>quizName</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -35,6 +36,15 @@
                 <i></i> <span [innerHTML]=" answer.answerTxt"></span>
               </li>
             </ul>
+           
+          </td>
+          <td>
+            <ul>
+              <li *ngFor="let quiz of question.quiz">
+                <i></i> <span [innerHTML]=" quiz.quizName"></span>
+              </li>
+            </ul>
+           
           </td>
           <td style="min-width: 150px;">
             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2">
