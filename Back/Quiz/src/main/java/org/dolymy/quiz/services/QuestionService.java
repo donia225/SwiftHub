@@ -9,7 +9,7 @@ import org.dolymy.quiz.repos.AnswerRepository;
 import org.dolymy.quiz.repos.QuestionRepository;
 
 import org.dolymy.quiz.repos.QuizRepository;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
