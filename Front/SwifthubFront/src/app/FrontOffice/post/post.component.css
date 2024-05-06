@@ -13,4 +13,34 @@
   .custom-button-background {
     background-color: black;
   }
-  
+  .custom-button .p-button {
+    background-color: #504032;
+    border-color: #504032;
+    color: white;
+}
+
+.custom-button .p-button:hover {
+    background-color: #5e513f;
+    border-color: #5e513f;
+}
+.btn-details {
+  background-color: #504032;
+  color: white;
+}
+
+.btn-edit {
+  background-color: #caa28c;
+  color: white;
+}
+.btn-update-cancel {
+  background-color: #caa28c;
+  color: white; /* Ajout de la couleur du texte */
+}
+.btn-edit {
+  background-color: #caa28c;
+  color: white;
+}
+
+.custom-button-color {
+  background-color: #5e513f !important;
+}

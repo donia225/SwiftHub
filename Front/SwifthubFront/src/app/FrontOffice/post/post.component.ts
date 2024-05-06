@@ -4,6 +4,9 @@ import { Post } from './post.model';
 import { Router } from '@angular/router';
 import { CommentService } from './comment.service';
 import { Comment } from './post.model';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
+
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -59,6 +62,7 @@ export class PostComponent {
   loadPosts(): void {
     this.postService.getPosts().subscribe(
       (posts) => {
+
         // Trier les posts par date décroissante, puis par ID du plus grand au plus petit en cas d'égalité de dates
         this.posts = posts.sort((a, b) => {
           const dateA = new Date(a.postDate);
@@ -120,6 +124,7 @@ export class PostComponent {
       title: post.title,
       description: post.description,
       postDate: new Date(),
+      visibility: post.visibility,
       attachment: this.selectedEditFile ? this.selectedEditFile.name : post.attachment
     };
 
@@ -159,5 +164,33 @@ export class PostComponent {
     );
   }
   
+  formGroup!: FormGroup;
+  searchTerm: string = '';
+
   
+  ngOnInit() {
+    this.formGroup = new FormGroup({
+      value: new FormControl('')
+    });
+
+    // Écoutez les changements dans le champ de recherche
+    this.formGroup.get('value')?.valueChanges.subscribe(value => {
+      this.searchTerm = value;
+      this.searchPosts();
+    });
+  }
+
+  searchPosts(): void {
+    if (!this.searchTerm) {
+      this.loadPosts();
+      return;
+    }
+
+    this.posts = this.posts.filter(post =>
+      post.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      (post.description && post.description.toLowerCase().includes(this.searchTerm.toLowerCase()))
+    );
+  }
 }
+  
+

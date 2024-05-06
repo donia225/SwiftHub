@@ -6,6 +6,7 @@ export interface Post {
     postDate: Date;
     attachment: Blob | File;
     comments: Comment[]; 
+    visibility: number;
 
   }
   
@@ -21,3 +22,4 @@ export interface Post {
   isUnderline: boolean;
   isHighlighted: boolean;
   }
+ 

@@ -9,10 +9,6 @@ import lombok.experimental.FieldDefaults;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-
-
-
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
@@ -25,12 +21,11 @@ public class Post implements Serializable {
     @Column(name = "idPost")
     Integer id;
     String title ;
-
     String description ;
     @Temporal(TemporalType.DATE)
     Date postDate;
     String attachment ;
-
+    Integer visibility;
     @Column(name = "userPost")
     Integer idUser;
 

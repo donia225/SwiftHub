@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
@@ -22,7 +20,6 @@ import { CalendarModule } from 'primeng/calendar';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
-
 import { FieldsetModule } from 'primeng/fieldset';
 
 import { FileUploadModule } from 'primeng/fileupload';
@@ -79,8 +76,10 @@ import { FrontAddComponent } from './FrontOffice/frontrequest/front-add/front-ad
 
 import { UpdateReqComponent } from './FrontOffice/frontrequest/update-req/update-req.component';
 import { AddAnswerComponent } from './requests/add-answer/add-answer.component';
+import { PostAdminComponent } from './BackOffice/post-admin/post-admin.component';
+import { EditorModule } from 'primeng/editor';
 
-
+import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 
 
 
@@ -93,7 +92,7 @@ import { AddAnswerComponent } from './requests/add-answer/add-answer.component';
     AppComponent,
      PostComponent,
      PostDetailsComponent,
-    
+    PostAdminComponent,
     ShowWorkshopComponent,
     EditWorkshopComponent,
     ShowFeedbackComponent,
@@ -119,6 +118,8 @@ import { AddAnswerComponent } from './requests/add-answer/add-answer.component';
 
   ],
   imports: [
+    TriStateCheckboxModule,
+    EditorModule,
     BrowserModule,
     DashboardModule,
     AppRoutingModule,

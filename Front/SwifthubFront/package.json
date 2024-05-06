@@ -28,6 +28,7 @@
     "primeflex": "^3.3.1",
     "primeicons": "^6.0.1",
     "primeng": "^15.4.1",
+    "quill": "^2.0.1",
     "rxjs": "~7.8.0",
     "scriptjs": "^2.5.9",
     "sockjs-client": "^1.6.1",
