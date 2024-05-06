@@ -61,7 +61,7 @@ import { AddQuizComponent } from './BackOffice/quizzes/add-quiz/add-quiz.compone
 import { CardQuizzesComponent } from './FrontOffice/card-quizzes/card-quizzes.component';
 
 
-
+import { PaginatorModule } from 'primeng/paginator';
 
 
 import { UserWorkshopComponent } from './components/workshop/user-workshop/user-workshop.component';
@@ -171,7 +171,9 @@ import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 		ProgressBarModule,
     TreeTableModule,
     BreadcrumbModule,
-    PanelModule
+    PanelModule,
+    PaginatorModule
+
 	
 	
   ],

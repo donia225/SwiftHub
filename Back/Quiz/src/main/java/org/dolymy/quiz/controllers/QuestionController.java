@@ -16,13 +16,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
-    private final QuizService quizService;
+
 
 
     @GetMapping("/getAllQuestions")
     public List<Question> getAllQuestions(){
 
         return questionService.getAllQuestions();
+    }
+    @GetMapping("/all")
+    public ResponseEntity<List<Question>> getAllQuestionsWithQuiz() {
+        List<Question> questions = questionService.getAllQuestionsWithQuiz();
+        return ResponseEntity.ok(questions);
     }
 
     @GetMapping("/{id}")

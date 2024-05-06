@@ -7,5 +7,6 @@ export interface QuestionModel {
     answered: boolean; 
   answers: AnswerModel[];
   quiz: QuizModel;
+  quizName: string; 
   
 }
