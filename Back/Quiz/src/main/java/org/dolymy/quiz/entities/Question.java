@@ -32,6 +32,7 @@ public class Question implements Serializable {
     private String questiontxt;
 
     private List<Answer> answers;
+    private String userId;
 
     @DocumentReference(collection = "quiz")
     @JsonBackReference

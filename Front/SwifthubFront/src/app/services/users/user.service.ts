@@ -38,5 +38,14 @@ export class UserService {
     return this.http.get(`${this.apiServerUrl}/email/${email}`);
   }
 
+  public findUserByUsername(username: string){
+    return this.http.get(`${this.apiServerUrl}/username/${username}`);
+  }
+  public findUserByRole(role: string) {
+    return this.http.get(`${this.apiServerUrl}/findd/${role}`);
+  }
 
 }
+
+
+

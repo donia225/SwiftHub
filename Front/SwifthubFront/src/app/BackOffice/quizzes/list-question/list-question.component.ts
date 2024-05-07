@@ -5,6 +5,7 @@ import { TreeNode} from 'primeng/api';
 import { Paginator } from 'primeng/paginator';
 import { QuizModel } from '../Model/quiz-model';
 import { QuestionService } from '../service/question.service';
+import { User } from 'src/app/models/user/user';
 
 
 
@@ -22,6 +23,7 @@ export class ListQuestionComponent implements OnInit{
   first: number = 0;
   rows: number = 5;
   quiz: QuizModel | undefined;
+
 
 
   constructor(private questionService: QuestionService) {}
