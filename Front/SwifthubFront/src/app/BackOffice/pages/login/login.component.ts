@@ -76,7 +76,8 @@ export class LoginComponent implements OnInit {
         next: (response) => {
           this.authResponse = response;
           if (!this.authResponse.mfaEnabled) {
-            localStorage.setItem('token', response.accesToken as string);
+            window.localStorage.setItem('token', response.accesToken as string);
+            window.localStorage.setItem('email', this.authRequest.email as string);
             if (loggedInUser?.role==Role.STUDENT) {
               this.router.navigate(['home/content']);
               
@@ -103,7 +104,8 @@ export class LoginComponent implements OnInit {
     this.authService.verifyCode(verifyRequest)
       .subscribe({
         next: (response) => {
-        localStorage.setItem('token', response.accesToken as string);
+          window.localStorage.setItem('token', response.accesToken as string);
+          window.localStorage.setItem('email', verifyRequest.email as string);
        
           
           this.router.navigate(['dashboard']);

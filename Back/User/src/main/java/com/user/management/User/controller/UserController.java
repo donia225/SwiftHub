@@ -105,6 +105,12 @@ public class UserController {
         return this.userService.findUserByToken(token);
     }
 
+    @GetMapping("email/{email}")
+    public User getUserByEmail(@PathVariable("email") String email ){
+        return this.userService.findUserByEmail(email);
+    }
+
+
 
 
 }

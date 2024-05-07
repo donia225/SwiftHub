@@ -27,6 +27,7 @@ export class ShowWorkshopComponent implements OnInit {
   selectedWorkshopId: string | null = null;
   meeting!:Meeting;
   selectedMeetingId: string | null = null;
+  
 
 
   //static logged in user
@@ -181,6 +182,25 @@ export class ShowWorkshopComponent implements OnInit {
       { label: 'dashboard', routerLink: '/dashboard' },
       { label: 'workshops' }
     ];
+
+      //fetch local storage
+  var email= window.localStorage.getItem("email");
+  console.log(email);
+  
+ if (email ) {
+ 
+  this.userService.findUserByEmail(email).subscribe(
+    res=>{
+   this.LoggedInUser=res as User;   
+   console.log(this.LoggedInUser);
+   
+    },
+    err=>{
+      console.log(err);
+      
+    }
+  );
+}
 
     this.getUsers();
     this.getWorkshops();

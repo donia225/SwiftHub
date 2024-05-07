@@ -69,7 +69,8 @@ export class RegisterComponent {
         next:(response: AuthenticationResponse)=>{
           this.message='Account created Succefully\n You will be redirected to the Welcome  page in 3 secondes';
           setTimeout(()=>{
-            localStorage.setItem('token',response.accesToken as string);
+            window.localStorage.setItem('token',response.accesToken as string);
+            window.localStorage.setItem('email', verifyRequest.email as string);
             this.router.navigate(['dashboard']);
 
           },3000)

@@ -34,5 +34,9 @@ export class UserService {
     return this.http.get(`${this.apiServerUrl}/${token}`);
   }
 
+  public findUserByEmail(email: string){
+    return this.http.get(`${this.apiServerUrl}/email/${email}`);
+  }
+
 
 }

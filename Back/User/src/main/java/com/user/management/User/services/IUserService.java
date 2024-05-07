@@ -12,4 +12,5 @@ public interface IUserService {
     public User findUserById(String id);
 
     User findUserByToken(String token);
+    User findUserByEmail(String email);
 }
