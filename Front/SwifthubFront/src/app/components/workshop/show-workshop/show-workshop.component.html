@@ -38,6 +38,8 @@
                             
                             </div>
                         </div>
+                        <!-- only showed for the logged in user that created the workshop -->
+                        <div *ngIf="workshop.userId==LoggedInUser.id">
                         <!-- edit workshop -->
                         <div class="flex justify-content-between pt-4">
                             <button routerLink="/workshopBack/edit/{{workshop.workshop_id}}" pbutton="" pripple=""
@@ -69,6 +71,7 @@
                                     class="p-button-label">Delete</span><span class="p-ink" aria-hidden="true"
                                     role="presentation"></span></button>
                         </div>
+                     </div>
                     </div>
                 </div>
             </div>

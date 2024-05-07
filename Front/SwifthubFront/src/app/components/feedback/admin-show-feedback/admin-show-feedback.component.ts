@@ -20,17 +20,6 @@ export class AdminShowFeedbackComponent implements OnInit {
   selectedFeedback: Feedback | null = null;
   selectedWorkshop!:Workshop;
   loggedInUser!: User;
-  // loggedInUser: User = {
-  //   id: '662bb6b46c4b2853ebe30871',
-  //   username: 'John doe',
-  //   password: '$2a$10$cW3D21mSbcfnSJxwu2jCVe0iywlH.aAALwpxyBavZ/o5Q4loWahPe',
-  //   email: 'john.doe@example.com',
-  //   className: 'Class A',
-  //   department: 'Computer Science',
-  //   managedService: 'IT Support',
-  //   role: Role.PROFESSOR,
-  //   ImageUrl: ''
-  // }
 
   constructor(
     private notifService: NotificationFeedbackService,
@@ -56,12 +45,6 @@ export class AdminShowFeedbackComponent implements OnInit {
    );
  }
 
-
-    
-   
-   
-
-
     //Notification
     // opening cnx with server socket 
     let stompClient = this.notifService.connect();
@@ -71,12 +54,13 @@ export class AdminShowFeedbackComponent implements OnInit {
         //get recent message 
         this.notification = JSON.parse(notification.body).message;
         setTimeout(() => this.notification = null, 3000);
+        this.showAdminWorkshops(this.loggedInUser.id);
+        
       })
     });
 
 
   }
-
 
   //get workshops by userId
   showAdminWorkshops(userId: string) {

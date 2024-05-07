@@ -99,6 +99,7 @@ export class UserWorkshopComponent implements OnInit {
   isValid(start: Date): boolean {
     const workshopstart=new Date(start)
     const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 1)
     return workshopstart >= currentDate;
   }
 
@@ -107,6 +108,7 @@ export class UserWorkshopComponent implements OnInit {
     const currentDate = new Date(Date.now());
     const startDate = new Date(workshop.start_date);
     const endDate = new Date(workshop.end_date);
+    currentDate.setDate(currentDate.getDate() + 1)
     return currentDate>=startDate&&currentDate<=endDate;
   }
 
