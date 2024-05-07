@@ -1,8 +1,11 @@
-import { QuestionService } from './../../../FrontOffice/question/services/question.service';
+
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { TreeNode} from 'primeng/api';
 import { Paginator } from 'primeng/paginator';
+import { QuizModel } from '../Model/quiz-model';
+import { QuestionService } from '../service/question.service';
+
 
 
 @Component({
@@ -18,6 +21,7 @@ export class ListQuestionComponent implements OnInit{
   totalRecords: number = 0;
   first: number = 0;
   rows: number = 5;
+  quiz: QuizModel | undefined;
 
 
   constructor(private questionService: QuestionService) {}
@@ -36,6 +40,7 @@ export class ListQuestionComponent implements OnInit{
     ];
 
     this.loadQuestions();
+    this.extractQuizId();
   }
 
   loadQuestions(): void {
@@ -65,4 +70,29 @@ export class ListQuestionComponent implements OnInit{
     this.loadQuestionsPerPage();
   }
   
+  extractQuizId(): void {
+    if (this.questions.length > 0 && this.questions[0].quiz) {
+      console.log('Quiz:', this.questions[0].quiz);
+      // Assuming each question contains a reference to the QuizModel object
+      // You can extract quizId from the first question for example
+      this.quiz = this.questions[0].quiz;
+      console.log('Quiz ID:', this.quiz?.quizId);
+    }
+  }
+
+  deleteQuestion(questionId: number): void {
+    this.questionService.deleteQuestion(questionId).subscribe(
+      () => {
+        // Handle successful deletion here if needed
+        console.log('Question deleted successfully');
+        // Reload questions after deletion
+        this.loadQuestions();
+      },
+      error => {
+        // Handle error here if needed
+        console.error('Error deleting question:', error);
+      }
+    );
+  }
+
 }

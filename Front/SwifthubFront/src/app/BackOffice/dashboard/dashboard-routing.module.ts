@@ -18,6 +18,7 @@ import { ListRequestComponent } from 'src/app/requests/list-request/list-request
 import { AddAnswerComponent } from 'src/app/requests/add-answer/add-answer.component';
 import { ListCategoryComponent } from '../categories/list-category/list-category.component';
 import { AddCategoryComponent } from '../categories/add-category/add-category.component';
+import { UpdateQuestionComponent } from '../quizzes/update-question/update-question.component';
 
 
 
@@ -48,7 +49,9 @@ const routes: Routes = [
       { path: 'update-quiz/:quizId', component: UpdateQuizComponent },
    
       {path:'add-question/:quizId', component: AddQuestionComponent},
-    
+      { path: 'update-question/update/:quizId/:question_id', component: UpdateQuestionComponent }
+
+
 
     ]
   },
