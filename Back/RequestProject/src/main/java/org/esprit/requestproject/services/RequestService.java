@@ -8,8 +8,10 @@ import org.esprit.requestproject.repositories.CategoryRepo;
 import org.esprit.requestproject.repositories.RequestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Transient;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -88,8 +90,7 @@ public class RequestService {
                 // Mettre à jour les champs de la demande
                 existingRequest.setTitle(request.getTitle());
                 existingRequest.setDescription(request.getDescription());
-                //existingRequest.setAttachment(request.getAttachment());
-                //existingRequest.setStatus(request.getStatus());
+                existingRequest.setStatus(request.getStatus());
 
 
                 // Vérifier si la catégorie associée à la demande existante est null
@@ -112,7 +113,13 @@ public class RequestService {
         return null;
     }
 
-
+    @Transactional
+    public Request updateRequestStatus(Long id, String newStatus) {
+        return requestRepo.findById(id).map(request -> {
+            request.setStatus(Status.valueOf(newStatus)); // Ensure 'newStatus' is valid enum or handle exceptions
+            return requestRepo.save(request);
+        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Request not found with ID: " + id));
+    }
     public void deleteRequest(Long id) {
         requestRepo.deleteById(id);
 

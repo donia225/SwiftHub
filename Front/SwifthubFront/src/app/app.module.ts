@@ -80,6 +80,7 @@ import { PostAdminComponent } from './BackOffice/post-admin/post-admin.component
 import { EditorModule } from 'primeng/editor';
 
 import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
+import { ListAnswersComponent } from './FrontOffice/frontrequest/answers/list-answers/list-answers.component';
 
 
 
@@ -112,7 +113,8 @@ import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
     RequestComponent,
     FrontAddComponent,
     UpdateReqComponent,
-    AddAnswerComponent
+    AddAnswerComponent,
+    ListAnswersComponent
 
     
 
@@ -171,7 +173,8 @@ import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 		ProgressBarModule,
     TreeTableModule,
     BreadcrumbModule,
-    PanelModule
+    PanelModule,
+    
 	
 	
   ],

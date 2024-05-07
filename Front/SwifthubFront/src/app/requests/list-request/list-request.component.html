@@ -21,7 +21,7 @@
                 <th>Status</th>
                 <th>Creation date</th>
                 <th>Category</th>
-                <th>answers</th>
+                
                 
                 <th>Actions</th> <!-- Nouvelle colonne pour les actions -->
             </tr>
@@ -37,19 +37,26 @@
          
         
                 <td>{{ request.category }}</td>
-                <td>
-                    <!-- Afficher chaque réponse textuellement liée à la requête -->
+              <!--   <td>
+                  
                     <ul>
                         <li *ngFor="let answer of request.answers">{{ answer.responseText }}</li>
                     </ul>
-                </td>
+                </td> -->
               
                 
                 <td>
                   <button  pButton pRipple type="button" label="Affect answer" class="p-button-rounded p-button-danger p-button-sm custom-button"  [routerLink]="['/request/add-answer', request.idRequest]"></button>
-                </td>
-                <td>
-                <button pButton type="button" label="View Details" class="p-button-text" (click)="openDetailsModal(request.idRequest)"></button>
+              
+                <button pButton type="button" label="Details" class="p-button-text" (click)="openDetailsModal(request.idRequest)"></button>
+
+                  <!-- Dropdown to select new status -->
+            <p-dropdown [options]="statuses" [(ngModel)]="request.newStatus" optionLabel="label" placeholder="Change Status"></p-dropdown>
+            <!-- Button to update status -->
+           
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="updateStatus(request.idRequest, request.newStatus)">
+                <i class="fa fa-edit"></i>
+              </button>
             </td>
                 
             </tr>

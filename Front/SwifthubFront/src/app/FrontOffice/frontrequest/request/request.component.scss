@@ -3,8 +3,39 @@
     height: 40px; /* Hauteur personnalisée */
     font-size: 16px; /* Taille de la police personnalisée */
 }
+.p-button-success{
+    background-color: #B88989;
+    border-color: #B88989;
 
+}
+.p-button-warning{
+    background-color: #CAA28C;
+    border-color: #CAA28C;
+
+}
+button.clicked{
+    background-color:#9B7586 ;
+}
 .text-orange {
     color: rgb(214, 104, 0); /* ou toute autre couleur orangée que vous préférez */
   }
+
+  /* CSS in your component's .scss or .css file */
+.header {
+    display: flex;
+    justify-content: flex-end; /* Aligns child elements to the right */
+    padding: 10px; /* Adds some padding around the header */
+  }
+  
+  .search-container-right {
+    /* Additional styling for the search container if needed */
+  }
+
+  .card-img-top {
+    width: 100%; /* Make the image take the full width of the card */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 0.25rem 0.25rem 0 0; /* Optional: round corners at the top */
+}
+
+  
   

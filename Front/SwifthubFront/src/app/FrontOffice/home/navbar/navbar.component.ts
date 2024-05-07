@@ -20,5 +20,8 @@ export class NavbarComponent {
   navigateToAddComplaint() {
     this.router.navigate(['home/content/frontadd']);
   }
+  navigateToListAnswers() {
+    this.router.navigate(['home/content/list-answers']);
+  }
 
 }
