@@ -21,9 +21,12 @@ export class EditWorkshopComponent implements OnInit {
   formData!:Workshop;
 
 
-  constructor(private router:Router,private activatedRoute: ActivatedRoute, private workshopService: WorkshopService, private datePipe: DatePipe, private messageService: MessageService) {
-
-  }
+  constructor(
+    private router:Router,
+    private activatedRoute: ActivatedRoute,
+     private workshopService: WorkshopService,
+      private datePipe: DatePipe,
+       private messageService: MessageService) {}
 
   stateOptions: any[] = [
     { label: 'In-Person', value: 'inPerson' },
