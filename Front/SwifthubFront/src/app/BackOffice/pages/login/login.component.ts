@@ -7,6 +7,9 @@ import {AuthenticationRequest} from "../../Model/AuthenticationRequest";
 import {AuthenticationResponse} from "../../Model/AuthenticationResponse";
 import {AuthenticationService} from "../../../services/users/authentication.service";
 import {VerificationRequest} from "../../Model/VerificationRequest";
+import { User } from 'src/app/models/user/user';
+import { UserService } from 'src/app/services/users/user.service';
+import { Role } from 'src/app/enums/role';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +21,7 @@ export class LoginComponent implements OnInit {
 
   public loginData: Login = new Login('', ''); // Initialize an instance of Login
   public messages: any[] = [];
+  users!:User[];
   formSubmit: boolean = false;
   loginForm: FormGroup;
   submitted: boolean = false;
@@ -27,7 +31,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder, private router: Router,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userService:UserService
   ) {
     this.loginForm = this.formBuilder.group({
       login: ['', Validators.required],
@@ -37,9 +42,12 @@ export class LoginComponent implements OnInit {
 
 
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getUsers();
+  }
 
   onSubmit() {
+   
     this.submitted = true;
 
 
@@ -55,13 +63,27 @@ export class LoginComponent implements OnInit {
     this.loginData.mdp = passwordControl.value;
     console.log("Login Data:", this.loginData);
 
+    const loggedInUser=this.users.find(user=>user.email==this.loginData.login);
+    if (!loggedInUser) {
+      console.log("not found!");
+      
+    }
+    console.log(loggedInUser);
+    
+
     this.authService.login(this.authRequest)
       .subscribe({
         next: (response) => {
           this.authResponse = response;
           if (!this.authResponse.mfaEnabled) {
             localStorage.setItem('token', response.accesToken as string);
-            this.router.navigate(['dashboard']);
+            if (loggedInUser?.role==Role.STUDENT) {
+              this.router.navigate(['home/content']);
+              
+            }else{
+              this.router.navigate(['dashboard']);
+            }
+           
           }
         }
       });
@@ -81,10 +103,25 @@ export class LoginComponent implements OnInit {
     this.authService.verifyCode(verifyRequest)
       .subscribe({
         next: (response) => {
-          localStorage.setItem('token', response.accesToken as string);
+        localStorage.setItem('token', response.accesToken as string);
+       
+          
           this.router.navigate(['dashboard']);
         }
       });
 
+  }
+
+  //fetch all users
+  getUsers(){
+    this.userService.getUsers().subscribe(
+      res=>{
+        this.users=res as User[];
+      },
+      err=>{
+        console.log("couldn't get all users"+ err);
+        
+      }
+    );
   }
 }
