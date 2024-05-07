@@ -16,6 +16,11 @@ export class ListRequestComponent implements OnInit {
   breadcrumbItems: MenuItem[] = [];
   displayModal: boolean = false;
   selectedRequest: any = null;
+  statuses = [
+    {label: 'AWAITING', value: 'AWAITING'},
+    {label: 'IN_PROGRESS', value: 'IN_PROGRESS'},
+    {label: 'DONE', value: 'DONE'}
+  ];
 
   constructor(private requestService:RequestService,private answerService: AnswerService, private route:Router ){
 
@@ -40,6 +45,26 @@ export class ListRequestComponent implements OnInit {
       }
     );
   }
+
+  updateStatus(idRequest: number, newStatus: any) {
+    console.log("New Status Received:", newStatus);
+
+    if (!newStatus) {
+        Swal.fire('Please select a status to update.');
+        return;
+    }
+    // Assuming newStatus is an object with a 'value' property
+    const statusValue = newStatus.value;
+    this.requestService.updateRequestStatus(idRequest, statusValue).subscribe(() => {
+        Swal.fire('Status Updated', 'The status has been successfully updated.', 'success');
+        this.loadRequests();
+    }, error => {
+        console.error('Failed to update status:', error);
+        Swal.fire('Error', 'Failed to update the status.', 'error');
+    });
+}
+
+
   openDetailsModal(idRequest: number): void {
     this.requestService.getRequestById(idRequest).subscribe(
       (response) => {

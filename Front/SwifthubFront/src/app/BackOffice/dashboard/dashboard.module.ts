@@ -90,7 +90,8 @@ import { PostAdminComponent } from '../post-admin/post-admin.component';
     DynamicDialogModule,
     ConfirmPopupModule,
     ToolbarModule,
-    ToastModule
+    ToastModule,
+    
   ],
   providers: [DialogService,DynamicDialogRef],
 })

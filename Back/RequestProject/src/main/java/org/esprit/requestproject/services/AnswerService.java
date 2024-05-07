@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +46,9 @@ public class AnswerService {
 
     public Answer CreateAnswer(Answer answer){
         answer.setId(sequenceGenerator.generateSequence(Answer.SEQUENCE_NAME));
+        if (answer.getResponseDate() == null) {
+            answer.setResponseDate(new Date());
+        }
         return this.answerRepo.save(answer);
 
     }
@@ -79,7 +83,6 @@ public class AnswerService {
             if (answer != null) {
                 existingAnswer.setResponseText(answer.getResponseText());
                 existingAnswer.setResponseDate(answer.getResponseDate());
-                existingAnswer.setAttachment(answer.getAttachment());
                 answer.setId(sequenceGenerator.generateSequence(Answer.SEQUENCE_NAME));
                 return this.answerRepo.save(existingAnswer);
             } else {

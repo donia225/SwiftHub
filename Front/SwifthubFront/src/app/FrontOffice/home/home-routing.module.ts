@@ -12,6 +12,7 @@ import { QuizfrontComponent } from '../quizfront/quizfront.component';
 import { RequestComponent } from '../frontrequest/request/request.component';
 import { FrontAddComponent } from '../frontrequest/front-add/front-add.component';
 import { UpdateReqComponent } from '../frontrequest/update-req/update-req.component';
+import { ListAnswersComponent } from '../frontrequest/answers/list-answers/list-answers.component';
 
 const routes: Routes = [
 
@@ -31,7 +32,8 @@ const routes: Routes = [
       { path: 'question/:quizId', component: QuestionComponent },
       {path: 'content/frontrequest', component:RequestComponent},
       {path: 'content/frontadd', component:FrontAddComponent},
-      {path: 'content/update-req/:id', component:UpdateReqComponent}
+      {path: 'content/update-req/:id', component:UpdateReqComponent},
+      {path: 'content/list-answers', component:ListAnswersComponent}
 
       
     ]
