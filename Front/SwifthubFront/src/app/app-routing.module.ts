@@ -7,10 +7,14 @@ import {ConsultUsersComponent} from "./components/users/consult-users/consult-us
 import {authGuard} from "./auth/auth.guard";
 
 
+
 const routes: Routes = [
   { path: '', redirectTo: "login", pathMatch: 'full' },
   { path: '', redirectTo: "dashboard", pathMatch: 'full' },
   { path: "home", loadChildren: () => import('../app/FrontOffice/home/home.module').then(m => m.HomeModule) },
+  { path: "dashboard", loadChildren: () => import('../app/BackOffice/dashboard/dashboard.module').then(m => m.DashboardModule) },
+ 
+  
   { path: "dashboard", loadChildren: () => import('../app/BackOffice/dashboard/dashboard.module').then(m => m.DashboardModule),canActivate: [authGuard] },
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},

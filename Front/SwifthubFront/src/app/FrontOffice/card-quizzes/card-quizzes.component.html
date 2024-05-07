@@ -19,7 +19,7 @@
           <!-- Titre de la carte -->
           <h5 class="card-title">{{ quiz.quizName }}</h5>
           <h5>{{quiz.quizTime}}</h5>
-          <!-- Lien vers un autre endroit -->
+          
         
           <a (click)="logQuizId(quiz.quizId)" [routerLink]="['/home/question', quiz.quizId]" class="btn btn-primary">Start Quiz</a>
 
