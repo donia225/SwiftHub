@@ -4,8 +4,10 @@ import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Meeting } from 'src/app/models/meeting/meeting';
+import { User } from 'src/app/models/user/user';
 import { Workshop } from 'src/app/models/workshop/workshop';
 import { MeetingService } from 'src/app/services/meeting/meeting.service';
+import { UserService } from 'src/app/services/users/user.service';
 import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 
 @Component({
@@ -17,6 +19,7 @@ export class AddWorkshopComponent implements OnInit {
 
   breadcrumbItems!: MenuItem[];
   generatedMeeting!:Meeting;
+  // loggedInUser!:User;
   workshop: Workshop = {
     workshop_id: "",
     title: "",
@@ -27,7 +30,7 @@ export class AddWorkshopComponent implements OnInit {
     location: "",
     link: "",
     // static untill user token is set
-    userId: "662bb6b46c4b2853ebe30871",
+    userId: "",
     feedbacks: [],
     joinedUsers: [],
     meetingId: ''
@@ -35,11 +38,19 @@ export class AddWorkshopComponent implements OnInit {
   addWorkshopForm!: FormGroup;
   presenceType: string = 'InPerson';
   dateValidity!: boolean;
+  loggedInUser!: User;
 
 
 
 
-  constructor(private sw:WorkshopService,private meetingServie:MeetingService,private datePipe: DatePipe,private messageService:MessageService,private router:Router) { }
+  constructor(
+    private sw:WorkshopService,
+    private meetingServie:MeetingService,
+    private datePipe: DatePipe,
+    private messageService:MessageService,
+    private router:Router,
+    private serviceUser:UserService
+  ) { }
 
   //options for workshop
   stateOptions: any[] = [
@@ -78,7 +89,10 @@ export class AddWorkshopComponent implements OnInit {
          start_date: this.formatDate(this.addWorkshopForm.value.start_date),
          end_date: this.formatDate(this.addWorkshopForm.value.end_date),
          meetingId:this.generatedMeeting.meeting_id,
+         userId:this.loggedInUser.id
        };
+       console.log(formData);
+       
        this.sw.addWorkshop(formData).subscribe(
          res=>{
           //show popup message
@@ -111,6 +125,28 @@ ngOnInit(): void {
     { label: 'add' }
   ];
 
+  //fetch local storage
+  var token= localStorage.getItem("token");
+  console.log(token);
+  
+ if (token) {
+  
+  this.serviceUser.findUserBytoken(token).subscribe(
+    res=>{
+   this.loggedInUser=res as User;   
+   console.log(this.loggedInUser);
+   
+    },
+    err=>{
+      console.log(err);
+      
+    }
+  );
+
+  
+
+}
+ 
 
   //add workshop form
   this.addWorkshopForm = new FormGroup({
@@ -121,7 +157,7 @@ ngOnInit(): void {
     end_date: new FormControl(this.workshop.end_date, [Validators.required]),
     location: new FormControl(this.workshop.location),
     // link: new FormControl(this.workshop.link),
-    userId: new FormControl(this.workshop.userId),
+    // userId: new FormControl(this.workshop.userId),
   })
 
 

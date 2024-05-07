@@ -10,7 +10,7 @@ import {authGuard} from "./auth/auth.guard";
 
 const routes: Routes = [
   { path: '', redirectTo: "login", pathMatch: 'full' },
-  { path: '', redirectTo: "dashboard", pathMatch: 'full' },
+  // { path: '', redirectTo: "dashboard", pathMatch: 'full' },
   { path: "home", loadChildren: () => import('../app/FrontOffice/home/home.module').then(m => m.HomeModule) },
   { path: "dashboard", loadChildren: () => import('../app/BackOffice/dashboard/dashboard.module').then(m => m.DashboardModule) },
  
@@ -20,7 +20,7 @@ const routes: Routes = [
   {path:"register",component:RegisterComponent},
   {path:'meeting',component:MeetingComponent},
   {path:'consultUser',component:ConsultUsersComponent},
-  { path: '**', redirectTo: 'login' }, 
+  // { path: '**', redirectTo: 'login' },
 
 
 

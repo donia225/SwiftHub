@@ -67,14 +67,14 @@ export class AppMenuComponent implements OnInit {
         label: 'Workshop',
         icon: 'pi pi-fw pi-briefcase',
         items: [
-          {
-            label: 'Auth',
-            icon: 'pi pi-fw pi-user',
-            items: [
-              { label: 'Login', icon: 'pi pi-fw pi-sign-in', routerLink: ['/login'] },
-              { label: 'Register' }
-            ]
-          },
+          // {
+          //   label: 'Auth',
+          //   icon: 'pi pi-fw pi-user',
+          //   items: [
+          //     { label: 'Login', icon: 'pi pi-fw pi-sign-in', routerLink: ['/login'] },
+          //     { label: 'Register' }
+          //   ]
+          // },
           {
             label: 'Workshop',
             icon: 'pi pi-fw pi-briefcase',

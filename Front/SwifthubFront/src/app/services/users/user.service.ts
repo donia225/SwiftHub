@@ -30,5 +30,13 @@ export class UserService {
     return this.http.delete<void>(`${this.apiServerUrl}/delete/${userId}`);
   }
 
+  public findUserBytoken(token: string){
+    return this.http.get(`${this.apiServerUrl}/${token}`);
+  }
+
+  public findUserByEmail(email: string){
+    return this.http.get(`${this.apiServerUrl}/email/${email}`);
+  }
+
 
 }
