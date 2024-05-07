@@ -1,5 +1,5 @@
 import { Answer } from "./Answer";
-import { Category } from "./Category";
+
 
 
 export interface Request{
@@ -8,8 +8,6 @@ export interface Request{
     description: string;
     status: string;
     creationDate: Date;
-    attachment: string;
-    category: Category;
-    categoryName: string;
+    categoryName:string;
     answers:Answer[];
 }

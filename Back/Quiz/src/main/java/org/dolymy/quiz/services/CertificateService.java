@@ -1,9 +1,13 @@
 package org.dolymy.quiz.services;
 
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,7 +17,9 @@ import org.dolymy.quiz.entities.Certificate;
 import org.dolymy.quiz.repos.CertificateRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import java.io.ByteArrayOutputStream;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -64,13 +70,11 @@ public class CertificateService {
         return this.certificateRepository.save(certificate);
 
     }
-
-    public void generateCertificatePdf() throws FileNotFoundException {
-        String fileName = "certificate.pdf";
-        String outputPath = attachmentPath + "/" + fileName;
+    public byte[] generateCertificatePdf() throws IOException {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
         // Create a PDF writer
-        PdfWriter pdfWriter = new PdfWriter(new FileOutputStream(outputPath));
+        PdfWriter pdfWriter = new PdfWriter(outputStream);
 
         // Create a PDF document
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
@@ -81,7 +85,7 @@ public class CertificateService {
         Document document = new Document(pdfDocument);
 
         // Add certificate content
-        Paragraph title = new Paragraph("Certificate of Accomplishment")
+        Paragraph title = new Paragraph("Accomplishment Certificate")
                 .setFontColor(ColorConstants.BLUE)
                 .setBold()
                 .setFontSize(24)
@@ -89,36 +93,89 @@ public class CertificateService {
                 .setMarginBottom(20);
         document.add(title);
 
-        Paragraph recipient = new Paragraph("This certificate is presented to:")
+        document.add(new Paragraph("In recognition of your achievement of passing the quiz of our soft skills sessions")
                 .setFontSize(14)
                 .setTextAlignment(TextAlignment.CENTER)
-                .setMarginBottom(20);
-        document.add(recipient);
+                .setMarginBottom(30));
 
-        Paragraph recipientName = new Paragraph("Recipient's Name")
-                .setBold()
+        // Add the signature image
+        // Ajouter la signature fictive
+        PdfFont font = PdfFontFactory.createFont();
+        Paragraph signature = new Paragraph("Signature")
+                .setFont(font)
                 .setFontSize(18)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setMarginBottom(30);
-        document.add(recipientName);
-
-        Paragraph message = new Paragraph("In recognition of your achievement of passing the quiz of our soft skills sessions.")
-                .setFontSize(14)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setMarginBottom(30);
-        document.add(message);
-
-        Paragraph signature = new Paragraph("Authorized Signature")
-                .setBold()
-                .setFontSize(16)
-                .setTextAlignment(TextAlignment.RIGHT)
-                .setMarginTop(100);
+                .setFontColor(ColorConstants.BLACK)
+                .setBold();
         document.add(signature);
+
+        // Ajouter le texte "Esprit" en dessous de la signature
+        Paragraph espritText = new Paragraph("Esprit")
+                .setFont(font)
+                .setFontSize(12)
+                .setFontColor(ColorConstants.BLACK);
+        document.add(espritText);
 
         // Close the document
         document.close();
         pdfDocument.close();
 
+        return outputStream.toByteArray();
     }
+
+//    public void generateCertificatePdf() throws FileNotFoundException {
+//        String fileName = "certificate.pdf";
+//        String outputPath = attachmentPath + "/" + fileName;
+//
+//        // Create a PDF writer
+//        PdfWriter pdfWriter = new PdfWriter(new FileOutputStream(outputPath));
+//
+//        // Create a PDF document
+//        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+//        // Set document with landscape orientation
+//        pdfDocument.setDefaultPageSize(PageSize.A4.rotate());
+//
+//        // Create a document
+//        Document document = new Document(pdfDocument);
+//
+//        // Add certificate content
+//        Paragraph title = new Paragraph("Certificate of Accomplishment")
+//                .setFontColor(ColorConstants.BLUE)
+//                .setBold()
+//                .setFontSize(24)
+//                .setTextAlignment(TextAlignment.CENTER)
+//                .setMarginBottom(20);
+//        document.add(title);
+//
+//        Paragraph recipient = new Paragraph("This certificate is presented to:")
+//                .setFontSize(14)
+//                .setTextAlignment(TextAlignment.CENTER)
+//                .setMarginBottom(20);
+//        document.add(recipient);
+//
+//        Paragraph recipientName = new Paragraph("Recipient's Name")
+//                .setBold()
+//                .setFontSize(18)
+//                .setTextAlignment(TextAlignment.CENTER)
+//                .setMarginBottom(30);
+//        document.add(recipientName);
+//
+//        Paragraph message = new Paragraph("In recognition of your achievement of passing the quiz of our soft skills sessions.")
+//                .setFontSize(14)
+//                .setTextAlignment(TextAlignment.CENTER)
+//                .setMarginBottom(30);
+//        document.add(message);
+//
+//        Paragraph signature = new Paragraph("Authorized Signature")
+//                .setBold()
+//                .setFontSize(16)
+//                .setTextAlignment(TextAlignment.RIGHT)
+//                .setMarginTop(100);
+//        document.add(signature);
+//
+//        // Close the document
+//        document.close();
+//        pdfDocument.close();
+//
+//    }
 
 }

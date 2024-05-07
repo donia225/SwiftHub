@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/appointments/location")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
 public class LocationController {
 
     private final LocationServiceImpl service;

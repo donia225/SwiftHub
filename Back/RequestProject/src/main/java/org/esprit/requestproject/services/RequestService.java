@@ -1,15 +1,14 @@
 package org.esprit.requestproject.services;
 
-import org.esprit.requestproject.entities.Category;
 import org.esprit.requestproject.entities.Request;
 
 import org.esprit.requestproject.entities.Status;
-import org.esprit.requestproject.repositories.CategoryRepo;
 import org.esprit.requestproject.repositories.RequestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Transient;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +20,7 @@ public class RequestService {
     @Autowired
     private RequestRepo requestRepo;
 
-    @Autowired
-    private CategoryRepo categoryRepo;
+
 
     public RequestService(SequenceGeneratorService sequenceGenerator) {
         this.sequenceGenerator = sequenceGenerator;
@@ -37,8 +35,6 @@ public class RequestService {
         Optional<Request> optionalRequest = requestRepo.findById(id);
         if (optionalRequest.isPresent()) {
             Request request = optionalRequest.get();
-            Category category = request.getCategory();
-            String categoryName = category != null ? category.getCategoryName() : null;
 
             return request;
         } else {
@@ -55,7 +51,7 @@ public class RequestService {
 
 
 
-    public Request affectRequestionToCateg(Long idCategory, Request request) {
+   /* public Request affectRequestionToCateg(Long idCategory, Request request) {
         Optional<Category> optionalCategory = categoryRepo.findById(idCategory);
         if (optionalCategory.isPresent()) {
             Category category = optionalCategory.get();
@@ -73,7 +69,7 @@ public class RequestService {
             return requestRepo.save(request);
         }
         return null;
-    }
+    }*/
 
     @Transactional
     public Request updateRequest(Long id, Request request) {
@@ -88,17 +84,9 @@ public class RequestService {
                 // Mettre à jour les champs de la demande
                 existingRequest.setTitle(request.getTitle());
                 existingRequest.setDescription(request.getDescription());
-                //existingRequest.setAttachment(request.getAttachment());
-                //existingRequest.setStatus(request.getStatus());
+                existingRequest.setStatus(request.getStatus());
+                existingRequest.setCategoryName(request.getCategoryName());
 
-
-                // Vérifier si la catégorie associée à la demande existante est null
-               /* if (existingRequest.getCategory() == null) {
-                    existingRequest.setCategory(new Category()); // Créer une nouvelle catégorie si elle est null
-                }
-
-                // Mettre à jour l'ID de la catégorie associée à la demande
-                existingRequest.getCategory().setIdCategory(request.getCategory().getIdCategory());*/
 
                 request.setIdRequest(sequenceGenerator.generateSequence(Request.SEQUENCE_NAME));
                 return this.requestRepo.save(existingRequest);
@@ -112,7 +100,13 @@ public class RequestService {
         return null;
     }
 
-
+    @Transactional
+    public Request updateRequestStatus(Long id, String newStatus) {
+        return requestRepo.findById(id).map(request -> {
+            request.setStatus(Status.valueOf(newStatus)); // Ensure 'newStatus' is valid enum or handle exceptions
+            return requestRepo.save(request);
+        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Request not found with ID: " + id));
+    }
     public void deleteRequest(Long id) {
         requestRepo.deleteById(id);
 

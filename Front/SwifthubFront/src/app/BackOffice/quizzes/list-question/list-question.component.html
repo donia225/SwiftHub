@@ -14,39 +14,52 @@
       </ng-template>
   </p-toolbar>
 
-  <div class="flex table-header">
-  </div>
-
-  <table>
+  <table class="table">
     <thead>
       <tr>
         <th>Question</th>
         <th>Réponses</th>
+     
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <ng-container *ngFor="let question of questions">
         <tr>
-          <td>{{ question.question }}</td>
+          <td>{{ question.questiontxt }}</td>
           <td>
             <ul>
               <li *ngFor="let answer of question.answers">
-                <i></i> <span [innerHTML]=" answer.answerTxt"></span>
+                <span>{{ answer.answerTxt }}</span>
               </li>
             </ul>
           </td>
-          <td style="min-width: 150px;">
-            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2">
-              <i class="fa fa-edit"></i>
-            </button>
+         
+         
 
-            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning">
-              <i class="fa fa-trash"></i>
-            </button>
-          </td>
+          <td style="min-width: 150px;">
+            <a [routerLink]="['/quiz/update-question/update', quiz?.quizId, question.id]">
+              <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2">
+                <i class="fa fa-edit"></i>
+              </button>
+            </a>
+
+            <td>
+              <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteQuestion(question.id)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
         </tr>
       </ng-container>
     </tbody>
   </table>
+
+ <!-- Paginator -->
+ <!-- Paginator -->
+ <div class="card flex justify-content-center">
+  <p-paginator (onPageChange)="onPageChange($event)" [rows]="rows" [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[5]">
+  </p-paginator>
+</div>
+  
 </div>

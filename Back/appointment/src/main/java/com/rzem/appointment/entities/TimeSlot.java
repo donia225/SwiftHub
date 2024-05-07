@@ -2,8 +2,10 @@ package com.rzem.appointment.entities;
 
 import jakarta.persistence.Id;
 import lombok.*;
+import org.bson.types.ObjectId;
 
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -14,7 +16,11 @@ import java.util.Date;
 
 public class TimeSlot {
 
-    private Date startTime;
-    private Date endTime;
+    @Id
+    private String id;
+
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private boolean reserved;
 
 }

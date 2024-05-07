@@ -16,7 +16,7 @@ public class Feedback {
     private int id;
     private String comment;
     private int rating;
-    private String studentId;
+    //private String studentId;
     private Appointment appointment;
 
 }
