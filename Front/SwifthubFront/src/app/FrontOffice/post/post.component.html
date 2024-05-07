@@ -15,7 +15,7 @@
           <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
             <div>
               <label for="idUser">ID User:</label>
-              <input type="text" id="idUser" name="idUser" [(ngModel)]="formData.idUser" required>
+              <input type="text" id="idUser" name="idUser" [(ngModel)]="formData.idUser"  required>
             </div>
             <div>
               <label for="title">Title:</label>
@@ -24,10 +24,6 @@
             <div>
               <label for="description">Description:</label>
               <textarea id="description" name="description" [(ngModel)]="formData.description" required></textarea>
-            </div>
-            <div>
-              <label for="attachment">Attachment:</label>
-              <input type="file" id="attachment" name="attachment" (change)="onFileSelected($event)">
             </div>
             <button type="submit"class="btn btn-primary">Submit</button>
             <button type="button" (click)="cancelAdd()"class="btn btn-primary">Cancel</button>
@@ -40,7 +36,7 @@
             <div class="col-md-10 offset-md-2">
               <ng-container *ngFor="let post of posts">
                 <div *ngIf="post.visibility === 1" class="card mb-3">
-                  <div class="card-header d-flex justify-content-between">
+                  <div class="card-header d-flex justify-content-between" >
                     <span>{{ post.idUser }}</span>
                   </div>
                   <div class="card-body">
@@ -81,10 +77,6 @@
               <label for="editDescription">Description:</label>
               <textarea id="editDescription" name="editDescription" [(ngModel)]="editingPost.description" required></textarea>
             </div>
-            <div>
-              <label for="editAttachment">Attachment:</label>
-              <input type="file" id="editAttachment" name="editAttachment" (change)="onEditFileSelected($event)">
-            </div>
             <button type="submit" class="btn btn-edit">Update</button>
             <span style="margin-right: 50px;"></span>
             <button type="button" (click)="cancelEdit()" class="btn btn-edit">Cancel</button>
@@ -97,4 +89,5 @@
     </div>
   </div>
 </section>
+<p-toast></p-toast>
 

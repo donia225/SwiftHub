@@ -1,5 +1,7 @@
 package org.dolymy.post.services;
 import org.dolymy.post.entities.Post;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Date;
 import java.util.List;
@@ -13,9 +15,8 @@ public interface PostService {
     //detele
     void deletePostById(Integer id);
     //Add
-    Post addPost(Post post);
-
-    //Update
+    //Post addPost(Post post);
+    ResponseEntity<Post> addPost(@RequestBody Post post);    //Update
     Post updatePost(Post post);
 
     List<Post> findPostByKeyword(String keyword);

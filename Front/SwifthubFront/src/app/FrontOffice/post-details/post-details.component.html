@@ -43,8 +43,14 @@
   <div class="comment-container">
     <div class="comment-input">
       
-      <textarea class="form-control" rows="3" [(ngModel)]="newCommentText"></textarea>
-      <button class="btn btn-add" (click)="addComment()">Add Comment</button>
+      <textarea 
+    rows="5"
+    cols="30" 
+    pInputTextarea 
+    [autoResize]="true"
+    [(ngModel)]="newCommentText">
+</textarea>
+      <button class="btn btn-add" (click)="addComment()" >Add Comment</button>
     </div>
   </div>
 </div>

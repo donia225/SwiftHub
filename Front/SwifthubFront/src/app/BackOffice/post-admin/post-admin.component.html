@@ -23,9 +23,11 @@
             <td>{{ post.idUser }}</td>
             <td>{{ post.description ? post.description.split(' ').slice(0, 4).join(' ') : '' }}...</td>
             <td>
-                <button *ngIf="post.visibility === 1" type="button" class="p-button p-button-secondary p-button-danger" (click)="hidePost(post)">Hide</button>
-                <button *ngIf="post.visibility === 0" type="button" class="p-button p-button-secondary p-button-success" (click)="showPost(post)">Show</button>
-            </td>
+                    <p-toast />
+                    <p-confirmDialog />
+                    <button class="p-button p-button-secondary p-button-danger" *ngIf="post.visibility === 1" (click)="hidePost(post)" label="hide"  >Hide</button>
+                    <button class="p-button p-button-secondary p-button-success" *ngIf="post.visibility === 0" (click)="showPost(post)" label="show" severity="danger"  >Show</button>
+             </td>
             
             
             

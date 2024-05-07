@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.dolymy.post.entities.Comment;
 import org.dolymy.post.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class CommentController {
     //add
     @PostMapping("")
     @ResponseBody
-    public Comment addingComment(@RequestBody Comment comment,@RequestParam int idPost) {
+    public ResponseEntity<Comment> addingComment(@RequestBody Comment comment, @RequestParam int idPost) {
         return commentService.addComment(comment,idPost);
     }
 

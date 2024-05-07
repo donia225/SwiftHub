@@ -78,6 +78,7 @@ import { UpdateReqComponent } from './FrontOffice/frontrequest/update-req/update
 import { AddAnswerComponent } from './requests/add-answer/add-answer.component';
 import { PostAdminComponent } from './BackOffice/post-admin/post-admin.component';
 import { EditorModule } from 'primeng/editor';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 
@@ -118,6 +119,7 @@ import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 
   ],
   imports: [
+    InputTextareaModule,
     TriStateCheckboxModule,
     EditorModule,
     BrowserModule,
