@@ -7,6 +7,7 @@ import { Meeting } from 'src/app/models/meeting/meeting';
 import { User } from 'src/app/models/user/user';
 import { Workshop } from 'src/app/models/workshop/workshop';
 import { MeetingService } from 'src/app/services/meeting/meeting.service';
+import { UserService } from 'src/app/services/users/user.service';
 import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 
 @Component({
@@ -29,19 +30,29 @@ export class ShowWorkshopComponent implements OnInit {
 
 
   //static logged in user
-  LoggedInUser:User={
-    id: '662bb68d6c4b2853ebe30870',
-    username: 'ons',
-    password: '$2a$10$xa.eJw6xfl7pAPopFQHTcezeCSsufmssLZ67Jck8md47Fw9l5l5/u',
-    email: 'ons.hanafi2@gmail.com',
-    className: 'Class A',
-    department: 'Computer Science',
-    managedService: 'IT Support',
-    role: Role.STUDENT,
-    ImageUrl: 'com.user.management.User.user.User'
-  }
+  LoggedInUser!:User;
+  // ={
+  //   id: '662bb68d6c4b2853ebe30870',
+  //   username: 'ons',
+  //   password: '$2a$10$xa.eJw6xfl7pAPopFQHTcezeCSsufmssLZ67Jck8md47Fw9l5l5/u',
+  //   email: 'ons.hanafi2@gmail.com',
+  //   className: 'Class A',
+  //   department: 'Computer Science',
+  //   managedService: 'IT Support',
+  //   role: Role.STUDENT,
+  //   ImageUrl: 'com.user.management.User.user.User'
+  // }
 
-  constructor(private serviceWorkshop: WorkshopService,private meetingService:MeetingService, public router: Router, private confirmationService: ConfirmationService, private messageService: MessageService,private datePipe: DatePipe) { }
+  constructor(
+    private serviceWorkshop: WorkshopService,
+    private meetingService:MeetingService,
+    private router: Router,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
+    private datePipe: DatePipe,
+    private userService:UserService
+      
+      ) { }
 
   //show html for students: frontOffice
   isStudentRoute() {
@@ -71,9 +82,9 @@ export class ShowWorkshopComponent implements OnInit {
 
   //getUsersList
   getUsers() {
-    this.serviceWorkshop.getAllUsers().subscribe(
+    this.userService.getUsers().subscribe(
       (res) => {
-        this.users = res;
+        this.users = res as User[];
       },
       err => {
         console.log(err);
