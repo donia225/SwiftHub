@@ -26,6 +26,7 @@ export class AppMenuComponent implements OnInit {
             items: [
                 { label: 'Ajouter quiz', icon: 'pi pi-fw pi-id-card', routerLink: ['/quiz/add-quiz'] },
                 { label: 'List quiz', icon: 'pi pi-fw pi-check-square', routerLink: ['/quiz/list-quiz'] },
+                
                
             ]
         },
@@ -39,29 +40,92 @@ export class AppMenuComponent implements OnInit {
                
             ]
         },
+        {label: 'question',
+        items: [
+           
+            { label: 'List questions', icon: 'pi pi-fw pi-check-square', routerLink: ['/question/list-question'] },
+            
+           
+        ]
+    },
+
+    
+    {
+        label: 'Request',
+        icon: '',
+        items: [
+          
+            {
+                label: 'Request',
+                icon: 'pi pi-book',
+                items: [
+                    {
+                        label: 'List requests',
+                        icon: 'pi pi-list',
+                        routerLink: ['/request/list-request']
+                    }
+                   
+                ]
+            },
+            
+        ]
+    },
+
+    {
+        label: '',
+        icon: '',
+        items: [
+          
+            {
+                label: 'Category',
+                icon: 'pi pi-book',
+                items: [
+                    {
+                        label: 'List categories',
+                        icon: 'pi pi-list',
+                        routerLink: ['/category/list-category']
+                    },
+                    {
+                        label:'Add category',
+                        icon: 'pi pi-plus',
+                        routerLink: ['/category/add-category']
+                    }
+                   
+                ]
+            },
+            
+        ]
+    },
        
            
             
             {
-                label: 'Pages',
+                label: 'Workshop',
                 icon: 'pi pi-fw pi-briefcase',
                 items: [
                   
                     {
-                        label: 'Auth',
-                        icon: 'pi pi-fw pi-user',
+                        label: 'Workshop',
+                        icon: 'pi pi-fw pi-briefcase',
                         items: [
                             {
-                                label: 'Login',
-                                icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/login']
+                                label: 'workshops',
+                                icon: 'pi pi-fw pi-arrow-right',
+                                routerLink: ['/workshopBack/show']
                             },
                             {
-                                label:'Register'
+                                label:'feedbacks',
+                                icon: 'pi pi-fw pi-arrow-right',
+                                routerLink: ['/workshopBack/feedback']
                             }
                            
                         ]
                     },
+
+
+
+
+
                     
                 ]
             },

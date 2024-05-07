@@ -1,0 +1,29 @@
+<div mat-dialog-title>
+    <h1>insert location</h1>
+</div>
+
+<form [formGroup]="empForm" (ngSubmit)="onFormSubmit()">
+<div mat-dialog-content class="content">
+    
+    
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>bloc</mat-label>
+            <input matInput type="text" formControlName="bloc">
+        </mat-form-field> 
+        <mat-form-field appearance="outline">
+            <mat-label>salle</mat-label>
+            <input matInput type="text" formControlName="salle">
+        </mat-form-field> 
+        
+        
+    </div>
+    
+      
+</div>
+
+<div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" mat-dialog-close="false">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">{{data ? 'update' :'save'}}</button> 
+</div>
+</form>

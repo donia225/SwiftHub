@@ -8,11 +8,12 @@ eureka:
 server:
   port: 8050
 
+spring:
   data:
     mongodb:
       host: localhost
       port: 27017
-      database: jwt_security
+      database: userr
 
 
 

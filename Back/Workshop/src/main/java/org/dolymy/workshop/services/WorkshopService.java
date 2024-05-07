@@ -3,13 +3,16 @@ package org.dolymy.workshop.services;
 import lombok.RequiredArgsConstructor;
 import org.dolymy.workshop.entities.Workshop;
 import org.dolymy.workshop.repositories.FeedbackRepository;
+import org.dolymy.workshop.repositories.MeetingRepository;
 import org.dolymy.workshop.repositories.WorkshopRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -23,9 +26,23 @@ public class WorkshopService {
 
     private final WorkshopRepository workshopRepository;
     private final FeedbackRepository feedbackRepository;
+    private  final MeetingRepository meetingRepository;
+  //  private final MeetingService meetingService;
 
 
     public Workshop saveWorkshop(Workshop workshop) {
+        //save workshopID to meeting if a meeting is created
+//        Meeting meeting=null;
+//        if (workshop.getMeetingId()!=null){
+//            Optional<Meeting> optionalMeeting=this.meetingRepository.findById(workshop.getMeetingId());
+//            if (optionalMeeting.isPresent()){
+//                meeting=optionalMeeting.get();
+//                meeting.setWorkshop_id(workshop.getWorkshop_id());
+//                this.meetingService.updateMeeting(workshop.getMeetingId(), meeting);
+//            }
+//
+//        }
+
         return this.workshopRepository.save(workshop);
     }
 
@@ -54,6 +71,44 @@ public class WorkshopService {
 
 
         return workshop;
+    }
+
+    public boolean JoinWorkshop(String workshopId, String userId) {
+        Workshop workshop=new Workshop();
+        Integer workshopCapacity=null;
+        List<String>usersInWorkshop=new ArrayList<String>();
+        boolean check=false;
+        if(workshopId!=null && userId!=null){
+            Optional<Workshop> optionalWorkshop=this.workshopRepository.findById(workshopId);
+            if (optionalWorkshop.isPresent())
+            {
+                workshop=optionalWorkshop.get();
+                workshopCapacity=workshop.getCapacity();
+                if (workshopCapacity>0) {
+                    if (workshop.getJoinedUsersId() == null) {
+                        usersInWorkshop.add(userId);
+                        workshop.setJoinedUsersId(usersInWorkshop);
+                        // reducing workshop capacity
+                        workshop.setCapacity(workshop.getCapacity() - 1);
+                        check = true;
+                    } else if (workshop.getJoinedUsersId().stream().anyMatch(userId::equals)) {
+                        check = false;
+                    } else {
+                        workshop.getJoinedUsersId().add(userId);
+                        // reducing workshop capacity
+                        workshop.setCapacity(workshop.getCapacity() - 1);
+                        check = true;
+                    }
+                    //update workshop
+                    this.updateWorkshop(workshopId,workshop);
+                }else {
+                    LOG.error("CAPACITY IS 0");
+                }
+            }else {
+                LOG.error("WORKSHOPID IS NULL AND/OR USERID IS NULL");
+            }
+        }
+        return check;
     }
 
     /**
@@ -96,8 +151,10 @@ public class WorkshopService {
                 //delete workshop
                 this.workshopRepository.deleteById(id);
                 //delete feedbacks corresponding to this workshop
-                workshop.get().getFeedbacks().stream()
-                        .forEach(feedbackRepository::delete);
+                if(workshop.get().getFeedbacks()!=null){
+                    workshop.get().getFeedbacks().stream()
+                            .forEach(feedbackRepository::delete);
+                }
 
 
             } else LOG.error(ERROR_NON_PRESENT_ID, id);
@@ -105,4 +162,33 @@ public class WorkshopService {
 
     }
 
+    /**
+     *
+     * @param id
+     * @return a list of workshop where the id belongs to the user that joined that workshop
+     */
+
+    public List<Workshop> findWorkshopsByJoinedUser(String id) {
+         List<Workshop> workshops=this.findWorkshops();
+         //get the workshops that have the user in the joined users list
+       return workshops.stream().filter(workshop ->
+             workshop.getJoinedUsersId()!=null&&workshop.getJoinedUsersId().stream().anyMatch(joinedUser -> joinedUser.equals(id))).collect(Collectors.toList());
+    }
+
+    /**
+     *
+     * @param id
+     * @return a list of workshops with the creator being the user passed on parameter (id)
+     */
+    public List<Workshop> findWorkshopsByUser(String id) {
+        if (id!=null) {
+            List<Workshop> workshops = this.findWorkshops();
+            return workshops.stream()
+                    .filter(workshop -> workshop.getUserId().equals(id))
+                    .collect(Collectors.toList());
+
+        }else {
+            throw new IllegalArgumentException("NULL_ID_PASSED_ON_PARAMETER");
+        }
+    }
 }

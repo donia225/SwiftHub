@@ -46,5 +46,11 @@ Thumbs.db
 
 #angular
 .angular
+node_modules
+SwifthubFront/.angular
+# SwifthubFront/.gitignore
+SwifthubFront/node_modules
+#angular
+.angular
 SwifthubFront/.gitignore
 SwifthubFront/node_modules

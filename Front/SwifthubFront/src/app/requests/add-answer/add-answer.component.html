@@ -1,0 +1,17 @@
+<div class="grid p-fluid">
+    <div class="col-12 md:col-10">
+        <div class="card">
+            <h5>Add Answer</h5>
+            <form [formGroup]="answerform" (ngSubmit)="onSubmit()">
+                <div class="field">
+                    <label for="responseText">responseText</label>
+                    <textarea rows="5" cols="60" formControlName="responseText" placeholder="responseText"></textarea>
+                </div>
+
+             
+                
+                <button style="width: 20%;" pButton pRipple type="submit" label="Add answer" class="p-button-warning"></button>
+            </form>
+        </div>
+    </div>
+</div>

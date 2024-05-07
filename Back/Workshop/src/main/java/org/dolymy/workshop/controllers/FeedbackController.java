@@ -1,6 +1,7 @@
 package org.dolymy.workshop.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.dolymy.workshop.services.NotificationService;
 import org.dolymy.workshop.entities.Feedback;
 import org.dolymy.workshop.services.FeedbackService;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 public class FeedbackController {
 
     private final FeedbackService feedbackService;
+    private final NotificationService notificationService;
 
     /**
      * creates a new feedback
@@ -21,8 +23,11 @@ public class FeedbackController {
      */
     @PostMapping
     public Feedback addFeedback(@RequestBody Feedback feedback){
+        this.notificationService.sendNotification(feedback);
         return this.feedbackService.saveFeedback(feedback);
     }
+
+
 
     /**
      * Retrieve all feedbacks.
@@ -62,5 +67,13 @@ public class FeedbackController {
     public void deleteFeedback(@PathVariable String id){
         this.feedbackService.deleteFeedback(id);
     }
+
+//    /**
+//     * get feedback by workshop id
+////     */
+//    @GetMapping("/workshop/{id}")
+//    public List<Feedback> getFeedBackByWorkshop(@PathVariable String id){
+//        return this.feedbackService.
+//    }
 
 }

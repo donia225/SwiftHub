@@ -20,6 +20,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "sockjs-client",
+              "stompjs"
+            ],
             "outputPath": "dist/gestion-RH",
             "index": "src/index.html",
             "main": "src/main.ts",

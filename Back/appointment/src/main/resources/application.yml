@@ -3,4 +3,14 @@ spring:
     name: appointments
   config:
     import: optional:configserver:http://localhost:8888
-
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: mohamed.rzem98@gmail.com
+    password: canwniegwxxahrgj
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

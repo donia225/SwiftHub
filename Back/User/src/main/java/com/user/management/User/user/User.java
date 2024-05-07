@@ -1,15 +1,18 @@
 package com.user.management.User.user;
 
+import com.user.management.User.token.Token;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,6 +32,12 @@ public class User implements UserDetails {
     private String managedService;
     private Role role;
     private String ImageUrl;
+    private boolean mfaEnabled;
+    private String secret;
+
+
+    @DBRef
+    private List<Token> tokens = new ArrayList<>();
 
 
     @Override
