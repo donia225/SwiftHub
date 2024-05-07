@@ -5,5 +5,6 @@ export interface QuizModel {
     quizName: string;
     quizTime: Date;
     questions: QuestionModel[];
+    
 }
 

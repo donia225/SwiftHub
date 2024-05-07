@@ -9,7 +9,10 @@ import { QuizModel } from '../Model/quiz-model';
 })
 export class UpdateQuizComponent implements OnInit {
   quizId!: number;
-  updatedQuiz: QuizModel = { quizId: 0, quizName: '', quizTime: new Date(), questions: [] };
+  updatedQuiz: QuizModel = {
+    quizId: 0, quizName: '', quizTime: new Date(), questions: [],
+   
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -24,8 +27,13 @@ export class UpdateQuizComponent implements OnInit {
       if (id !== null) {
         this.quizId = +id;
         this.getQuizDetails(this.quizId);
+
+       
+
       }
+      
     });
+    
   }
 
   getQuizDetails(quizId: number): void {
