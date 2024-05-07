@@ -1,6 +1,6 @@
 export interface Post {
     id: number;
-    idUser: number;
+    idUser: string;
     title: string;
     description: string;
     postDate: Date;
@@ -13,7 +13,7 @@ export interface Post {
   export interface Comment {
     id: number | null;
     postId: number;
-    idUser: number;
+    idUser: string;
     content: string;
     commentDate: Date;
     textColor: string;

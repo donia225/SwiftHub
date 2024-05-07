@@ -27,7 +27,7 @@ public class Post implements Serializable {
     String attachment ;
     Integer visibility;
     @Column(name = "userPost")
-    Integer idUser;
+    String idUser;
 
     @OneToMany(mappedBy="post", cascade = CascadeType.ALL)
     private List<Comment> comments;

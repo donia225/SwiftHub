@@ -4,7 +4,8 @@ import { PostService } from '../post/post.service';
 import { Comment } from '../post/post.model';
 import { CommentService } from '../post/comment.service';
 import {  MessageService } from 'primeng/api';
-
+import { UserService } from 'src/app/services/users/user.service';
+import { User } from 'src/app/models/user/user';
 
 @Component({
   selector: 'app-post-details',
@@ -25,8 +26,13 @@ export class PostDetailsComponent implements OnInit {
   showForm = false;
   editingComment: Comment | null = null;
   showEditForm = false;
+  LoggedInUser!:User;
   
-  constructor(private postService: PostService, private commentService: CommentService,private messageService:MessageService) {}
+  constructor(private postService: PostService,
+     private commentService: CommentService,
+     private messageService:MessageService,
+     private userService:UserService
+    ) {}
   
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.postId && !changes.postId.firstChange) {
@@ -36,6 +42,25 @@ export class PostDetailsComponent implements OnInit {
   
   ngOnInit(): void {
     this.loadPostDetails();
+   
+      //fetch local storage
+    var email= window.localStorage.getItem("email");
+    console.log(email);
+    
+   if (email ) {
+   
+    this.userService.findUserByEmail(email).subscribe(
+      res=>{
+     this.LoggedInUser=res as User;   
+     console.log(this.LoggedInUser);
+     
+      },
+      err=>{
+        console.log(err);
+        
+      }
+    );
+  }
   }
 
   
@@ -74,7 +99,7 @@ export class PostDetailsComponent implements OnInit {
         postId: this.postId, 
         content: commentContent,
         commentDate: new Date(),
-        idUser: 12,
+        idUser: this.LoggedInUser.username,
         textColor: this.textColor,
         isBold: this.isBold,
         isItalic: this.isItalic,
