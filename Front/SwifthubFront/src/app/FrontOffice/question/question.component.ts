@@ -1,6 +1,7 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { ResultModel } from './../../BackOffice/quizzes/Model/result-model';
+import { Component, OnInit, HostListener, AfterViewInit } from '@angular/core';
 import { interval } from 'rxjs';
-import { QuestionService } from './services/question.service';
+import { QuestionService } from 'src/app/BackOffice/quizzes/service/question.service';
 import { QuestionModel } from 'src/app/BackOffice/quizzes/Model/question-model';
 import { AnswerModel } from 'src/app/BackOffice/quizzes/Model/answer-model';
 import { QuizModel } from 'src/app/BackOffice/quizzes/Model/quiz-model';
@@ -8,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import { QuizserviceService } from 'src/app/BackOffice/quizzes/service/quizservice.service';
 import { HttpClient } from '@angular/common/http';
 import { CertificateService } from 'src/app/BackOffice/quizzes/service/certificate.service';
+import { environment } from 'src/environments/environment';
+
 
 
 @Component({
@@ -15,12 +18,12 @@ import { CertificateService } from 'src/app/BackOffice/quizzes/service/certifica
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss']
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent implements AfterViewInit {
   public name: string = "";
   public questionList!:  QuestionModel[];
   public currentQuestion: number = 0;
   public points: number = 0;
-  public counter = 60;
+  public counter = 120;
   public correctAnswer: number = 0;
   public inCorrectAnswer: number = 0;
   public interval$: any;
@@ -29,9 +32,15 @@ export class QuestionComponent implements OnInit {
   public quiz: QuizModel | undefined;
   public selectedAnswers: AnswerModel[] = []; 
  public  maxPossiblePoints: number = 0;
- 
+ public totalScore: number = 0;
+  ResultModel: any;
+  isSessionActive: boolean = false;
+
+  private readonly FULL_SCREEN_ELEMENT_ID = 'fullscreen-card';
+  private readonly ESCAPE_KEY_CODE = 27;
 
   constructor(private questionService: QuestionService, private activatedRoute: ActivatedRoute, private quizService: QuizserviceService, private http: HttpClient, private certificateService: CertificateService) { }
+  protected baseUrl = environment.API_URL;
   
 
   ngOnInit(): void {
@@ -39,9 +48,7 @@ export class QuestionComponent implements OnInit {
 
     this.getQuizDetails();
     this.startCounter();
-
-    this.maxPossiblePoints = this.calculateMaxPossiblePoints();
-
+   
   }
 
  
@@ -83,25 +90,37 @@ export class QuestionComponent implements OnInit {
         if (this.currentQuestion === this.questionList.length) {
           this.isQuizCompleted = true;
           this.stopCounter();
+          this.totalScore = this.calculateTotalScore();
+          this.saveResult();
         }
       }, 1000);
     }
   }
-  calculateMaxPossiblePoints(): number {
-    let maxPoints = 0;
-    if (this.quiz && this.quiz.questions) {
-      for (const question of this.quiz.questions) {
-        for (const answer of question.answers) {
-          if (answer.correctAnswer) {
-            maxPoints += answer.point;
-            break; // Break after adding the first correct answer's points
-          }
-        }
-      }
-    }
-    return maxPoints;
+  calculateTotalScore(): number {
+    return this.selectedAnswers.reduce((total, answer) => total + answer.point, 0);
   }
 
+  saveResult(): void {
+    this.totalScore = this.calculateTotalScore();
+    let quizId = 0; // Définir une valeur par défaut pour quizId
+    if (this.quiz && this.quiz.quizId !== undefined) {
+      quizId = this.quiz.quizId;
+    }
+  
+    const resultDTO: ResultModel = {
+      quizId: quizId,
+      score: this.totalScore
+    };
+  
+    this.http.post(`${this.baseUrl}/api/quizzes/result/results`, resultDTO).subscribe(
+      () => {
+        console.log('Result saved successfully');
+      },
+      (error) => {
+        console.error('An error occurred while saving the result', error);
+      }
+    );
+  }
 
 
 nextQuestion() {
@@ -136,29 +155,46 @@ nextQuestion() {
     this.progress = ((this.currentQuestion / this.questionList.length) * 100).toString();
   }
 
-
-  generateCertificatePdf(): void {
-    this.certificateService.generateCertificatePdf().subscribe(
-      response => {
-        // Create a blob from the response text
-        const blob = new Blob([response], { type: 'application/pdf' });
-
-        // Create a download link
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-
-        // Set the filename for the download
-        link.download = 'certificate.pdf';
-
-        // Trigger the download
-        link.click();
-      },
-      error => {
-        console.error(error); // Handle error response
-        // You can display an error message or perform other actions here
-      }
-    );
+  isPreviousDisabled(): boolean {
+    if (this.currentQuestion === 0) {
+      return true; // Si c'est la première question, désactiver la flèche précédente
+    } else {
+      const previousQuestion: QuestionModel = this.questionList[this.currentQuestion - 1];
+      return previousQuestion.answered; // Désactiver la flèche précédente si la question précédente a déjà été répondue
+    }
   }
 
+  onDownloadCertificateClick(): void {
+    this.certificateService.downloadCertificate();
+  }
+
+  ngAfterViewInit() {
+    this.requestFullScreen();
+  }
+
+
+  // Demander le mode plein écran pour l'élément spécifié
+  private requestFullScreen() {
+    const element = document.getElementById(this.FULL_SCREEN_ELEMENT_ID);
+    if (element) {
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.requestFullscreen) { // Pour Safari
+        element.requestFullscreen();
+      } else if (element.requestFullscreen) { // Pour IE/Edge
+        element.requestFullscreen();
+      }
+    }
+  }
+
+  // Intercepter la touche "Échap" pour empêcher de quitter le mode plein écran
+  @HostListener('document:keydown', ['$event'])
+  onKeydown(event: KeyboardEvent) {
+    if (event.keyCode === this.ESCAPE_KEY_CODE) {
+      event.preventDefault();
+      this.requestFullScreen(); // Réactiver le mode plein écran
+    }
+  }
+ 
 
 }

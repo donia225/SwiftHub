@@ -22,4 +22,11 @@
   .comment-input textarea {
     margin-bottom: 10px;
   }
-  
+  .btn-edit {
+    background-color: #caa28c;
+    color: white;
+  }
+  .btn-add {
+    background-color: #caa28c;
+    color: white;
+  }

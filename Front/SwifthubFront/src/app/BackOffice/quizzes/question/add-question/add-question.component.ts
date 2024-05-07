@@ -63,7 +63,8 @@ export class AddQuestionComponent implements OnInit {
   addAnswer() {
     const answerControl = this.formBuilder.group({
       answerTxt: [''],  // Ensure answerTxt control is initialized with a default value
-      correctAnswer: [false]
+      correctAnswer: [false],
+      point: ['']  
     });
     (this.addQuestionForm.get('answers') as FormArray).push(answerControl);
   }

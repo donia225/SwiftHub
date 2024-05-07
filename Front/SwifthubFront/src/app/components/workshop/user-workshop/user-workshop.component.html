@@ -8,7 +8,7 @@
        </div>
       <div class="card-body">
         <h5 class="card-title">{{workshop.title}}</h5>
-        
+
         <div class="grid inline-flex  ">
           <div *ngFor="let user of users">
             <div *ngIf="user.id === workshop.userId">
@@ -16,15 +16,15 @@
             </div>
           </div>
           <div>
-        
+
           <button (click)="hideShow(workshop.workshop_id)" style="margin-left: 600px;" class="btn btn-dark"  [disabled]="isValid(workshop.start_date)">Feedbacks</button>
-            
+
         </div>
         <p class="card-text">{{workshop.description}}</p>
-        
+
       </div>
       <!-- <a href="#" class="card-link"></a> -->
-     
+
 
     </div>
     <button (click)="studentJoinMeeting(workshop.meetingId)" type="button" class="btn btn-outline-info" [disabled]="workshop.meetingId==null||!meetingValidity(workshop)" >Join Meeting</button>
@@ -34,4 +34,5 @@
       <app-show-feedback  [workshopId]="selectedWorkshopId"></app-show-feedback>
     </div>
   </div>
+</div>
 </div>

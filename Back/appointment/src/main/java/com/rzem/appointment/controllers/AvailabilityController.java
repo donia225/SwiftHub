@@ -15,7 +15,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/appointments/availability")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
 
 public class AvailabilityController {
 

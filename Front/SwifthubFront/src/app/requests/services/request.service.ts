@@ -35,6 +35,13 @@ export class RequestService {
   public updaterequest(idRequest: number, Request:any): Observable<any> {
     return this.httpclient.put(`${this.url}/${idRequest}`, Request);
   }
+
+// Update the Angular Service to match the backend's expected parameters
+updateRequestStatus(idRequest: number, newStatus: string): Observable<any> {
+  const url = `${this.url}/${idRequest}?status=${encodeURIComponent(newStatus)}`; // Ensure status is correctly encoded
+  return this.httpclient.put(url, {}); // Sending a PUT request
+}
+
   public deleterequest(idRequest:number):Observable<any>{
     return this.httpclient.delete(`${this.url}/${idRequest}`);
   }

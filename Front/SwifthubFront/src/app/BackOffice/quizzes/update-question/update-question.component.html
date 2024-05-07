@@ -1,0 +1,34 @@
+<div class="grid p-fluid">
+    <div class="col-12">
+      <div class="card">
+       
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-12">
+            <label for="questiontxt">Question</label>
+            <textarea pInputTextarea id="questiontxt" rows="4" [(ngModel)]="question.questiontxt"></textarea>
+          </div>
+          <div class="field col-12" *ngFor="let answer of question.answers; let i = index">
+            <div>
+              <label for="answerTxt{{i}}">Réponse {{i + 1}}</label>
+              <textarea pInputTextarea id="answerTxt{{i}}" rows="4" [(ngModel)]="answer.answerTxt"></textarea>
+            </div>
+            <div>
+              <input pInputCheckbox type="checkbox" [(ngModel)]="answer.correctAnswer">
+              <label for="correctAnswer{{i}}">Réponse correcte</label>
+            </div>
+            <div>
+              <label for="point{{i}}">Point</label>
+              <input pInputText id="point{{i}}" type="number" [(ngModel)]="answer.point">
+            </div>
+          </div>
+          <div class="field col-12">
+            <button pButton type="button" (click)="addAnswer()" label="Ajouter une réponse" class="p-button-info"></button>
+          </div>
+          <div class="field col-12">
+            <button pButton type="button" (click)="onSubmit()" label="Modifier la question" class="p-button-warning"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

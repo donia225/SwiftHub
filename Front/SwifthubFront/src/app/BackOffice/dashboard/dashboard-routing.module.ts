@@ -1,7 +1,5 @@
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from '../login/login.component';
 import { AppLayoutComponent } from '../layout/app.layout.component';
 import { ListQuizComponent } from '../quizzes/list-quiz/list-quiz.component';
 import { AddQuizComponent } from '../quizzes/add-quiz/add-quiz.component';
@@ -12,14 +10,19 @@ import { DashboardComponent } from './dashboard.component';
 import { AppComponentAdmin } from '../Administrator/AdminMainComponent/app.component';
 import { AppComponentTeacher } from '../Teacher/TeacherMainComponent/app.component';
 import { AppComponentStudent } from '../Student/StudentMainComponent/app.component';
+import { PostAdminComponent } from '../post-admin/post-admin.component';
 import { UpdateQuizComponent } from '../quizzes/update-quiz/update-quiz.component';
 import { AddQuestionComponent } from '../quizzes/question/add-question/add-question.component';
 import { ListQuestionComponent } from '../quizzes/list-question/list-question.component';
 import { AdminShowFeedbackComponent } from 'src/app/components/feedback/admin-show-feedback/admin-show-feedback.component';
 import { ListRequestComponent } from 'src/app/requests/list-request/list-request.component';
-import { ListCategoryComponent } from '../categories/list-category/list-category.component';
-import { AddCategoryComponent } from '../categories/add-category/add-category.component';
 import { AddAnswerComponent } from 'src/app/requests/add-answer/add-answer.component';
+import { UpdateQuestionComponent } from '../quizzes/update-question/update-question.component';
+import { LoginComponent } from '../pages/login/login.component';
+
+
+
+
 
 
 
@@ -30,12 +33,17 @@ const routes: Routes = [
   children:[
     {
       path: '', component: AppLayoutComponent,
-     
+
     },
+    { path: 'postAdmin', component: PostAdminComponent },
   ]
  },
   { path: 'login', component: LoginComponent },
+
+
   
+  
+
   {
     path: 'quiz', component: AppLayoutComponent,
     children: [
@@ -55,6 +63,9 @@ const routes: Routes = [
       { path: 'student', component: AppComponentStudent },
       
     
+      { path: 'update-question/update/:quizId/:question_id', component: UpdateQuestionComponent }
+
+
 
     ]
   },
@@ -87,16 +98,7 @@ const routes: Routes = [
 
     ]
   },
-  {
-    path: 'category', component: AppLayoutComponent,
-    children: [
-      { path: 'list-category', component: ListCategoryComponent },
-      { path: 'add-category', component: AddCategoryComponent },
 
-    
-
-    ]
-  },
 
 ];
 

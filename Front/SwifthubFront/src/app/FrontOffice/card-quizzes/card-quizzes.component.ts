@@ -16,6 +16,8 @@ export class CardQuizzesComponent  implements OnInit {
   name: string = '';
   quiz!: QuizModel;
   quizId!: number;
+  searchQuery: string = '';
+  filteredQuizzes: QuizModel[] = [];
 
 
   
@@ -28,7 +30,7 @@ export class CardQuizzesComponent  implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllQuizzes();
+    this.getAllQuizzesForToday();
     //this.getQuizById();
 
   }
@@ -43,13 +45,33 @@ export class CardQuizzesComponent  implements OnInit {
    
   
   
-
-  getAllQuizzes() {
-    this.quizService.getAllQuizzes() 
-      .subscribe((quizzes: QuizModel[]) => {
-        this.quizzes = quizzes;
-      });
+  getAllQuizzesForToday() {
+    const now = new Date();
+    const todayString = this.formatDateTime(now);
+    this.quizService.getAllQuizzes().subscribe((quizzes: QuizModel[]) => {
+      this.quizzes = quizzes.filter(quiz => this.formatDateTime(new Date(quiz.quizTime)) === todayString);
+      this.filteredQuizzes = [...this.quizzes]; // Initialize filteredQuizzes array
+    });
   }
+
+  private formatDateTime(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  searchQuizzes(): void {
+    if (!this.searchQuery.trim()) {
+      this.filteredQuizzes = [...this.quizzes]; // Reset the filtered quizzes if search query is empty
+    } else {
+      this.filteredQuizzes = this.quizzes.filter(quiz =>
+        quiz.quizName.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+  }
+
+ 
   showDialog() {
     this.displayDialog = true;
   }

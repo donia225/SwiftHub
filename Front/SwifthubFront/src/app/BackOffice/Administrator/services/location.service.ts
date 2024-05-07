@@ -12,9 +12,9 @@ export class LocationService {
 
   addLocation(data: any): Observable<any> {
     console.log(data);
-    return this._http.post('http://localhost:8060/api/appointments/location', data);
+    return this._http.post('http://localhost:8222/api/appointments/location', data);
   }
   getLocationList(): Observable<any> {
-    return this._http.get('http://localhost:8060/api/appointments/location');
+    return this._http.get('http://localhost:8222/api/appointments/location');
   }
 }

@@ -17,6 +17,13 @@
                         <input type="checkbox" formControlName="correctAnswer">
                         <label for="correctAnswer{{i}}">Réponse correcte</label>
                       </div> 
+                      <div>
+                        <div class="field">
+                          <input type="text" formControlName="point">
+                          <label for="point{{i}}">Point</label>
+                      </div>
+                      
+                      </div>
                     </div>
                   </div>
                 <button style="width: 20%;" pButton pRipple type="button" (click)="addAnswer()" label="Ajouter une réponse" class="p-button-info"></button>

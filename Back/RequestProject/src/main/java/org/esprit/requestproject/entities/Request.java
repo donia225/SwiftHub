@@ -40,6 +40,8 @@ public class Request implements Serializable {
     @TextIndexed
     private Status status; //c'est pas l'étudiant qui gére ça
 
+    private CategoryName categoryName;
+
 
     @CreatedDate
     private Date creationDate;
@@ -54,14 +56,12 @@ public class Request implements Serializable {
     }
 
 
-    private String attachment;
     private long idUser;
 
 
-
-    @DocumentReference(collection = "categories")
+    /*@DocumentReference(collection = "categories")
     @JsonBackReference
-    private Category category;
+    private Category category;*/
 
 
     @JsonBackReference
@@ -76,10 +76,9 @@ public class Request implements Serializable {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", status=" + status +
+                ", categoryName=" + categoryName +
                 ", creationDate=" + creationDate +
-                ", attachment='" + attachment + '\'' +
                 ", idUser=" + idUser +
-                ", category=" + category +
                 ", answers=" + answers +
                 '}';
     }

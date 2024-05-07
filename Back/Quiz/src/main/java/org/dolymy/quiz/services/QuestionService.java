@@ -33,9 +33,14 @@ public class QuestionService {
     private final SequenceGeneratorService sequenceGenerator;
 
 
-    // a simple method to add a question
-
-
+    public List<Question> getAllQuestionsWithQuiz() {
+        List<Question> questions = questionRepository.findAll();
+        questions.forEach(question -> {
+            String quizName = question.getQuiz().getQuizName();
+            question.getQuiz().setQuizName(quizName); // Set quizName on Quiz entity if necessary
+        });
+        return questions;
+    }
     // get all the questions
     public List<Question> getAllQuestions() {
         return this.questionRepository.findAll();
@@ -67,6 +72,7 @@ public class QuestionService {
 
         if (optionalQuiz.isPresent()) {
             Quiz quiz = optionalQuiz.get();
+
             question.setQuiz(quiz); // here we set the quiz for the question
             question.setId(sequenceGenerator.generateSequence(Question.SEQUENCE_NAME));
             // we update the list of questions in the quiz

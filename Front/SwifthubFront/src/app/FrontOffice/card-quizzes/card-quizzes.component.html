@@ -1,13 +1,25 @@
 <div class="container">
+  
+  <div class="flex flex-column gap-2">
+    <label for="searchQuery"></label>
+    <div class="p-toolbar-group-center">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input pInputText id="searchQuery" [(ngModel)]="searchQuery" (input)="searchQuizzes()" placeholder="Search by quiz name" />
+      </span>
+    </div>
+    <small id="searchQuery-help"></small>
+  </div>
   <div class="row">
-    <div class="col-3" *ngFor="let quiz of quizzes">
+    <div class="col-3" *ngFor="let quiz of filteredQuizzes">
       <div class="card" style="width: 17rem;">
         <!-- Image de la carte -->
         <img class="card-img-top" src="/assets/img/softlogo.png" alt="soft skills">
         <div class="card-body">
           <!-- Titre de la carte -->
           <h5 class="card-title">{{ quiz.quizName }}</h5>
-          <!-- Lien vers un autre endroit -->
+          <h5>{{quiz.quizTime}}</h5>
+          
         
           <a (click)="logQuizId(quiz.quizId)" [routerLink]="['/home/question', quiz.quizId]" class="btn btn-primary">Start Quiz</a>
 
