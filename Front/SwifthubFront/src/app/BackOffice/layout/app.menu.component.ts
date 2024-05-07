@@ -32,6 +32,17 @@ export class AppMenuComponent implements OnInit {
           { label: 'consultUser', icon: 'pi pi-fw pi-id-card', routerLink: ['/consultUser'] }
         ]
       },
+
+      {
+        label: 'appointment',
+        items: [
+            { label: 'Admin', icon: 'pi pi-fw pi-id-card', routerLink: ['/appointment/admin'] },
+            { label: 'Student', icon: 'pi pi-fw pi-check-square', routerLink: ['/appointment/student'] },
+            { label: 'teacher', icon: 'pi pi-fw pi-check-square', routerLink: ['/appointment/teacher'] },
+           
+        ]
+    },
+
       {
         label: 'question',
         items: [
@@ -51,20 +62,7 @@ export class AppMenuComponent implements OnInit {
           }
         ]
       },
-      {
-        label: '',
-        icon: '',
-        items: [
-          {
-            label: 'Category',
-            icon: 'pi pi-book',
-            items: [
-              { label: 'List categories', icon: 'pi pi-list', routerLink: ['/category/list-category'] },
-              { label: 'Add category', icon: 'pi pi-plus', routerLink: ['/category/add-category'] }
-            ]
-          }
-        ]
-      },
+  
       {
         label: 'Workshop',
         icon: 'pi pi-fw pi-briefcase',

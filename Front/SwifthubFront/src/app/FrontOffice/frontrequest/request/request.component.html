@@ -1,11 +1,29 @@
+
+<!-- Search Input -->
+<div class="header">
+  <!-- Wrapper for search container to manage layout -->
+  <div class="search-container-right">
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input pInputText [(ngModel)]="searchText" placeholder="Search requests" (ngModelChange)="loadRequests()" />
+    </span>
+    <button pButton type="button" label="Search" icon="pi pi-search" (click)="loadRequests()"
+        [ngStyle]="{'background-color': '#caa28c', 'border-color': '#caa28c'}"></button>
+
+  </div>
+</div>
+
 <div class="container">
     <div class="row">
       <div class="col-7" *ngFor="let request of Request">
-        <div class="card" style="width: 900px;"> <!-- Ajustez la largeur selon vos besoins -->
+        <div class="card" style="width: 900px;">
+          <!-- Image from assets -->
+          <img    style="width: 10%;"    src="/assets/img/request_img.png" class="card-img-top" alt="Request Image">
           
           <div class="card-body text-center">
             <!-- Titre de la carte -->
             <h5 class="card-title">{{ request.title }}</h5>
+            <p>{{ request.categoryName }}</p>
             <p>{{ request.creationDate | date }}</p>
             <p class="card-text" [ngClass]="{
                 'text-warning': request.status === 'AWAITING',
@@ -14,18 +32,32 @@
               }">{{ request.status }}</p>
             
     
-            <p>{{ request.category }}</p>
-                                  
-                                 
            
+                                  
           </div> 
           <div class="text-right mb-3"> <!-- Aligner les boutons à droite -->
+            <button pButton type="button" label="Details" class="p-button-text" (click)="openDetailsModal(request.idRequest)"></button>
             <button pButton pRipple type="button" label="edit" class="p-button-rounded p-button-success custom-button" (click)="gotoupdatepage(request.idRequest)"></button>
             <button pButton pRipple type="button" label="delete" class="p-button-rounded p-button-warning custom-button ml-2" (click)="deleteRequest(request.idRequest)"></button>
+            
           </div>
          
         </div>
       </div>
     </div>
+    <!-- Ajout du Dialog pour afficher les détails d'une demande -->
+<p-dialog header="Request Details" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}">
+  <div *ngIf="selectedRequest">
+      <p><strong>Title:</strong> {{selectedRequest.title}}</p>
+      <p><strong>Category:</strong> {{selectedRequest.categoryName}}</p>
+      <p><strong>Description:</strong> {{selectedRequest.description}}</p>
+      <p><strong>Status:</strong> {{selectedRequest.status}}</p>
+      <p><strong>Creation Date:</strong> {{selectedRequest.creationDate | date}}</p>
+      <p><strong>Answers:</strong></p>
+      <ul>
+          <li *ngFor="let answer of selectedRequest.answers">{{ answer.responseText }}</li>
+      </ul>
+  </div>
+</p-dialog>
   </div>
   

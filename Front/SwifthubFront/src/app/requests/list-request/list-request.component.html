@@ -17,11 +17,12 @@
         <ng-template pTemplate="header">
             <tr>
                 <th>Title</th>
+                <th>Category</th>
                 <th>Description</th>
                 <th>Status</th>
                 <th>Creation date</th>
-                <th>Category</th>
-                <th>answers</th>
+              
+                
                 
                 <th>Actions</th> <!-- Nouvelle colonne pour les actions -->
             </tr>
@@ -31,25 +32,33 @@
             <tr>
             
                 <td>{{ request.title }}</td>
+                <td>{{ request.categoryName }}</td>
                 <td>{{ request.description }}</td>
                 <td>{{ request.status }}</td>
                 <td>{{ request.creationDate | date }}</td>
          
         
-                <td>{{ request.category }}</td>
-                <td>
-                    <!-- Afficher chaque réponse textuellement liée à la requête -->
+              
+              <!--   <td>
+                  
                     <ul>
                         <li *ngFor="let answer of request.answers">{{ answer.responseText }}</li>
                     </ul>
-                </td>
+                </td> -->
               
                 
                 <td>
                   <button  pButton pRipple type="button" label="Affect answer" class="p-button-rounded p-button-danger p-button-sm custom-button"  [routerLink]="['/request/add-answer', request.idRequest]"></button>
-                </td>
-                <td>
-                <button pButton type="button" label="View Details" class="p-button-text" (click)="openDetailsModal(request.idRequest)"></button>
+              
+                <button pButton type="button" label="Details" class="p-button-text" (click)="openDetailsModal(request.idRequest)"></button>
+
+                  <!-- Dropdown to select new status -->
+            <p-dropdown [options]="statuses" [(ngModel)]="request.newStatus" optionLabel="label" placeholder="Change Status"></p-dropdown>
+            <!-- Button to update status -->
+           
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="updateStatus(request.idRequest, request.newStatus)">
+                <i class="fa fa-edit"></i>
+              </button>
             </td>
                 
             </tr>
@@ -64,7 +73,7 @@
         <p><strong>Description:</strong> {{selectedRequest.description}}</p>
         <p><strong>Status:</strong> {{selectedRequest.status}}</p>
         <p><strong>Creation Date:</strong> {{selectedRequest.creationDate | date}}</p>
-        <p><strong>Category:</strong> {{selectedRequest.category?.categoryName}}</p>
+        <p><strong>Category:</strong> {{selectedRequest.categoryName}}</p>
         <p><strong>Answers:</strong></p>
         <ul>
             <li *ngFor="let answer of selectedRequest.answers">{{ answer.responseText }}</li>

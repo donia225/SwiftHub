@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CommentService } from './comment.service';
 import { Comment } from './post.model';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {  MessageService } from 'primeng/api';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class PostComponent {
   selectedEditFile: File | null = null;
   textColor: string = '#000000';
   comments: Comment[] = [];
-  constructor(private router: Router, private postService: PostService,private commentService: CommentService) {
+  constructor(private router: Router, private postService: PostService,private commentService: CommentService,private messageService:MessageService) {
     this.loadPosts();
   }
 
@@ -44,6 +45,8 @@ export class PostComponent {
 
     this.postService.createPost(newPost).subscribe(
       (createdPost) => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Post added successfully !' });
+
         console.log('Post added successfully:', createdPost);
         // Réinitialiser les données du formulaire après la soumission
         this.formData = {};
@@ -54,9 +57,16 @@ export class PostComponent {
         this.loadPosts();
       },
       (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed : Post contain bas words !!' });
+
         console.error('Error adding post:', error);
       }
     );
+  }
+  visible: boolean = false;
+
+  showDialog() {
+      this.visible = true;
   }
 
   loadPosts(): void {

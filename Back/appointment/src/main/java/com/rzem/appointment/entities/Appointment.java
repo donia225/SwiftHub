@@ -2,6 +2,7 @@ package com.rzem.appointment.entities;
 
 
 import com.rzem.appointment.enums.AppointmentType;
+import com.rzem.appointment.enums.Priority;
 import com.rzem.appointment.enums.Status;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -21,20 +22,19 @@ import java.util.List;
 public class Appointment {
 
     @Id
-    private String id;//ma tit3malch
-    private String description;//cye    1
-    private Date start;//cye         2
-    private Status status; //ma tit3malch
-    private Boolean reminder;  //3
-    private AppointmentType appointmentType;//4
-    private String studentId; //ma tit3malch
-    private String professorId;//5
-    private Location location; //ma tit3malch
-    private String priority; //6 tji
-    private List<Feedback> feedbackList;  //ma tit3malch
-    private List<Notification> notificationList; //ma tit3malch
-    private Boolean absance; //ma tit3malch
-    private String meetingLink; //ma tit3malch
+    private String id;
+    private String description; //yes
+    private Date start;  //yes
+    private Date end;  //yes
+    private Status status;
+    private Boolean reminder;  //yes
+    private AppointmentType appointmentType;  //yes
+    private String studentId;
+    private String professorId;  //yes
+    private String location;
+    private Priority priority;  //yes
+    private Boolean absance;
+    private String meetingLink;
 
 
 }

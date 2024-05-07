@@ -19,7 +19,7 @@
       <tr>
         <th>Question</th>
         <th>Réponses</th>
-   
+     
         <th>Actions</th>
       </tr>
     </thead>
@@ -34,15 +34,21 @@
               </li>
             </ul>
           </td>
-          <td>{{ question.quizName }}</td>
+         
+         
+
           <td style="min-width: 150px;">
-            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2">
-              <i class="fa fa-edit"></i>
-            </button>
-            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning">
-              <i class="fa fa-trash"></i>
-            </button>
-          </td>
+            <a [routerLink]="['/quiz/update-question/update', quiz?.quizId, question.id]">
+              <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2">
+                <i class="fa fa-edit"></i>
+              </button>
+            </a>
+
+            <td>
+              <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteQuestion(question.id)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
         </tr>
       </ng-container>
     </tbody>

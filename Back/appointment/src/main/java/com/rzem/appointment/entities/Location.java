@@ -18,9 +18,8 @@ public class Location {
 
     @Id
     private String id;
-    private String name;
-    private String description;
-    private int capacity;
+    private String bloc;
+    private String salle;
     private List<Appointment> appointments;
 
 

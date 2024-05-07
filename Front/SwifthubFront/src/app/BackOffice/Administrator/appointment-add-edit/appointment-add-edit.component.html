@@ -1,0 +1,26 @@
+<div mat-dialog-title>
+    <h1>select location</h1>
+</div>
+
+<form [formGroup]="empForm" (ngSubmit)="onFormSubmit()">
+<div mat-dialog-content class="content">
+    
+    
+    <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Locations List</mat-label>
+          <mat-select formControlName="location">
+            <mat-option *ngFor="let val of LocationList" [value]="val">
+                {{ val }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+      
+</div>
+
+<div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" mat-dialog-close="false">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">{{data ? 'update' :'save'}}</button> 
+</div>
+</form>

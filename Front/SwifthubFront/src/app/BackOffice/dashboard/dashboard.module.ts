@@ -38,9 +38,42 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
 import {LoginComponent} from "../pages/login/login.component";
 import { ListRequestComponent } from 'src/app/requests/list-request/list-request.component';
-import { ListCategoryComponent } from '../categories/list-category/list-category.component';
-import { AddCategoryComponent } from '../categories/add-category/add-category.component';
 import { PostAdminComponent } from '../post-admin/post-admin.component';
+
+import { CalendarModule  as AngularCalendarModule, DateAdapter } from 'angular-calendar';
+
+import { BrowserModule } from '@angular/platform-browser';
+
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {AppComponentAdmin} from '../Administrator/AdminMainComponent/app.component';
+import {AppComponentTeacher} from '../Teacher/TeacherMainComponent/app.component';
+import {AppComponentStudent} from '../Student/StudentMainComponent/app.component';
+import {AppointmentAddEditComponentAdmin} from '../Administrator/appointment-add-edit/appointment-add-edit.component'
+import {AppointmentAddEditComponentTeacher} from '../Teacher/appointment-add-edit/appointment-add-edit.component'
+import {AppointmentAddEditComponentStudent} from '../Student/appointment-add-edit/appointment-add-edit.component'
+import {CalendarComponentAdmin} from '../Administrator/calendar/calendar.component';
+import {CalendarComponentTeacher} from '../Teacher/calendar/calendar.component';
+import {CalendarComponentStudent} from '../Student/calendar/calendar.component';
+import {MatCardModule} from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import {LocationComponent} from '../Administrator/location/location.component'
+
 
 
 
@@ -50,6 +83,10 @@ import { PostAdminComponent } from '../post-admin/post-admin.component';
     DashboardComponent,
     ListQuizComponent,
     AddQuizComponent,
+    CalendarComponentAdmin,CalendarComponentTeacher,CalendarComponentStudent,
+    AppointmentAddEditComponentAdmin,AppointmentAddEditComponentTeacher,AppointmentAddEditComponentStudent,
+    AppComponentAdmin,AppComponentTeacher,AppComponentStudent,LocationComponent,
+
     LoginComponent
     
   
@@ -86,11 +123,36 @@ import { PostAdminComponent } from '../post-admin/post-admin.component';
     ToggleButtonModule,
     AutoCompleteModule,
     DialogModule,
-    CalendarModule,
+    AngularCalendarModule,
     DynamicDialogModule,
     ConfirmPopupModule,
     ToolbarModule,
-    ToastModule
+    ToastModule,
+    MatTabsModule,
+    MatCardModule,
+    MatTableModule,
+    RouterModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCheckboxModule,
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatInputModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    BrowserModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    AngularCalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+
+
+    
   ],
   providers: [DialogService,DynamicDialogRef],
 })

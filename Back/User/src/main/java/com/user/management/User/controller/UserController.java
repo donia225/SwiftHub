@@ -2,6 +2,7 @@ package com.user.management.User.controller;
 
 import com.user.management.User.auth.*;
 import com.user.management.User.services.UserService;
+import com.user.management.User.user.Role;
 import com.user.management.User.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
@@ -108,6 +110,16 @@ public class UserController {
     @GetMapping("email/{email}")
     public User getUserByEmail(@PathVariable("email") String email ){
         return this.userService.findUserByEmail(email);
+    }
+
+
+
+
+    @GetMapping("/findd/{role}")
+    public List<User> getUserByRole(@PathVariable("role") Role role) {
+        List<User> userList = userService.findUserByRole(role);
+        return userList;
+
     }
 
 

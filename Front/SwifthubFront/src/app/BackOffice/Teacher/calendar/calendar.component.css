@@ -1,0 +1,87 @@
+/* Calendar Container */
+.calendar-container {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Calendar Header (Top Section) */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background-color: #3f51b5; /* Blue background color */ /* New line for header styling */
+}
+
+.calendar-header .calendar-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: white; /* Adjust text color as needed */
+}
+
+.calendar-header .calendar-nav-buttons {
+  margin-left: auto;
+}
+
+/* Calendar Buttons */
+#cal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+#cal-date-nav-buttons button,
+#cal-view-nav-buttons button {
+  background-color: #f5f5f5;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#cal-date-nav-buttons button:hover,
+#cal-view-nav-buttons button:hover {
+  background-color: #eee;
+}
+
+/* Calendar Date Display */
+.calendar-date-display {
+  text-align: center;
+  font-size: 16px;
+  padding: 16px;
+}
+
+/* Calendar View Switcher */
+.calendar-view-switcher {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.calendar-view-switcher button {
+  background-color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.calendar-view-switcher button:hover {
+  background-color: #eee;
+}
+
+/* Calendar Body */
+.calendar-body {
+  padding: 16px;
+}
+
+.scrollable-container {
+  max-height: 80vh; /* Définissez la hauteur maximale souhaitée */
+  overflow-y: auto; /* Activez le défilement vertical */
+}
+
+
+/* Rest of your styles remain the same... */

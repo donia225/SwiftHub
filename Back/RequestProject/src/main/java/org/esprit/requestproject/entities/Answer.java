@@ -3,6 +3,7 @@ package org.esprit.requestproject.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Id;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -26,9 +27,16 @@ public class Answer implements Serializable {
     @Id
     private long id;
     private String responseText;
-    @DateTimeFormat
+    @CreatedDate
     private Date responseDate;
-    private String attachment;
+
+    public Date getResponseDate() {
+        return responseDate;
+    }
+
+    public void setResponseDate(Date responseDate) {
+        this.responseDate = responseDate;
+    }
 
     @DocumentReference(collection = "requests")
     @JsonBackReference

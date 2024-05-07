@@ -1,7 +1,7 @@
 import { ResultModel } from './../../BackOffice/quizzes/Model/result-model';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, AfterViewInit } from '@angular/core';
 import { interval } from 'rxjs';
-import { QuestionService } from './services/question.service';
+import { QuestionService } from 'src/app/BackOffice/quizzes/service/question.service';
 import { QuestionModel } from 'src/app/BackOffice/quizzes/Model/question-model';
 import { AnswerModel } from 'src/app/BackOffice/quizzes/Model/answer-model';
 import { QuizModel } from 'src/app/BackOffice/quizzes/Model/quiz-model';
@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss']
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent implements AfterViewInit {
   public name: string = "";
   public questionList!:  QuestionModel[];
   public currentQuestion: number = 0;
@@ -34,8 +34,10 @@ export class QuestionComponent implements OnInit {
  public  maxPossiblePoints: number = 0;
  public totalScore: number = 0;
   ResultModel: any;
+  isSessionActive: boolean = false;
 
- 
+  private readonly FULL_SCREEN_ELEMENT_ID = 'fullscreen-card';
+  private readonly ESCAPE_KEY_CODE = 27;
 
   constructor(private questionService: QuestionService, private activatedRoute: ActivatedRoute, private quizService: QuizserviceService, private http: HttpClient, private certificateService: CertificateService) { }
   protected baseUrl = environment.API_URL;
@@ -46,9 +48,7 @@ export class QuestionComponent implements OnInit {
 
     this.getQuizDetails();
     this.startCounter();
-
-    
-
+   
   }
 
  
@@ -168,5 +168,33 @@ nextQuestion() {
     this.certificateService.downloadCertificate();
   }
 
+  ngAfterViewInit() {
+    this.requestFullScreen();
+  }
+
+
+  // Demander le mode plein écran pour l'élément spécifié
+  private requestFullScreen() {
+    const element = document.getElementById(this.FULL_SCREEN_ELEMENT_ID);
+    if (element) {
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.requestFullscreen) { // Pour Safari
+        element.requestFullscreen();
+      } else if (element.requestFullscreen) { // Pour IE/Edge
+        element.requestFullscreen();
+      }
+    }
+  }
+
+  // Intercepter la touche "Échap" pour empêcher de quitter le mode plein écran
+  @HostListener('document:keydown', ['$event'])
+  onKeydown(event: KeyboardEvent) {
+    if (event.keyCode === this.ESCAPE_KEY_CODE) {
+      event.preventDefault();
+      this.requestFullScreen(); // Réactiver le mode plein écran
+    }
+  }
+ 
 
 }

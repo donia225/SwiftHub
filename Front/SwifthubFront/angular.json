@@ -35,6 +35,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -103,6 +105,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss",
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
@@ -110,7 +113,6 @@
             ],
             "scripts": [
               "node_modules/primeng/bundles/primeng.umd.js"
-
             ]
           }
         }
