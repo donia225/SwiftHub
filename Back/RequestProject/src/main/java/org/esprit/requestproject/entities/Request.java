@@ -54,7 +54,6 @@ public class Request implements Serializable {
     }
 
 
-    private String attachment;
     private long idUser;
 
 
@@ -77,7 +76,6 @@ public class Request implements Serializable {
                 ", description='" + description + '\'' +
                 ", status=" + status +
                 ", creationDate=" + creationDate +
-                ", attachment='" + attachment + '\'' +
                 ", idUser=" + idUser +
                 ", category=" + category +
                 ", answers=" + answers +

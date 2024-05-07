@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -18,6 +18,11 @@ export class RequestService {
   public getAllRequests(): Observable<any> {
     console.log("Calling getAllrequests()...");
     return this.httpclient.get(`${this.url}`);
+  }
+
+  searchRequests(searchText: string): Observable<any[]> {
+    const params = new HttpParams().set('searchText', searchText);
+    return this.httpclient.get<any[]>(`${this.url}/search`, { params });
   }
 
   public getRequestById(idRequest:number):Observable<any>{

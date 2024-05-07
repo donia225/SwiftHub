@@ -8,8 +8,6 @@ export interface Request{
     description: string;
     status: string;
     creationDate: Date;
-    attachment: string;
     category: Category;
-    categoryName: string;
     answers:Answer[];
 }

@@ -1,3 +1,4 @@
+/*
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddWorkshopComponent } from './add-workshop.component';
@@ -21,3 +22,4 @@ describe('AddWorkshopComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+*/

@@ -81,6 +81,20 @@ public class RequestController {
         }
     }
 
+    // Endpoint to update the status of a request using request parameters
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateRequestStatus(@PathVariable Long id, @RequestParam String status) {
+        try {
+            Request updatedRequest = requestService.updateRequestStatus(id, status);
+            return ResponseEntity.ok(updatedRequest);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid status provided");
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRequest(@PathVariable("id") Long id) {
         try {

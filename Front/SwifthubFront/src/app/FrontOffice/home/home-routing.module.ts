@@ -12,15 +12,16 @@ import { CardQuizzesComponent } from '../card-quizzes/card-quizzes.component';
 import { RequestComponent } from '../frontrequest/request/request.component';
 import { FrontAddComponent } from '../frontrequest/front-add/front-add.component';
 import { UpdateReqComponent } from '../frontrequest/update-req/update-req.component';
+import { ListAnswersComponent } from '../frontrequest/answers/list-answers/list-answers.component';
 
 const routes: Routes = [
-  
-  { 
-    path: 'home', 
+
+  {
+    path: 'home',
     component: HomeComponent,
-    
+
     children: [
-      // {path:'home',redirectTo:'content'} ,    
+      // {path:'home',redirectTo:'content'} ,
       { path: 'content', component:ContentComponent },
       { path: 'posts', component: PostComponent},
       { path: 'posts/:id', component: PostDetailsComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
       { path: 'question/:quizId', component: QuestionComponent },
       {path: 'content/frontrequest', component:RequestComponent},
       {path: 'content/frontadd', component:FrontAddComponent},
-      {path: 'content/update-req/:id', component:UpdateReqComponent}
+      {path: 'content/update-req/:id', component:UpdateReqComponent},
+      {path: 'content/list-answers', component:ListAnswersComponent}
 
       
     ]

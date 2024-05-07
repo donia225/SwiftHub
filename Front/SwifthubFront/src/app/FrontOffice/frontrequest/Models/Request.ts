@@ -7,7 +7,6 @@ export interface Request{
     description: string;
     status: string;
     creationDate: Date;
-    attachment: string;
     category: Category;
     
 }
