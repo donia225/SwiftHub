@@ -11,4 +11,5 @@ public interface IUserService {
     public void deleteUser(String id);
     public User findUserById(String id);
 
+    User findUserByToken(String token);
 }

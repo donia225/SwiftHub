@@ -100,6 +100,11 @@ public class UserController {
 
     }
 
+    @GetMapping("{token}")
+    public User getUserByToken(@PathVariable("token") String token ){
+        return this.userService.findUserByToken(token);
+    }
+
 
 
 }
