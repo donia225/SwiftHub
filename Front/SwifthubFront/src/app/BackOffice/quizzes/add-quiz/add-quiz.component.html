@@ -12,7 +12,7 @@
                 </div>
                 <div class="field col-12 md:col-6">
                     <label for="quizTime">Date et heure du quiz</label>
-                    <p-calendar id="quizTime" [showTime]="true" [showSeconds]="true" formControlName="quizTime"></p-calendar>
+                    <p-calendar id="quizTime" [showTime]="true" [showSeconds]="true" formControlName="quizTime"   ></p-calendar>
                     <div *ngIf="quizForm.get('quizTime')?.invalid && quizForm.get('quizTime')?.touched" class="text-danger">
                         Veuillez sélectionner une date et heure valides pour le quiz.
                     </div>

@@ -15,13 +15,13 @@ import { UpdateReqComponent } from '../frontrequest/update-req/update-req.compon
 import { ListAnswersComponent } from '../frontrequest/answers/list-answers/list-answers.component';
 
 const routes: Routes = [
-  
-  { 
-    path: 'home', 
+
+  {
+    path: 'home',
     component: HomeComponent,
-    
+
     children: [
-      // {path:'home',redirectTo:'content'} ,    
+      // {path:'home',redirectTo:'content'} ,
       { path: 'content', component:ContentComponent },
       { path: 'posts', component: PostComponent},
       { path: 'posts/:id', component: PostDetailsComponent },

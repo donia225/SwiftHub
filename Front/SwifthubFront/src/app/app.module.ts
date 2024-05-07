@@ -21,7 +21,6 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FieldsetModule } from 'primeng/fieldset';
-
 import { FileUploadModule } from 'primeng/fileupload';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PanelModule } from 'primeng/panel';
@@ -29,9 +28,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DialogModule } from 'primeng/dialog';
-import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
 import { DashboardModule } from './BackOffice/dashboard/dashboard.module';
@@ -40,9 +37,8 @@ import { PostComponent } from './FrontOffice/post/post.component';
 import { PostDetailsComponent } from './FrontOffice/post-details/post-details.component';
 import { ShowWorkshopComponent } from './components/workshop/show-workshop/show-workshop.component';
 import { EditWorkshopComponent } from './components/workshop/edit-workshop/edit-workshop.component';
+import { HomeModule } from './FrontOffice/home/home.module';
 import { ShowFeedbackComponent } from './components/feedback/show-feedback/show-feedback.component';
-import { AddWorkshopComponent } from './components/workshop/add-workshop/add-workshop.component';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { SelectButtonModule } from 'primeng/selectbutton';
@@ -59,34 +55,25 @@ import { UpdateQuizComponent } from './BackOffice/quizzes/update-quiz/update-qui
 import { ListQuestionComponent } from './BackOffice/quizzes/list-question/list-question.component';
 import { AddQuizComponent } from './BackOffice/quizzes/add-quiz/add-quiz.component';
 import { CardQuizzesComponent } from './FrontOffice/card-quizzes/card-quizzes.component';
-
-
-
-
-
-import { UserWorkshopComponent } from './components/workshop/user-workshop/user-workshop.component';
+import { PaginatorModule } from 'primeng/paginator';
 import { MeetingComponent } from './components/meeting/meeting.component';
 import { AdminShowFeedbackComponent } from './components/feedback/admin-show-feedback/admin-show-feedback.component';
-import { HomeModule } from './FrontOffice/home/home.module';
 import { ListRequestComponent } from './requests/list-request/list-request.component';
 import { AddCategoryComponent } from './BackOffice/categories/add-category/add-category.component';
 import { ListCategoryComponent } from './BackOffice/categories/list-category/list-category.component';
 import { RequestComponent } from './FrontOffice/frontrequest/request/request.component';
 import { FrontAddComponent } from './FrontOffice/frontrequest/front-add/front-add.component';
-
 import { UpdateReqComponent } from './FrontOffice/frontrequest/update-req/update-req.component';
 import { AddAnswerComponent } from './requests/add-answer/add-answer.component';
 import { PostAdminComponent } from './BackOffice/post-admin/post-admin.component';
 import { EditorModule } from 'primeng/editor';
-
 import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 import { ListAnswersComponent } from './FrontOffice/frontrequest/answers/list-answers/list-answers.component';
-
-
-
-
-
-
+import {RegisterComponent} from "./BackOffice/pages/register/register.component";
+import {AddWorkshopComponent} from "./components/workshop/add-workshop/add-workshop.component";
+import {UserWorkshopComponent} from "./components/workshop/user-workshop/user-workshop.component";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ConsultUsersComponent} from "./components/users/consult-users/consult-users.component";
 
 @NgModule({
   declarations: [
@@ -95,8 +82,9 @@ import { ListAnswersComponent } from './FrontOffice/frontrequest/answers/list-an
      PostDetailsComponent,
     PostAdminComponent,
     ShowWorkshopComponent,
-    EditWorkshopComponent,
     ShowFeedbackComponent,
+    MeetingComponent,
+    EditWorkshopComponent,
     AddWorkshopComponent,
     QuizfrontComponent,
     QuestionComponent,
@@ -104,6 +92,7 @@ import { ListAnswersComponent } from './FrontOffice/frontrequest/answers/list-an
     ListQuestionComponent,
     AddQuestionComponent,
     CardQuizzesComponent,
+    MeetingComponent,
     UserWorkshopComponent,
     MeetingComponent,
     AdminShowFeedbackComponent,
@@ -114,9 +103,13 @@ import { ListAnswersComponent } from './FrontOffice/frontrequest/answers/list-an
     FrontAddComponent,
     UpdateReqComponent,
     AddAnswerComponent,
-    ListAnswersComponent
+    ListAnswersComponent,
+    ShowWorkshopComponent,
+    ConsultUsersComponent,
 
-    
+
+
+
 
   ],
   imports: [
@@ -158,7 +151,9 @@ import { ListAnswersComponent } from './FrontOffice/frontrequest/answers/list-an
     ConfirmPopupModule,
     ToolbarModule,
     ToastModule,
-    ConfirmPopupModule,
+    HomeModule,
+    SelectButtonModule,
+    RegisterComponent,
     ConfirmDialogModule,
     CardModule,
     SelectButtonModule,
@@ -177,6 +172,11 @@ import { ListAnswersComponent } from './FrontOffice/frontrequest/answers/list-an
     
 	
 	
+    PaginatorModule
+
+
+
+
   ],
     providers:[MessageService,ConfirmationService,DatePipe],
     bootstrap: [AppComponent]

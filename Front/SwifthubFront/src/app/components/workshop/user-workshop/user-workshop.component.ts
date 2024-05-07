@@ -19,7 +19,7 @@ export class UserWorkshopComponent implements OnInit {
   showFeedback:boolean=false;
   selectedWorkshopId!: string;
   meeting!:Meeting;
-  
+
 
  //static logged in user
  LoggedInUser:User={
@@ -40,7 +40,7 @@ export class UserWorkshopComponent implements OnInit {
 
     this.getUsers();
     this.WorkshopsByJoinedUser(this.LoggedInUser.id)
- 
+
    }
 
   // Set the initial position of the feedback container
@@ -73,20 +73,20 @@ export class UserWorkshopComponent implements OnInit {
       },
       err=>{
         console.log(err);
-        
+
       }
     );
-    
+
   }
   //show feedbacks
-  
+
   hideShow(workshopId: string){
     this.selectedWorkshopId = workshopId;
     this.showFeedback=!this.showFeedback;
-    
+
   }
 
-  //check start date is >= current date 
+  //check start date is >= current date
   isValid(start: Date): boolean {
     const workshopstart=new Date(start)
     const currentDate = new Date();
@@ -100,7 +100,7 @@ export class UserWorkshopComponent implements OnInit {
     const endDate = new Date(workshop.end_date);
     return currentDate>=startDate&&currentDate<=endDate;
   }
-        
+
   studentJoinMeeting(meetingId:string) {
     this.meetingService.getMeetingById(meetingId).subscribe(
       res=>{
@@ -109,7 +109,7 @@ export class UserWorkshopComponent implements OnInit {
     },
     err=>{
       console.log(err);
-      
+
     }
     );
     }
