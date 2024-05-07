@@ -33,15 +33,11 @@ export class UserWorkshopComponent implements OnInit {
 
   ngOnInit(): void {
     //fetch local storage
-  var email= window.localStorage.getItem("email");
-  console.log(email);
-  
+  var email= window.localStorage.getItem("email");  
  if (email ) {
- 
   this.userService.findUserByEmail(email).subscribe(
     res=>{
    this.LoggedInUser=res as User;   
-   console.log(this.LoggedInUser);
    this.WorkshopsByJoinedUser();
     },
     err=>{
