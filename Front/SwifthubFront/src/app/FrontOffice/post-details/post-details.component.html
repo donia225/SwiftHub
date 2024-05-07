@@ -8,11 +8,12 @@
   <ul>
     <li *ngFor="let comment of comments">
       <div class="d-flex align-items-center">
-        <p class="mr-2">{{ comment.idUser }} - {{ comment.commentDate }}</p>
-        <button *ngIf="comment.id !== null" class="p-button p-button-danger" (click)="deleteComment(comment.id)">
+        <p class="mr-2">{{ comment.idUser }} </p>
+        <p class="mr-2">(({{ comment.commentDate }})) </p>
+        <button *ngIf="LoggedInUser && LoggedInUser.username === comment.idUser && comment.id !== null" class="p-button p-button-danger" (click)="deleteComment(comment.id)">
           <span class="pi pi-times"></span> 
-
         </button>
+        
               </div>
       
       
@@ -22,7 +23,7 @@
         [style.background-color]="comment.isHighlighted ? 'yellow' : 'transparent'">
         {{ comment.content }}
       </p>
-      <button class="btn btn-edit"       (click)="editComment(comment)">Edit</button>
+      <button *ngIf="LoggedInUser && LoggedInUser.username === comment.idUser" class="btn btn-edit"       (click)="editComment(comment)">Edit</button>
       <form *ngIf="editingComment && showEditForm" (ngSubmit)="updateComment(editingComment)">
         <textarea class="form-control" rows="3" name="editedComment" [(ngModel)]="editingComment.content"></textarea>
         <button type="submit" class="btn btn-primary">Save Changes</button>

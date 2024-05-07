@@ -7,16 +7,14 @@
       </form>
     </div>
 
+    
     <div class="row">
       <div class="col-md-6">
         <button class="btn btn-primary mb-3" style="margin-left: 220px;" (click)="toggleFormVisibility()">Add Post</button> <!-- Bouton "Add Post" -->
         
         <div *ngIf="showForm">
           <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-            <div>
-              <label for="idUser">ID User:</label>
-              <input type="text" id="idUser" name="idUser" [(ngModel)]="formData.idUser"  required>
-            </div>
+            
             <div>
               <label for="title">Title:</label>
               <input type="text" id="title" name="title" [(ngModel)]="formData.title" required>
@@ -31,32 +29,35 @@
         </div>
         
         
+
+
         <div class="container">
-          <div class="row">
-            <div class="col-md-10 offset-md-2">
-              <ng-container *ngFor="let post of posts">
-                <div *ngIf="post.visibility === 1" class="card mb-3">
-                  <div class="card-header d-flex justify-content-between" >
-                    <span>{{ post.idUser }}</span>
-                  </div>
-                  <div class="card-body">
-                    <div>
-                      
-                      <span>{{ post.postDate | date: 'dd/MM/yyyy' }}</span>
-                      <button class="btn btn-details"  style="margin-left: 182px;" (click)="showPostDetails(post.id)">Details</button>
-                    </div>
-                    <h5 class="card-title">{{ post.title }}</h5>
-                    <p class="card-text" *ngIf="post.description">Description: {{ post.description.split(' ').slice(0, 10).join(' ') }}...</p>
-                    <button class="btn btn-edit" (click)="editPost(post)">Edit</button>
-                    <button  class="p-button p-button-danger"  style="margin-left: 220px;" (click)="deletePost(post.id)">
-                      <span class="pi pi-times"></span> 
-                    </button>
-                  </div>
-                </div>
-              </ng-container>
+  <div class="row">
+    <div class="col-md-10 offset-md-2">
+      <ng-container *ngFor="let post of posts">
+        <div *ngIf="post.visibility === 1" class="card mb-3">
+          <div class="card-header d-flex justify-content-between">
+            <span>{{ post.idUser }}</span>
+          </div>
+          <div class="card-body">
+            <div>
+              <span>{{ post.postDate | date: 'dd/MM/yyyy' }}</span>
+              <button class="btn btn-details" style="margin-left: 170px;" (click)="showPostDetails(post.id)">Details</button>
             </div>
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text" *ngIf="post.description">Description: {{ post.description.split(' ').slice(0, 10).join(' ') }}...</p>
+            <!-- Affichage conditionnel des boutons Edit et Delete -->
+            <button *ngIf="LoggedInUser && LoggedInUser.username === post.idUser" class="btn btn-edit" (click)="editPost(post)">Edit</button>
+            <button *ngIf="LoggedInUser && LoggedInUser.username === post.idUser" class="p-button p-button-danger" style="margin-left: 220px;" (click)="deletePost(post.id)">
+              <span class="pi pi-times"></span> 
+            </button>
           </div>
         </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
         
  
         

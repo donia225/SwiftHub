@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PostService } from './post.service';
 import { Post } from './post.model';
 import { Router } from '@angular/router';
@@ -6,6 +6,8 @@ import { CommentService } from './comment.service';
 import { Comment } from './post.model';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {  MessageService } from 'primeng/api';
+import { UserService } from 'src/app/services/users/user.service';
+import { User } from 'src/app/models/user/user';
 
 
 @Component({
@@ -13,7 +15,7 @@ import {  MessageService } from 'primeng/api';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
-export class PostComponent {
+export class PostComponent implements OnInit{
   formData: any = {
     idUser: "",
     description: ""
@@ -26,9 +28,48 @@ export class PostComponent {
   selectedEditFile: File | null = null;
   textColor: string = '#000000';
   comments: Comment[] = [];
-  constructor(private router: Router, private postService: PostService,private commentService: CommentService,private messageService:MessageService) {
+  LoggedInUser!:User;
+  full_name!:string;
+
+  constructor(
+    private router: Router,
+    private postService: PostService,
+    private commentService: CommentService,
+    private messageService:MessageService,
+    private userService:UserService) {
     this.loadPosts();
   }
+
+  ngOnInit() {
+    //fetch local storage
+  var email= window.localStorage.getItem("email");
+  console.log(email);
+  
+ if (email ) {
+ 
+  this.userService.findUserByEmail(email).subscribe(
+    res=>{
+   this.LoggedInUser=res as User;   
+   console.log(this.LoggedInUser);
+   
+    },
+    err=>{
+      console.log(err);
+      
+    }
+  );
+}
+    this.formGroup = new FormGroup({
+      value: new FormControl('')
+    });
+
+    // Écoutez les changements dans le champ de recherche
+    this.formGroup.get('value')?.valueChanges.subscribe(value => {
+      this.searchTerm = value;
+      this.searchPosts();
+    });
+  }
+  
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
@@ -36,7 +77,8 @@ export class PostComponent {
 
   onSubmit(): void {
     const newPost: any = {
-      idUser: this.formData.idUser,
+      
+      idUser: this.LoggedInUser.username,
       title: this.formData.title,
       description: this.formData.description,
       postDate: new Date(),
@@ -178,29 +220,23 @@ export class PostComponent {
   searchTerm: string = '';
 
   
-  ngOnInit() {
-    this.formGroup = new FormGroup({
-      value: new FormControl('')
-    });
-
-    // Écoutez les changements dans le champ de recherche
-    this.formGroup.get('value')?.valueChanges.subscribe(value => {
-      this.searchTerm = value;
-      this.searchPosts();
-    });
-  }
+  
 
   searchPosts(): void {
     if (!this.searchTerm) {
       this.loadPosts();
       return;
     }
-
+  
+    const searchTermLower = this.searchTerm.toLowerCase();
     this.posts = this.posts.filter(post =>
-      post.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      (post.description && post.description.toLowerCase().includes(this.searchTerm.toLowerCase()))
+      (post.title && post.title.toLowerCase().includes(searchTermLower)) ||
+      (post.description && post.description.toLowerCase().includes(searchTermLower)) ||
+      (post.idUser && post.idUser.toLowerCase().includes(searchTermLower))
     );
   }
+  
+  
 }
   
 
