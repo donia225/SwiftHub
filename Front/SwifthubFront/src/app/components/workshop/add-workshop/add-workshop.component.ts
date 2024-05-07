@@ -91,6 +91,7 @@ export class AddWorkshopComponent implements OnInit {
          err=>{
           // show error popup
           this.messageService.add({severity:'error', summary:'Error', detail:'Failed to update workshop'});
+      
 
 
          }

@@ -68,6 +68,8 @@ import { UpdateReqComponent } from './FrontOffice/frontrequest/update-req/update
 import { AddAnswerComponent } from './requests/add-answer/add-answer.component';
 import { PostAdminComponent } from './BackOffice/post-admin/post-admin.component';
 import { EditorModule } from 'primeng/editor';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+
 import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 import { UpdateQuestionComponent } from './BackOffice/quizzes/update-question/update-question.component';
 
@@ -116,6 +118,7 @@ import {ConsultUsersComponent} from "./components/users/consult-users/consult-us
 
   ],
   imports: [
+    InputTextareaModule,
     TriStateCheckboxModule,
     EditorModule,
     BrowserModule,

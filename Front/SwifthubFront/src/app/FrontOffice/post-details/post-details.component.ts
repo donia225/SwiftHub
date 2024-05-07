@@ -3,12 +3,14 @@ import { Post } from '../post/post.model';
 import { PostService } from '../post/post.service';
 import { Comment } from '../post/post.model';
 import { CommentService } from '../post/comment.service';
-import { content } from 'html2canvas/dist/types/css/property-descriptors/content';
+import {  MessageService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
-  styleUrls: ['./post-details.component.css']
+  styleUrls: ['./post-details.component.css'],
+
 })
 export class PostDetailsComponent implements OnInit {
   @Input() postId: number | null = null;
@@ -23,17 +25,21 @@ export class PostDetailsComponent implements OnInit {
   showForm = false;
   editingComment: Comment | null = null;
   showEditForm = false;
-
-  constructor(private postService: PostService, private commentService: CommentService) {}
+  
+  constructor(private postService: PostService, private commentService: CommentService,private messageService:MessageService) {}
   
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.postId && !changes.postId.firstChange) {
       this.loadPostDetails();
     }
   }
+  
   ngOnInit(): void {
     this.loadPostDetails();
   }
+
+  
+  
   loadPostDetails(): void {
     if (this.postId !== null) {
       this.postService.getPostById(this.postId).subscribe(post => {
@@ -54,6 +60,7 @@ export class PostDetailsComponent implements OnInit {
   }
 
   addComment(): void {
+    
     if (this.postId !== null) {
       let commentContent = this.newCommentText;
   
@@ -76,6 +83,8 @@ export class PostDetailsComponent implements OnInit {
       };
       this.commentService.addComment(newComment, this.postId).subscribe(
         (response) => {
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Comment added successfully !' });
+
           console.log('Comment added successfully:', response);
           // Ajouter le nouveau commentaire à la liste locale des commentaires avec les styles
           this.comments.push(response);
@@ -88,6 +97,8 @@ export class PostDetailsComponent implements OnInit {
           this.isHighlighted = false;
         },
         (error) => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed : Comment contain bad words !!' });
+
           console.error('Error adding comment:', error);
           // Gérer les erreurs en conséquence
         }
@@ -95,7 +106,9 @@ export class PostDetailsComponent implements OnInit {
     } else {
       console.error('Post ID is null');
     }
+   
   }
+ 
   
   deleteComment(id: number): void {
     this.commentService.deleteComment(id).subscribe(
