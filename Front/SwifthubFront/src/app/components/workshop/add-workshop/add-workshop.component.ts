@@ -126,7 +126,6 @@ ngOnInit(): void {
   ];
 
   //fetch local storage
-  //fetch local storage
   var email= window.localStorage.getItem("email");
   console.log(email);
   
