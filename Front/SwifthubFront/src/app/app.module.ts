@@ -49,7 +49,7 @@ import { SliderModule } from 'primeng/slider';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TreeTableModule } from 'primeng/treetable';
 import { AddQuestionComponent } from './BackOffice/quizzes/question/add-question/add-question.component';
-import { QuizfrontComponent } from './FrontOffice/quizfront/quizfront.component';
+
 import { QuestionComponent } from './FrontOffice/question/question.component';
 import { UpdateQuizComponent } from './BackOffice/quizzes/update-quiz/update-quiz.component';
 import { ListQuestionComponent } from './BackOffice/quizzes/list-question/list-question.component';
@@ -66,12 +66,15 @@ import { AddAnswerComponent } from './requests/add-answer/add-answer.component';
 import { PostAdminComponent } from './BackOffice/post-admin/post-admin.component';
 import { EditorModule } from 'primeng/editor';
 import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
+import { UpdateQuestionComponent } from './BackOffice/quizzes/update-question/update-question.component';
+
 import { ListAnswersComponent } from './FrontOffice/frontrequest/answers/list-answers/list-answers.component';
 import {RegisterComponent} from "./BackOffice/pages/register/register.component";
 import {AddWorkshopComponent} from "./components/workshop/add-workshop/add-workshop.component";
 import {UserWorkshopComponent} from "./components/workshop/user-workshop/user-workshop.component";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ConsultUsersComponent} from "./components/users/consult-users/consult-users.component";
+
 
 @NgModule({
   declarations: [
@@ -84,7 +87,6 @@ import {ConsultUsersComponent} from "./components/users/consult-users/consult-us
     MeetingComponent,
     EditWorkshopComponent,
     AddWorkshopComponent,
-    QuizfrontComponent,
     QuestionComponent,
     UpdateQuizComponent,
     ListQuestionComponent,
@@ -99,6 +101,7 @@ import {ConsultUsersComponent} from "./components/users/consult-users/consult-us
     FrontAddComponent,
     UpdateReqComponent,
     AddAnswerComponent,
+    UpdateQuestionComponent,
     ListAnswersComponent,
     ShowWorkshopComponent,
     ConsultUsersComponent,

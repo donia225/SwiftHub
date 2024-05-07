@@ -15,8 +15,11 @@ import { ListQuestionComponent } from '../quizzes/list-question/list-question.co
 import { AdminShowFeedbackComponent } from 'src/app/components/feedback/admin-show-feedback/admin-show-feedback.component';
 import { ListRequestComponent } from 'src/app/requests/list-request/list-request.component';
 import { AddAnswerComponent } from 'src/app/requests/add-answer/add-answer.component';
-
+import { UpdateQuestionComponent } from '../quizzes/update-question/update-question.component';
 import { LoginComponent } from '../pages/login/login.component';
+
+
+
 
 
 
@@ -47,7 +50,9 @@ const routes: Routes = [
       { path: 'update-quiz/:quizId', component: UpdateQuizComponent },
    
       {path:'add-question/:quizId', component: AddQuestionComponent},
-    
+      { path: 'update-question/update/:quizId/:question_id', component: UpdateQuestionComponent }
+
+
 
     ]
   },
