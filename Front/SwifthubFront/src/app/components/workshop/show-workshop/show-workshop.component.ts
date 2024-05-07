@@ -183,7 +183,7 @@ export class ShowWorkshopComponent implements OnInit {
       { label: 'workshops' }
     ];
 
-      //fetch local storage
+  //fetch local storage
   var email= window.localStorage.getItem("email");
   console.log(email);
   
