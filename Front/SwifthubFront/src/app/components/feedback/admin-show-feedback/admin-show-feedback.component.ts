@@ -4,6 +4,7 @@ import { Feedback } from 'src/app/models/feedback/feedback';
 import { User } from 'src/app/models/user/user';
 import { Workshop } from 'src/app/models/workshop/workshop';
 import { NotificationFeedbackService } from 'src/app/services/notifications/notification-feedback.service';
+import { UserService } from 'src/app/services/users/user.service';
 import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 
 @Component({
@@ -18,23 +19,46 @@ export class AdminShowFeedbackComponent implements OnInit {
   users!:User[];
   selectedFeedback: Feedback | null = null;
   selectedWorkshop!:Workshop;
-  loggedInUser: User = {
-    id: '662bb6b46c4b2853ebe30871',
-    username: 'John doe',
-    password: '$2a$10$cW3D21mSbcfnSJxwu2jCVe0iywlH.aAALwpxyBavZ/o5Q4loWahPe',
-    email: 'john.doe@example.com',
-    className: 'Class A',
-    department: 'Computer Science',
-    managedService: 'IT Support',
-    role: Role.PROFESSOR,
-    ImageUrl: ''
-  }
+  loggedInUser!: User;
+  // loggedInUser: User = {
+  //   id: '662bb6b46c4b2853ebe30871',
+  //   username: 'John doe',
+  //   password: '$2a$10$cW3D21mSbcfnSJxwu2jCVe0iywlH.aAALwpxyBavZ/o5Q4loWahPe',
+  //   email: 'john.doe@example.com',
+  //   className: 'Class A',
+  //   department: 'Computer Science',
+  //   managedService: 'IT Support',
+  //   role: Role.PROFESSOR,
+  //   ImageUrl: ''
+  // }
 
-  constructor(private notifService: NotificationFeedbackService, private serviceWorkshop: WorkshopService) { }
+  constructor(
+    private notifService: NotificationFeedbackService,
+    private serviceWorkshop: WorkshopService,
+    private userService:UserService
+
+    ) { }
 
   ngOnInit(): void {
-    this.getAllUsers();
-    this.showAdminWorkshops(this.loggedInUser.id);
+    //fetch local storage
+  var email= window.localStorage.getItem("email");  
+  if (email ) {
+   this.userService.findUserByEmail(email).subscribe(
+     res=>{
+    this.loggedInUser=res as User; 
+    this.getAllUsers();  
+    this.showAdminWorkshops(this.loggedInUser.id); 
+     },
+     err=>{
+       console.log(err);
+       
+     }
+   );
+ }
+
+
+    
+   
    
 
 
@@ -80,9 +104,9 @@ export class AdminShowFeedbackComponent implements OnInit {
 
   //getAllUsers
   getAllUsers(){
-    return this.serviceWorkshop.getAllUsers().subscribe(
+    return this.userService.getUsers().subscribe(
       res=>{
-        this.users=res;
+        this.users=res as User[];
       },
       err=>{
         console.log("couldn't fetch users: " + err);
