@@ -1,7 +1,8 @@
-<!--Feedbacks -->
+<!--
+&lt;!&ndash;Feedbacks &ndash;&gt;
 <div class="col-md-6">
 
-  <!-- Feedbacks card -->
+  &lt;!&ndash; Feedbacks card &ndash;&gt;
   <div class="card" style="max-height: 670px; width: 557.6px;">
 
     <div class="flex-column">
@@ -11,7 +12,7 @@
       <button class="btn btn-outline-light btn-sm sticky-top"
         style="color: #c8935e; display: inline-block;width: 515.6px;" (click)="openAddFeedbackModal()">Add
         Feedback</button>
-      <!-- Add Feedback Component -->
+      &lt;!&ndash; Add Feedback Component &ndash;&gt;
       <div *ngIf="addFeedbackCheck">
         <form [formGroup]="addFeedbackForm">
 
@@ -45,15 +46,15 @@
         <p-toast></p-toast>
       </div>
     </div>
-      <!-- Add Feedback Component ENDS HERE -->
+      &lt;!&ndash; Add Feedback Component ENDS HERE &ndash;&gt;
     <div class="card-body" style="overflow-y: auto;">
-      <!-- Feedback items -->
+      &lt;!&ndash; Feedback items &ndash;&gt;
       <div class="list-group">
 
-        <!-- Feedback item -->
+        &lt;!&ndash; Feedback item &ndash;&gt;
         <div class="list-group-item shadow-sm rounded mb-3" *ngFor="let feedback of feedbacks">
-          <!-- Star rating -->
-          <!-- Creation date -->
+          &lt;!&ndash; Star rating &ndash;&gt;
+          &lt;!&ndash; Creation date &ndash;&gt;
           <div class="text-right" style="color: #6c757d; font-size: 12px;">
             {{ feedback.creationDate | date: 'medium' }}
           </div>
@@ -78,7 +79,7 @@
           </div>
           <br>
 
-          <!-- Username and feedback content on the right -->
+          &lt;!&ndash; Username and feedback content on the right &ndash;&gt;
           <div class="d-flex justify-content-between align-items-center">
             <div>
               <div *ngFor="let user of users">
@@ -91,8 +92,8 @@
             </div>
           </div>
         </div>
-        <!--  -->
+        &lt;!&ndash;  &ndash;&gt;
       </div>
     </div>
   </div>
-</div>
+</div>-->

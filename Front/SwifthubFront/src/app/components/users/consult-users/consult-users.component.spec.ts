@@ -1,19 +1,18 @@
-/*
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddWorkshopComponent } from './add-workshop.component';
+import { ConsultUsersComponent } from './consult-users.component';
 
-describe('AddWorkshopComponent', () => {
-  let component: AddWorkshopComponent;
-  let fixture: ComponentFixture<AddWorkshopComponent>;
+describe('ConsultUsersComponent', () => {
+  let component: ConsultUsersComponent;
+  let fixture: ComponentFixture<ConsultUsersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddWorkshopComponent ]
+      declarations: [ ConsultUsersComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddWorkshopComponent);
+    fixture = TestBed.createComponent(ConsultUsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -22,4 +21,3 @@ describe('AddWorkshopComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-*/

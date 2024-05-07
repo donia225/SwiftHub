@@ -50,7 +50,7 @@ export class AddWorkshopComponent implements OnInit {
 
 
 
-  //getters for from 
+  //getters for from
   get title() { return this.addWorkshopForm.get('title') };
   get description() { return this.addWorkshopForm.get('description') };
   get capacity() { return this.addWorkshopForm.get('capacity') };
@@ -70,7 +70,7 @@ export class AddWorkshopComponent implements OnInit {
     const formattedDate = this.datePipe.transform(date, 'yyyy-MM-dd');
     return formattedDate ? new Date(formattedDate) : new Date();
   }
-    //add workshop 
+    //add workshop
     addWorkshop() {
       if (this.addWorkshopForm.valid) {
        const formData={
@@ -86,21 +86,21 @@ export class AddWorkshopComponent implements OnInit {
           // wait 8s then route to show workshops
           setTimeout(() => {
             this.router.navigateByUrl("/workshopBack/show")
-          }, 800);    
+          }, 800);
          },
          err=>{
           // show error popup
           this.messageService.add({severity:'error', summary:'Error', detail:'Failed to update workshop'});
 
-                   
+
          }
        );
       }
-      
+
      }
 
 
-  
+
 
 
 ngOnInit(): void {
@@ -111,7 +111,7 @@ ngOnInit(): void {
   ];
 
 
-  //add workshop form 
+  //add workshop form
   this.addWorkshopForm = new FormGroup({
     title: new FormControl(this.workshop.title, Validators.required),
     description: new FormControl(this.workshop.description, Validators.required),
@@ -123,12 +123,12 @@ ngOnInit(): void {
     userId: new FormControl(this.workshop.userId),
   })
 
- 
+
 
 
 }
 
-// creating meeting 
+// creating meeting
 createMeeting() {
   this.meetingServie.addMeeting().subscribe(
     res=>{
@@ -136,7 +136,7 @@ createMeeting() {
     },
     err=>{
       console.log(err);
-      
+
     }
   );
   }

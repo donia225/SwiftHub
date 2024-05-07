@@ -29,9 +29,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DialogModule } from 'primeng/dialog';
-import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
 import { DashboardModule } from './BackOffice/dashboard/dashboard.module';
@@ -40,9 +38,8 @@ import { PostComponent } from './FrontOffice/post/post.component';
 import { PostDetailsComponent } from './FrontOffice/post-details/post-details.component';
 import { ShowWorkshopComponent } from './components/workshop/show-workshop/show-workshop.component';
 import { EditWorkshopComponent } from './components/workshop/edit-workshop/edit-workshop.component';
+import { HomeModule } from './FrontOffice/home/home.module';
 import { ShowFeedbackComponent } from './components/feedback/show-feedback/show-feedback.component';
-import { AddWorkshopComponent } from './components/workshop/add-workshop/add-workshop.component';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { SelectButtonModule } from 'primeng/selectbutton';
@@ -64,10 +61,8 @@ import { CardQuizzesComponent } from './FrontOffice/card-quizzes/card-quizzes.co
 import { PaginatorModule } from 'primeng/paginator';
 
 
-import { UserWorkshopComponent } from './components/workshop/user-workshop/user-workshop.component';
 import { MeetingComponent } from './components/meeting/meeting.component';
 import { AdminShowFeedbackComponent } from './components/feedback/admin-show-feedback/admin-show-feedback.component';
-import { HomeModule } from './FrontOffice/home/home.module';
 import { ListRequestComponent } from './requests/list-request/list-request.component';
 import { AddCategoryComponent } from './BackOffice/categories/add-category/add-category.component';
 import { ListCategoryComponent } from './BackOffice/categories/list-category/list-category.component';
@@ -82,10 +77,11 @@ import { EditorModule } from 'primeng/editor';
 import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 
 
-
-
-
-
+import {RegisterComponent} from "./BackOffice/pages/register/register.component";
+import {AddWorkshopComponent} from "./components/workshop/add-workshop/add-workshop.component";
+import {UserWorkshopComponent} from "./components/workshop/user-workshop/user-workshop.component";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ConsultUsersComponent} from "./components/users/consult-users/consult-users.component";
 
 @NgModule({
   declarations: [
@@ -94,8 +90,9 @@ import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
      PostDetailsComponent,
     PostAdminComponent,
     ShowWorkshopComponent,
-    EditWorkshopComponent,
     ShowFeedbackComponent,
+    MeetingComponent,
+    EditWorkshopComponent,
     AddWorkshopComponent,
     QuizfrontComponent,
     QuestionComponent,
@@ -103,6 +100,7 @@ import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
     ListQuestionComponent,
     AddQuestionComponent,
     CardQuizzesComponent,
+    MeetingComponent,
     UserWorkshopComponent,
     MeetingComponent,
     AdminShowFeedbackComponent,
@@ -112,9 +110,13 @@ import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
     RequestComponent,
     FrontAddComponent,
     UpdateReqComponent,
-    AddAnswerComponent
+    AddAnswerComponent,
+    ShowWorkshopComponent,
+    ConsultUsersComponent,
 
-    
+
+
+
 
   ],
   imports: [
@@ -156,7 +158,9 @@ import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
     ConfirmPopupModule,
     ToolbarModule,
     ToastModule,
-    ConfirmPopupModule,
+    HomeModule,
+    SelectButtonModule,
+    RegisterComponent,
     ConfirmDialogModule,
     CardModule,
     SelectButtonModule,
@@ -174,8 +178,9 @@ import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
     PanelModule,
     PaginatorModule
 
-	
-	
+
+
+
   ],
     providers:[MessageService,ConfirmationService,DatePipe],
     bootstrap: [AppComponent]

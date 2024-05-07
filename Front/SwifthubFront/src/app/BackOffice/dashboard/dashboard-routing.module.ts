@@ -1,7 +1,6 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from '../login/login.component';
 import { AppLayoutComponent } from '../layout/app.layout.component';
 import { ListQuizComponent } from '../quizzes/list-quiz/list-quiz.component';
 import { AddQuizComponent } from '../quizzes/add-quiz/add-quiz.component';
@@ -18,6 +17,7 @@ import { ListRequestComponent } from 'src/app/requests/list-request/list-request
 import { AddAnswerComponent } from 'src/app/requests/add-answer/add-answer.component';
 import { ListCategoryComponent } from '../categories/list-category/list-category.component';
 import { AddCategoryComponent } from '../categories/add-category/add-category.component';
+import { LoginComponent } from '../pages/login/login.component';
 
 
 
@@ -29,7 +29,7 @@ const routes: Routes = [
   children:[
     {
       path: '', component: AppLayoutComponent,
-     
+
     },
     { path: 'postAdmin', component: PostAdminComponent },
   ]
@@ -39,7 +39,7 @@ const routes: Routes = [
 
   
   
-  
+
   {
     path: 'quiz', component: AppLayoutComponent,
     children: [
