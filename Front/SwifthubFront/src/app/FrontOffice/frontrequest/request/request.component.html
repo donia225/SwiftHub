@@ -23,6 +23,7 @@
           <div class="card-body text-center">
             <!-- Titre de la carte -->
             <h5 class="card-title">{{ request.title }}</h5>
+            <p>{{ request.categoryName }}</p>
             <p>{{ request.creationDate | date }}</p>
             <p class="card-text" [ngClass]="{
                 'text-warning': request.status === 'AWAITING',
@@ -31,16 +32,32 @@
               }">{{ request.status }}</p>
             
     
-            <p>{{ request.category }}</p>
+           
                                   
           </div> 
           <div class="text-right mb-3"> <!-- Aligner les boutons à droite -->
+            <button pButton type="button" label="Details" class="p-button-text" (click)="openDetailsModal(request.idRequest)"></button>
             <button pButton pRipple type="button" label="edit" class="p-button-rounded p-button-success custom-button" (click)="gotoupdatepage(request.idRequest)"></button>
             <button pButton pRipple type="button" label="delete" class="p-button-rounded p-button-warning custom-button ml-2" (click)="deleteRequest(request.idRequest)"></button>
+            
           </div>
          
         </div>
       </div>
     </div>
+    <!-- Ajout du Dialog pour afficher les détails d'une demande -->
+<p-dialog header="Request Details" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}">
+  <div *ngIf="selectedRequest">
+      <p><strong>Title:</strong> {{selectedRequest.title}}</p>
+      <p><strong>Category:</strong> {{selectedRequest.categoryName}}</p>
+      <p><strong>Description:</strong> {{selectedRequest.description}}</p>
+      <p><strong>Status:</strong> {{selectedRequest.status}}</p>
+      <p><strong>Creation Date:</strong> {{selectedRequest.creationDate | date}}</p>
+      <p><strong>Answers:</strong></p>
+      <ul>
+          <li *ngFor="let answer of selectedRequest.answers">{{ answer.responseText }}</li>
+      </ul>
+  </div>
+</p-dialog>
   </div>
   

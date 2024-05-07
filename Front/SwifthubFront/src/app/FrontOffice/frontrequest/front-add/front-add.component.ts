@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequestService } from '../request.service';
 import Swal from 'sweetalert2';
-import { Category } from '../Models/Category';
 import { CategoryService } from '../category.service';
 import { Request } from '../Models/Request';
 
@@ -14,9 +13,10 @@ import { Request } from '../Models/Request';
 })
 export class FrontAddComponent implements OnInit {
   requestform!: FormGroup;
-  categories: Category[] = []; // Renommez la variable
-  selectedCategory: Category | null = null;
+
   Request: Request[] = [];
+  categoryNames: string[] = ['Grade', 'Administration', 'Quality_of_study', 'Course'];
+
 
 
   constructor(
@@ -30,25 +30,17 @@ export class FrontAddComponent implements OnInit {
     this.requestform = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      selectedCategory: [null, Validators.required], 
+      categoryName: [null, Validators.required], 
     });
 
-    // Charger les catégories lors de l'initialisation du composant
-    this.loadCategories();
+    this.requestform.get('categoryName')?.valueChanges.subscribe(value => {
+      console.log("Current category name:", value);
+    });
+
+    
   }
 
-  loadCategories(): void {
-    console.log("Calling loadCategories()...");
-    this.categoryService.getAllCategories().subscribe(
-      categories => {
-        this.categories = categories;
-        console.log("Categories received:", this.categories);
-      },
-      error => {
-        console.error("Error while loading categories:", error);
-      }
-    );
-  }
+
   
 
   addRequest(): void {

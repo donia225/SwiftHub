@@ -15,8 +15,7 @@ import { ListQuestionComponent } from '../quizzes/list-question/list-question.co
 import { AdminShowFeedbackComponent } from 'src/app/components/feedback/admin-show-feedback/admin-show-feedback.component';
 import { ListRequestComponent } from 'src/app/requests/list-request/list-request.component';
 import { AddAnswerComponent } from 'src/app/requests/add-answer/add-answer.component';
-import { ListCategoryComponent } from '../categories/list-category/list-category.component';
-import { AddCategoryComponent } from '../categories/add-category/add-category.component';
+
 import { LoginComponent } from '../pages/login/login.component';
 
 
@@ -81,16 +80,7 @@ const routes: Routes = [
 
     ]
   },
-  {
-    path: 'category', component: AppLayoutComponent,
-    children: [
-      { path: 'list-category', component: ListCategoryComponent },
-      { path: 'add-category', component: AddCategoryComponent },
 
-    
-
-    ]
-  },
 
 ];
 

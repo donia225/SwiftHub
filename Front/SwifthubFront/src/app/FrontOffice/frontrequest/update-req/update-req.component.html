@@ -14,13 +14,16 @@
                 </div>
                 
             
-          <!--       <div class="field col-12 md-6">
+                <div class="field col-12 md-6">
                     <label htmlFor="category">Category</label>
-                    <p-dropdown [options]="categories" optionLabel="categoryName" formControlName="selectedCategory" name="category"></p-dropdown>
-                    <div *ngIf="requestform.get('selectedCategory')?.invalid && requestform.get('selectedCategory')?.touched" class="text-danger">
+                    <select id="category" formControlName="categoryName">
+                      <option *ngFor="let category of categoryNames" [value]="category">{{ category }}</option>
+                    </select>
+                    <div *ngIf="requestform.get('categoryName')?.invalid && requestform.get('categoryName')?.touched"
+                      class="text-danger">
                       Category is required
                     </div>
-                  </div> -->
+                  </div>
                   
                 
                   

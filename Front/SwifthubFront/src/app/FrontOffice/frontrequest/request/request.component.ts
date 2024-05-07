@@ -14,6 +14,8 @@ export class RequestComponent implements OnInit{
   Request: any[]=[];
   breadcrumbItems: MenuItem[] = [];
   searchText: string = '';
+  displayModal: boolean = false;
+  selectedRequest: any = null;
 
   constructor(private requestService:RequestService, private route:Router ){
 
@@ -81,6 +83,16 @@ export class RequestComponent implements OnInit{
   }
   gotoupdatepage(idRequest: number) {
     this.route.navigate(['home/content/update-req', idRequest]);
+  }
+
+  openDetailsModal(idRequest: number): void {
+    this.requestService.getRequestById(idRequest).subscribe(
+      (response) => {
+        this.selectedRequest = response;
+        this.displayModal = true;
+      },
+      (error) => { console.error('Error loading request details:', error); }
+    );
   }
   //fonction pour trier la table
   onSort() {

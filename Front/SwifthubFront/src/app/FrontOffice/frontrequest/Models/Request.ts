@@ -1,4 +1,4 @@
-import { Category } from "./Category";
+
 
 
 export interface Request{
@@ -7,6 +7,7 @@ export interface Request{
     description: string;
     status: string;
     creationDate: Date;
-    category: Category;
+    categoryName:string;
+    
     
 }
