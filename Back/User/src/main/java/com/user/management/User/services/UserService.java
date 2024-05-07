@@ -49,9 +49,13 @@ public class UserService  implements IUserService{
     public User findUserByToken(String token) {
         User userfound =null;
        if (token!=null){
-           Optional<Token> optionalToken=this.tokenRepo.findByToken(token);
-           if (optionalToken.isPresent()){
-               userfound=optionalToken.get().getUser();
+           Optional<List<Token>> optionalTokens=this.tokenRepo.findAllByToken(token);
+           if (optionalTokens.isPresent()){
+               List<Token> tokens = optionalTokens.get();
+              Optional<Token> tokenOptional= tokens.stream().filter(t->t.getUser()!=null).findAny();
+              if (tokenOptional.isPresent()){
+                  userfound=tokenOptional.get().getUser();
+              }
            }
        }
         System.out.println(userfound);
