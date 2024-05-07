@@ -1,8 +1,6 @@
 package org.esprit.requestproject.controllers;
 
-import org.esprit.requestproject.entities.Category;
 import org.esprit.requestproject.entities.Request;
-import org.esprit.requestproject.entities.Status;
 import org.esprit.requestproject.services.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,7 +51,7 @@ public class RequestController {
 
 
 
-    @PostMapping("/addcateg")
+   /* @PostMapping("/addcateg")
 
     public ResponseEntity<Request> affectRequestionToCateg(@RequestBody Request request) {
         Category category = request.getCategory(); // Récupérer la catégorie depuis la requête
@@ -67,7 +65,7 @@ public class RequestController {
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
-    }
+    }*/
 
 
 

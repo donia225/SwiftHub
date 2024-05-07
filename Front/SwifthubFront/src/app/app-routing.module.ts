@@ -20,7 +20,7 @@ const routes: Routes = [
   {path:"register",component:RegisterComponent},
   {path:'meeting',component:MeetingComponent},
   {path:'consultUser',component:ConsultUsersComponent},
-  { path: '**', redirectTo: 'login' },
+  { path: '**', redirectTo: 'login' }, 
 
 
 

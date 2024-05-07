@@ -38,8 +38,6 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
 import {LoginComponent} from "../pages/login/login.component";
 import { ListRequestComponent } from 'src/app/requests/list-request/list-request.component';
-import { ListCategoryComponent } from '../categories/list-category/list-category.component';
-import { AddCategoryComponent } from '../categories/add-category/add-category.component';
 import { PostAdminComponent } from '../post-admin/post-admin.component';
 
 

@@ -17,10 +17,11 @@
         <ng-template pTemplate="header">
             <tr>
                 <th>Title</th>
+                <th>Category</th>
                 <th>Description</th>
                 <th>Status</th>
                 <th>Creation date</th>
-                <th>Category</th>
+              
                 
                 
                 <th>Actions</th> <!-- Nouvelle colonne pour les actions -->
@@ -31,12 +32,13 @@
             <tr>
             
                 <td>{{ request.title }}</td>
+                <td>{{ request.categoryName }}</td>
                 <td>{{ request.description }}</td>
                 <td>{{ request.status }}</td>
                 <td>{{ request.creationDate | date }}</td>
          
         
-                <td>{{ request.category }}</td>
+              
               <!--   <td>
                   
                     <ul>
@@ -71,7 +73,7 @@
         <p><strong>Description:</strong> {{selectedRequest.description}}</p>
         <p><strong>Status:</strong> {{selectedRequest.status}}</p>
         <p><strong>Creation Date:</strong> {{selectedRequest.creationDate | date}}</p>
-        <p><strong>Category:</strong> {{selectedRequest.category?.categoryName}}</p>
+        <p><strong>Category:</strong> {{selectedRequest.categoryName}}</p>
         <p><strong>Answers:</strong></p>
         <ul>
             <li *ngFor="let answer of selectedRequest.answers">{{ answer.responseText }}</li>

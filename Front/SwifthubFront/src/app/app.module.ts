@@ -59,8 +59,6 @@ import { PaginatorModule } from 'primeng/paginator';
 import { MeetingComponent } from './components/meeting/meeting.component';
 import { AdminShowFeedbackComponent } from './components/feedback/admin-show-feedback/admin-show-feedback.component';
 import { ListRequestComponent } from './requests/list-request/list-request.component';
-import { AddCategoryComponent } from './BackOffice/categories/add-category/add-category.component';
-import { ListCategoryComponent } from './BackOffice/categories/list-category/list-category.component';
 import { RequestComponent } from './FrontOffice/frontrequest/request/request.component';
 import { FrontAddComponent } from './FrontOffice/frontrequest/front-add/front-add.component';
 import { UpdateReqComponent } from './FrontOffice/frontrequest/update-req/update-req.component';
@@ -99,8 +97,6 @@ import {ConsultUsersComponent} from "./components/users/consult-users/consult-us
     MeetingComponent,
     AdminShowFeedbackComponent,
     ListRequestComponent,
-    AddCategoryComponent,
-    ListCategoryComponent,
     RequestComponent,
     FrontAddComponent,
     UpdateReqComponent,

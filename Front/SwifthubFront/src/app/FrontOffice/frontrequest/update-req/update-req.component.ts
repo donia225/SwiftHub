@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 export class UpdateReqComponent implements OnInit{
   requestform!: FormGroup;
   idRequest!:number;
+  categoryNames: string[] = ['Grade', 'Administration', 'Quality_of_study', 'Course'];
 
   constructor(
     private router: Router,
@@ -28,7 +29,8 @@ export class UpdateReqComponent implements OnInit{
     this.requestform = this.fb.group(
    {
     title: ['', Validators.required],
-    description: ['', Validators.required]
+    description: ['', Validators.required],
+    categoryName: [null, Validators.required], 
 }
 )
 
@@ -44,6 +46,7 @@ this.requestService.getRequestById(this.idRequest).subscribe(
           
         this.requestform.controls['title'].setValue(Request.title)
         this.requestform.controls['description'].setValue(Request.description)
+        this.requestform.controls['categoryName'].setValue(Request.categoryName)
       }
 
    )
