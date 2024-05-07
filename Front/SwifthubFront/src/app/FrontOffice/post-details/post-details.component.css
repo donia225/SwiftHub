@@ -1,0 +1,32 @@
+/* post-details.component.css */
+
+.comment-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .comment-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+  }
+  
+  .comment-input {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  .comment-input textarea {
+    margin-bottom: 10px;
+  }
+  .btn-edit {
+    background-color: #caa28c;
+    color: white;
+  }
+  .btn-add {
+    background-color: #caa28c;
+    color: white;
+  }

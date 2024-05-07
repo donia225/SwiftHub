@@ -1,0 +1,34 @@
+<div class="card card-w-title">
+    <p-breadcrumb [model]="breadcrumbItems" [home]="{icon: 'pi pi-home'}"></p-breadcrumb>
+</div>
+
+
+<p-table [value]="posts" [tableStyle]="{ 'min-width': '50rem' }">
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>IdPost</th>
+            <th>Visibility</th>
+            <th>Post Date</th>
+            <th>IdUser</th>
+            <th>Description</th>
+            <th>Actions</th> <!-- Ajout d'une colonne pour les actions -->
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-post>
+        <tr>
+            <td>{{ post.id }}</td>
+            <td>{{ post.visibility }}</td>
+            <td>{{ post.postDate | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ post.idUser }}</td>
+            <td>{{ post.description ? post.description.split(' ').slice(0, 4).join(' ') : '' }}...</td>
+            <td>
+                <button *ngIf="post.visibility === 1" type="button" class="p-button p-button-secondary p-button-danger" (click)="hidePost(post)">Hide</button>
+                <button *ngIf="post.visibility === 0" type="button" class="p-button p-button-secondary p-button-success" (click)="showPost(post)">Show</button>
+            </td>
+            
+            
+            
+        </tr>
+    </ng-template>
+</p-table>

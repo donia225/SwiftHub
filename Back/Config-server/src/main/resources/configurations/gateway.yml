@@ -27,11 +27,7 @@ spring:
         - id: post
           uri: http://localhost:8070
           predicates:
-            - Path=/api/posts/**
-        - id: comment
-          uri: http://localhost:8070
-          predicates:
-            - Path=/api/comments/**
+            - Path=/api/post/**
         - id: workshop
           uri: http://localhost:8020
           predicates:
@@ -49,10 +45,6 @@ spring:
           predicates:
             - Path=/api/appointments/**
         - id: angular
-          uri: http://localhost:4200/
+          uri: http://localhost:4200
           predicates:
             - Path=/**
-
-
-
-

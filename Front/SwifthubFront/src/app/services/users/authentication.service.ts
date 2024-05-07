@@ -10,7 +10,7 @@ import {AuthenticationRequest} from "../../BackOffice/Model/AuthenticationReques
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private apiServerUrl: string = `${environment.API_URL}/api/user`;
+  private apiServerUrl: string = `${environment.API_URL1}/api/user`;
 
 
   constructor(

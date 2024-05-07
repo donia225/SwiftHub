@@ -1,1 +1,26 @@
-<p>add-quiz works!</p>
+<div class="col-12">
+    <div class="card">
+        <h5>Ajout du quiz</h5>
+        <form [formGroup]="quizForm" (ngSubmit)="addQuiz()">
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 md:col-6">
+                    <label for="quizName">Nom du quiz</label>
+                    <input pInputText id="quizName" type="text" formControlName="quizName" />
+                    <div *ngIf="quizForm.get('quizName')?.invalid && quizForm.get('quizName')?.touched" class="text-danger">
+                        Le nom du quiz est requis.
+                    </div>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="quizTime">Date et heure du quiz</label>
+                    <p-calendar id="quizTime" [showTime]="true" [showSeconds]="true" formControlName="quizTime"   ></p-calendar>
+                    <div *ngIf="quizForm.get('quizTime')?.invalid && quizForm.get('quizTime')?.touched" class="text-danger">
+                        Veuillez sélectionner une date et heure valides pour le quiz.
+                    </div>
+                </div>
+            </div>
+            <div class="field col-12 md:col-2">
+                <button pButton pRipple type="submit" label="Ajouter" class="p-button-raised p-button-success"></button>
+            </div>
+        </form>
+    </div>
+</div>

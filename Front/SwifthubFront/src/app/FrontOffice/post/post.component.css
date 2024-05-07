@@ -1,0 +1,46 @@
+.custom-btn {
+    background-color: #caa28c;
+  }
+.custom-btn{
+    border: #caa28c;
+}  
+.custom-post-container {
+    background-color: #caa28c;
+  }
+  .bg-caa28c {
+    background-color: #caa28c;
+  }
+  .custom-button-background {
+    background-color: black;
+  }
+  .custom-button .p-button {
+    background-color: #504032;
+    border-color: #504032;
+    color: white;
+}
+
+.custom-button .p-button:hover {
+    background-color: #5e513f;
+    border-color: #5e513f;
+}
+.btn-details {
+  background-color: #504032;
+  color: white;
+}
+
+.btn-edit {
+  background-color: #caa28c;
+  color: white;
+}
+.btn-update-cancel {
+  background-color: #caa28c;
+  color: white; /* Ajout de la couleur du texte */
+}
+.btn-edit {
+  background-color: #caa28c;
+  color: white;
+}
+
+.custom-button-color {
+  background-color: #5e513f !important;
+}

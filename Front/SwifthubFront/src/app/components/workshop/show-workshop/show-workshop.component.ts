@@ -41,7 +41,7 @@ export class ShowWorkshopComponent implements OnInit {
     ImageUrl: 'com.user.management.User.user.User'
   }
 
-  constructor(public serviceWorkshop: WorkshopService,private meetingService:MeetingService, public router: Router, private confirmationService: ConfirmationService, private messageService: MessageService,private datePipe: DatePipe) { }
+  constructor(private serviceWorkshop: WorkshopService,private meetingService:MeetingService, public router: Router, private confirmationService: ConfirmationService, private messageService: MessageService,private datePipe: DatePipe) { }
 
   //show html for students: frontOffice
   isStudentRoute() {

@@ -1,0 +1,24 @@
+
+<div class="col-12">
+    <div class="card">
+        <h5 style="text-align: center;"></h5>
+        <form [formGroup]="categoryform" (ngSubmit)="addCategory()">
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="categoryName">Name of category</label>
+                    <input pInputText id="categoryName" type="text" formControlName="categoryName" />
+                    <div *ngIf="categoryform.get('categoryName')?.invalid && categoryform.get('categoryName')?.touched" class="text-danger">
+                    Name of category is required </div>
+                </div>
+          
+            
+                <div class="field col-12" style="text-align: right;">
+                    <button pButton pRipple type="submit" label="Save" class="p-button-rounded p-button-success p-button-sm custom-button" ></button>
+                    <button pButton pRipple type="button" label="Cancel" class="p-button-rounded p-button-danger p-button-sm custom-button" (click)="cancel()" ></button>
+                </div>
+                    
+                
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+<section>
+  <div class="container">
+    <div class="card flex justify-content-center">
+      <form [formGroup]="formGroup" (ngSubmit)="searchPosts()">
+          <label for="integer" class="font-bold block mb-2"> Search </label>
+          <input pInputText id="integer" pKeyFilter="int"  formControlName="value" />
+      </form>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btn btn-primary mb-3" style="margin-left: 220px;" (click)="toggleFormVisibility()">Add Post</button> <!-- Bouton "Add Post" -->
+        
+        <div *ngIf="showForm">
+          <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+            <div>
+              <label for="idUser">ID User:</label>
+              <input type="text" id="idUser" name="idUser" [(ngModel)]="formData.idUser" required>
+            </div>
+            <div>
+              <label for="title">Title:</label>
+              <input type="text" id="title" name="title" [(ngModel)]="formData.title" required>
+            </div>
+            <div>
+              <label for="description">Description:</label>
+              <textarea id="description" name="description" [(ngModel)]="formData.description" required></textarea>
+            </div>
+            <div>
+              <label for="attachment">Attachment:</label>
+              <input type="file" id="attachment" name="attachment" (change)="onFileSelected($event)">
+            </div>
+            <button type="submit"class="btn btn-primary">Submit</button>
+            <button type="button" (click)="cancelAdd()"class="btn btn-primary">Cancel</button>
+          </form>
+        </div>
+        
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10 offset-md-2">
+              <ng-container *ngFor="let post of posts">
+                <div *ngIf="post.visibility === 1" class="card mb-3">
+                  <div class="card-header d-flex justify-content-between">
+                    <span>{{ post.idUser }}</span>
+                  </div>
+                  <div class="card-body">
+                    <div>
+                      
+                      <span>{{ post.postDate | date: 'dd/MM/yyyy' }}</span>
+                      <button class="btn btn-details"  style="margin-left: 182px;" (click)="showPostDetails(post.id)">Details</button>
+                    </div>
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text" *ngIf="post.description">Description: {{ post.description.split(' ').slice(0, 10).join(' ') }}...</p>
+                    <button class="btn btn-edit" (click)="editPost(post)">Edit</button>
+                    <button  class="p-button p-button-danger"  style="margin-left: 220px;" (click)="deletePost(post.id)">
+                      <span class="pi pi-times"></span> 
+                    </button>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        
+ 
+        
+      </div>
+      <div class="col-md-6">
+        <!-- Formulaire d'édition -->
+        <div *ngIf="showEditForm && editingPost" class="mb-3">
+          <form (ngSubmit)="updatePost(editingPost)" enctype="multipart/form-data">
+            <div>
+              <label for="editIdUser">ID User:</label>
+              <input type="text" id="editIdUser" name="editIdUser" [(ngModel)]="editingPost.idUser" required>
+            </div>
+            <div>
+              <label for="editTitle">Title:</label>
+              <input type="text" id="editTitle" name="editTitle" [(ngModel)]="editingPost.title" required>
+            </div>
+            <div>
+              <label for="editDescription">Description:</label>
+              <textarea id="editDescription" name="editDescription" [(ngModel)]="editingPost.description" required></textarea>
+            </div>
+            <div>
+              <label for="editAttachment">Attachment:</label>
+              <input type="file" id="editAttachment" name="editAttachment" (change)="onEditFileSelected($event)">
+            </div>
+            <button type="submit" class="btn btn-edit">Update</button>
+            <span style="margin-right: 50px;"></span>
+            <button type="button" (click)="cancelEdit()" class="btn btn-edit">Cancel</button>
+            </form>
+        </div>
+
+        <!-- Détails du post -->
+        <app-post-details *ngIf="selectedPostId" [postId]="selectedPostId"></app-post-details>
+      </div>
+    </div>
+  </div>
+</section>
+

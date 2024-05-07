@@ -1,0 +1,50 @@
+<div *ngIf="post">
+  <p>{{ post.idUser }}</p>
+  <h2>{{ post.title }}</h2>
+  <p>{{ post.description }}</p>
+  <p>Post Date: {{ post.postDate }}</p>
+  
+  <h3>Comments</h3>
+  <ul>
+    <li *ngFor="let comment of comments">
+      <div class="d-flex align-items-center">
+        <p class="mr-2">{{ comment.idUser }} - {{ comment.commentDate }}</p>
+        <button *ngIf="comment.id !== null" class="p-button p-button-danger" (click)="deleteComment(comment.id)">
+          <span class="pi pi-times"></span> 
+
+        </button>
+              </div>
+      
+      
+      <!-- Appliquer les styles -->
+      <p [style.color]="comment.textColor" [style.fontWeight]="comment.isBold ? 'bold' : 'normal'" 
+        [style.fontStyle]="comment.isItalic ? 'italic' : 'normal'" [style.textDecoration]="comment.isUnderline ? 'underline' : 'none'"
+        [style.background-color]="comment.isHighlighted ? 'yellow' : 'transparent'">
+        {{ comment.content }}
+      </p>
+      <button class="btn btn-edit"       (click)="editComment(comment)">Edit</button>
+      <form *ngIf="editingComment && showEditForm" (ngSubmit)="updateComment(editingComment)">
+        <textarea class="form-control" rows="3" name="editedComment" [(ngModel)]="editingComment.content"></textarea>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button type="button" class="btn btn-secondary" style="margin-left: 20px;" (click)="cancelEdit()">Cancel</button>
+      </form>
+      <span style="margin-right: 10px;"></span>
+
+      <hr>
+    </li>
+  </ul>
+
+  <!-- Afficher "No comments for this post" s'il n'y a pas de commentaires -->
+  <p *ngIf="comments.length === 0 && post.comments.length === 0">No comments for this post</p>
+
+  <hr>
+
+  <!-- Add new comment -->
+  <div class="comment-container">
+    <div class="comment-input">
+      
+      <textarea class="form-control" rows="3" [(ngModel)]="newCommentText"></textarea>
+      <button class="btn btn-add" (click)="addComment()">Add Comment</button>
+    </div>
+  </div>
+</div>
