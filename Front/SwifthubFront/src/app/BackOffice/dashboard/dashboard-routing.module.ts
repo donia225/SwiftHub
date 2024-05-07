@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from '../layout/app.layout.component';
@@ -8,6 +7,9 @@ import { ShowWorkshopComponent } from 'src/app/components/workshop/show-workshop
 import { EditWorkshopComponent } from 'src/app/components/workshop/edit-workshop/edit-workshop.component';
 import { AddWorkshopComponent } from 'src/app/components/workshop/add-workshop/add-workshop.component';
 import { DashboardComponent } from './dashboard.component';
+import { AppComponentAdmin } from '../Administrator/AdminMainComponent/app.component';
+import { AppComponentTeacher } from '../Teacher/TeacherMainComponent/app.component';
+import { AppComponentStudent } from '../Student/StudentMainComponent/app.component';
 import { PostAdminComponent } from '../post-admin/post-admin.component';
 import { UpdateQuizComponent } from '../quizzes/update-quiz/update-quiz.component';
 import { AddQuestionComponent } from '../quizzes/question/add-question/add-question.component';
@@ -48,8 +50,19 @@ const routes: Routes = [
       { path: 'list-quiz', component: ListQuizComponent },
       { path: 'add-quiz', component: AddQuizComponent },
       { path: 'update-quiz/:quizId', component: UpdateQuizComponent },
-   
       {path:'add-question/:quizId', component: AddQuestionComponent},
+    ]
+  },
+  
+
+  {
+    path: 'appointment', component: AppLayoutComponent,
+    children: [
+      { path: 'admin', component: AppComponentAdmin },
+      { path: 'teacher', component: AppComponentTeacher },
+      { path: 'student', component: AppComponentStudent },
+      
+    
       { path: 'update-question/update/:quizId/:question_id', component: UpdateQuestionComponent }
 
 

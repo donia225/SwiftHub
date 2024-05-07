@@ -31,6 +31,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
+
 import { DashboardModule } from './BackOffice/dashboard/dashboard.module';
 import { AppLayoutModule } from './BackOffice/layout/app.layout.module';
 import { PostComponent } from './FrontOffice/post/post.component';
@@ -58,6 +59,8 @@ import { CardQuizzesComponent } from './FrontOffice/card-quizzes/card-quizzes.co
 import { PaginatorModule } from 'primeng/paginator';
 import { MeetingComponent } from './components/meeting/meeting.component';
 import { AdminShowFeedbackComponent } from './components/feedback/admin-show-feedback/admin-show-feedback.component';
+import { CalendarModule as AngularCalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ListRequestComponent } from './requests/list-request/list-request.component';
 import { RequestComponent } from './FrontOffice/frontrequest/request/request.component';
 import { FrontAddComponent } from './FrontOffice/frontrequest/front-add/front-add.component';
@@ -110,6 +113,7 @@ import {ConsultUsersComponent} from "./components/users/consult-users/consult-us
 
 
 
+
   ],
   imports: [
     TriStateCheckboxModule,
@@ -145,7 +149,7 @@ import {ConsultUsersComponent} from "./components/users/consult-users/consult-us
     ToggleButtonModule,
     AutoCompleteModule,
     DialogModule,
-    CalendarModule,
+    AngularCalendarModule,
     DynamicDialogModule,
     ConfirmPopupModule,
     ToolbarModule,
@@ -168,6 +172,8 @@ import {ConsultUsersComponent} from "./components/users/consult-users/consult-us
     TreeTableModule,
     BreadcrumbModule,
     PanelModule,
+    HomeModule,
+    AngularCalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     
 	
 	
@@ -178,6 +184,7 @@ import {ConsultUsersComponent} from "./components/users/consult-users/consult-us
 
   ],
     providers:[MessageService,ConfirmationService,DatePipe],
+
     bootstrap: [AppComponent]
 })
 export class AppModule { }
