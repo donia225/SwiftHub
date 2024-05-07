@@ -27,23 +27,8 @@ export class ShowWorkshopComponent implements OnInit {
   selectedWorkshopId: string | null = null;
   meeting!:Meeting;
   selectedMeetingId: string | null = null;
-  
-
-
-  //static logged in user
   LoggedInUser!:User;
-  // ={
-  //   id: '662bb68d6c4b2853ebe30870',
-  //   username: 'ons',
-  //   password: '$2a$10$xa.eJw6xfl7pAPopFQHTcezeCSsufmssLZ67Jck8md47Fw9l5l5/u',
-  //   email: 'ons.hanafi2@gmail.com',
-  //   className: 'Class A',
-  //   department: 'Computer Science',
-  //   managedService: 'IT Support',
-  //   role: Role.STUDENT,
-  //   ImageUrl: 'com.user.management.User.user.User'
-  // }
-
+ 
   constructor(
     private serviceWorkshop: WorkshopService,
     private meetingService:MeetingService,

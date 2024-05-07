@@ -5,6 +5,7 @@ import { Meeting } from 'src/app/models/meeting/meeting';
 import { User } from 'src/app/models/user/user';
 import { Workshop } from 'src/app/models/workshop/workshop';
 import { MeetingService } from 'src/app/services/meeting/meeting.service';
+import { UserService } from 'src/app/services/users/user.service';
 import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 
 @Component({
@@ -19,27 +20,38 @@ export class UserWorkshopComponent implements OnInit {
   showFeedback:boolean=false;
   selectedWorkshopId!: string;
   meeting!:Meeting;
+  LoggedInUser!:User;
 
 
- //static logged in user
- LoggedInUser:User={
-  id: '662bb68d6c4b2853ebe30870',
-  username: 'ons',
-  password: '$2a$10$xa.eJw6xfl7pAPopFQHTcezeCSsufmssLZ67Jck8md47Fw9l5l5/u',
-  email: 'ons.hanafi2@gmail.com',
-  className: 'Class A',
-  department: 'Computer Science',
-  managedService: 'IT Support',
-  role: Role.STUDENT,
-  ImageUrl: 'com.user.management.User.user.User'
-}
-
-  constructor(private workshopService: WorkshopService,private meetingService:MeetingService,private route: ActivatedRoute,private router:Router){}
+  constructor(
+    private workshopService: WorkshopService,
+    private meetingService:MeetingService,
+    private route: ActivatedRoute,
+    private router:Router,
+    private userService:UserService
+  ){}
 
   ngOnInit(): void {
-
+    //fetch local storage
+  var email= window.localStorage.getItem("email");
+  console.log(email);
+  
+ if (email ) {
+ 
+  this.userService.findUserByEmail(email).subscribe(
+    res=>{
+   this.LoggedInUser=res as User;   
+   console.log(this.LoggedInUser);
+   this.WorkshopsByJoinedUser();
+    },
+    err=>{
+      console.log(err);
+      
+    }
+  );
+}
     this.getUsers();
-    this.WorkshopsByJoinedUser(this.LoggedInUser.id)
+   
 
    }
 
@@ -55,9 +67,9 @@ export class UserWorkshopComponent implements OnInit {
 
   //getUsersList
   getUsers() {
-    this.workshopService.getAllUsers().subscribe(
+    this.userService.getUsers().subscribe(
       (res) => {
-        this.users = res;
+        this.users = res as User[];   
       },
       err => {
         console.log(err);
@@ -66,7 +78,8 @@ export class UserWorkshopComponent implements OnInit {
   }
 
 //  Workshops of logged in user
-  WorkshopsByJoinedUser(userId: string){
+  WorkshopsByJoinedUser(){
+    const userId = this.LoggedInUser.id;
     return this.workshopService.getWorkshopsByUser(userId).subscribe(
       res=>{
         this.workshops=res;
