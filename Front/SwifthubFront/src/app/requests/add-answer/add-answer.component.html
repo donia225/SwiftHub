@@ -1,11 +1,12 @@
-<div class="grid p-fluid">
+<div >
+  <div  class="grid p-fluid">
     <div class="col-12 md:col-10">
         <div class="card">
             <h5>Add Answer</h5>
             <form [formGroup]="answerform" (ngSubmit)="onSubmit()">
                 <div class="field">
-                    <label for="responseText">responseText</label>
-                    <textarea rows="5" cols="60" formControlName="responseText" placeholder="responseText"></textarea>
+                    
+                    <textarea rows="5" cols="60" formControlName="responseText" placeholder="response"></textarea>
                 </div>
 
              
@@ -14,4 +15,5 @@
             </form>
         </div>
     </div>
+</div>
 </div>

@@ -5,6 +5,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { AnswerService } from '../services/answer.service';
+import { User } from 'src/app/models/user/user';
+import { UserService } from 'src/app/services/users/user.service';
 
 @Component({
   selector: 'app-list-request',
@@ -16,15 +18,19 @@ export class ListRequestComponent implements OnInit {
   breadcrumbItems: MenuItem[] = [];
   displayModal: boolean = false;
   selectedRequest: any = null;
+  users!: User[];
+  LoggedInUser!:User;
   statuses = [
     {label: 'AWAITING', value: 'AWAITING'},
     {label: 'IN_PROGRESS', value: 'IN_PROGRESS'},
     {label: 'DONE', value: 'DONE'}
   ];
 
-  constructor(private requestService:RequestService,private answerService: AnswerService, private route:Router ){
+  constructor(private requestService:RequestService, private route:Router,  private userService:UserService ){
 
   }
+
+ 
 
   ngOnInit(): void {
     this.loadRequests();
@@ -32,6 +38,24 @@ export class ListRequestComponent implements OnInit {
       { label: 'Home', routerLink: '/home/content' },
       { label: 'List requests' }
     ];
+
+    var email= window.localStorage.getItem("email");
+    console.log(email);
+    
+   if (email ) {
+   
+    this.userService.findUserByEmail(email).subscribe(
+      res=>{
+     this.LoggedInUser=res as User;   
+     console.log(this.LoggedInUser);
+     
+      },
+      err=>{
+        console.log(err);
+        
+      }
+    );
+  }
   }
 
   loadRequests() {
@@ -48,6 +72,7 @@ export class ListRequestComponent implements OnInit {
 
   updateStatus(idRequest: number, newStatus: any) {
     console.log("New Status Received:", newStatus);
+    
 
     if (!newStatus) {
         Swal.fire('Please select a status to update.');
@@ -73,6 +98,12 @@ export class ListRequestComponent implements OnInit {
       },
       (error) => { console.error('Error loading request details:', error); }
     );
+  }
+
+  // show html for admins+professors: BackOffice
+  isAdminRoute() {
+    return this.route.url === '/request/list-request';
+
   }
 
 

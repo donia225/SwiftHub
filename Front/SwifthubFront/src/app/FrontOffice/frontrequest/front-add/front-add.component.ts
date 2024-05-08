@@ -5,6 +5,8 @@ import { RequestService } from '../request.service';
 import Swal from 'sweetalert2';
 import { CategoryService } from '../category.service';
 import { Request } from '../Models/Request';
+import { UserService } from 'src/app/services/users/user.service';
+import { User } from 'src/app/models/user/user';
 
 @Component({
   selector: 'app-front-add',
@@ -13,9 +15,10 @@ import { Request } from '../Models/Request';
 })
 export class FrontAddComponent implements OnInit {
   requestform!: FormGroup;
-
+  users!: User[];
   Request: Request[] = [];
   categoryNames: string[] = ['Grade', 'Administration', 'Quality_of_study', 'Course'];
+  LoggedInUser!:User;
 
 
 
@@ -23,28 +26,64 @@ export class FrontAddComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private requestService: RequestService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private userService:UserService
   ) {}
 
   ngOnInit(): void {
     this.requestform = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      categoryName: [null, Validators.required], 
+      categoryName: [null, Validators.required],
+      idUser:''
+       
     });
 
     this.requestform.get('categoryName')?.valueChanges.subscribe(value => {
       console.log("Current category name:", value);
     });
 
-    
+     //fetch local storage
+  var email= window.localStorage.getItem("email");
+  console.log(email);
+  
+ if (email ) {
+ 
+  this.userService.findUserByEmail(email).subscribe(
+    res=>{
+   this.LoggedInUser=res as User;   
+   console.log(this.LoggedInUser);
+   
+    },
+    err=>{
+      console.log(err);
+      
+    }
+  );
+}
+
+  }
+
+  //list users
+  getUsers() {
+    this.userService.getUsers().subscribe(
+      (res) => {
+        this.users = res as User[];
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
 
   
 
   addRequest(): void {
-    if (this.requestform.valid) {
+   
+    if (this.LoggedInUser && this.requestform.valid) {
+      //var idUser:string=this.LoggedInUser.id
+      this.requestform.value.idUser = this.LoggedInUser.id;
       console.log(this.requestform.value);
 
       this.requestService.addRequest(this.requestform.value).subscribe(

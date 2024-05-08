@@ -1,6 +1,8 @@
 package org.esprit.requestproject;
 
 import org.esprit.requestproject.entities.Request;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.index.Index;
 import org.springframework.data.mongodb.core.index.IndexInfo;
 import org.springframework.data.mongodb.core.index.TextIndexDefinition;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -21,23 +23,25 @@ public class MongoDbSetup {
     @PostConstruct
     public void init() {
         // Supprimer l'index existant
-        List<IndexInfo> indexes = mongoTemplate.indexOps(Request.class).getIndexInfo();
+        List<IndexInfo> indexes = mongoTemplate.indexOps("ma_collection").getIndexInfo();
 
         // Check if the index exists before trying to drop it
         boolean exists = indexes.stream()
-                .anyMatch(index -> index.getName().equals("title_text_description_text"));
+                .anyMatch(index -> index.getName().equals("title_text_description_text_status_text"));
 
         if (exists) {
-            mongoTemplate.indexOps(Request.class).dropIndex("title_text_description_text");
+            mongoTemplate.indexOps("ma_collection").dropIndex("title_text_description_text_status_text");
         }
 
-        // Create the new index
-        TextIndexDefinition textIndex = TextIndexDefinition.builder()
-                .onField("title")
-                .onField("description")
-                .onField("status")
-                .build();
-        mongoTemplate.indexOps(Request.class).ensureIndex(textIndex);
+        // Créer un index avec un nom spécifique
+        Index indexDefinition = new Index()
+                .named("title_description_status_index")
+                .on("title", Sort.Direction.ASC)
+                .on("description", Sort.Direction.ASC)
+                .on("status", Sort.Direction.ASC);
+
+// Appliquer l'index à la collection
+        mongoTemplate.indexOps("ma_collection").ensureIndex(indexDefinition);
     }
 }
 

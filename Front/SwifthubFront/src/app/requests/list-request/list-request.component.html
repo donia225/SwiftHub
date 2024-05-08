@@ -1,7 +1,7 @@
+<div *ngIf="isAdminRoute()" >
 <div class="card card-w-title">
-    <p-breadcrumb [model]="breadcrumbItems" [home]="{icon: 'pi pi-home'}"></p-breadcrumb>
+    
 </div>
-
 <div class="card">
     <h5>List requests</h5>
 
@@ -21,15 +21,12 @@
                 <th>Description</th>
                 <th>Status</th>
                 <th>Creation date</th>
-              
-                
-                
                 <th>Actions</th> <!-- Nouvelle colonne pour les actions -->
             </tr>
         </ng-template>
         
         <ng-template  pTemplate="body" let-request let-rowIndex="rowIndex">
-            <tr>
+            <tr >
             
                 <td>{{ request.title }}</td>
                 <td>{{ request.categoryName }}</td>
@@ -74,11 +71,9 @@
         <p><strong>Status:</strong> {{selectedRequest.status}}</p>
         <p><strong>Creation Date:</strong> {{selectedRequest.creationDate | date}}</p>
         <p><strong>Category:</strong> {{selectedRequest.categoryName}}</p>
-        <p><strong>Answers:</strong></p>
-        <ul>
-            <li *ngFor="let answer of selectedRequest.answers">{{ answer.responseText }}</li>
-        </ul>
+   
     </div>
 </p-dialog>
 
+</div>
 </div>

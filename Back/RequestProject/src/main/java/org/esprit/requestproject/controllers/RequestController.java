@@ -37,11 +37,6 @@ public class RequestController {
         }
     }
 
-
-
-
-
-
     @PostMapping("/add-request")
     public ResponseEntity<Request> addRequest(@RequestBody Request request) {
         request.setCreationDate(new Date()); // Définir manuellement pour tester
@@ -49,23 +44,6 @@ public class RequestController {
         return ResponseEntity.ok(savedRequest);
     }
 
-
-
-   /* @PostMapping("/addcateg")
-
-    public ResponseEntity<Request> affectRequestionToCateg(@RequestBody Request request) {
-        Category category = request.getCategory(); // Récupérer la catégorie depuis la requête
-        if (category != null) {
-            Request createdRequest = requestService.affectRequestionToCateg(category.getIdCategory(), request);
-            if (createdRequest != null) {
-                return ResponseEntity.status(HttpStatus.CREATED).body(createdRequest);
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-    }*/
 
 
 
