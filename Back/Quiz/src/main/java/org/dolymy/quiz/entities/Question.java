@@ -2,6 +2,7 @@ package org.dolymy.quiz.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,7 @@ public class Question implements Serializable {
     private String questiontxt;
 
     private List<Answer> answers;
+    private String userId;
 
     @DocumentReference(collection = "quiz")
     @JsonBackReference

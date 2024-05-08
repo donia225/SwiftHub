@@ -4,6 +4,8 @@ import { QuizserviceService } from '../service/quizservice.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user/user';
+import { UserService } from 'src/app/services/users/user.service';
 @Component({
   selector: 'app-list-quiz',
   templateUrl: './list-quiz.component.html',
@@ -12,10 +14,11 @@ import { Router } from '@angular/router';
 })
 export class ListQuizComponent implements OnInit {
   breadcrumbItems: MenuItem[] = [];
+  users!: User[];
  
-
+  LoggedInUser!:User;
   quizzes: any[] = [];
-  constructor(private http: HttpClient,private quizService: QuizserviceService,private router: Router) {
+  constructor(private http: HttpClient,private quizService: QuizserviceService,private router: Router, private userService:UserService) {
 
    }
   ngOnInit(): void {
@@ -25,6 +28,54 @@ export class ListQuizComponent implements OnInit {
       { label: 'List quizzes' , routerLink:'/quiz/list-quiz'}
     ];
     this.fetchQuizzes();
+
+
+    var email= window.localStorage.getItem("email");
+    console.log(email);
+    
+   if (email ) {
+   
+    this.userService.findUserByEmail(email).subscribe(
+      res=>{
+     this.LoggedInUser=res as User;   
+     console.log(this.LoggedInUser);
+     
+      },
+      err=>{
+        console.log(err);
+        
+      }
+    );
+  }
+  
+      this.getUsers();
+      this.fetchQuizzes();
+  
+  
+  
+  
+  
+
+
+
+  }
+  getUsers() {
+    this.userService.getUsers().subscribe(
+      (res) => {
+        this.users = res as User[];
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  isStudentRoute() {
+    return this.router.url === '/home/content'
+  }
+  
+  isAdminRoute() {
+    return this.router.url === '/quiz/list-quiz';
 
   }
   fetchQuizzes(): void {
@@ -72,6 +123,12 @@ export class ListQuizComponent implements OnInit {
     });
   }
  
+
+
+ 
+
+  
+
 
   }
   

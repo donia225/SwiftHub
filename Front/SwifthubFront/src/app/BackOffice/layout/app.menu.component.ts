@@ -27,6 +27,12 @@ export class AppMenuComponent implements OnInit {
         ]
       },
       {
+        label: 'question',
+        items: [
+          { label: 'List questions', icon: 'pi pi-fw pi-check-square', routerLink: ['/question/list-question'] }
+        ]
+      },
+      {
         label: 'Users',
         items: [
           { label: 'consultUser', icon: 'pi pi-fw pi-id-card', routerLink: ['/consultUser'] }
@@ -43,12 +49,7 @@ export class AppMenuComponent implements OnInit {
         ]
     },
 
-      {
-        label: 'question',
-        items: [
-          { label: 'List questions', icon: 'pi pi-fw pi-check-square', routerLink: ['/question/list-question'] }
-        ]
-      },
+    
       {
         label: 'Request',
         icon: '',

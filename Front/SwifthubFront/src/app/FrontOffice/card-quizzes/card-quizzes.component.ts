@@ -3,6 +3,8 @@ import { QuizModel } from 'src/app/BackOffice/quizzes/Model/quiz-model';
 import { QuizserviceService } from 'src/app/BackOffice/quizzes/service/quizservice.service';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/services/users/user.service';
+import { User } from 'src/app/models/user/user';
 
 
 @Component({
@@ -18,6 +20,7 @@ export class CardQuizzesComponent  implements OnInit {
   quizId!: number;
   searchQuery: string = '';
   filteredQuizzes: QuizModel[] = [];
+  loggedInUser!: User;
 
 
   
@@ -26,12 +29,32 @@ export class CardQuizzesComponent  implements OnInit {
   constructor( private quizService: QuizserviceService,
     private messageService: MessageService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService
   ) {}
+
+  getUserInfo(): void {
+    // Assurez-vous de passer le nom d'utilisateur actuellement connecté à la méthode findUserByUsername
+    const username = this.loggedInUser.username;
+    this.userService.findUserByUsername(username).subscribe(
+      (user: any) => {
+        this.loggedInUser = user as User;
+      },
+      (error) => {
+        console.error("Une erreur s'est produite lors de la récupération des informations de l'utilisateur :", error);
+        // Gérer l'erreur, par exemple en affichant un message à l'utilisateur ou en effectuant une action appropriée
+      }
+    );
+  }
+  
+
 
   ngOnInit(): void {
     this.getAllQuizzesForToday();
     //this.getQuizById();
+    this.getUserInfo();
+
+  
 
   }
 
@@ -96,11 +119,39 @@ export class CardQuizzesComponent  implements OnInit {
     }
   } */
   
-  startQuiz() {
-    // Your start quiz logic here
-    localStorage.setItem("name", this.name);
-    this.hideDialog(); // Close the dialog
+ startQuiz() {
+  if (!this.loggedInUser) {
+    console.log('Utilisateur non connecté');
+    return;
   }
+
+  // Vérifier si l'utilisateur a déjà passé le quiz
+  const quizId = this.quiz.quizId;
+  const key = 'doneQuizzes';
+  let doneQuizzes: number[] = JSON.parse(localStorage.getItem(key) || '[]');
+
+  if (doneQuizzes.includes(quizId)) {
+    console.log('Vous avez déjà passé ce quiz.');
+    return;
+  }
+
+  // Si l'utilisateur n'a pas encore passé le quiz, enregistrer l'ID du quiz dans localStorage
+  doneQuizzes.push(quizId);
+  localStorage.setItem(key, JSON.stringify(doneQuizzes));
+
+  // Autres actions nécessaires pour démarrer le quiz
+  const username = this.loggedInUser.username;
+  localStorage.setItem('username', username);
+  this.hideDialog();
+}
+
+
+
+  hasUserDoneQuiz(quizId: number): boolean {
+    const key = `quiz_${quizId}_done`;
+    return localStorage.getItem(key) === 'true';
+}
+
   
 
 

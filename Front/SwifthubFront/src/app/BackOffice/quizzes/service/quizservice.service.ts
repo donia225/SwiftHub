@@ -34,6 +34,8 @@ export class QuizserviceService {
     return this.http.delete(`${this.baseUrl}/api/quizzes/${quizId}`);
   }
 
- 
+  isQuizCompletedByUser(userId: string, quizId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/api/quizzes/completed?userId=${userId}&quizId=${quizId}`);
+  }
 
 }

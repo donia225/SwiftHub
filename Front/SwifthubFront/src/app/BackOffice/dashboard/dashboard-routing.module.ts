@@ -53,6 +53,15 @@ const routes: Routes = [
       {path:'add-question/:quizId', component: AddQuestionComponent},
     ]
   },
+  {
+    path: 'question', component: AppLayoutComponent,
+    children: [
+      { path: 'list-question', component: ListQuestionComponent },
+  
+    
+
+    ]
+  },
   
 
   {
@@ -69,15 +78,7 @@ const routes: Routes = [
 
     ]
   },
-  {
-    path: 'question', component: AppLayoutComponent,
-    children: [
-      { path: 'list-question', component: ListQuestionComponent },
   
-    
-
-    ]
-  },
   
   
   {
