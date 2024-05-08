@@ -1,9 +1,10 @@
+<div *ngIf="isAdminRoute()">
 <div class="card card-w-title">
     <p-breadcrumb [model]="breadcrumbItems" [home]="{icon: 'pi pi-home'}"></p-breadcrumb>
 </div>
 
 <div class="card">
-    <h5>Liste des quizzes</h5>
+    <h3>Liste des quizzes</h3>
 
     <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
@@ -47,4 +48,5 @@
             </tr>
         </ng-template>
     </p-table>
+</div>
 </div>

@@ -20,6 +20,7 @@ public class Certificate implements Serializable {
     @Id
     private String certificate_id;
     private byte[] attachment;
+    private String studentId;
 
 
 //    @DBRef

@@ -30,6 +30,11 @@
     background-color: #caa28c;
     color: white;
   }
-  @import "~primeng/resources/themes/saga-blue/theme.css";
-@import "~primeng/resources/primeng.min.css";
-@import "~primeicons/primeicons.css";
+  .small-date {
+    font-size: 12px; /* ajustez la taille selon vos préférences */
+  }
+  .btn-small {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+  

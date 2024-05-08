@@ -3,7 +3,6 @@ package org.dolymy.workshop.services;
 import lombok.RequiredArgsConstructor;
 import org.dolymy.workshop.entities.Workshop;
 import org.dolymy.workshop.repositories.FeedbackRepository;
-import org.dolymy.workshop.repositories.MeetingRepository;
 import org.dolymy.workshop.repositories.WorkshopRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,23 +25,9 @@ public class WorkshopService {
 
     private final WorkshopRepository workshopRepository;
     private final FeedbackRepository feedbackRepository;
-    private  final MeetingRepository meetingRepository;
-  //  private final MeetingService meetingService;
 
 
     public Workshop saveWorkshop(Workshop workshop) {
-        //save workshopID to meeting if a meeting is created
-//        Meeting meeting=null;
-//        if (workshop.getMeetingId()!=null){
-//            Optional<Meeting> optionalMeeting=this.meetingRepository.findById(workshop.getMeetingId());
-//            if (optionalMeeting.isPresent()){
-//                meeting=optionalMeeting.get();
-//                meeting.setWorkshop_id(workshop.getWorkshop_id());
-//                this.meetingService.updateMeeting(workshop.getMeetingId(), meeting);
-//            }
-//
-//        }
-
         return this.workshopRepository.save(workshop);
     }
 

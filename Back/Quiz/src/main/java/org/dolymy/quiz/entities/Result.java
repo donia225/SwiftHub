@@ -32,8 +32,7 @@ public class Result  implements Serializable {
     private List<Answer> answers;
 
     private double score;
-
-
+    private String studentId;
 
 
 

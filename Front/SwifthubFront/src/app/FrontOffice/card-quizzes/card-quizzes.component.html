@@ -21,7 +21,7 @@
           <h5>{{quiz.quizTime}}</h5>
           
         
-          <a (click)="logQuizId(quiz.quizId)" [routerLink]="['/home/question', quiz.quizId]" class="btn btn-primary">Start Quiz</a>
+          <a   *ngIf="!hasUserDoneQuiz(quiz.quizId)"    (click)="logQuizId(quiz.quizId)" [routerLink]="['/home/question', quiz.quizId]" class="btn btn-primary">Start Quiz</a>
 
 
         </div>

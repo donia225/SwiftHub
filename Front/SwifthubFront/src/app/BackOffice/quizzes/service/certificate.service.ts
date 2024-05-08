@@ -24,4 +24,8 @@ export class CertificateService {
         window.open(url);
       });
   }
+
+ 
+  
+  
 }

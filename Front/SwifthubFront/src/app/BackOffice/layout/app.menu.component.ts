@@ -16,7 +16,7 @@ export class AppMenuComponent implements OnInit {
       {
         label: 'Home',
         items: [
-          { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
+          { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: ['/home/content'] }
         ]
       },
       {
@@ -24,6 +24,12 @@ export class AppMenuComponent implements OnInit {
         items: [
           { label: 'Ajouter quiz', icon: 'pi pi-fw pi-id-card', routerLink: ['/quiz/add-quiz'] },
           { label: 'List quiz', icon: 'pi pi-fw pi-check-square', routerLink: ['/quiz/list-quiz'] }
+        ]
+      },
+      {
+        label: 'question',
+        items: [
+          { label: 'List questions', icon: 'pi pi-fw pi-check-square', routerLink: ['/question/list-question'] }
         ]
       },
       {
@@ -43,12 +49,7 @@ export class AppMenuComponent implements OnInit {
         ]
     },
 
-      {
-        label: 'question',
-        items: [
-          { label: 'List questions', icon: 'pi pi-fw pi-check-square', routerLink: ['/question/list-question'] }
-        ]
-      },
+    
       {
         label: 'Request',
         icon: '',
