@@ -2,30 +2,28 @@
   <p>{{ post.idUser }}</p>
   <h2>{{ post.title }}</h2>
   <p>{{ post.description }}</p>
-  <p>Post Date: {{ post.postDate }}</p>
+  <p class="mr-2 small-date" >Post Date: {{ post.postDate }} </p>
   
-  <h3>Comments</h3>
+  <h2>Comments</h2>
   <ul>
     <li *ngFor="let comment of comments">
       <div class="d-flex align-items-center">
-        <p class="mr-2">{{ comment.idUser }} </p>
-        <p class="mr-2">(({{ comment.commentDate }})) </p>
-        <button *ngIf="LoggedInUser && LoggedInUser.username === comment.idUser && comment.id !== null" class="p-button p-button-danger" (click)="deleteComment(comment.id)">
+        <p class="mr-2"><i class="pi pi-user" style="color: #708090"></i> | {{ comment.idUser }}  </p>
+        <p class="mr-2 small-date">(({{ comment.commentDate }}))</p>
+        <button *ngIf="LoggedInUser && LoggedInUser.username === comment.idUser && comment.id !== null" class="btn btn-danger btn-small" (click)="deleteComment(comment.id)">
           <span class="pi pi-times"></span> 
         </button>
-        
               </div>
-      
-      
+  
       <!-- Appliquer les styles -->
       <p [style.color]="comment.textColor" [style.fontWeight]="comment.isBold ? 'bold' : 'normal'" 
         [style.fontStyle]="comment.isItalic ? 'italic' : 'normal'" [style.textDecoration]="comment.isUnderline ? 'underline' : 'none'"
         [style.background-color]="comment.isHighlighted ? 'yellow' : 'transparent'">
         {{ comment.content }}
       </p>
-      <button *ngIf="LoggedInUser && LoggedInUser.username === comment.idUser" class="btn btn-edit"       (click)="editComment(comment)">Edit</button>
-      <form *ngIf="editingComment && showEditForm" (ngSubmit)="updateComment(editingComment)">
-        <textarea class="form-control" rows="3" name="editedComment" [(ngModel)]="editingComment.content"></textarea>
+      <button *ngIf="LoggedInUser && LoggedInUser.username === comment.idUser" class="btn btn-edit" (click)="editComment(comment)">Edit</button>
+      <form *ngIf="editingCommentId === comment.id && showEditForm" (ngSubmit)="editingComment && updateComment(editingComment)">
+        <textarea class="form-control" rows="3" name="editedComment" *ngIf="editingComment" [(ngModel)]="editingComment.content"></textarea>
         <button type="submit" class="btn btn-primary">Save Changes</button>
         <button type="button" class="btn btn-secondary" style="margin-left: 20px;" (click)="cancelEdit()">Cancel</button>
       </form>

@@ -27,6 +27,8 @@ export class PostDetailsComponent implements OnInit {
   editingComment: Comment | null = null;
   showEditForm = false;
   LoggedInUser!:User;
+  editingCommentId: number | null = null;
+
   
   constructor(private postService: PostService,
      private commentService: CommentService,
@@ -150,12 +152,14 @@ export class PostDetailsComponent implements OnInit {
   
   editComment(comment: Comment): void {
     this.editingComment = { ...comment }; 
-    this.showEditForm = true; // Assurez-vous que showEditForm est défini sur true
+    this.editingCommentId = comment.id;
+    this.showEditForm=true // Stockez l'ID du commentaire en cours d'édition
   }
+
   cancelEdit(): void {
-    this.editingComment = null;
-    this.showEditForm = false;
-  }
+  this.editingComment = null;
+  this.editingCommentId = null; // Réinitialisez l'ID du commentaire en cours d'édition
+}
   updateComment(comment: Comment): void {
     if (this.postId !== null) {
       const updatedComment: any = {
