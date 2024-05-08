@@ -39,7 +39,6 @@ public class Request implements Serializable {
     private String description ;
     @TextIndexed
     private Status status; //c'est pas l'étudiant qui gére ça
-
     private CategoryName categoryName;
 
 
@@ -56,12 +55,7 @@ public class Request implements Serializable {
     }
 
 
-    private long idUser;
-
-
-    /*@DocumentReference(collection = "categories")
-    @JsonBackReference
-    private Category category;*/
+    private String idUser;
 
 
     @JsonBackReference

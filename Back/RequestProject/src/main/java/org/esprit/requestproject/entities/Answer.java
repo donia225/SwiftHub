@@ -30,6 +30,7 @@ public class Answer implements Serializable {
     @CreatedDate
     private Date responseDate;
 
+    private String idUser;
     public Date getResponseDate() {
         return responseDate;
     }
@@ -39,8 +40,16 @@ public class Answer implements Serializable {
     }
 
     @DocumentReference(collection = "requests")
-    @JsonBackReference
     private Request request;
 
-
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "id=" + id +
+                ", responseText='" + responseText + '\'' +
+                ", responseDate=" + responseDate +
+                ", idUser='" + idUser + '\'' +
+                ", request=" + request +
+                '}';
+    }
 }

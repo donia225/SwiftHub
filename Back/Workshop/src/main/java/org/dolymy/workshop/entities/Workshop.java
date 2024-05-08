@@ -25,7 +25,6 @@ public class Workshop implements Serializable {
     private String title;
     private String description;
     private Integer capacity;
-
     private LocalDate start_date;
     private LocalDate end_date;
     private String location;

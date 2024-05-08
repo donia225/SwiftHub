@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RequestService } from '../request.service';
 import Swal from 'sweetalert2';
+import { User } from 'src/app/models/user/user';
+import { UserService } from 'src/app/services/users/user.service';
 
 @Component({
   selector: 'app-update-req',
@@ -13,12 +15,15 @@ export class UpdateReqComponent implements OnInit{
   requestform!: FormGroup;
   idRequest!:number;
   categoryNames: string[] = ['Grade', 'Administration', 'Quality_of_study', 'Course'];
+  users!: User[];
+  LoggedInUser!:User;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private activateRoute:ActivatedRoute,
-    private requestService: RequestService
+    private requestService: RequestService,
+    private userService: UserService
 
   ) {}
 
@@ -31,8 +36,27 @@ export class UpdateReqComponent implements OnInit{
     title: ['', Validators.required],
     description: ['', Validators.required],
     categoryName: [null, Validators.required], 
+    idUser:''
 }
 )
+
+var email= window.localStorage.getItem("email");
+  console.log(email);
+  
+ if (email ) {
+ 
+  this.userService.findUserByEmail(email).subscribe(
+    res=>{
+   this.LoggedInUser=res as User;   
+   console.log(this.LoggedInUser);
+   
+    },
+    err=>{
+      console.log(err);
+      
+    }
+  );
+}
 
 
 this.activateRoute.params.subscribe(
@@ -55,18 +79,13 @@ this.requestService.getRequestById(this.idRequest).subscribe(
 }
 
 
-
-
-
-
-
 updateRequest() {
 
   
-  if (this.requestform.valid) {
+  if (this.LoggedInUser && this.requestform.valid) {
     // this.requestform.value pour obtenir les données du formulaire
     const Request = this.requestform.value;
-  
+    Request.idUser= this.LoggedInUser.id;
     this.requestService.updaterequest(this.idRequest, Request).subscribe(
       (response) => {
         console.log(response);

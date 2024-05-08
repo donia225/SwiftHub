@@ -4,6 +4,8 @@ import { MenuItem } from 'primeng/api';
 import { RequestService } from '../request.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { User } from 'src/app/models/user/user';
+import { UserService } from 'src/app/services/users/user.service';
 
 @Component({
   selector: 'app-request',
@@ -16,8 +18,10 @@ export class RequestComponent implements OnInit{
   searchText: string = '';
   displayModal: boolean = false;
   selectedRequest: any = null;
+  users!: User[];
+  LoggedInUser!:User;
 
-  constructor(private requestService:RequestService, private route:Router ){
+  constructor(private requestService:RequestService, private route:Router, private userService:UserService ){
 
   }
 
@@ -27,6 +31,24 @@ export class RequestComponent implements OnInit{
       { label: 'Home', routerLink: '/home/content' },
       { label: 'List complaints' }
     ];
+
+    var email= window.localStorage.getItem("email");
+    console.log(email);
+    
+   if (email ) {
+   
+    this.userService.findUserByEmail(email).subscribe(
+      res=>{
+     this.LoggedInUser=res as User;   
+     console.log(this.LoggedInUser);
+     
+      },
+      err=>{
+        console.log(err);
+        
+      }
+    );
+  }
   }
 
   loadRequests() {
@@ -62,7 +84,8 @@ export class RequestComponent implements OnInit{
       confirmButtonText: 'Yes, remove it!',
       cancelButtonText: 'No, keep it'
     }).then((result) => {
-      if (result.isConfirmed) {
+      if (this.LoggedInUser && result.isConfirmed) {
+        var idUser:string=this.LoggedInUser.id
         this.requestService.deleterequest(idRequest).subscribe(
           () => {
             // Suppression réussie
@@ -89,6 +112,7 @@ export class RequestComponent implements OnInit{
     this.requestService.getRequestById(idRequest).subscribe(
       (response) => {
         this.selectedRequest = response;
+        console.log(this.selectedRequest);
         this.displayModal = true;
       },
       (error) => { console.error('Error loading request details:', error); }
@@ -97,5 +121,8 @@ export class RequestComponent implements OnInit{
   //fonction pour trier la table
   onSort() {
   
+  }
+  isStudentRoute() {
+    return this.route.url === '/home/content/frontrequest'
   }
 }

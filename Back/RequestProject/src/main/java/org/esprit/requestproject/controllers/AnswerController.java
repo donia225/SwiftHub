@@ -39,7 +39,7 @@ public class AnswerController {
     @PostMapping("/addcateg")
 
     public ResponseEntity<Answer> affectAnswerToreq(@RequestBody Answer answer) {
-        Request request = answer.getRequest(); // Récupérer la catégorie depuis la requête
+        Request request = answer.getRequest();
         if (request != null) {
             Answer createdAnswer = answerService.affectAnswerToreq(request.getIdRequest(), answer);
             if (createdAnswer != null) {
