@@ -80,4 +80,20 @@ public class UserService  implements IUserService{
         }
         return userfound;
     }
+
+    public User findUserByName(String username) {
+        System.out.println("name");
+        User userfound=null;
+        if(username!=null){
+            List<User> users = this.userRepo.findAll();
+            Optional<User> optionalUser=users.stream().filter(user->user.getUsername().equals(username)).findFirst();
+            if (optionalUser.isPresent()){
+                userfound=optionalUser.get();
+                System.out.println(userfound);
+            }
+        }
+        return userfound;
+    }
+
+
 }

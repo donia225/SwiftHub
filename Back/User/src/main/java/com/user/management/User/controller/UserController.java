@@ -112,7 +112,10 @@ public class UserController {
         return this.userService.findUserByEmail(email);
     }
 
-
+@GetMapping("username/{username}")
+public User getUserByname(@PathVariable("username") String username) {
+        return this.userService.findUserByName(username);
+}
 
 
     @GetMapping("/findd/{role}")

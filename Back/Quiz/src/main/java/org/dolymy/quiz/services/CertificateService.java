@@ -20,6 +20,8 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -122,60 +124,8 @@ public class CertificateService {
         return outputStream.toByteArray();
     }
 
-//    public void generateCertificatePdf() throws FileNotFoundException {
-//        String fileName = "certificate.pdf";
-//        String outputPath = attachmentPath + "/" + fileName;
-//
-//        // Create a PDF writer
-//        PdfWriter pdfWriter = new PdfWriter(new FileOutputStream(outputPath));
-//
-//        // Create a PDF document
-//        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
-//        // Set document with landscape orientation
-//        pdfDocument.setDefaultPageSize(PageSize.A4.rotate());
-//
-//        // Create a document
-//        Document document = new Document(pdfDocument);
-//
-//        // Add certificate content
-//        Paragraph title = new Paragraph("Certificate of Accomplishment")
-//                .setFontColor(ColorConstants.BLUE)
-//                .setBold()
-//                .setFontSize(24)
-//                .setTextAlignment(TextAlignment.CENTER)
-//                .setMarginBottom(20);
-//        document.add(title);
-//
-//        Paragraph recipient = new Paragraph("This certificate is presented to:")
-//                .setFontSize(14)
-//                .setTextAlignment(TextAlignment.CENTER)
-//                .setMarginBottom(20);
-//        document.add(recipient);
-//
-//        Paragraph recipientName = new Paragraph("Recipient's Name")
-//                .setBold()
-//                .setFontSize(18)
-//                .setTextAlignment(TextAlignment.CENTER)
-//                .setMarginBottom(30);
-//        document.add(recipientName);
-//
-//        Paragraph message = new Paragraph("In recognition of your achievement of passing the quiz of our soft skills sessions.")
-//                .setFontSize(14)
-//                .setTextAlignment(TextAlignment.CENTER)
-//                .setMarginBottom(30);
-//        document.add(message);
-//
-//        Paragraph signature = new Paragraph("Authorized Signature")
-//                .setBold()
-//                .setFontSize(16)
-//                .setTextAlignment(TextAlignment.RIGHT)
-//                .setMarginTop(100);
-//        document.add(signature);
-//
-//        // Close the document
-//        document.close();
-//        pdfDocument.close();
-//
-//    }
+
+
+
 
 }

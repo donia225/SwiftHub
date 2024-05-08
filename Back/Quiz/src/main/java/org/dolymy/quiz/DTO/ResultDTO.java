@@ -8,7 +8,7 @@ import lombok.Setter;
 public class ResultDTO {
     private Long quizId;
     private double score;
-
+  private String studentId;
 
 
 }

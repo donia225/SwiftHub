@@ -24,6 +24,8 @@ public class Answer implements Serializable {
     private String answerTxt;
     private boolean correctAnswer;
     private int point;
+    private String userId;
+    private String studentId;
 
 
 }

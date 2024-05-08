@@ -78,6 +78,7 @@ public class ResultService {
             // Map data from DTO to entity
             result.setQuiz(quiz);
             result.setScore(resultDTO.getScore());
+            result.setStudentId(resultDTO.getStudentId());
 
             // Save the result to the database
             resultRepository.save(result);

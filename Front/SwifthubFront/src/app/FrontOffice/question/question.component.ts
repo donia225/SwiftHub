@@ -5,11 +5,13 @@ import { QuestionService } from 'src/app/BackOffice/quizzes/service/question.ser
 import { QuestionModel } from 'src/app/BackOffice/quizzes/Model/question-model';
 import { AnswerModel } from 'src/app/BackOffice/quizzes/Model/answer-model';
 import { QuizModel } from 'src/app/BackOffice/quizzes/Model/quiz-model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuizserviceService } from 'src/app/BackOffice/quizzes/service/quizservice.service';
 import { HttpClient } from '@angular/common/http';
 import { CertificateService } from 'src/app/BackOffice/quizzes/service/certificate.service';
 import { environment } from 'src/environments/environment';
+import { User } from 'src/app/models/user/user';
+import { UserService } from 'src/app/services/users/user.service';
 
 
 
@@ -35,22 +37,65 @@ export class QuestionComponent implements AfterViewInit {
  public totalScore: number = 0;
   ResultModel: any;
   isSessionActive: boolean = false;
+  users!: User[];
+  LoggedInUser!:User;
+  
 
   private readonly FULL_SCREEN_ELEMENT_ID = 'fullscreen-card';
   private readonly ESCAPE_KEY_CODE = 27;
 
-  constructor(private questionService: QuestionService, private activatedRoute: ActivatedRoute, private quizService: QuizserviceService, private http: HttpClient, private certificateService: CertificateService) { }
+  constructor(private questionService: QuestionService, private activatedRoute: ActivatedRoute, private quizService: QuizserviceService, private http: HttpClient, private certificateService: CertificateService, private userService :UserService, private router :Router) { }
   protected baseUrl = environment.API_URL;
   
 
   ngOnInit(): void {
-    this.name = localStorage.getItem("name")!;
+     var email= window.localStorage.getItem("email");
+    console.log(email);
+    
+   if (email ) {
+   
+    this.userService.findUserByEmail(email).subscribe(
+      res=>{
+     this.LoggedInUser=res as User;   
+     console.log(this.LoggedInUser);
+     
+      },
+      err=>{
+        console.log(err);
+        
+      }
+    );
 
+
+    
+  }
+
+  this.getUsers();
     this.getQuizDetails();
     this.startCounter();
+  
    
   }
 
+
+
+  getUsers() {
+    this.userService.getUsers().subscribe(
+      (res) => {
+        this.users = res as User[];
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+  
+  isStudentRoute() {
+    
+    return this.router.url === '/home/content'
+  }
+  
+ 
  
 
   @HostListener('document:keydown.escape', ['$event'])
@@ -109,7 +154,8 @@ export class QuestionComponent implements AfterViewInit {
   
     const resultDTO: ResultModel = {
       quizId: quizId,
-      score: this.totalScore
+      score: this.totalScore,
+      studentId: this.LoggedInUser.id
     };
   
     this.http.post(`${this.baseUrl}/api/quizzes/result/results`, resultDTO).subscribe(
@@ -168,6 +214,8 @@ nextQuestion() {
     this.certificateService.downloadCertificate();
   }
 
+ 
+  
   ngAfterViewInit() {
     this.requestFullScreen();
   }
