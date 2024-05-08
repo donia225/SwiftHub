@@ -10,6 +10,5 @@ import java.util.List;
 @Repository
 public interface WorkshopRepository extends MongoRepository<Workshop,String> {
 
-    List<Workshop> findWorkshopByEnd_dateBefore(LocalDate today);
 
 }
