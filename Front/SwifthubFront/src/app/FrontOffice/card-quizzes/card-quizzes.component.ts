@@ -33,26 +33,26 @@ export class CardQuizzesComponent  implements OnInit {
     private userService: UserService
   ) {}
 
-  getUserInfo(): void {
-    // Assurez-vous de passer le nom d'utilisateur actuellement connecté à la méthode findUserByUsername
-    const username = this.loggedInUser.username;
-    this.userService.findUserByUsername(username).subscribe(
-      (user: any) => {
-        this.loggedInUser = user as User;
-      },
-      (error) => {
-        console.error("Une erreur s'est produite lors de la récupération des informations de l'utilisateur :", error);
-        // Gérer l'erreur, par exemple en affichant un message à l'utilisateur ou en effectuant une action appropriée
-      }
-    );
-  }
+  // getUserInfo(): void {
+  //   // Assurez-vous de passer le nom d'utilisateur actuellement connecté à la méthode findUserByUsername
+  //   const username = this.loggedInUser.username;
+  //   this.userService.findUserByUsername(username).subscribe(
+  //     (user: any) => {
+  //       this.loggedInUser = user as User;
+  //     },
+  //     (error) => {
+  //       console.error("Une erreur s'est produite lors de la récupération des informations de l'utilisateur :", error);
+  //       // Gérer l'erreur, par exemple en affichant un message à l'utilisateur ou en effectuant une action appropriée
+  //     }
+  //   );
+  // }
   
 
 
   ngOnInit(): void {
     this.getAllQuizzesForToday();
     //this.getQuizById();
-    this.getUserInfo();
+    // this.getUserInfo();
 
   
 

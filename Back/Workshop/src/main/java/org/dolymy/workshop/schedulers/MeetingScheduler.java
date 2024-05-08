@@ -20,10 +20,10 @@ public class MeetingScheduler {
     private  MeetingRepository meetingRepository;
     @Autowired
     private WorkshopRepository workshopRepository;
-    @Scheduled(cron = "0 0 * * MON")
+    @Scheduled(cron = "0 0 0 * * MON")
     public void removedEndedMeeting(){
         LocalDate today = LocalDate.now();
-        List<Workshop> workshops= workshopRepository.findWorkshopByEnd_dateBefore(today);
+        List<Workshop> workshops= this.workshopRepository.findAll().stream().filter(workshop -> workshop.getEnd_date().isBefore(today)).toList();
        for(Workshop workshop: workshops){
            String meetingId=workshop.getMeetingId();
            if(meetingId!=null){
