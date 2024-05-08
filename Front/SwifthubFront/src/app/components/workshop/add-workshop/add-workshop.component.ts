@@ -49,7 +49,7 @@ export class AddWorkshopComponent implements OnInit {
     private datePipe: DatePipe,
     private messageService:MessageService,
     private router:Router,
-    private serviceUser:UserService
+    private userService:UserService
   ) { }
 
   //options for workshop
@@ -126,12 +126,12 @@ ngOnInit(): void {
   ];
 
   //fetch local storage
-  var token= localStorage.getItem("token");
-  console.log(token);
+  var email= window.localStorage.getItem("email");
+  console.log(email);
   
- if (token) {
-  
-  this.serviceUser.findUserBytoken(token).subscribe(
+ if (email ) {
+ 
+  this.userService.findUserByEmail(email).subscribe(
     res=>{
    this.loggedInUser=res as User;   
    console.log(this.loggedInUser);
