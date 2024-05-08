@@ -4,12 +4,20 @@ import com.rzem.appointment.entities.Availability;
 import com.rzem.appointment.entities.TimeSlot;
 import com.rzem.appointment.repos.AvailabilityRepository;
 import com.rzem.appointment.services.AvailabilityService;
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 @Service
@@ -25,6 +33,32 @@ public class AvailabilityServiceImpl implements AvailabilityService {
 
     @Autowired
     private AvailabilityRepository availabilityRepository;
+
+    @Resource
+    private MongoTemplate mongoTemplate;
+
+
+
+    @Scheduled(fixedRate = 100000)
+    public void deleteExpiredAvailability() {
+
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        List<Availability> availabilities = mongoTemplate.findAll(Availability.class);
+        for (Availability availability : availabilities) {
+            List<TimeSlot> timeSlots = availability.getAvailableTimeSlots();
+            Iterator<TimeSlot> iterator = timeSlots.iterator();
+            while (iterator.hasNext()) {
+                TimeSlot timeSlot = iterator.next();
+                Instant instant = timeSlot.getStartTime().atZone(ZoneId.systemDefault()).toInstant();
+                LocalDateTime startTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+                if (startTime.isBefore(currentDateTime)) {
+                    iterator.remove();
+                }
+            }
+
+            mongoTemplate.save(availability);
+        }
+    }
 
 
 

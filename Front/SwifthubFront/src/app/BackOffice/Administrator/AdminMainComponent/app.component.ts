@@ -91,17 +91,34 @@ export class AppComponentAdmin implements OnInit{
   getAppointementListWithAwaitingStatus() {
     this.displayedColumns = ['description', 'start', 'end', 'status', 'appointmentType', 'student', 'professorId', 'location', 'action'];
     this._appoiService.getEmployeeList().subscribe({
-      next: (res :any[]) => {
-
-        const filteredAppointments = res.filter(appointment => appointment.status === "AWAITING");
+      next: (res: any[]) => {
+        const filteredAppointments = res.filter(appointment => appointment.status === "AWAITING").map(appointment => {
+          return {
+            ...appointment,
+            professorName: '', // Initialisez professorName à une valeur par défaut
+            studentName: '', // Initialisez studentName à une valeur par défaut
+          };
+        });
+  
+        // Maintenant, pour chaque rendez-vous, récupérez le nom du professeur et du student
+        filteredAppointments.forEach(appointment => {
+          this.userService.getUserById(appointment.professorId).subscribe((professorData) => {
+            appointment.professorName = professorData.username;
+          });
+  
+          this.userService.getUserById(appointment.studentId).subscribe((studentData) => {
+            appointment.studentName = studentData.username;
+          });
+        });
+  
         this.dataSource2 = new MatTableDataSource(filteredAppointments);
         this.dataSource2.sort = this.sort;
         this.dataSource2.paginator = this.paginator2;
-        console.log(this.dataSource2);
       },
-      error: console.log,
+      error: console.error,
     });
   }
+  
 
 
   

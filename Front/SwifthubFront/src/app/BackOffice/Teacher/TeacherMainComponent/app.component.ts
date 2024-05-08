@@ -17,12 +17,14 @@ export class AppComponentTeacher implements OnInit {
 
   user: any;
   filteredAppointments: any[] = [];
+  student: any;
 
   constructor(private _dialog: MatDialog, private _appoiService: AppointementService, private _coreService: CoreService, private userService: UserService, private _availabilityService: AvailabilityServiceService) { }
 
   ngOnInit(): void {
-    this.getAppointementList();
     this.user = this.userService.getUser();
+    this.getAppointementList();
+    
   }
 
   openAddEditAppointmentForm() {
@@ -43,13 +45,34 @@ export class AppComponentTeacher implements OnInit {
   getAppointementList() {
     this._appoiService.getEmployeeList().subscribe({
       next: (res :any[]) => {
-        this.filteredAppointments = res.filter(appointment => appointment.professorId === this.userService.getUser().id && appointment.status === "CONFIRMED_BY_ADMIN"); //hedi bch titbaddl userService.getUser().username
+        this.filteredAppointments = res.filter(appointment => {
+          return appointment.professorId === this.userService.getUser().id && appointment.status === "CONFIRMED_BY_ADMIN";
+        }).map(appointment => {
+          return {
+            ...appointment,
+            professorName: '', // Initialisez professorName à une valeur par défaut
+            studentName: '', // Initialisez studentName à une valeur par défaut
+          };
+        });
+  
+        // Maintenant, pour chaque rendez-vous, récupérez le nom du professeur et du student
+        this.filteredAppointments.forEach(appointment => {
+          this.userService.getUserById(appointment.professorId).subscribe((professorData) => {
+            appointment.professorName = professorData.username;
+          });
+  
+          this.userService.getUserById(appointment.studentId).subscribe((studentData) => {
+            appointment.studentName = studentData.username;
+          });
+        });
+  
         console.log(res);
         console.log(this.filteredAppointments);
       },
       error: console.log,
     });
   }
+  
 
 
   refuseAppointment(appointment: any) {
@@ -81,11 +104,59 @@ export class AppComponentTeacher implements OnInit {
     this._appoiService.updateEmployee(updatedAppointment).subscribe({
       next: (res) => {
         this.getAppointementList();
+        console.log(appointment.studentId);
+        this.userService.getUserById(appointment.studentId).subscribe((userData) => {
+          this.student = userData;
+          console.log(this.student); // Log des données de l'utilisateur une fois récupérées
+          console.log("hhhhhhhahahahah");
+          //this.userService.SendEmail("mohamed@gmail.com","yyyy","votreRendezousestconfirmer");
+
+          this.userService.SendEmail(this.student.email, "start :  "+updatedAppointment.start + "          end :   " +updatedAppointment.end + "           location :  " + updatedAppointment.location , "votre rendez-vous est confirmer").subscribe({
+            next: () => {
+              this._coreService.openSnackBar('Email sent!', 'done');
+            },
+            error: (error) => {
+              console.error('Error sending email:', error);
+              // Gérer l'erreur
+            }
+          });
+
+
+
+        });        
         this._coreService.openSnackBar('Appointment accepted!', 'done');
       },
       error: console.log, 
     });
   }
+/*
+  acceptAppointment(appointment: any) {
+    
+    this._appoiService.updateEmployee(updatedAppointment).subscribe({
+      next: (res) => {
+        this.getAppointementList();
+        console.log(appointment.studentId);
+        this.userService.getUserById(appointment.studentId).subscribe((userData) => {
+          this.student = userData;
+          console.log(this.student); // Log des données de l'utilisateur une fois récupérées
+          console.log("hhhhhhhahahahah");
+  
+          // Utiliser les données de l'utilisateur pour envoyer l'e-mail
+          this.userService.SendEmail(this.student.email, updatedAppointment.start + updatedAppointment.end, "votre rendez-vous est confirmer").subscribe({
+            next: () => {
+              this._coreService.openSnackBar('Appointment accepted!', 'done');
+            },
+            error: (error) => {
+              console.error('Error sending email:', error);
+              // Gérer l'erreur
+            }
+          });
+        });
+      },
+      error: console.log, 
+    });
+  }
+  */
 
   
 

@@ -112,18 +112,18 @@
       
           <ng-container matColumnDef="student">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> student </th>
-            <td mat-cell *matCellDef="let row"> {{row.studentId}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.studentName}} </td>
           </ng-container>
       
           
            <ng-container matColumnDef="professorId">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> professorId </th>
-            <td mat-cell *matCellDef="let row"> {{row.professorId}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.professorName}} </td>
           </ng-container>
       
           <ng-container matColumnDef="location">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> location </th>
-            <td mat-cell *matCellDef="let row" > {{row.location?.name}} </td>
+            <td mat-cell *matCellDef="let row" > {{row.location}} </td>
           </ng-container>
     
           <ng-container matColumnDef="action">

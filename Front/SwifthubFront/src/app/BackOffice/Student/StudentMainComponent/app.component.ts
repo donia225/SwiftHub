@@ -27,8 +27,8 @@ import { map } from 'rxjs/operators';
 export class AppComponentStudent implements OnInit{
 
   user: any;
-  userService: UserService;
   //username$: Observable<string>;
+  teacher: any;
   
   displayedColumns: string[] = ['description', 'start', 'end' ,'status', 'appointmentType' ,'priority','student','professorId','location'];
  
@@ -37,18 +37,18 @@ export class AppComponentStudent implements OnInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _dialog: MatDialog , private _appoiService: AppointementService , private _coreService: CoreService , private serviceUser: UserService) {
-    this.userService = serviceUser;
+  constructor(private _dialog: MatDialog , private _appoiService: AppointementService , private _coreService: CoreService , private serviceUser: UserService, ) {
   }
 
   ngOnInit(): void {
+    this.user = this.serviceUser.getUser();
     this.GetAppointementList();
-    this.user = this.userService.getUser();
   }
 
 
   getUsernameById(id: string): Observable<string> {
-    return this.userService.getUserById(id);
+    return this.serviceUser.getUserById(id);
+    
   }
   
 
@@ -72,8 +72,14 @@ export class AppComponentStudent implements OnInit{
   GetAppointementList(){
     this._appoiService.getEmployeeList().subscribe({
       next: (res :any[]) =>{
+      const filteredAppointments = res.filter(appointment => appointment.studentId === this.serviceUser.getUser().id);
 
-      const filteredAppointments = res.filter(appointment => appointment.studentId === this.userService.getUser().id);
+      filteredAppointments.forEach(appointment => {
+        this.serviceUser.getUserById(appointment.professorId).subscribe((userData) => {
+          appointment.name = userData.username; 
+        });
+      });
+
       this.dataSource = new MatTableDataSource(filteredAppointments);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
@@ -81,6 +87,9 @@ export class AppComponentStudent implements OnInit{
       error: console.log,
     });
   }
+
+ 
+   
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -90,32 +99,5 @@ export class AppComponentStudent implements OnInit{
       this.dataSource.paginator.firstPage();
     }
   }
-
-/*
-  deleteEmployee(id: string) {
-    this._appoiService.deleteEmployee(id).subscribe({
-      next: (res) => {
-        this.GetAppointementList();
-        this._coreService.openSnackBar('Appointment deleted!', 'done');
-      },
-      error: console.log,
-    });
-  }
-
-  openEditForm(data: any) {
-    const dialogRef = this._dialog.open(AppointmentAddEditComponentStudent, {
-      data,
-    });
-
-    dialogRef.afterClosed().subscribe({
-      next: (val) => {
-        if (val) {
-          this.GetAppointementList();
-        }
-      },
-    });
-  }
-  
-*/
  
 }
