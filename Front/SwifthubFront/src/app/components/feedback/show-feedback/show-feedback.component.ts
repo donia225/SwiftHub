@@ -7,6 +7,7 @@ import { Feedback } from 'src/app/models/feedback/feedback';
 import { User } from 'src/app/models/user/user';
 import { Workshop } from 'src/app/models/workshop/workshop';
 import { FeedbackService } from 'src/app/services/feedback/feedback.service';
+import { UserService } from 'src/app/services/users/user.service';
 import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 
 @Component({
@@ -16,49 +17,52 @@ import { WorkshopService } from 'src/app/services/workshop/workshop.service';
 })
 export class ShowFeedbackComponent implements OnInit {
 
-  @Input() workshopId: string="";
-  
-  workshop!:Workshop ;
-  feedbacks!:Feedback[];
-  users!:User[];
-  addFeedbackCheck: boolean=false;
-  addFeedbackForm!: FormGroup;
+  @Input() workshopId: string = "";
 
-    //static logged in user
- LoggedInUser:User={
-  id: '662bb68d6c4b2853ebe30870',
-  username: 'ons',
-  password: '$2a$10$xa.eJw6xfl7pAPopFQHTcezeCSsufmssLZ67Jck8md47Fw9l5l5/u',
-  email: 'ons.hanafi2@gmail.com',
-  className: 'Class A',
-  department: 'Computer Science',
-  managedService: 'IT Support',
-  role: Role.STUDENT,
-  ImageUrl: 'com.user.management.User.user.User'
- }
-feedback:Feedback={
+  workshop!: Workshop;
+  feedbacks!: Feedback[];
+  users!: User[];
+  addFeedbackCheck: boolean = false;
+  addFeedbackForm!: FormGroup;
+  LoggedInUser!: User;
+
+  //static logged in user
+  //  LoggedInUser:User={
+  //   id: '662bb68d6c4b2853ebe30870',
+  //   username: 'ons',
+  //   password: '$2a$10$xa.eJw6xfl7pAPopFQHTcezeCSsufmssLZ67Jck8md47Fw9l5l5/u',
+  //   email: 'ons.hanafi2@gmail.com',
+  //   className: 'Class A',
+  //   department: 'Computer Science',
+  //   managedService: 'IT Support',
+  //   role: Role.STUDENT,
+  //   ImageUrl: 'com.user.management.User.user.User'
+  //  }
+  feedback: Feedback = {
     feedback_id: '',
     description: "",
     rating: RatingType.Great,
     creationDate: new Date(),
-    userId: this.LoggedInUser.id,
-    workshop:this.workshop,
+    userId: "",
+    workshop: this.workshop,
   };
 
 
 
 
   constructor(
-    private feedbackService:FeedbackService,
-    private workshopService:WorkshopService,
-    private messageService:MessageService){}
+    private feedbackService: FeedbackService,
+    private workshopService: WorkshopService,
+    private messageService: MessageService,
+    private userService: UserService
+  ) { }
 
 
-///////////////// DESGIN
+  ///////////////// DESGIN
   isItemInViewport(index: number): boolean {
     const element = document.querySelectorAll('.list-group-item')[index];
     if (!element) return false;
-    
+
     const rect = element.getBoundingClientRect();
     return (
       rect.top >= 0 &&
@@ -68,89 +72,110 @@ feedback:Feedback={
     );
   }
 
-////////////////////////////////////////////////////
-//getUsersList
+  ////////////////////////////////////////////////////
+  //getUsersList
   getUsers() {
-    this.workshopService.getAllUsers().subscribe(
+    this.userService.getUsers().subscribe(
       (res) => {
-        this.users = res;
+        this.users = res as User[];
       },
       err => {
         console.log(err);
       }
     );
   }
+
   //get feedbacks by workshop
-  showfeedback(id:string):void{
+  showfeedback(id: string): void {
     this.workshopService.getWorkshopById(id).subscribe(
-      res=>{
-          this.workshop=res as Workshop;
-          this.feedbacks=this.workshop.feedbacks;
-         
-      },
-      err=>{
-        console.log(err);
+      res => {
+        this.workshop = res as Workshop;
+        this.feedbacks = this.workshop.feedbacks;
+        console.log(this.feedbacks);
         
+
+      },
+      err => {
+        console.log(err);
+
       }
     );
   }
   ///showing add feedback component
   openAddFeedbackModal() {
-   return this.addFeedbackCheck=!this.addFeedbackCheck;
+    return this.addFeedbackCheck = !this.addFeedbackCheck;
   }
 
-  
-  
+
+
   ngOnInit(): void {
-  this.getUsers();
-  this.showfeedback(this.workshopId);
-  this.initializeForm();
-  
+    //fetch local storage
+    var email = window.localStorage.getItem("email");
+    console.log(email);
+
+    if (email) {
+
+      this.userService.findUserByEmail(email).subscribe(
+        res => {
+          this.LoggedInUser = res as User;
+          console.log(this.LoggedInUser);
+          this.initializeForm();
+        },
+        err => {
+          console.log(err);
+
+        }
+      );
+    }
+    this.getUsers();
+    this.showfeedback(this.workshopId);
     
+
+
   }
 
   //////add feedback
-  initializeForm(){
+  initializeForm() {
     //  add feedback form
-    this.addFeedbackForm=new FormGroup({
-      description : new FormControl(this.feedback.description,Validators.required),
-      rating: new FormControl(this.feedback.rating,Validators.required),
+    this.addFeedbackForm = new FormGroup({
+      description: new FormControl(this.feedback.description, Validators.required),
+      rating: new FormControl(this.feedback.rating, Validators.required),
       creationDate: new FormControl(this.feedback.creationDate),
-      userId: new FormControl(this.feedback.userId),
+      userId: new FormControl(this.LoggedInUser.id),
       workshop: new FormControl(this.feedback.workshop),
     });
-    }
-  
-     //getters
-   get description(){return this.addFeedbackForm.get('description')};
-   get rating(){return this.addFeedbackForm.get('rating')};
-  
-   //submit feedback
+  }
+
+  //getters
+  get description() { return this.addFeedbackForm.get('description') };
+  get rating() { return this.addFeedbackForm.get('rating') };
+
+  //submit feedback
   submitFeedback() {
     if (this.addFeedbackForm.valid) {
-      const formData={
+      const formData = {
         ...this.addFeedbackForm.value,
         workshop: this.workshop
       }
-    this.feedbackService.addFeedback(formData).subscribe(
-      res=>{
-        this.messageService.add({severity:'success', summary:'Success', detail:'Feedback added successfully'});
-        this.addFeedbackCheck=false;
-        this.showfeedback(this.workshopId);
-        
-      },
-      err=>{
-        console.log(err);
-        this.messageService.add({severity:'error', summary:'Error', detail:'Failed to add feedback'});
-  
-        
-      }
-          );
-  
-  
-      }
-  
+      this.feedbackService.addFeedback(formData).subscribe(
+        res => {
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Feedback added successfully' });
+          this.addFeedbackCheck = false;
+          this.showfeedback(this.workshopId);
 
-}
+        },
+        err => {
+          console.log(err);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to add feedback' });
+
+
+        }
+      );
+
+
+    }
+
+
+  }
 
 }

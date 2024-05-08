@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../../models/user/user";
 import {environment} from "../../../environments/environment";
+import {  of } from 'rxjs'; // Import of
 
 @Injectable({
   providedIn: 'root'
@@ -38,14 +39,12 @@ export class UserService {
     return this.http.get(`${this.apiServerUrl}/email/${email}`);
   }
 
-  public findUserByUsername(username: string){
-    return this.http.get(`${this.apiServerUrl}/username/${username}`);
-  }
-  public findUserByRole(role: string) {
-    return this.http.get(`${this.apiServerUrl}/findd/${role}`);
-  }
 
-}
+
+
+
+
+ 
 
 
 

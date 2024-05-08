@@ -26,7 +26,7 @@ public class Comment implements Serializable{
     String content;
 
     @Column(name = "userComment")
-    int idUser;
+    String idUser;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

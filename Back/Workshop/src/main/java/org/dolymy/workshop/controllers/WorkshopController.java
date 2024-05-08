@@ -71,11 +71,22 @@ public class WorkshopController {
        return this.workshopService.JoinWorkshop(workshopId,userId);
     }
 
+    /**
+     *
+     * @param id
+     * @return the workshops that the user has joined
+     * the userId is passed on parameter
+     */
     @GetMapping("/joined-user/{id}")
     public List<Workshop> getJoinedUserWorkshops(@PathVariable String id){
         return this.workshopService.findWorkshopsByJoinedUser(id);
     }
 
+    /**
+     *
+     * @param id
+     * @return the workshops that the user has created
+     */
     @GetMapping("/user/{id}")
     public List<Workshop> getWorkshopsByUser(@PathVariable String id){
         return this.workshopService.findWorkshopsByUser(id);
