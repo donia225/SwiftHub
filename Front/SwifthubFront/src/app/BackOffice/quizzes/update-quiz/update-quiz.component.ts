@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuizserviceService } from '../service/quizservice.service';
 import { QuizModel } from '../Model/quiz-model';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/users/user.service';
+import { User } from 'src/app/models/user/user';
 @Component({
   selector: 'app-update-quiz',
   templateUrl: './update-quiz.component.html',
@@ -9,16 +12,19 @@ import { QuizModel } from '../Model/quiz-model';
 })
 export class UpdateQuizComponent implements OnInit {
   quizId!: number;
+  updateForm!: FormGroup;
   updatedQuiz: QuizModel = {
     quizId: 0, quizName: '', quizTime: new Date(), questions: [],
    
   };
+  LoggedInUser: User | undefined;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private quizService: QuizserviceService,
-  
+    private userService: UserService,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +39,30 @@ export class UpdateQuizComponent implements OnInit {
       }
       
     });
+
+
+    this.updateForm = this.fb.group({
+      quizName: ['', [Validators.required, Validators.minLength(5)]], 
+      quizTime: [null, [Validators.required, this.dateNotInPastValidator()]],
+      userId: ''
+    });
+    var email= window.localStorage.getItem("email");
+  console.log(email);
+  
+ if (email ) {
+ 
+  this.userService.findUserByEmail(email).subscribe(
+    res=>{
+   this.LoggedInUser=res as User;   
+   console.log(this.LoggedInUser);
+   
+    },
+    err=>{
+      console.log(err);
+      
+    }
+  );
+}
     
   }
 
@@ -59,4 +89,17 @@ export class UpdateQuizComponent implements OnInit {
       }
     );
   }
+
+  dateNotInPastValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const currentDate = new Date();
+      const selectedDate = control.value;
+      if (selectedDate < currentDate) {
+        return { 'dateNotInPast': true };
+      }
+      return null;
+    };
+  }
+
+
 }

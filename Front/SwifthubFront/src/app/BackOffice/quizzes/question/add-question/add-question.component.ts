@@ -71,8 +71,8 @@ export class AddQuestionComponent implements OnInit {
       this.questionService.affectQuestionToQuiz(quizIdString, question).subscribe(
         (response) => {
           console.log('Question added successfully', response);
-          // Redirect to the list of quizzes or another appropriate page
-          this.router.navigate(['/quiz/list-quiz']);
+       
+          this.router.navigate(['/question/list-question']);
         },
         (error) => {
           console.error('Error adding question', error);

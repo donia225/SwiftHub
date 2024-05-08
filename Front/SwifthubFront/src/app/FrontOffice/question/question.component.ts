@@ -39,6 +39,7 @@ export class QuestionComponent implements AfterViewInit {
   isSessionActive: boolean = false;
   users!: User[];
   LoggedInUser!:User;
+  
 
   private readonly FULL_SCREEN_ELEMENT_ID = 'fullscreen-card';
   private readonly ESCAPE_KEY_CODE = 27;
@@ -72,8 +73,11 @@ export class QuestionComponent implements AfterViewInit {
   this.getUsers();
     this.getQuizDetails();
     this.startCounter();
+  
    
   }
+
+
 
   getUsers() {
     this.userService.getUsers().subscribe(
@@ -210,6 +214,8 @@ nextQuestion() {
     this.certificateService.downloadCertificate();
   }
 
+ 
+  
   ngAfterViewInit() {
     this.requestFullScreen();
   }

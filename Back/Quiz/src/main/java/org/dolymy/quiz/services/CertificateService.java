@@ -20,6 +20,8 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -121,6 +123,7 @@ public class CertificateService {
 
         return outputStream.toByteArray();
     }
+
 
 
 

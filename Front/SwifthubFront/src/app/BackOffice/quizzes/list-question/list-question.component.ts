@@ -6,6 +6,8 @@ import { Paginator } from 'primeng/paginator';
 import { QuizModel } from '../Model/quiz-model';
 import { QuestionService } from '../service/question.service';
 import { User } from 'src/app/models/user/user';
+import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 
@@ -82,19 +84,35 @@ export class ListQuestionComponent implements OnInit{
     }
   }
 
+ 
+ 
   deleteQuestion(questionId: number): void {
-    this.questionService.deleteQuestion(questionId).subscribe(
-      () => {
-        // Handle successful deletion here if needed
-        console.log('Question deleted successfully');
-        // Reload questions after deletion
-        this.loadQuestions();
-      },
-      error => {
-        // Handle error here if needed
-        console.error('Error deleting question:', error);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Are you sure you want to remove this question?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, remove it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.questionService.deleteQuestion(questionId).subscribe(
+          () => {
+            // Handle successful deletion here if needed
+            console.log('Question deleted successfully');
+            // Reload questions after deletion
+            this.loadQuestions();
+          },
+          (error: HttpErrorResponse) => {
+            console.error('Error while deleting question: ', error);
+            alert('Error while deleting question: ' + error.message);
+          }
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // L'utilisateur a cliqué sur "Non"
+        Swal.fire('Cancelled', 'The question is not removed 🙂', 'info');
       }
-    );
+    });
   }
 
 }

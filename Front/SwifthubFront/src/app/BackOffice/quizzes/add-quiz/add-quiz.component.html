@@ -1,24 +1,36 @@
 <div *ngIf="isAdminRoute()">
 <div class="col-12">
     <div class="card">
-        <h5>Ajout du quiz</h5>
+        <h3>Ajout du quiz</h3>
         <form [formGroup]="quizForm" (ngSubmit)="addQuiz()">
             <div class="p-fluid p-formgrid grid">
                 <div class="field col-12 md:col-6">
                     <label for="quizName">Nom du quiz</label>
                     <input pInputText id="quizName" type="text" formControlName="quizName" />
+                  
                     <div *ngIf="quizForm.get('quizName')?.invalid && quizForm.get('quizName')?.touched" class="text-danger">
+                      <div *ngIf="quizForm.get('quizName')?.errors?.required">
                         Le nom du quiz est requis.
+                      </div>
+                      <div *ngIf="quizForm.get('quizName')?.errors?.minlength">
+                        Le nom du quiz doit comporter au moins 5 caractères.
+                      </div>
                     </div>
-                </div>
-                <div class="field col-12 md:col-6">
+                  </div>
+                  <div class="field col-12 md:6">
                     <label for="quizTime">Date et heure du quiz</label>
-                    <p-calendar id="quizTime" [showTime]="true" [showSeconds]="true" formControlName="quizTime"   ></p-calendar>
+                    <p-calendar id="quizTime" [showTime]="true" [showSeconds]="true" formControlName="quizTime"></p-calendar>
+                    <!-- Affichage du message d'erreur pour la date du quiz -->
                     <div *ngIf="quizForm.get('quizTime')?.invalid && quizForm.get('quizTime')?.touched" class="text-danger">
-                        Veuillez sélectionner une date et heure valides pour le quiz.
+                      <div *ngIf="quizForm.get('quizTime')?.errors?.required">
+                        La date et l'heure du quiz sont requis.
+                      </div>
+                      <div *ngIf="quizForm.get('quizTime')?.errors?.dateNotInPast">
+                        La date du quiz ne peut pas être dans le passé.
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
             <div class="field col-12 md:col-2">
                 <button pButton pRipple type="submit" label="Ajouter" class="p-button-raised p-button-success"></button>
             </div>

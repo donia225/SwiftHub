@@ -7,6 +7,7 @@ import { QuizserviceService } from '../service/quizservice.service';
 import Swal from 'sweetalert2';
 import { User } from 'src/app/models/user/user';
 import { UserService } from 'src/app/services/users/user.service';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
 @Component({
   selector: 'app-add-quiz',
   templateUrl: './add-quiz.component.html',
@@ -23,10 +24,13 @@ export class AddQuizComponent   implements OnInit   {
 
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient,private quizService: QuizserviceService, private userService:UserService) {
     this.quizForm = this.fb.group({
-      quizName: ['', Validators.required],
-      quizTime: [null, Validators.required],
+      quizName: ['', [Validators.required, Validators.minLength(5)]], 
+      quizTime: [null, [Validators.required, this.dateNotInPastValidator()]],
       userId: ""
     });
+
+
+
   }
   ngOnInit(): void {
     var email = window.localStorage.getItem("email");
@@ -83,5 +87,20 @@ export class AddQuizComponent   implements OnInit   {
         }
       );
     }
+  }
+
+
+// Validator pour vérifier que la date n'est pas dans le passé
+  dateNotInPastValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const currentDate = new Date();
+    const selectedDate = control.value;
+    if (selectedDate < currentDate) {
+      return { 'dateNotInPast': true };
+    }
+    return null;
+  };
+
+
   }
 }

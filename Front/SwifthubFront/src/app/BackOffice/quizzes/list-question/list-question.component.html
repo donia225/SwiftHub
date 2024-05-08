@@ -3,7 +3,7 @@
 </div>
 
 <div class="card">
-  <h5>Liste des questions et réponses</h5>
+  <h3>Liste des questions et réponses</h3>
 
   <p-toolbar styleClass="mb-4">
       <ng-template pTemplate="left">
@@ -19,6 +19,7 @@
       <tr>
         <th>Question</th>
         <th>Réponses</th>
+      
      
         <th>Actions</th>
       </tr>
@@ -34,8 +35,8 @@
               </li>
             </ul>
           </td>
-         
-         
+          
+       
 
           <td style="min-width: 150px;">
             <a [routerLink]="['/quiz/update-question/update', quiz?.quizId, question.id]">
