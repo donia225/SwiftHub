@@ -14,9 +14,10 @@ public class EmailController {
     @Autowired
     private EmailSenderService emailSenderService;
 
-    @PostMapping("/send")
-    public ResponseEntity<?> sendEmail(@RequestParam String to, @RequestParam String subject, @RequestParam String body) {
+    @PostMapping("/send/{to}/{subject}/{body}")
+    public ResponseEntity<?> sendEmail(@PathVariable String to, @PathVariable String subject, @PathVariable String body) {
         emailSenderService.sendEmail(to, subject, body);
+        System.out.println("blablablabla");
         return ResponseEntity.ok().build();
     }
 }

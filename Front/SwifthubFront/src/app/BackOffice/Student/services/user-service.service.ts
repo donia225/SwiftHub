@@ -1,27 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { User } from 'src/app/models/user/user';
+import { UserService as userConnected} from 'src/app/services/users/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  user: any = {
-    id: "1",
-    username: 'rzemStudent',
-    email: 'utilisateur123@example.com',
-    password:'hahaha',
-    className:'4ARCTIC7',
-    department:'info',
-    managedService:'inf',
-    role:'student',
-    ImageUrl:'alees44.jpg',
-  };
+  LoggedInUser!: User ;
 
-  constructor(private _http: HttpClient) {}
+  
+
+  constructor(private userServiceConnected: userConnected, private _http: HttpClient) {}
 
   getUser() {
-    return this.user;
+  var email= window.localStorage.getItem("email");
+  console.log(email);
+  if (email ) {
+ 
+    this.userServiceConnected.findUserByEmail(email).subscribe(
+      res=>{
+     this.LoggedInUser=res as User;   
+     console.log(this.LoggedInUser);
+     
+      },
+      err=>{
+        console.log(err);
+        
+      }
+    );
+  }
+    return this.LoggedInUser;
   }
 
 

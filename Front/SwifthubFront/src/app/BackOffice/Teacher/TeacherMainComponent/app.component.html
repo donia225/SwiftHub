@@ -23,9 +23,9 @@
         <p>End: {{ appointment.end | date: 'EEE, MMM d, y, h:mm a':'UTC' }}</p>
         <p>Status: {{ appointment.status }}</p>
         <p>Appointment Type: {{ appointment.appointmentType }}</p>
-        <p>Student: {{ appointment.studentId }}</p>
-        <p>Professor ID: {{ appointment.professorId }}</p>
-        <p>Location: {{ appointment.location?.bloc }}  -> {{appointment.location?.salle}}</p>
+        <p>Student: {{ appointment.studentName }}</p>
+        <p>Professor ID: {{ appointment.professorName }}</p>
+        <p>Location: {{ appointment.location}}</p>
       </mat-card-content>
       <mat-card-actions>
         <!-- Boutons d'action pour chaque rendez-vous -->
