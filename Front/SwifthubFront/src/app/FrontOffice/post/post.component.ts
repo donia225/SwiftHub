@@ -232,10 +232,23 @@ export class PostComponent implements OnInit{
     this.posts = this.posts.filter(post =>
       (post.title && post.title.toLowerCase().includes(searchTermLower)) ||
       (post.description && post.description.toLowerCase().includes(searchTermLower)) ||
-      (post.idUser && post.idUser.toLowerCase().includes(searchTermLower))
+      (post.idUser && post.idUser.toLowerCase().includes(searchTermLower)) ||
+      (post.postDate && this.formatDate(post.postDate).toLowerCase().includes(searchTermLower))
     );
-  }
-  
+}
+
+formatDate(date: Date): string {
+    const formattedDate = new Date(date);
+    const day = formattedDate.getDate().toString().padStart(2, '0');
+    const month = (formattedDate.getMonth() + 1).toString().padStart(2, '0');
+    const year = formattedDate.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+
+
+
+    
   
 }
   
