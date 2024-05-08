@@ -10,4 +10,5 @@ export interface Request{
     creationDate: Date;
     categoryName:string;
     answers:Answer[];
+    idUser:string;
 }

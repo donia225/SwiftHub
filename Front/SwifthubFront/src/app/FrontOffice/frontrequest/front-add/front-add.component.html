@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
 <div class="col-10">
     <div class="card">
-        <h5 class="text-center">Student Complaint Management System</h5>
+        <h1 class="text-center">Student Complaint Management System</h1>
 
         <form [formGroup]="requestform" (ngSubmit)="addRequest()">
         <div class="p-fluid p-formgrid grid">
@@ -24,16 +24,10 @@
                     </div>
                   </div>
                   
-                  
-                  
-                
-                  
-                  
             <div class="field col-12 md:col-6">
                 <textarea rows="5" cols="30" placeholder="Description" pInputTextarea formControlName="description"></textarea>
                 <div *ngIf="requestform.get('description')?.invalid && requestform.get('description')?.touched" class="text-danger">
-                    Description is required </div>
-            
+                    Description is required </div>          
             </div>
        
       

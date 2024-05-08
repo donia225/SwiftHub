@@ -1,3 +1,4 @@
+import { Answer } from "src/app/requests/Models/Answer";
 
 
 
@@ -8,6 +9,7 @@ export interface Request{
     status: string;
     creationDate: Date;
     categoryName:string;
+    answers:Answer [];
     
     
 }

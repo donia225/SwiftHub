@@ -192,9 +192,6 @@ export class ShowWorkshopComponent implements OnInit {
 
 
 
-
-
-
   }
 
 }

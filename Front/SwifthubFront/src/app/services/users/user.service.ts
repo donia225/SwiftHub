@@ -40,11 +40,16 @@ export class UserService {
   }
 
 
+  public findUserByRole(role: string){
+    return this.http.get(`${this.apiServerUrl}/findd/${role}`);
+  }
+
+
+}
+
 
 
 
 
  
-
-
 

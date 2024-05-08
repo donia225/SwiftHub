@@ -19,8 +19,6 @@ export class ListAnswersComponent {
 
   }
 
- 
-
   ngOnInit() {
     this.answerService.getAnswers().subscribe({
       next: (response: any[]) => {

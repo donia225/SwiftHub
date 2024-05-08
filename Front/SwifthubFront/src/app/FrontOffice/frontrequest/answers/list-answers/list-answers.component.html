@@ -1,18 +1,22 @@
 <!-- In list-answers.component.html -->
 <div class="container">
   <div class="row">
-    <!-- Make sure *ngFor is used with the structural directive syntax * -->
     <div class="col-7" *ngFor="let answer of answers">
       <div class="card" style="width: 900px;">
         <div class="card-body text-center">
-          <h5 class="card-title">{{ answer.responseText }}</h5>
-          <!-- Uncomment and properly format other fields as needed -->
-           <p>{{ answer.responseDate | date }}</p> 
-          <!-- <p>{{ answer.request?.title }}</p> -->
-          <!-- <p>{{ answer.request?.description }}</p> -->
-          <!-- <p>{{ answer.request?.creationDate | date }}</p> -->
+          <h5 class="card-title">Response : {{ answer.responseText }}</h5>
+        <!-- Display "Response" at the bottom -->
+        <hr> <!-- Adding a horizontal line for visual separation -->
+          <ng-container *ngIf="answer.request">
+            <p><strong>Object :</strong>{{ answer.request.title }}</p>
+            <p><strong>Complaint date :</strong>{{ answer.request.creationDate | date}}</p>
+            <p><strong>Category :</strong>{{answer.request.categoryName}}</p>
+            <p><strong>Description :</strong>{{ answer.request.description }}</p>
+            <p><strong>Status :</strong>{{ answer.request.status }}</p>
+            <!-- Uncomment if needed -->
+            <!-- <p>{{ answer.request.creationDate | date }}</p> -->
+          </ng-container>
         </div>
-     
       </div>
     </div>
   </div>

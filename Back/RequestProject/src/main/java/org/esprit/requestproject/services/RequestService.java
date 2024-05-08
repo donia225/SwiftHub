@@ -31,6 +31,8 @@ public class RequestService {
         return requestRepo.findAll();
     }
 
+
+
     public Request getRequestById(Long id) {
         Optional<Request> optionalRequest = requestRepo.findById(id);
         if (optionalRequest.isPresent()) {
@@ -51,25 +53,7 @@ public class RequestService {
 
 
 
-   /* public Request affectRequestionToCateg(Long idCategory, Request request) {
-        Optional<Category> optionalCategory = categoryRepo.findById(idCategory);
-        if (optionalCategory.isPresent()) {
-            Category category = optionalCategory.get();
-            request.setCategory(category);
 
-            request.setIdRequest(sequenceGenerator.generateSequence(Request.SEQUENCE_NAME));
-            category.getRequests().add(request);
-
-            //request.getAnswers().forEach(answer -> answerRepository.save(answer));
-
-
-            categoryRepo.save(category);
-
-
-            return requestRepo.save(request);
-        }
-        return null;
-    }*/
 
     @Transactional
     public Request updateRequest(Long id, Request request) {
