@@ -21,30 +21,30 @@ spring:
             allowedHeaders: "*"
       routes:
         - id: quiz
-          uri: http://localhost:8090
+          uri: http://quiz-service:8090
           predicates:
             - Path=/api/quizzes/**
         - id: post
-          uri: http://localhost:8070
+          uri: http://post-service:8070
           predicates:
             - Path=/api/post/**
         - id: workshop
-          uri: http://localhost:8020
+          uri: http://workshop-service:8020
           predicates:
             - Path=/api/workshop/**
         - id: request
-          uri: http://localhost:8080
+          uri: http://request-service:8080
           predicates:
             - Path=/api/request/**
         - id: user
-          uri: http://localhost:8050
+          uri: http://user-service:8050
           predicates:
             - Path=/api/user/**
         - id: appointments
-          uri: http://localhost:8060
+          uri: http://appointments-service:8060
           predicates:
             - Path=/api/appointments/**
         - id: angular
-          uri: http://localhost:4200
+          uri: http://angular-service:4200
           predicates:
             - Path=/**

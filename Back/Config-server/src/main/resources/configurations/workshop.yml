@@ -1,9 +1,9 @@
 eureka:
   instance:
-    hostname: localhost
+    hostname: discovery-service
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://discovery-service:8761/eureka
 
 server:
   port: 8020
@@ -11,4 +11,4 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/workshopDB
+      uri: mongodb://mongodb:27017/workshopDB
