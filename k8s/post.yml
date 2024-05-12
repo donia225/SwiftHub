@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: post-app
+  template:
+    metadata:
+      labels:
+        app: post-app
+    spec:
+      containers:
+      - name: post-app
+        image: youssefhamrouni/post-image:latest
+        ports:
+        - containerPort: 8070
+        env:
+        - name: EUREKA_INSTANCE_HOSTNAME
+          value: localhost
+        - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
+          value: http://discovery-service:8761/eureka
+        - name: SERVER_PORT
+          value: "8070"
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:mysql://mysql-service:3306/post
+        - name: SPRING_DATASOURCE_USERNAME
+          value: root
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
+        - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+          value: com.mysql.cj.jdbc.Driver
+        - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
+          value: org.hibernate.dialect.MySQL8Dialect
+        - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+          value: update
+        - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+          value: kafka-service:9092
+        - name: SPRING_KAFKA_CONSUMER_GROUP_ID
+          value: group-id
+        - name: SPRING_KAFKA_CONSUMER_AUTO_OFFSET_RESET
+          value: earliest
+        - name: KAFKA_TOPIC_COMMENT_ADDED
+          value: my-comment-topic
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-service
+spec:
+  selector:
+    app: post-service
+  ports:
+    - protocol: TCP
+      port: 8070
+      targetPort: 8070
