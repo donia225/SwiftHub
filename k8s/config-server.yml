@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: config-server-app
-        image: onshanafi/configserver:1.0.0
+        image: onshanafi/config-server:1.0.0
         imagePullPolicy: Always
         ports:
         - containerPort: 8888

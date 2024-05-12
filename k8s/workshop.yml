@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workshop-app
+  labels:
+    app: workshop-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: workshop-app
+  template:
+    metadata:
+      labels:
+        app: workshop-app
+    spec:
+      containers:
+      - name: workshop-app
+        image: onshanafi/workshop:1.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8020
+        env:
+        - name: SPRING_DATA_MONGODB_URI
+          value: "mongodb://mongodb:27017/workshopDB"
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: workshop-service
+spec:
+  selector:
+    app: workshop-app
+  type: LoadBalancer 
+  ports:
+    - protocol: TCP
+      port: 8020       
+      targetPort: 8020 

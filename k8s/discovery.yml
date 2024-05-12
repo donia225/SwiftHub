@@ -29,10 +29,11 @@ metadata:
 spec:
   selector:
     app: discovery-app
-  type: LoadBalancer
+  type: LoadBalancer 
   ports:
-  - port: 8761
-    targetPort: 8761
-    protocol: TCP
+    - protocol: TCP
+      port: 8761       
+      targetPort: 8761 
+
 
 

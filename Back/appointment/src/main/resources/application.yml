@@ -2,7 +2,7 @@ spring:
   application:
     name: appointments
   config:
-    import: optional:configserver:http://localhost:8888
+    import: optional:configserver:http://config-server-service:8888
   mail:
     host: smtp.gmail.com
     port: 587
