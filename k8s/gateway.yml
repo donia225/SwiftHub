@@ -29,10 +29,11 @@ metadata:
 spec:
   selector:
     app: gateway-app
-  type: NodePort
+  type: LoadBalancer 
   ports:
-  - port: 8222
-    targetPort: 8222
+    - protocol: TCP
+      port: 8222       
+      targetPort: 8222 
 
 
 
