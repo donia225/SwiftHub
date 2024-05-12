@@ -25,7 +25,7 @@ spec:
         - name: SERVER_PORT
           value: "8070"
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:mysql://mysql-service:3306/post?createDatabaseIfNotExist=true
+          value: jdbc:mysql://mysql-service:3306/post
         - name: SPRING_DATASOURCE_USERNAME
           value: root
         - name: SPRING_DATASOURCE_PASSWORD
