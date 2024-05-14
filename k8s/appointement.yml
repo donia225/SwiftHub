@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quiz-app
+  labels:
+    app: quiz-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quiz-app
+  template:
+    metadata:
+      labels:
+        app: quiz-app
+    spec:
+      containers:
+      - name: quiz-app
+        image: lobnadrira21/quiztag:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8090
+        env:
+        - name: EUREKA_INSTANCE_HOSTNAME
+          value: discovery-service
+        - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
+          value: http://discovery-service:8761/eureka
+        - name: SERVER_PORT
+          value: "8020"
+        - name: SPRING_DATA_MONGODB_URI
+          value: "mongodb://mongodb:27017/quizDB"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: quiz-service
+spec:
+  selector:
+    app: quiz-app
+  type: ClusterIP 
+  ports:
+    - protocol: TCP
+      port: 8090       
+      targetPort: 8090 
