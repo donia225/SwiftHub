@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: request-app
+  labels:
+    app: request-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: request-app
+  template:
+    metadata:
+      labels:
+        app: request-app
+    spec:
+      containers:
+      - name: request-app
+        image: doniadrira/request:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: EUREKA_INSTANCE_HOSTNAME
+          value: discovery-service
+        - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
+          value: http://discovery-service:8761/eureka
+        - name: SERVER_PORT
+          value: "8080"
+        - name: SPRING_DATA_MONGODB_URI
+          value: "mongodb://mongodb:27017/RequestBD"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: request-service
+spec:
+  selector:
+    app: request-app
+  type: ClusterIP 
+  ports:
+    - protocol: TCP
+      port: 8080       
+      targetPort: 8080 

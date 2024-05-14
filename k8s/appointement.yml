@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appointement-app
+  labels:
+    app: appointement-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appointement-app
+  template:
+    metadata:
+      labels:
+        app: appointement-app
+    spec:
+      containers:
+      - name: appointement-app
+        image: mohamedrzem/appointment-image:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8060
+        env:
+        - name: EUREKA_INSTANCE_HOSTNAME
+          value: discovery-service
+        - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
+          value: http://discovery-service:8761/eureka
+        - name: SERVER_PORT
+          value: "8060"
+        - name: SPRING_DATA_MONGODB_URI
+          value: "mongodb://mongodb:27017/appointments"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: appointement-service
+spec:
+  selector:
+    app: appointement-app
+  type: ClusterIP 
+  ports:
+    - protocol: TCP
+      port: 8060       
+      targetPort: 8060 
