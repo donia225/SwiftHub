@@ -19,7 +19,7 @@ spec:
         image: onshanafi/angular:1.0.0
         imagePullPolicy: Always
         ports:
-        - containerPort: 4222
+        - containerPort: 80
 
 
 ---
@@ -35,4 +35,4 @@ spec:
   ports:
     - protocol: TCP
       port: 80       
-      targetPort: 4222 
+      # targetPort: 80 
