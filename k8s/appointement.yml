@@ -44,3 +44,4 @@ spec:
     - protocol: TCP
       port: 8060       
       targetPort: 8060 
+
