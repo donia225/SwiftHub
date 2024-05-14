@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: angular-app
-        image: doniadrira/angular:latest
+        image: onshanafi/angular:1.0.0
         imagePullPolicy: Always
         ports:
         - containerPort: 4222
@@ -34,5 +34,5 @@ spec:
   type: LoadBalancer 
   ports:
     - protocol: TCP
-      port: 4222       
+      port: 80       
       targetPort: 4222 
