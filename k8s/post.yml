@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: post-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: post-app
@@ -22,17 +22,10 @@ spec:
           value: localhost
         - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
           value: http://discovery-service:8761/eureka
-        - name: SERVER_PORT
-          value: "8070"
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:mysql://mysql-service:3306/post
+          value: jdbc:mysql://mysql-service:3306/post?createDatabaseIfNotExist=true
         - name: SPRING_DATASOURCE_USERNAME
           value: root
-        - name: SPRING_DATASOURCE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: password
         - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
           value: com.mysql.cj.jdbc.Driver
         - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
@@ -47,6 +40,7 @@ spec:
           value: earliest
         - name: KAFKA_TOPIC_COMMENT_ADDED
           value: my-comment-topic
+        imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
@@ -54,7 +48,7 @@ metadata:
   name: post-service
 spec:
   selector:
-    app: post-service
+    app: post-app
   ports:
     - protocol: TCP
       port: 8070
