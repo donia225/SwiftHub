@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  API_URL1: 'http://localhost:8050',
-  API_URL: 'http://localhost:8222',
-  apiBaseUrl: 'http://localhost:8222/api/request'
+  API_URL1: 'http://user-service:8050',
+  API_URL: 'http://gateway-service:8222',
+  apiBaseUrl: 'http://gateway-service:8222/api/request'
 
 };
 

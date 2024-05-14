@@ -7,7 +7,7 @@ import { Comment } from './post.model';
   providedIn: 'root'
 })
 export class CommentService {
-  private apiUrl = 'http://localhost:8222'; 
+  private apiUrl = 'http://gateway-service:8222'; 
 
   constructor(private http: HttpClient) {}
 

@@ -1,46 +1,46 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: workshop-app
+  name: user-app
   labels:
-    app: workshop-app
+    app: user-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: workshop-app
+      app: user-app
   template:
     metadata:
       labels:
-        app: workshop-app
+        app: user-app
     spec:
       containers:
-      - name: workshop-app
-        image: onshanafi/workshop:1.0.0
+      - name: user-app
+        image: onshanafi/user:1.0.0
         imagePullPolicy: Always
         ports:
-        - containerPort: 8020
+        - containerPort: 8050
         env:
         - name: EUREKA_INSTANCE_HOSTNAME
           value: discovery-service
         - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
           value: http://discovery-service:8761/eureka
         - name: SERVER_PORT
-          value: "8020"
+          value: "8050"
         - name: SPRING_DATA_MONGODB_URI
-          value: "mongodb://mongodb:27017/workshopDB"
+          value: "mongodb://mongodb:27017/userr"
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: workshop-service
+  name: user-service
 spec:
   selector:
-    app: workshop-app
+    app: user-app
   type: ClusterIP 
   ports:
     - protocol: TCP
-      port: 8020       
-      targetPort: 8020 
+      port: 8050       
+      targetPort: 8050 

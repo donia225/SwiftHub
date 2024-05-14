@@ -29,18 +29,15 @@ metadata:
 spec:
   selector:
     app: config-server-app
-  externalTrafficPolicy: Cluster
-  internalTrafficPolicy: Cluster
   ipFamilies:
   - IPv4
   ipFamilyPolicy: SingleStack
   sessionAffinity: None
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - port: 8888
     targetPort: 8888
-status:
-  loadBalancer: {}
+
 
 
 

@@ -12,7 +12,7 @@ export class AvailabilityServiceService {
 
 
   getAvailabilityrByUser(id:string): Observable<any> {
-    return this._http.get(`http://localhost:8222/api/appointments/availability/${id}`);
+    return this._http.get(`http://gateway-service:8222/api/appointments/availability/${id}`);
   }
 
   updateReservedStatus(teacherId: string, start: string , end: string): Observable<any> {
@@ -24,7 +24,7 @@ export class AvailabilityServiceService {
     const endTime = endDateParts[1].split('.')[0].slice(0, -3); // Supprime les trois derniers caractères
     const formattedEndDate = `${endDateParts[0]}T${endTime}`;
     console.log(formattedStartDate + 'hihi' + formattedEndDate+ '    '+teacherId)
-    return this._http.put(`http://localhost:8222/api/appointments/availability/${teacherId}/${formattedStartDate}/${formattedEndDate}`, {});
+    return this._http.put(`http://gateway-service:8222/api/appointments/availability/${teacherId}/${formattedStartDate}/${formattedEndDate}`, {});
 
   }
 }

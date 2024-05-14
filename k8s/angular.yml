@@ -1,39 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway-app
+  name: angular-app
   labels:
-    app: gateway-app
+    app: angular-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gateway-app
+      app: angular-app
   template:
     metadata:
       labels:
-        app: gateway-app
+        app: angular-app
     spec:
       containers:
-      - name: gateway-app
-        image: onshanafi/gateway:1.0.0
+      - name: angular-app
+        image: doniadrira/angular:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 8222
+        - containerPort: 4222
+
 
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: gateway-service
+  name: angular-service
 spec:
   selector:
-    app: gateway-app
-  type: ClusterIP 
+    app: angular-app
+  type: LoadBalancer 
   ports:
     - protocol: TCP
-      port: 8222       
-      targetPort: 8222 
-
-
-
+      port: 4222       
+      targetPort: 4222 
