@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: angular-app
-        image: onshanafi/angular:1.0.0
+        image: onshanafi/angular:1.6.0
         imagePullPolicy: Always
         ports:
         - containerPort: 80

@@ -61,11 +61,11 @@ export class UserService {
 
 
   getUserByRole(): Observable<any> {
-    return this._http.get(`http://user-service:8050/api/user/findd/PROFESSOR`);
+    return this._http.get(`http://52.228.158.147:8050/api/user/findd/PROFESSOR`);
   }
 
   getUserById(id: string): Observable<any> {
-    return this._http.get(`http://user-service:8050/api/user/find/${id}`);
+    return this._http.get(`http://52.228.158.147:8050/api/user/find/${id}`);
   }
 
 

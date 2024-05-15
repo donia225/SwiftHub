@@ -1,6 +1,9 @@
 eureka:
+  instance:
+    hostname: discovery-service
   client:
-    register-with-eureka: false
+    service-url:
+      defaultZone: http://discovery-service:8761/eureka
 
 server:
   port: 8222
@@ -44,7 +47,4 @@ spring:
           uri: http://appointments-service:8060
           predicates:
             - Path=/api/appointments/**
-        - id: angular
-          uri: http://angular-service:4200
-          predicates:
-            - Path=/**
+

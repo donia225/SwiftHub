@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: user-app
-        image: onshanafi/user:1.0.0
+        image: onshanafi/user:1.13.0
         imagePullPolicy: Always
         ports:
         - containerPort: 8050
@@ -39,7 +39,7 @@ metadata:
 spec:
   selector:
     app: user-app
-  type: ClusterIP 
+  type: LoadBalancer 
   ports:
     - protocol: TCP
       port: 8050       

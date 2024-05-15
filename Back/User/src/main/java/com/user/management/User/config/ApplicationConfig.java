@@ -53,29 +53,28 @@ public class ApplicationConfig {
         return authProvider;
 
     }
-    @Bean
-    public CorsFilter corsFilter() {
-        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        final CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
-        config.setAllowedHeaders(Arrays.asList(
-                ORIGIN,
-                CONTENT_TYPE,
-                ACCEPT,
-                AUTHORIZATION
-        ));
-        config.setAllowedMethods(Arrays.asList(
-                GET.name(),
-                POST.name(),
-                DELETE.name(),
-                PUT.name(),
-                PATCH.name()
-        ));
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-
-    }
+//    @Bean
+//    public CorsFilter corsFilter() {
+//        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        final CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true);
+//        config.setAllowedHeaders(Arrays.asList(
+//                ORIGIN,
+//                CONTENT_TYPE,
+//                ACCEPT,
+//                AUTHORIZATION
+//        ));
+//        config.setAllowedMethods(Arrays.asList(
+//                GET.name(),
+//                POST.name(),
+//                DELETE.name(),
+//                PUT.name(),
+//                PATCH.name()
+//        ));
+//        source.registerCorsConfiguration("/**", config);
+//        return new CorsFilter(source);
+//
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

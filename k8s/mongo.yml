@@ -17,11 +17,11 @@ spec:
         image: onshanafi/mongo:latest
         ports:
         - containerPort: 27017
-        env:
-        - name: MONGO_INITDB_ROOT_USERNAME
-          value: root
-        - name: MONGO_INITDB_ROOT_PASSWORD
-          value: example
+        # env:
+        # - name: MONGO_INITDB_ROOT_USERNAME
+        #   value: root
+        # - name: MONGO_INITDB_ROOT_PASSWORD
+        #   value: example
         volumeMounts:
         - name: mongodb
           mountPath: /var/opt/mongodb

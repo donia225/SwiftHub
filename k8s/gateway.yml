@@ -20,6 +20,11 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8222
+        env:
+        - name: EUREKA_INSTANCE_HOSTNAME
+          value: discovery-service
+        - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
+          value: http://discovery-service:8761/eureka
 
 ---
 apiVersion: v1
@@ -29,7 +34,7 @@ metadata:
 spec:
   selector:
     app: gateway-app
-  type: ClusterIP 
+  type: LoadBalancer   
   ports:
     - protocol: TCP
       port: 8222       

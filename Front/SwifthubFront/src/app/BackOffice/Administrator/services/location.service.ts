@@ -12,9 +12,9 @@ export class LocationService {
 
   addLocation(data: any): Observable<any> {
     console.log(data);
-    return this._http.post('http://gateway-service:8222/api/appointments/location', data);
+    return this._http.post('http://52.228.152.99:8222/api/appointments/location', data);
   }
   getLocationList(): Observable<any> {
-    return this._http.get('http://gateway-service:8222/api/appointments/location');
+    return this._http.get('http://52.228.152.99:8222/api/appointments/location');
   }
 }

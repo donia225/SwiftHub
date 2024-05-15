@@ -36,16 +36,16 @@ export class UserService {
   }
 
   getUserByRole(): Observable<any> {
-    return this._http.get(`http://user-service:8050/api/user/findd/PROFESSOR`);
+    return this._http.get(`http://52.228.158.147:8050/api/user/findd/PROFESSOR`);
   }
 
   getUserById(id: string): Observable<any> {
-    return this._http.get(`http://user-service:8050/api/user/find/${id}`);
+    return this._http.get(`http://52.228.158.147:8050/api/user/find/${id}`);
   }
 
   SendEmail(to: string, subject: string, body: string): Observable<any> {
     //console.log(`http://localhost:8222/api/appointments/email/send/${to}/${subject}/${body}`);
-    return this._http.post(`http://user-service:8222/api/appointments/email/send/${to}/${body}/${subject}`, {});
+    return this._http.post(`http://52.228.158.147:8222/api/appointments/email/send/${to}/${body}/${subject}`, {});
   }
 
 }

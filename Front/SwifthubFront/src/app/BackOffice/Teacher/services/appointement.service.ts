@@ -11,22 +11,22 @@ export class AppointementService {
 
   addEmployee(data: any): Observable<any> {
     console.log(data);
-    return this._http.post('http://gateway-service:8222/api/appointments/appointment', data);
+    return this._http.post('http://52.228.152.99:8222/api/appointments/appointment', data);
   }
 
   updateEmployee(data: any): Observable<any> {
-    return this._http.put(`http://gateway-service:8222/api/appointments/appointment`, data);
+    return this._http.put(`http://52.228.152.99:8222/api/appointments/appointment`, data);
   }
 
   getEmployeeList(): Observable<any> {
-    return this._http.get('http://gateway-service:8222/api/appointments/appointment');
+    return this._http.get('http://52.228.152.99:8222/api/appointments/appointment');
   }
  
   getEmployeeById(id: string): Observable<any> {
-    return this._http.get( `http://gateway-service:8222/api/appointments/appointment/${id}`);
+    return this._http.get( `http://52.228.152.99:8222/api/appointments/appointment/${id}`);
   }
 
   deleteEmployee(id: string): Observable<any> {
-    return this._http.delete(`http://gateway-service:8222/api/appointments/appointment/${id}`);
+    return this._http.delete(`http://52.228.152.99:8222/api/appointments/appointment/${id}`);
   }
 }
